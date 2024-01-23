@@ -20,6 +20,6 @@ if (cookies.get("access_token")) {
 }
 
 console.log("=== verify ===");
-console.log(member_data);
+console.log("MEMBER_DATA :: ", member_data);
 
 export const verifiedMemberData = member_data ? member_data : null;

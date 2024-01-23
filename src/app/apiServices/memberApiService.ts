@@ -14,6 +14,52 @@ class MemberApiService {
         this.path = serverApi;
     }
 
+    public async loginRequest(login_data: any): Promise<Member> {
+        try {
+            const result = await axios.post(
+                this.path + "/login", 
+                login_data, 
+                {withCredentials: true }
+            );
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            console.log("Login STATE :: ", result.data.state);
+
+            const member: Member = result.data.data;
+            localStorage.setItem("member_data", JSON.stringify(member));
+            console.log("Login MEMBER :: ", member);
+
+            return member;
+        } catch (err: any) {
+            console.log(`ERROR :: loginRequest: ${err.message}`);
+            throw err;
+        }
+    };
+
+    public async signupRequest(signup_data: any): Promise<Member> {
+        try {
+            const result = await axios.post(
+                this.path + "/signup", 
+                signup_data, 
+                {withCredentials: true}
+            );
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            console.log("Signup STATE ::", result.data.state);
+
+            const member: Member = result.data.data;
+            localStorage.setItem("member_data", JSON.stringify(member));
+            console.log("Signup MEMBER :: ", member);
+
+            return member;
+        } catch (err: any) {
+            console.log(`ERROR :: signupRequest: ${err.message}`);
+            throw err;
+        }
+    };
+
     public async getChosenMember(id: string): Promise<Member> {
         try {
             const url = `/member/${id}`;
