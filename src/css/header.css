@@ -1,95 +1,56 @@
-@import url('https://fonts.cdnfonts.com/css/night-circus-personal-use');
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    
-}
-
-body {
-    background: #363636;
-    color: #fff;
-}
-
-.header_container {
-    height: 80px;
-    background: #0b0b0f;
+.navbar {
+    position: fixed;
     display: flex;
+    width: 100%;
+    height: 62px;
     justify-content: space-between;
     align-items: center;
+    background: #000000;
+    z-index: 1;
+    border-bottom: 4px solid #FF007A;
 }
 
-.right-container {
+/* LOGO */
+.navbar .logo{
+    margin-left: 80px;
+    color: white;
+}
+
+/* Right */
+.navbar .right{
     display: flex;
-    justify-content: center;
-}
-
-.logo {
-    font-family: 'Night Circus Personal Use', sans-serif;
-    letter-spacing: 4px;
-    /* color: rgb(145, 4, 91);*/
-    font-size: 25px;
-    margin: -10px -150px 0 -100px;
-}
-
-.search_container {
-    position: relative;
-    width: 280px;
-    height: 32px;
-    display: flex;
-    background: #fffcfc;
-    border-radius: 18.5px;
-    box-sizing: border-box;
-}
-
-.search_form {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    
+    gap: 180px;
 }
 
-.button_search {
+/* SEARCH */
+.navbar .search{
+    width: 330px; 
     position: relative;
-    width: 60px;
-    height: 25px;
-    background: transparent;
+}
+.search .search-input{
+    width: 320px; 
+    height: 34px; 
+    border-radius: 50px;
     border: none;
+    padding-left: 20px;
+}
+
+.search-icon{
+    width: 20px; 
+    height: 20px; 
+    left: 290px; 
+    top: 7px; 
+    position: absolute;
+}
+
+/* ICONS */
+.navbar .icons {
+    display: flex;
+    gap: 20px;
+    margin-right: 80px;
+}
+.navbar .right .icons .icon {
+    width: 30px;
     cursor: pointer;
-}
-
-.search_input {
-    position: relative;
-    width: 245px;
-    height: 22px;
-    margin-left: 7px;
-    padding-left: 10px;
-    display: flex;
-    border: none;
-    border-radius: 10px 0px 0px 10px;
-    font-family: "GT Walsheim Pro";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 26px;
-    color: #4f547b;
-    outline: none;
-}
-.navLink {
-    text-decoration: none;
-    color: #ffffff;
-}
-
-.icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 50px;
-}
-
-.icons .icon {
-    margin-left: 30px;
 }

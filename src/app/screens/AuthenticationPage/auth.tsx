@@ -4,7 +4,7 @@ import { Definer } from '../../../lib/definer';
 import MemberApiService from '../../apiServices/memberApiService';
 import { sweetErrorHandling } from '../../../lib/sweetAlert';
 
-import "../../../css/auth.css"
+// import "../../../css/auth.css"
 
 export function AuthenticationPage(props: any) {
     // INITIALIZATIONS 
@@ -110,7 +110,7 @@ export function AuthenticationPage(props: any) {
 
     return (
         <div>
-            <div className='logo'>
+            <div className='zivo'>
             <a href="/admin">
                 <span>Z</span>
                 I
@@ -121,26 +121,25 @@ export function AuthenticationPage(props: any) {
 
             <div className="home_contaner">
                 <div className='login-box'>
-<h2>Login</h2>
-            <div className='form'>
-                <div className="user-box">
-                    <input onChange={handleUserNickName} type="text" name="mb_nick" required />
-                    <label>Username</label>
+                <h2>Login</h2>
+                    <div className='form'>
+                        <div className="user-box">
+                            <input onChange={handleUserNickName} type="text" name="mb_nick" required />
+                            <label>NickName</label>
+                        </div>
+                        <div className="user-box">
+                            <input onChange={handleUserPassword} type="password" name="mb_password" required />
+                            <label>Password</label>
+                        </div>
+                        <Box className='button'>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <input onClick={handleLoginRequest} className="btn" type="submit" value="Login" />
+                        </Box>
+                    </div>
                 </div>
-                <div className="user-box">
-                    <input onChange={handleUserPassword} type="password" name="mb_password" required />
-                    <label>Password</label>
-                </div>
-                <Box className='button'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <input onClick={handleLoginRequest} className="btn" type="submit" value="Login" />
-                </Box>
-            </div>
-                </div>
-            
             </div>
         </div>
     )

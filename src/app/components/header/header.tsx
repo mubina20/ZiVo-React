@@ -1,54 +1,26 @@
-import { Box } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import {Stack } from '@mui/material';
+import "../../../css/header.css"
 
 export function Header() {
-    return (
-        <div className="header_container">
-            {/* LOGO */}
-            <Box className="logo">
-                <h1>ZIVO</h1>
-            </Box>
+    return(
+        <div className='navbar'>
+            <Stack className='logo'>
+                <h1 style={{color: "white"}}>ZiVo</h1>
+            </Stack>
 
-            {/* SEARCH */}
-            <div className="right-container">
-                <div className="search">
-                    <Box className={'search_container'}>
-                        <form className={'search_form'} action={''} method={''}>
-                            <input
-                                type={'search'}
-                                className={'search_input'}
-                                placeholder={'Search'}
-                            />
-                            <button type="button" className='button_search'>
-                                <SearchIcon />
-                            </button>                        
-                        </form>
-                    </Box>
-                </div>
+            <div className='right'>
+                <Stack className='search'>
+                    <input className='search-input' type='text' placeholder='Search' />
+                    <img className='search-icon' src="/icons/search.png" alt='search-icon'/>
+                </Stack>
 
-                {/* RIGHT */}
-                <div className="icons">
-                    <Box className="icon">
-                        <NavLink to="/member" activeClassName="underline" className={"navLink"}>
-                            <ChatBubbleOutlineOutlinedIcon />
-                        </NavLink>
-                    </Box>
-                    <Box className="icon">
-                        <NavLink to="/member" activeClassName="underline" className={"navLink"}>
-                            <NotificationsNoneOutlinedIcon />
-                        </NavLink>
-                    </Box>
-                    <Box className="icon">
-                        <NavLink to="/member" activeClassName="underline" className={"navLink"}>
-                            <AccountCircleOutlinedIcon />
-                        </NavLink>
-                    </Box>
+                <div className='icons'>
+                    <img className='icon' src="/icons/notification.png" alt="notification" />
+                    <img className='icon' src="/icons/chat.png" alt="chat" />
+                    <img className='icon' src="/icons/user.png" alt="user" />
                 </div>
             </div>
+            
         </div>
     )
 }

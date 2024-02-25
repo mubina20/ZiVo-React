@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import "./css/index.css";
 
 import { ThemeProvider } from "@mui/material/styles";
-import theme from './app/components/header/theme/theme';
+import theme from './app/components/theme/theme';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
