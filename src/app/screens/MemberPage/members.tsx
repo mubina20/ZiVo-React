@@ -1,8 +1,7 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import "../../../css/members.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
-import { Opacity } from "@mui/icons-material";
 
 export function MembersPage() {
     return(

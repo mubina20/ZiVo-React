@@ -1,0 +1,161 @@
+.visit_container {
+    margin-left: 300px;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.visit_container .visit_page_container {
+    margin-top: 100px;
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.visit_container .visit_page_container .visit_page_box{
+    width: 848px;
+    height: 1006px;
+}
+
+.visit_page_box .page_top{
+    width: 788px;
+    height: 300px;
+    display: flex;
+    gap: 130px;
+    padding: 50px 30px;
+}
+
+/* Top Left Info */
+.visit_page_box .page_top .left_info .user_icon{
+    width: 132px;
+    height: 132px;
+}
+
+.visit_page_box .page_top .left_info .nickname{
+    font-size: 20px;
+    margin: 10px 0 60px 0;
+}
+
+.visit_page_box .page_top .left_info .story-btn{
+    width: 135px;
+    height: 38px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #4D0025 0%, #FF007A 100%);
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Top Right Info */
+.visit_page_box .page_top .right_info{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.visit_page_box .page_top .right_info .info{
+    display: flex;
+    gap: 100px;
+}
+
+.visit_page_box .page_top .right_info .info .group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.visit_page_box .page_top .right_info .info .group .text{
+    color: #868383;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.visit_page_box .page_top .right_info .info .group .count{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    }
+
+.visit_page_box .page_top .right_info .description{
+    color: rgb(196, 193, 193);
+    width: 500px;
+}
+
+/* Center */
+.visit_page_box .page_center{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.visit_page_box .page_center .center_icon{
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+}
+
+.visit_page_box .line{
+    margin-top: 5px;
+    position: relative;
+    width: 848px;
+    height: 1px;
+}
+
+/* Upload Post Button */
+.visit_page_box .upload_post_btn{
+    display: flex;
+    justify-content: end;
+}
+
+.visit_page_box .upload_post_btn .upload-post{
+    width: 135px;
+    height: 38px;
+    border-radius: 6px;
+    background: var(--ff-007-a, #FF007A);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Page Bottom */
+.visit_page_box .page_bottom{
+    margin-top: 30px;
+    display: grid;
+    grid-template-areas: 'a a a a';
+    gap: 10px;
+}
+.visit_page_box .page_bottom .post{
+    width: 206.756px;
+    height: 247px;
+}
+
+.visit_page_box .page_bottom .post img{
+    width: 100%;
+    height: 100%;
+}
+
+/* Edit Profile */
+
+.visit_container .visit_page_container .edit-profile{
+    width: 135px;
+    height: 38px;
+    background: #777777;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    margin-left: 50px;
+}
+
+

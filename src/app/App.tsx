@@ -7,6 +7,7 @@ import { HelpPage } from "./screens/HelpPage/help";
 import { verifiedMemberData } from "./apiServices/verify";
 import { HomePage } from "./screens/HomePage";
 import { ShortContents } from "./screens/ShortContentsPage/shortContent";
+import { MyPage } from "./screens/MemberPage/myPage";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path="/members">
           <MembersPage />
+        </Route>
+        <Route path="/my-page">
+          <MyPage />
         </Route>
         <Route path="/short-contents">
           <ShortContents />
