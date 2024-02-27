@@ -1,0 +1,91 @@
+.members_main_container{
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.members_main_container .members{
+    width: 870px;
+    height: auto;
+    margin-top: 100px;
+}
+
+.members_main_container .members .text {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-left: 30px;
+}  
+
+.members_main_container .members .members_container{
+    width: 830px;
+    height: auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-areas: 'a a a a';
+    gap: 50px;
+}
+
+.members_main_container .members .members_container .card{
+    width: 160px;
+    height: 235px;
+    border-radius: 16px;
+    border: 1px solid #535353;
+    display: flex;
+    flex-direction: column;
+}
+
+.members_main_container .members .members_container .card .close_box{
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    
+}
+
+.members_main_container .members .members_container .card .close{
+    width: 28px;
+    height: 28px;
+    background: #3f3b3b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.members_main_container .members .members_container .card .user_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.members_main_container .members .members_container .card .user_info .user_icon {
+    width: 93px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.members_main_container .members .members_container .card .user_info .follow_btn{
+    margin: 15px 0;
+    width: 111px;
+    height: 24px;
+    border-radius: 21.5px;
+    background: var(--ff-007-a, #FF007A);
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+
+
+

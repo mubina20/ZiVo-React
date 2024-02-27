@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../css/App.css"
 import { AuthenticationPage } from "./screens/AuthenticationPage/auth";
-import { MemberPage } from "./screens/MemberPage/member";
+import { MembersPage } from "./screens/MemberPage/members";
 import { HelpPage } from "./screens/HelpPage/help";
 
 import { verifiedMemberData } from "./apiServices/verify";
 import { HomePage } from "./screens/HomePage";
+import { ShortContents } from "./screens/ShortContentsPage/shortContent";
 
 function App() {
   return (
@@ -21,8 +22,11 @@ function App() {
         <Route path="/home">
           <HomePage />
         </Route>
-        <Route path="/member">
-          <MemberPage />
+        <Route path="/members">
+          <MembersPage />
+        </Route>
+        <Route path="/short-contents">
+          <ShortContents />
         </Route>
         <Route path="/help">
           <HelpPage />

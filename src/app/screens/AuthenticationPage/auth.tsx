@@ -4,7 +4,7 @@ import { Definer } from '../../../lib/definer';
 import MemberApiService from '../../apiServices/memberApiService';
 import { sweetErrorHandling } from '../../../lib/sweetAlert';
 
-// import "../../../css/auth.css"
+import "../../../css/auth.css"
 
 export function AuthenticationPage(props: any) {
     // INITIALIZATIONS 
