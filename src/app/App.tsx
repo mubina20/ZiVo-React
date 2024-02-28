@@ -8,6 +8,7 @@ import { verifiedMemberData } from "./apiServices/verify";
 import { HomePage } from "./screens/HomePage";
 import { ShortContents } from "./screens/ShortContentsPage/shortContent";
 import { MyPage } from "./screens/MemberPage/myPage";
+import { ChatPage } from "./screens/ChatPage/chat";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route path="/short-contents">
           <ShortContents />
+        </Route>
+        <Route path="/chat">
+          <ChatPage />
         </Route>
         <Route path="/help">
           <HelpPage />
