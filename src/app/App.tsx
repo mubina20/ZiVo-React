@@ -9,6 +9,7 @@ import { HomePage } from "./screens/HomePage";
 import { ShortContents } from "./screens/ShortContentsPage/shortContent";
 import { MyPage } from "./screens/MemberPage/myPage";
 import { ChatPage } from "./screens/ChatPage/chat";
+import { OtherPage } from "./screens/MemberPage/otherPage";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route path="/my-page">
           <MyPage />
+        </Route>
+        <Route path="/member/:mb_id">
+          <OtherPage />
         </Route>
         <Route path="/short-contents">
           <ShortContents />

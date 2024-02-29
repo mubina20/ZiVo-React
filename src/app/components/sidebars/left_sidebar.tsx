@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import "../../../css/sidebar.css";
+import { NavLink } from "react-router-dom";
 
 export function LeftSidebar() {
     return(
@@ -17,10 +18,10 @@ export function LeftSidebar() {
             <div className="sections">
                 <div className="top_sections">
                     <div className="section">
-                        <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/><span>Home</span>
+                        <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/><NavLink to="/">Home</NavLink>
                     </div>
                     <div className="section">
-                        <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><span>Short Contents</span>
+                        <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><NavLink to="/short-contents">Short Contents</NavLink>
                     </div>
                     <div className="section">
                         <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/><span>Members</span>

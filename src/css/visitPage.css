@@ -12,6 +12,7 @@
 }
 
 .visit_container .visit_page_container .visit_page_box{
+    position: relative;
     width: 848px;
     height: 1006px;
 }
@@ -47,7 +48,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 7px;
+}
+
+.visit_page_box .page_top .left_info .follow_btn{
+    width: 152px;
+    height: 33px;
+    border-radius: 21.5px;
+    background: var(--ff-007-a, #FF007A);
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
 }
 
 /* Top Right Info */
@@ -59,6 +75,20 @@
 
 .visit_page_box .page_top .right_info .info{
     display: flex;
+    flex-direction: column;
+}
+
+.visit_page_box .page_top .right_info .info .top_icons{
+    display: flex;
+    position: absolute;
+    right: 40px;
+    gap: 20px;
+}
+
+.visit_page_box .page_top .right_info .info .bottom_infos{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
     gap: 100px;
 }
 
@@ -156,6 +186,12 @@
     font-size: 16px;
     border: none;
     margin-left: 50px;
+}
+
+.info .top_icon{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
 
