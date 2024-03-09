@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import "../../../css/chat.css";
+import { NavLink } from "react-router-dom";
 
 export function ChatPageSidebar() {
     return(
         <div className="chat_page_sidebar">
             <div className="account">
-                <img src="/icons/user.png" alt="" className="user_icon"/>
+                <NavLink to={'/my-page'}><img src="/icons/user.png" alt="" className="user_icon"/></NavLink>
             </div>
 
             <Box className='sidebar_line' />
@@ -13,16 +14,16 @@ export function ChatPageSidebar() {
             <div className="chat_sidebar_sections">
                 <div className="sidebar_top_sections">
                     <div className="top_section">
-                        <img src="/icons/left-sidebar-icons/home.png" alt="" className="sidebar_icon"/>
+                        <NavLink to={'/'}><img src="/icons/left-sidebar-icons/home.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="sidebar_icon"/>
+                        <NavLink to={'/short-contents'}><img src="/icons/left-sidebar-icons/shorts.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <img src="/icons/left-sidebar-icons/members.png" alt="" className="sidebar_icon"/>
+                        <NavLink to={'/members'}><img src="/icons/left-sidebar-icons/members.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <img src="/icons/left-sidebar-icons/life.png" alt="" className="sidebar_icon"/>
+                        <NavLink to={'/life'}><img src="/icons/left-sidebar-icons/life.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                 </div>
 
@@ -30,10 +31,10 @@ export function ChatPageSidebar() {
 
                 <div className="sidebar_bottom_sections">
                     <div className="top_section">
-                        <img src="/icons/left-sidebar-icons/setting.png" alt="" className="sidebar_icon"/>
+                        <NavLink to={'/setting'}><img src="/icons/left-sidebar-icons/setting.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <img src="/icons/left-sidebar-icons/logout.png" alt="" className="sidebar_icon"/>
+                        <NavLink to={'/logout'}><img src="/icons/left-sidebar-icons/logout.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                 </div>
             </div>

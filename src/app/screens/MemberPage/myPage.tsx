@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
+import { NavLink } from "react-router-dom";
 
 export function MyPage() {
     return(
@@ -20,17 +21,19 @@ export function MyPage() {
                             </div>
                             <div className="right_info">
                                 <div className="info">
-                                    <div className="group">
-                                        <Typography className="text">Followers</Typography>
-                                        <span className="count">35.8K</span>
-                                    </div>
-                                    <div className="group">
-                                        <Typography className="text">Followings</Typography>
-                                        <span className="count">35</span>
-                                    </div>
-                                    <div className="group">
-                                        <Typography className="text">Posts</Typography>
-                                        <span className="count">100</span>
+                                    <div className="my_data">
+                                        <div className="group">
+                                            <Typography className="text">Followers</Typography>
+                                            <span className="count">35.8K</span>
+                                        </div>
+                                        <div className="group">
+                                            <Typography className="text">Followings</Typography>
+                                            <span className="count">35</span>
+                                        </div>
+                                        <div className="group">
+                                            <Typography className="text">Posts</Typography>
+                                            <span className="count">100</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="description">
@@ -48,7 +51,13 @@ export function MyPage() {
                         <Box className='line' />
 
                         <div className="upload_post_btn">
-                            <button className="upload-post"><img src="/icons/post/plus.png" alt="" width={"15px"}/> Upload Post</button>
+                            <NavLink to={"/upload-post"}>
+                                <button className="upload-post">
+                                    <img src="/icons/post/plus.png" alt="" width={"15px"}/>
+                                    Upload Post
+                                </button>
+                            </NavLink>
+                            
                         </div>
 
                         <div className="page_bottom">

@@ -1,0 +1,135 @@
+.upload_big_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.upload_container{
+    margin-top: 100px;
+    margin-left: 17%;
+    width: 1050px;
+    height: 620px;
+    color: #fff; 
+}
+.upload_text{
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin: 20px;
+}
+.upload_page_tabs_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Upload Post Bottom (Photo, Video, Article Post) */
+.upload_post_bottom{
+    width: 100%;
+    height: 450px;
+}
+
+.upload_file{
+    width: 300px;
+    height: 300px;
+}
+.image{
+    width: 100%;
+    height: 100%;
+}
+
+.upload_image_box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.photos{
+    position: relative;
+    width: 100%;
+    height: 230px;
+    background: #f887be;
+    display: flex;
+    overflow-x: scroll;
+    gap: 10px;
+}
+.uploaded_image{
+    width: 215px;
+    height: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.file_input{
+    position: relative;
+    width: 130px;
+    cursor: pointer;
+    background: linear-gradient(180deg, #4D0025 0%, #FF007A 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 18px 0;
+}
+.Upload_file{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+/* Photo Panel */
+.photo_panel_container{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+.photo_panel_left{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 130px;
+    border: 2px solid red;
+}
+.photo_panel_left textarea{
+    margin-top: 20px;
+    width: 370px;
+    height: 130px;
+    resize: none;
+    background: rgb(94, 93, 93);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px;
+}
+.upload_button{
+    width: 135px;
+    height: 33px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #4D0025 0%, #FF007A 100%);
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.cencel{
+    background: #888888;
+}
+textarea::placeholder{
+    color: rgb(175, 175, 187);
+}
+.buttons{
+    display: flex;
+    gap: 100px;
+}
+
+
+
+.photo_panel_right{
+    width: 45%;
+    border: 2px solid red;
+}

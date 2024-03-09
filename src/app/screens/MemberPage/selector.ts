@@ -1,14 +1,14 @@
 import { createSelector } from "reselect";
 import { AppRootState } from "../../../types/screen";
 
-const selectHomePage = (state: AppRootState) => state.homePage;
+const selectMemberPage = (state: AppRootState) => state.memberPage;
 
-export const retrieveRecommendations = createSelector(
-    selectHomePage,
-    (HomePage) => HomePage.recommendations
+export const retrieveMembers = createSelector(
+    selectMemberPage,
+    (memberPage) => memberPage.allMembers
 );
 
-export const retrieveSavedPosts = createSelector(
-    selectHomePage,
-    (HomePage) => HomePage.savedPosts
-);
+// export const retrieveSavedPosts = createSelector(
+//     selectHomePage,
+//     (HomePage) => HomePage.savedPosts
+// );

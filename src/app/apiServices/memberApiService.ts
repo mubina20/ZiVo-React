@@ -77,7 +77,7 @@ class MemberApiService {
         }
     };
 
-    public async getAllMembers(): Promise<Member[]> {
+    public async getAllMembers() {
         try {
             const result = await axios.get(
                 this.path + "/members", 

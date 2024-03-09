@@ -17,26 +17,36 @@ export function LeftSidebar() {
 
             <div className="sections">
                 <div className="top_sections">
-                    <div className="section">
-                        <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/><NavLink to="/">Home</NavLink>
-                    </div>
-                    <div className="section">
-                        <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><NavLink to="/short-contents">Short Contents</NavLink>
-                    </div>
-                    <div className="section">
-                        <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/><span>Members</span>
-                    </div>
-                    <div className="section">
-                        <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/><span>Life</span>
-                    </div>
+                    <NavLink to="/" className={'navlink'}>
+                        <div className="section">
+                            <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/>Home
+                        </div>
+                    </NavLink>
+                    <NavLink to="/short-contents" className={'navlink'}>
+                        <div className="section">
+                            <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/>Short Contents
+                        </div>
+                    </NavLink>
+                    <NavLink to="/members" className={'navlink'}>
+                        <div className="section">
+                            <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/>Members
+                        </div>
+                    </NavLink>
+                    <NavLink to="/life" className={'navlink'}>
+                        <div className="section">
+                            <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/>Life
+                        </div>
+                    </NavLink>
                 </div>
 
                 <Box className='line' />
 
                 <div className="bottom_sections">
-                    <div className="section">
-                        <img src="/icons/left-sidebar-icons/setting.png" alt="" className="icon"/><span>Settings</span>
-                    </div>
+                    <NavLink to={'/setting'} className={'navlink'}>
+                        <div className="section">
+                            <img src="/icons/left-sidebar-icons/setting.png" alt="" className="icon"/><span>Settings</span>
+                        </div>
+                    </NavLink>
                     <div className="section">
                         <img src="/icons/left-sidebar-icons/logout.png" alt="" className="icon"/><span>LogOut</span>
                     </div>

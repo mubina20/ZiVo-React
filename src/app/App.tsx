@@ -10,6 +10,7 @@ import { ShortContents } from "./screens/ShortContentsPage/shortContent";
 import { MyPage } from "./screens/MemberPage/myPage";
 import { ChatPage } from "./screens/ChatPage/chat";
 import { OtherPage } from "./screens/MemberPage/otherPage";
+import { UploadPostPage } from "./screens/UploadPage/uploadPost";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/short-contents">
           <ShortContents />
+        </Route>
+        <Route path="/upload-post">
+          <UploadPostPage />
         </Route>
         <Route path="/chat">
           <ChatPage />

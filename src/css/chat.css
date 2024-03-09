@@ -82,10 +82,10 @@
 /* Chat Left Container */
 .big_chat_container .chat_container .chat_left_container{
     width: 370px;
-    height: 100vh;
+    height: 100%;
     background: #121212;
     border-right: 1px solid #FF007A;
-    overflow: hidden;
+    overflow: scroll;
 }
 .chat_left_container::-webkit-scrollbar {
     width: 10px; 
@@ -94,27 +94,9 @@
 .chat_left_container::-webkit-scrollbar-thumb {
     background-color: #888; 
     border-radius: 5px; 
+    
 }
 
-/* Mozilla Firefox */
-.chat_left_container::-moz-scrollbar {
-    width: 10px;
-}
-
-.chat_left_container::-moz-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 5px;
-}
-
-/* Microsoft Edge and Internet Explorer */
-.chat_left_container::-ms-scrollbar {
-    width: 10px;
-}
-
-.chat_left_container::-ms-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 5px;
-}
 /* Search Container */
 .big_chat_container .chat_container .chat_left_container .left_search{
     position: relative;
@@ -129,12 +111,14 @@
     border: none;
     height: 34px;
     padding-left: 15px;
+    font-size: 19px;
 }
 .big_chat_container .chat_container .chat_left_container .left_search .search_icon{
     position: absolute;
     right: 10px;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 /* Chatting Containers */
@@ -213,21 +197,34 @@
 
 
 /* Chat Right Container */
-.big_chat_container .chat_container .chat_right_container{ 
-    overflow: hidden;
+.big_chat_container .chat_container .chat_right_container { 
+    overflow: scroll;
     width: 100%;
     height: 100vh;
     background: linear-gradient(231deg, #4400B2 0%, #5F002D 100%);
 }
 
+.big_chat_container .chat_container .chat_right_container::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.big_chat_container .chat_container .chat_right_container::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 5px; 
+    
+}
+
 .chat_right_container .chat_top{
-    width: 100%;
+    position: relative;
+    width: 84.5%;
     height: 70px;
     background: #121212;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    z-index: 1;
 }
 
 .chat_top .user_container{
@@ -239,6 +236,7 @@
     width: 56px;
     height: 56px;
     cursor: pointer;
+    z-index: 2;
 }
 .chat_top .user_container .oneline{
     color: #A0A0A0;
@@ -250,6 +248,8 @@
 }
 
 .chat_top .icons_container{
+    position: absolute;
+    right: 12%;
     display: flex;
     gap: 30px;
     margin-right: 40px;
@@ -345,19 +345,26 @@
 /* Chat Bottom Container */
 .chat_right_container .chat_bottom{
     position: fixed;
-    bottom: 0;
-    width: 80.4%;
-    height: 80px;
+    bottom: 0px;
+    width: 100%;
+    /* height: 80px; */
+    height: 100px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background: linear-gradient(231deg, #011c75 10%, #2d0246 100%);
 }
 .chat_right_container .chat_bottom .chat_bottom_container{
-    position: relative;
-    width: 935px;
-    height: 70px;
+    margin-left: -400px;
+    height: 90px;
     display: flex;
     align-items: center;
-    border-radius: 30px;
+    justify-content: center;
+    /* border-radius: 30px; */
+    width: 60%;
+    /* border: 1px solid #000; */
+    background: transparent;
+    margin-top: 20px;
 }
 .chat_right_container .chat_bottom .chat_bottom_container .microphone{
     width: 60px;
@@ -374,6 +381,7 @@
 }
 
 .chat_right_container .chat_bottom .chat_bottom_container .input_box{
+    position: relative;
     width: 825px;
     height: 60px;
     border-radius: 30px;
@@ -408,7 +416,7 @@
 }
 .chat_right_container .chat_bottom .chat_bottom_container .input_box .sticker{
     position: absolute;
-    left: 90px;
+    left: 30px;
     width: 25px;
     height: 25px;    
 }

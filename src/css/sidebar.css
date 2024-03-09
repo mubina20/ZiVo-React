@@ -105,3 +105,8 @@
     color: #FF007A;
     transition: 0.3s;
 }
+
+.navlink{
+    color: #fff;
+    text-decoration: none;
+}

@@ -1,13 +1,25 @@
-import { Member } from "./user";
+import { Member, Post } from "./user";
 
 /*** REACT APP STATE ***/
 export interface AppRootState {
-    homePage: HomePageState;
+    memberPage: MemberPageState;
 };
 
-/*** HOMEPAGE ***/
+/*** MEMBER PAGE ***/
+export interface MemberPageState {
+    allMembers: Member[];
+    savedPosts: Post[];
+    likedPosts: Post[]
+    chosenMember: Member | null;
+    myFollowers: any[];
+};
+
+/*** HOME PAGE ***/
 export interface HomePageState {
-    recommendations: Member[];
-    savedPosts: Member[];
+    allPosts: Post[];
+    allPhotoPosts: Post[];
+    allVideoPosts: Post[];
+    allArticlePosts: Post[];
+    myFollowing: any[];
+}
 
-};

@@ -1,17 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { HomePageState } from "../../../types/screen";
+import { MemberPageState } from "../../../types/screen";
 
-const initialState: HomePageState = {
-    recommendations: [],
-    savedPosts: []
+const initialState: MemberPageState = {
+    allMembers: [],
+    savedPosts: [],
+    likedPosts: [],
+    chosenMember: null,
+    myFollowers: []
 };
 
-const HomePageSlice = createSlice({
-    name: "homePage",
+const MemberPageSlice = createSlice({
+    name: "memberpage",
     initialState,
     reducers: {
-        setrecommendations: (state, action) => {
-            state.recommendations = action.payload;
+        setAllMembers: (state, action) => {
+            state.allMembers = action.payload;
         },
         setsavedPosts: (state, action) => {
             state.savedPosts = action.payload;
@@ -20,9 +23,9 @@ const HomePageSlice = createSlice({
     });
 
 export const {
-    setrecommendations,
+    setAllMembers,
     setsavedPosts
-} = HomePageSlice.actions;
+} = MemberPageSlice.actions;
 
-const HomePageReducer = HomePageSlice.reducer;
-export default HomePageReducer;
+const MemberPageReducer = MemberPageSlice.reducer;
+export default MemberPageReducer;

@@ -293,6 +293,13 @@ export function Home() {
                     </div>
                 </div>
 
+                <div className="post-mode">
+                    <button>Only Videos</button>
+                    <button>Only Photos</button>
+                    <button>Only Articles</button>
+                    <button>Default</button>
+                </div>
+
                 <div className="post_container">
                     <div className="post_data">
                         <div className="post_top">

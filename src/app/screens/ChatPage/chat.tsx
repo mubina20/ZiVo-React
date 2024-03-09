@@ -1,7 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import "../../../css/chat.css";
 import { ChatPageSidebar } from "../../components/sidebars/chat_page_sidebar";
-import { Header } from "../../components/header/header";
 
 export function ChatPage() {
     return(
@@ -233,6 +232,94 @@ export function ChatPage() {
                             <div className="conversation_container">
                                 <div className="conversation">
                                     <div className="chatting_date">2024.02.15</div>
+                                    <div className="my_message_container">
+                                        <div className="message_time">8:12</div>
+                                        <div className="my_message">
+                                            <div className="message">Hello Samo, It's me Mubina!</div>
+                                            <div className="read">R</div>
+                                        </div>
+                                    </div>
+                                    <div className="friend_message_container">
+                                        <div className="user_profile">
+                                            <img src="/icons/user.png" alt="" className="profile"/>
+                                        </div>
+                                        <div className="friend_message_data">
+                                            <div className="friend_message">
+                                                <div className="message">ohh Hi! How are you?</div>
+                                            </div>
+                                            <div className="message_time">8:12</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="my_message_container">
+                                        <div className="message_time">8:12</div>
+                                        <div className="my_message">
+                                            <div className="message">Hello Samo, It's me Mubina!</div>
+                                            <div className="read">R</div>
+                                        </div>
+                                    </div>
+                                    <div className="friend_message_container">
+                                        <div className="user_profile">
+                                            <img src="/icons/user.png" alt="" className="profile"/>
+                                        </div>
+                                        <div className="friend_message_data">
+                                            <div className="friend_message">
+                                                <div className="message">ohh Hi! How are you?</div>
+                                            </div>
+                                            <div className="message_time">8:12</div>
+                                        </div>
+                                    </div><div className="my_message_container">
+                                        <div className="message_time">8:12</div>
+                                        <div className="my_message">
+                                            <div className="message">Hello Samo, It's me Mubina!</div>
+                                            <div className="read">R</div>
+                                        </div>
+                                    </div>
+                                    <div className="friend_message_container">
+                                        <div className="user_profile">
+                                            <img src="/icons/user.png" alt="" className="profile"/>
+                                        </div>
+                                        <div className="friend_message_data">
+                                            <div className="friend_message">
+                                                <div className="message">ohh Hi! How are you?</div>
+                                            </div>
+                                            <div className="message_time">8:12</div>
+                                        </div>
+                                    </div><div className="my_message_container">
+                                        <div className="message_time">8:12</div>
+                                        <div className="my_message">
+                                            <div className="message">Hello Samo, It's me Mubina!</div>
+                                            <div className="read">R</div>
+                                        </div>
+                                    </div>
+                                    <div className="friend_message_container">
+                                        <div className="user_profile">
+                                            <img src="/icons/user.png" alt="" className="profile"/>
+                                        </div>
+                                        <div className="friend_message_data">
+                                            <div className="friend_message">
+                                                <div className="message">ohh Hi! How are you?</div>
+                                            </div>
+                                            <div className="message_time">8:12</div>
+                                        </div>
+                                    </div><div className="my_message_container">
+                                        <div className="message_time">8:12</div>
+                                        <div className="my_message">
+                                            <div className="message">Hello Samo, It's me Mubina!</div>
+                                            <div className="read">R</div>
+                                        </div>
+                                    </div>
+                                    <div className="friend_message_container">
+                                        <div className="user_profile">
+                                            <img src="/icons/user.png" alt="" className="profile"/>
+                                        </div>
+                                        <div className="friend_message_data">
+                                            <div className="friend_message">
+                                                <div className="message">ohh Hi! How are you?</div>
+                                            </div>
+                                            <div className="message_time">8:12</div>
+                                        </div>
+                                    </div>
                                     <div className="my_message_container">
                                         <div className="message_time">8:12</div>
                                         <div className="my_message">

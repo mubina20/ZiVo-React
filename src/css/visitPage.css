@@ -14,15 +14,15 @@
 .visit_container .visit_page_container .visit_page_box{
     position: relative;
     width: 848px;
-    height: 1006px;
+    height: auto;
 }
 
 .visit_page_box .page_top{
     width: 788px;
-    height: 300px;
+    height: 330px;
     display: flex;
     gap: 130px;
-    padding: 50px 30px;
+    padding: 0 30px;
 }
 
 /* Top Left Info */
@@ -157,6 +157,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    cursor: pointer;
 }
 
 /* Page Bottom */
@@ -194,4 +195,8 @@
     cursor: pointer;
 }
 
-
+.my_data{
+    margin-top: 50px;
+    display: flex;
+    gap: 100px;
+}

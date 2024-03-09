@@ -5,6 +5,7 @@
 }
 
 .members_main_container .members{
+    margin-left: 200px;
     width: 870px;
     height: auto;
     margin-top: 100px;
@@ -66,8 +67,10 @@
 
 .members_main_container .members .members_container .card .user_info .user_icon {
     width: 93px;
+    height: 93px;
     cursor: pointer;
     margin-bottom: 10px;
+    border-radius: 50%;
 }
 
 .members_main_container .members .members_container .card .user_info .follow_btn{
