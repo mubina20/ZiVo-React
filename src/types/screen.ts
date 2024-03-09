@@ -1,7 +1,9 @@
-import { Member, Post } from "./user";
+import { Post } from "./post";
+import { Member } from "./user";
 
 /*** REACT APP STATE ***/
 export interface AppRootState {
+    homePage: HomePageState;
     memberPage: MemberPageState;
 };
 
@@ -9,7 +11,7 @@ export interface AppRootState {
 export interface MemberPageState {
     allMembers: Member[];
     savedPosts: Post[];
-    likedPosts: Post[]
+    likedPosts: Post[];
     chosenMember: Member | null;
     myFollowers: any[];
 };
@@ -20,6 +22,7 @@ export interface HomePageState {
     allPhotoPosts: Post[];
     allVideoPosts: Post[];
     allArticlePosts: Post[];
-    myFollowing: any[];
+    myFollowingsStory: Post[];
+    myFollowings: any[];
 }
 
