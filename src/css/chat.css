@@ -85,7 +85,7 @@
     height: 100%;
     background: #121212;
     border-right: 1px solid #FF007A;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .chat_left_container::-webkit-scrollbar {
     width: 10px; 
@@ -190,11 +190,6 @@
     height: 8px;
     font-family: 'Inter';
 }
-
-
-
-
-
 
 /* Chat Right Container */
 .big_chat_container .chat_container .chat_right_container { 
@@ -337,11 +332,6 @@
 }
 
 
-
-
-
-
-
 /* Chat Bottom Container */
 .chat_right_container .chat_bottom{
     position: fixed;
@@ -352,7 +342,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(231deg, #011c75 10%, #2d0246 100%);
+    /* background: linear-gradient(231deg, #011c75 10%, #2d0246 100%); */
 }
 .chat_right_container .chat_bottom .chat_bottom_container{
     margin-left: -400px;

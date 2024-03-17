@@ -17,24 +17,24 @@ export function LeftSidebar() {
 
             <div className="sections">
                 <div className="top_sections">
-                    <NavLink to="/" className={'navlink'}>
+                <NavLink to="/" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/>Home
+                            <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/><span>Home</span>
                         </div>
                     </NavLink>
                     <NavLink to="/short-contents" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/>Short Contents
+                            <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><span>Short Contents</span>
                         </div>
                     </NavLink>
                     <NavLink to="/members" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/>Members
+                            <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/><span>Members</span>
                         </div>
                     </NavLink>
                     <NavLink to="/life" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/>Life
+                            <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/><span>Life</span>
                         </div>
                     </NavLink>
                 </div>

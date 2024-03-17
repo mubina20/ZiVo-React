@@ -1,8 +1,15 @@
+body{
+    height: 200svh;
+    background: linear-gradient(#0c131f, #264569);
+    background-repeat: no-repeat;
+}
+
 .upload_big_container {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
+    
 }
 .upload_container{
     margin-top: 100px;
@@ -13,7 +20,7 @@
 }
 .upload_text{
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 20px;
 }
 .upload_page_tabs_container{
@@ -28,48 +35,36 @@
     height: 450px;
 }
 
-.upload_file{
-    width: 300px;
-    height: 300px;
-}
-.image{
-    width: 100%;
-    height: 100%;
-}
-
 .upload_image_box {
     position: relative;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
+    align-items: end;
 }
 .photos{
-    position: relative;
-    width: 100%;
-    height: 230px;
-    background: #f887be;
-    display: flex;
-    overflow-x: scroll;
-    gap: 10px;
+    width: 93%;
+    padding: 15px;
+    height: 270px;
 }
 .uploaded_image{
-    width: 215px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
-    cursor: pointer;
+    object-fit: cover;
 }
 
 .file_input{
     position: relative;
     width: 130px;
     cursor: pointer;
-    background: linear-gradient(180deg, #4D0025 0%, #FF007A 100%);
+    background: linear-gradient(180deg, #f8041c -50%, #000000 70%);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    padding: 18px 0;
+    padding: 16px 0;
+    margin: 15px;
 }
 .Upload_file{
     position: absolute;
@@ -86,6 +81,7 @@
     height: 400px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .photo_panel_left{
     width: 45%;
@@ -93,43 +89,130 @@
     flex-direction: column;
     align-items: center;
     gap: 130px;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 .photo_panel_left textarea{
-    margin-top: 20px;
     width: 370px;
     height: 130px;
     resize: none;
-    background: rgb(94, 93, 93);
+    background: rgb(187, 187, 187);
     color: #fff;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     padding: 15px;
 }
 .upload_button{
     width: 135px;
-    height: 33px;
+    height: 50px;
     border-radius: 20px;
-    background: linear-gradient(180deg, #4D0025 0%, #FF007A 100%);
+    background: transparent;
+    border: 1px solid #fff;
     color: #ffffff;
-    font-size: 16px;
-    border: none;
+    font-size: 18px;
     cursor: pointer;
 }
 .cencel{
     background: #888888;
 }
 textarea::placeholder{
-    color: rgb(175, 175, 187);
+    color: rgb(109, 108, 108);
 }
 .buttons{
     display: flex;
     gap: 100px;
 }
-
-
+.upload_photo{
+    width: 99%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+    font-size: 18px;
+}
 
 .photo_panel_right{
     width: 45%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
+}
+
+/* Article Contaienr */
+.article_panel_container{
+    width: 100%;
+    height: 600px;
+    /* background: blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.article_container{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* background: red; */
+}
+
+.article_title_textarea {
+    width: 560px;
+    height: 300px;
+    resize: none;
+    background: rgb(187, 187, 187);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 15px;
+    font-family: initial;
+    border-radius: 10px;
+}
+
+.change-color_btn{
+    background:  rgb(0, 0, 0);
+    border: none;
+    height: 40px;
+    width: 260px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #fff;
+    transition: 0.5s;
+}
+.bg{
+    width: 300px;
+}
+.change-color_btn:active{
+    transform: scale(1.1);
+    background: #FF007A;
+    transition: 0.1s;
+}
+.change-color-buttons{
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    gap: 60px;
+    justify-content: end;
+}
+.input-color{
+    position: absolute;
+    border-radius: 50px;
+    width: 200px;
+    padding: 20px;
+    cursor: pointer;
+    background: #000;
+    opacity: 0;
+
+}
+.bg-span{
+    height: 40px;
+    width: 200px;
+    background: #000;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

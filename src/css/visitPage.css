@@ -2,7 +2,7 @@
     margin-left: 300px;
     display: flex;
     justify-content: center;
-    color: #ffffff;
+    color: #fff;
 }
 
 .visit_container .visit_page_container {
@@ -199,4 +199,48 @@
     margin-top: 50px;
     display: flex;
     gap: 100px;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    .visit_page_box .page_bottom {
+        display: grid;
+        grid-template-areas: "a a a"; 
+        width: 100%;
+        justify-content: center;
+    }
+    .container {
+        width: 100px;
+    }
+    .container p {
+        display: none;
+    }
+    .container span {
+        display: none;
+    }
+    .container .line {
+        width: 50px;
+    }
+    .container .user_container {
+        display: flex;
+        justify-content: center;
+        width: 30px;
+    }
+    .visit_container {
+        margin-left: 100px;
+    }
+    .visit_container .visit_page_container .edit-profile {
+        
+        border: 1px solid #000;
+    }
+    .pc {
+        display: none;
+    }
+    .tablet {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    
 }

@@ -20,3 +20,11 @@ export interface Post {
     member_data: Member;
     me_liked: MeLiked[];
 };
+
+export interface UploadPost {
+    post_title: string ;
+    post_content: string ;
+    post_bg_color?: string;
+    post_text_color?: string;
+    post_align?: string;
+};

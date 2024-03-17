@@ -25,7 +25,7 @@ export function ChatPage() {
                                             <span className="date">2024-02-07</span>
                                         </div>
                                         <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! fgfagdfsghfagfsagagagdafgdfagdagdafgdfg</div>
+                                            <div className="message">Hello</div>
                                             <div className="checking"></div>
                                         </div>
                                     </div>
