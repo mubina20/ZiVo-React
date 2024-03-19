@@ -7,6 +7,7 @@ export interface MeLiked{
 };
 
 export interface Post {
+    member: any;
     _id: string;
     post_title: string,
     post_status: string;
@@ -18,7 +19,10 @@ export interface Post {
     mb_id: string;
     createdAt: Date;
     member_data: Member;
-    me_liked: MeLiked[];
+    post_bg_color: string;
+    post_align: string;
+    post_text_color: string;
+    // me_liked: MeLiked[];
 };
 
 export interface UploadPost {

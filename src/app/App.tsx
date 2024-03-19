@@ -17,11 +17,11 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact>
-          {/* {verifiedMemberData ? ( */}
+          {verifiedMemberData ? (
             <HomePage />
-          {/* ) : (  */}
-            {/* <AuthenticationPage />
-          )} */}
+          ) : (
+            <AuthenticationPage />
+          )}
         </Route>
         <Route path="/members">
           <MembersPage />

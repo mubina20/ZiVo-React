@@ -17,10 +17,22 @@ export function HomePage() {
 		)
 	}
 	if (isTablet) {
-		return <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>;
+		return(
+			<div>
+				<Header />
+				<div style={{color: "white", fontSize: "5rem"}}>isTablet</div>;
+			</div>
+			
+		) 
 	}
 	if (isMobile) {
-		return <div style={{color: "white", fontSize: "5rem"}}>isMobile</div>;
+		return(
+			<div>
+				<Header />
+				<div style={{color: "white", fontSize: "5rem"}}>isMobile</div>;
+			</div>
+			
+		)
 	}
 	
 	return <div>Other</div>;

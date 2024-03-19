@@ -2,7 +2,7 @@ import assert from "assert";
 import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/definer";
-import { UploadPost } from "../../types/post";
+import { Post, UploadPost } from "../../types/post";
 
 class PostApiService {
     private readonly path: string;
@@ -77,6 +77,29 @@ class PostApiService {
             return result;
         } catch (err: any) {
             console.log(`ERROR :: createArticlePost: ${err.message}`);
+            throw err;
+        }
+    };
+
+    public async getAllPosts() {
+        try {
+            const result = await axios.get(
+                this.path + "/post/all-posts", 
+                { withCredentials: true }
+            );
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            console.log("getAllPosts STATE ::", result.data.state);
+
+            const posts: Post[] = result.data.data;
+            console.log("posts", posts)
+
+            console.log("getAllPosts POSTS :: ", posts);
+
+            return posts;
+        } catch (err: any) {
+            console.log(`ERROR :: getAllgetAllPostsMembers: ${err.message}`);
             throw err;
         }
     };
