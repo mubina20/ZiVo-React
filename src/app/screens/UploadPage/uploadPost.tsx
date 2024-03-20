@@ -29,9 +29,11 @@ const useStyles = makeStyles({
 });
 
 export function UploadPostPage(props: any) {
+    /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
     const classes = useStyles();
 
+    /** HANDLERS **/
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
