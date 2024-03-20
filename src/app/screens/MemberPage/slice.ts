@@ -18,13 +18,17 @@ const MemberPageSlice = createSlice({
         },
         setsavedPosts: (state, action) => {
             state.savedPosts = action.payload;
+        },
+        setChosenMember: (state, action) => {
+            state.chosenMember = action.payload;
         }
     }
     });
 
 export const {
     setAllMembers,
-    setsavedPosts
+    setsavedPosts,
+    setChosenMember
 } = MemberPageSlice.actions;
 
 const MemberPageReducer = MemberPageSlice.reducer;

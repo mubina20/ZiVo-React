@@ -7,8 +7,7 @@ export const retrieveMembers = createSelector(
     selectMemberPage,
     (memberPage) => memberPage.allMembers
 );
-
-// export const retrieveSavedPosts = createSelector(
-//     selectHomePage,
-//     (HomePage) => HomePage.savedPosts
-// );
+export const retrieveChosenMember = createSelector(
+    selectMemberPage,
+    (memberPage) => memberPage.chosenMember
+);

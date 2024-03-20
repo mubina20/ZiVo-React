@@ -16,7 +16,7 @@ import moment from "moment";
 export function MyPage(props: any) {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
-    const { open, handleMemberInfoModelOpen, handleMemberInfoModelClose } = props;
+    const { open, handleOpenModal, handleModalClose } = props;
 
     /** HANDLERS **/
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -73,20 +73,20 @@ export function MyPage(props: any) {
                                         <Tab label={<img src="/icons/other/posts.png" alt="" className="center_icon" />} value="1" />
                                         <Tab label={<img src="/icons/other/save.png" alt="" className="center_icon" />} value="2" />
                                         <Tab label={<img src="/icons/other/heart.png" alt="" className="center_icon" />} value="3" />
-                                        <div className="my-page-information" onClick={handleMemberInfoModelOpen}><Typography>Information</Typography></div>  
+                                        <div className="my-page-information" onClick={handleOpenModal}><Typography>Information</Typography></div>  
 
                                         <div>
                                             <Modal
                                                 className="infoModalContainer"
                                                 open={open}
-                                                onClose={handleMemberInfoModelClose}
+                                                onClose={handleModalClose}
                                                 aria-labelledby="modal-modal-title"
                                                 aria-describedby="modal-modal-description"
                                             >
                                                 <div className="infoModal">
                                                     <div className="member_info_closing">
                                                         <span>@{verifiedMemberData?.mb_nick}<span>'s Information</span></span>
-                                                        <img src="/icons/other/close.png" alt="" onClick={handleMemberInfoModelClose} className="close"/>
+                                                        <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="close"/>
                                                     </div>
                                                     <div className="information">
                                                         <div className="info_category">Name</div>

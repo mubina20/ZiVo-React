@@ -1,10 +1,15 @@
-import { Box } from '@mui/material';
+import { Box, Modal } from '@mui/material';
 import assert from 'assert';
 import { Definer } from '../../../lib/definer';
 import MemberApiService from '../../apiServices/memberApiService';
 import { sweetErrorHandling } from '../../../lib/sweetAlert';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import "../../../css/auth.css"
+import { Link } from 'react-router-dom';
 
 export function AuthenticationPage(props: any) {
     // INITIALIZATIONS 
@@ -17,6 +22,8 @@ export function AuthenticationPage(props: any) {
         mb_type: string = "",
         mb_phone: number = 0,
         mb_password: string = "";
+
+        const { open, handleOpenModal, handleModalClose } = props;
     
     // HANDLERS 
     const handleUsername = (e: any) => {
@@ -96,7 +103,6 @@ export function AuthenticationPage(props: any) {
                 mb_phone: mb_phone,
                 mb_email: mb_email,
                 mb_birthday: mb_birthday,
-                mb_type: mb_type
             };
     
             const memberApiService = new MemberApiService();
@@ -111,12 +117,12 @@ export function AuthenticationPage(props: any) {
     return (
         <div>
             <div className='zivo'>
-            <a href="/admin">
-                <span>Z</span>
-                I
-                <span>V</span>
-                O
-            </a>
+                <Link to={"/"} href="/admin">
+                    <span>Z</span>
+                    I
+                    <span>V</span>
+                    O
+                </Link>
             </div>
 
             <div className="home_contaner">
@@ -138,8 +144,31 @@ export function AuthenticationPage(props: any) {
                             <span></span>
                             <input onClick={handleLoginRequest} className="btn" type="submit" value="Login" />
                         </Box>
+                        <button onClick={handleOpenModal}>Opennnnnn</button>
                     </div>
                 </div>
+                <Modal
+                    className="signup_container"
+                    open={open}
+                    onClose={handleModalClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className="signup">
+                        <div className="signup_closing">
+                            <span>Signup</span>
+                            <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="signup_close"/>
+                        </div>
+                        <div className="birthday_container">
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['DatePicker']}>
+                                    <DatePicker className='abb'/>
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+                        
+                    </div>
+                </Modal>
             </div>
         </div>
     )

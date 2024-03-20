@@ -55,3 +55,74 @@
     height: 30px;
     cursor: pointer;
 }
+
+
+/* =================== Mobile Navbar ===================== */
+
+
+.mobile-navbar {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 62px;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    z-index: 1;
+    border-bottom: 4px solid #FF007A;
+    top: 0;
+}
+
+.mobile-navbar-inside {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 20px;
+}
+
+.mobile-navbar-logo {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.mobile-navbar-logo h1 {
+    margin: 0 20px;
+}
+
+.mobile-navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-navbar-search {
+    width: 180px; 
+    position: relative;
+}
+
+.mobile-navbar-search-input {
+    width: 140px; 
+    height: 34px; 
+    border-radius: 50px;
+    border: none;
+    padding-left: 20px;
+}
+
+.mobile-navbar-search-icon {
+    width: 20px; 
+    height: 20px; 
+    left: 110px; 
+    cursor: pointer;
+    top: 7px; 
+    position: absolute;
+}
+
+.mobile-navbar-icons {
+    display: flex;
+}
+
+.mobile-navbar-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

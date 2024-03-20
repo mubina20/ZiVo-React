@@ -196,3 +196,53 @@ body {
         bottom: 100%;
     }
 }
+
+/* Signup */
+.signup_container{
+    width: 500px;
+    height: 600px;
+    background: linear-gradient(#0c131f, #264569);
+    margin: auto;
+    border: 2px solid #f71661;
+    color: #fff;
+}
+.signup_closing{
+    width: 470px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 150px;
+}
+.signup_closing span{
+    margin-top: 5px;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+.signup_close{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.birthday_container{
+    background: rgb(255, 255, 255);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 1px;
+}
+.abb{
+    background: rgb(117, 103, 103);
+    border-radius: 5px;
+    width: 300px;
+}
+
+
+
+
+
+
+
+
+
+

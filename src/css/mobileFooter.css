@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footer {
+    height: 62px;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    background: #000000;
+    border-top: 4px solid #FF007A;
+}
+
+.footer-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    height: 100%;
+    gap: 50px;
+}

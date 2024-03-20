@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import "../../../css/sidebar.css";
 import { NavLink } from "react-router-dom";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 export function LeftSidebar() {
     return(
@@ -8,8 +9,8 @@ export function LeftSidebar() {
             <div className="user_container">
                 <img src="/icons/user.png" alt="" className="user_icon"/>
                 <div className="user_info">
-                    <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>Samo</Typography>
-                    <Typography className="name" style={{opacity: "0.56"}}>@samo_ping12</Typography>
+                    <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>{verifiedMemberData?.mb_name}</Typography>
+                    <Typography className="name" style={{opacity: "0.56"}}>@{verifiedMemberData?.mb_nick}</Typography>
                 </div>
             </div>
 

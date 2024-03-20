@@ -18,8 +18,8 @@ function App() {
   const [open, setOpen] = React.useState(false);
 
   /** HANDLERS **/
-  const handleMemberInfoModelOpen = () => setOpen(true);
-  const handleMemberInfoModelClose = () => setOpen(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleModalClose = () => setOpen(false);
   return (
     <Router>
       <Switch>
@@ -27,7 +27,11 @@ function App() {
           {verifiedMemberData ? (
             <HomePage />
           ) : (
-            <AuthenticationPage />
+            <AuthenticationPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
         <Route path="/members">
@@ -36,8 +40,8 @@ function App() {
         <Route path="/my-page">
           <MyPage 
             open={open}
-            handleMemberInfoModelOpen={handleMemberInfoModelOpen}
-            handleMemberInfoModelClose={handleMemberInfoModelClose}
+            handleOpenModal={handleOpenModal}
+            handleModalClose={handleModalClose}
           />
         </Route>
         <Route path="/member/:mb_id">

@@ -3,6 +3,7 @@ import { LeftSidebar } from '../../components/sidebars/left_sidebar';
 import { RightSidebar } from '../../components/sidebars/right_sidebar';
 import useDeviceSize from '../../hooks';
 import { Home } from './home';
+import { MobileHome } from './mobileHome';
 
 export function HomePage() {
 	const { isDesktop, isMobile, isTablet } = useDeviceSize();
@@ -28,8 +29,7 @@ export function HomePage() {
 	if (isMobile) {
 		return(
 			<div>
-				<Header />
-				<div style={{color: "white", fontSize: "5rem"}}>isMobile</div>;
+				<MobileHome />
 			</div>
 			
 		)
