@@ -11,8 +11,15 @@ import { MyPage } from "./screens/MemberPage/myPage";
 import { ChatPage } from "./screens/ChatPage/chat";
 import { OtherPage } from "./screens/MemberPage/otherPage";
 import { UploadPostPage } from "./screens/UploadPage/uploadPost";
+import React, { useState } from "react";
 
 function App() {
+  /** INITIALIZATIONS **/
+  const [open, setOpen] = React.useState(false);
+
+  /** HANDLERS **/
+  const handleMemberInfoModelOpen = () => setOpen(true);
+  const handleMemberInfoModelClose = () => setOpen(false);
   return (
     <Router>
       <Switch>
@@ -27,7 +34,11 @@ function App() {
           <MembersPage />
         </Route>
         <Route path="/my-page">
-          <MyPage />
+          <MyPage 
+            open={open}
+            handleMemberInfoModelOpen={handleMemberInfoModelOpen}
+            handleMemberInfoModelClose={handleMemberInfoModelClose}
+          />
         </Route>
         <Route path="/member/:mb_id">
           <OtherPage />

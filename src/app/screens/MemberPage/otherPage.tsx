@@ -45,7 +45,7 @@ export function OtherPage() {
                             </div>
                         </div>
                         
-                        <div className="page_center">
+                        <div className="other_page_center">
                             <img src="/icons/other/posts.png" alt="" className="center_icon"/>
                             <Typography style={{cursor: "pointer"}}>Information</Typography>
                         </div>

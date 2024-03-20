@@ -123,26 +123,37 @@
 .visit_page_box .page_center{
     display: flex;
     justify-content: center;
-    gap: 100px;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+.other_page_center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
 }
 
-.visit_page_box .page_center .center_icon{
+.visit_page_box .center_icon{
     width: 27px;
     height: 27px;
     cursor: pointer;
 }
 
 .visit_page_box .line{
-    margin-top: 5px;
+    margin-top: -1px;
     position: relative;
     width: 848px;
     height: 1px;
 }
 
 /* Upload Post Button */
-.visit_page_box .upload_post_btn{
+.upload_post_btn{
+    width: 100%;
     display: flex;
     justify-content: end;
+    margin-top: 12px;
+    gap: 20px;
 }
 
 .visit_page_box .upload_post_btn .upload-post{
@@ -178,8 +189,7 @@
 }
 
 /* Edit Profile */
-
-.visit_container .visit_page_container .edit-profile{
+.edit-profile{
     width: 135px;
     height: 38px;
     background: #777777;
@@ -187,6 +197,8 @@
     font-size: 16px;
     border: none;
     margin-left: 50px;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 .info .top_icon{
@@ -200,47 +212,58 @@
     display: flex;
     gap: 100px;
 }
-
-
-@media only screen and (max-width: 1300px) {
-    .visit_page_box .page_bottom {
-        display: grid;
-        grid-template-areas: "a a a"; 
-        width: 100%;
-        justify-content: center;
-    }
-    .container {
-        width: 100px;
-    }
-    .container p {
-        display: none;
-    }
-    .container span {
-        display: none;
-    }
-    .container .line {
-        width: 50px;
-    }
-    .container .user_container {
-        display: flex;
-        justify-content: center;
-        width: 30px;
-    }
-    .visit_container {
-        margin-left: 100px;
-    }
-    .visit_container .visit_page_container .edit-profile {
-        
-        border: 1px solid #000;
-    }
-    .pc {
-        display: none;
-    }
-    .tablet {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-    
+.my-page-information {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 30px;
 }
+.infoModalContainer{
+    user-select: none;
+    margin: auto;
+    display: flex;
+    width: 500px;
+    height: 670px;
+    background: rgb(0, 0, 0);
+    color: #fff;
+    border: 2px solid #FF007A;
+}
+.member_info_closing{
+    width: 476px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 70px;
+    padding: 10px;
+    font-size: 2rem;
+}
+.member_info_closing span{
+    font-size: 2rem;
+    color: #FF007A;
+    margin-bottom: 20px;
+}
+.member_info_closing span span{
+    font-size: 1.4rem;
+    color: #fff;
+}
+.close{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.information{
+    font-size: 18px;
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+    margin-left: 30px;
+}
+.info_category{
+    width: 100px;
+    color: #999798;
+}
+
+
+
+
+
