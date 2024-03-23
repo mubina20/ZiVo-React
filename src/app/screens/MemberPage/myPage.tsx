@@ -2,8 +2,8 @@ import { Box, Button, Typography } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
-import { Link, NavLink } from "react-router-dom";
-import {  Stack, Tab, Tabs } from "@mui/material";
+import { Link } from "react-router-dom";
+import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useState } from "react";
 import { MyPosts } from "./myPosts";
@@ -62,8 +62,9 @@ export function MyPage(props: any) {
                         
                         <div className="page_center">
                             <TabContext value={value}>
-                                <Stack>
-                                    <TabList 
+                                <Stack className="my_page_stack">
+                                    <div className="my_page_tablist">
+                                        <TabList 
                                         onChange={handleChange} 
                                         textColor={"inherit"}
                                         TabIndicatorProps={{
@@ -132,6 +133,8 @@ export function MyPage(props: any) {
                                             </Modal>
                                         </div>
                                     </TabList>
+                                    </div>
+                                    
                                 </Stack>
                                 <Box className='line' />
 
