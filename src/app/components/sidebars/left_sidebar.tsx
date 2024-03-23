@@ -2,8 +2,23 @@ import { Box, Typography } from "@mui/material";
 import "../../../css/sidebar.css";
 import { NavLink } from "react-router-dom";
 import { verifiedMemberData } from "../../apiServices/verify";
+import MemberApiService from "../../apiServices/memberApiService";
+import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { Definer } from "../../../lib/definer";
 
 export function LeftSidebar() {
+
+    /** HANDLERS **/
+    const handleLogOutRequest = async () => {
+        try {
+          const memberApiService = new MemberApiService();
+          await memberApiService.logOutRequest();
+          await sweetTopSmallSuccessAlert("success", 700, true);
+        } catch (err: any) {
+          console.log(err);
+          sweetFailureProvider(Definer.general_err1);
+        }
+      };
     return(
         <div className="container">
             <div className="user_container">
@@ -48,7 +63,7 @@ export function LeftSidebar() {
                             <img src="/icons/left-sidebar-icons/setting.png" alt="" className="icon"/><span>Settings</span>
                         </div>
                     </NavLink>
-                    <div className="section">
+                    <div className="section"  onClick={handleLogOutRequest}>
                         <img src="/icons/left-sidebar-icons/logout.png" alt="" className="icon"/><span>LogOut</span>
                     </div>
                 </div>

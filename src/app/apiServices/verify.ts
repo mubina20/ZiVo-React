@@ -2,24 +2,26 @@ import Cookies from "universal-cookie";
 import { serverApi } from "../../lib/config";
 
 const cookies = new Cookies();
-let member_data: any = null;
+let verifiedMemberData: any = null;
 
 if (cookies.get("access_token")) {
-    const memberDataJson: any = localStorage.getItem("member_data")
-        ? localStorage.getItem("member_data")
-        : null;
-    member_data = memberDataJson ? JSON.parse(memberDataJson) : null;
+    const memberDataJson: any = localStorage.getItem("member_data");
+    
+    if (memberDataJson) {
+        let member_data = JSON.parse(memberDataJson);
 
-    if (member_data) {
-        member_data.mb_image = member_data.mb_image
-            ? `${serverApi}/${member_data.mb_image}`.replaceAll('\\','/')
-            : "/auth/default_user.svg";
+        if (member_data.mb_profile_image) {
+            member_data.mb_profile_image = `${serverApi}/${member_data.mb_profile_image}`.replace(/\\/g,'/');
+        } else {
+            member_data.mb_profile_image = "/auth/default_user.svg";
+        }
+        verifiedMemberData = member_data;
     }
 } else {
     localStorage.removeItem("member_data");
 }
 
 console.log("=== verify ===");
-console.log("MEMBER_DATA :: ", member_data);
+console.log("VERIFIED_MEMBER_DATA :: ", verifiedMemberData);
 
-export const verifiedMemberData = member_data ? member_data : null;
+export { verifiedMemberData };

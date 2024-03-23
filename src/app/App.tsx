@@ -12,6 +12,9 @@ import { ChatPage } from "./screens/ChatPage/chat";
 import { OtherPage } from "./screens/MemberPage/otherPage";
 import { UploadPostPage } from "./screens/UploadPage/uploadPost";
 import React, { useState } from "react";
+import MemberApiService from "./apiServices/memberApiService";
+import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../lib/sweetAlert";
+import { Definer } from "../lib/definer";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -20,6 +23,9 @@ function App() {
   /** HANDLERS **/
   const handleOpenModal = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
+
+  // LogOut Request
+  
   return (
     <Router>
       <Switch>

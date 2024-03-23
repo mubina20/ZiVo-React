@@ -68,10 +68,6 @@ export function AllArticlePosts(props: any) {
                                 <div 
                                     className="post_content"
                                     style={{
-                                        fontSize: "22px",
-                                        fontWeight: "700",
-                                        padding: "15px",
-                                        width: "94.9%",
                                         background: post?.post_bg_color ? post?.post_bg_color : "grey",
                                         color: post?.post_text_color ? post?.post_text_color : "black",
                                         textAlign: post.post_align === "center" ? "center" : "left"

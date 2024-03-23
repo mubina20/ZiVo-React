@@ -11,19 +11,23 @@ class PostApiService {
         this.path = serverApi;
     }
 
-    public async createPhotoPost(data: FormData) {
+    public async createPhotoPost(data: UploadPost) {
         try {
-            const result = await axios.post(
-                this.path + "/post/create/photo", 
-                    data, 
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        }
-                    }
-            );
+            const formData = new FormData();
+            formData.append("post_title", data.post_title);
+            formData.append("post_content", data.post_content);
+
+            const result = await axios(`${this.path}/post/create/photo`, {
+                method: "POST",
+                data: formData,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
     
             console.log(data);
+            console.log(typeof data.post_content);
     
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
@@ -36,7 +40,7 @@ class PostApiService {
         }
     };
 
-    public async createVideoPost(data: FormData) {
+    public async createVideoPost(data: any) {
         try {
             const result = await axios.post(
                 this.path + "/post/create/video", 

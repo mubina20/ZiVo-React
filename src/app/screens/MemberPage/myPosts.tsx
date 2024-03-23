@@ -33,7 +33,8 @@ export function MyPosts() {
                 filteredPosts.map((post: Post) => (
                     <div key={post._id}>
                         <div className="post">
-                            <img src={post.post_content} alt="" />
+                            {/* <img src={post?.post_content} alt="" width="300px"/> */}
+                            {post.post_content}
                         </div>
                     </div>
                 ))

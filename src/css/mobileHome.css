@@ -1,22 +1,25 @@
-/* * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.user-icon svg {
-    margin-bottom: -10.5px;
-    margin-right: 10.5px;
+.user_icon svg {
+    margin-bottom: -83.5px;
+    margin-left: -4.5px;
 }
 
-.story-wrapper p {
+.story_wrapper p {
     font-size: 13px;
 }
 
-.story-wrapper {
+.story_wrapper {
     display: flex;
     gap: 5px;
-
+    width: 100%;
+    overflow: scroll;
+    margin-top: 65px;
+    color: white;
 }
 
 
@@ -48,7 +51,7 @@
     flex-direction: column;
 }
 
-.post-top {
+.post_top {
     display: flex;
     width: 100%;
     color: #ffffff;
@@ -56,34 +59,34 @@
     align-items: center;
 }
 
-.user-container {
+.user_container {
     display: flex;
 }
 
-.post-user-icon {
+.post_user_icon {
     width: 50px;
     height: 50px;
     margin-right: 10px;
     cursor: pointer;
 }
 
-.mobile-icon {
+.mobile_icon {
     width: 23px;
     height: 23px;
 }
 
-.post-content {
+.post_content {
     width: 100%;
     height: 66%;
     background: gray;
 }
 
-.post-content img {
+.post_content img {
     width: 100%;
     height: 100%;
 }
 
-.post-bottom {
+.post_bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -93,13 +96,13 @@
     padding: 0 30px;
 }
 
-.post-bottom .mobile-left, .mobile-right{
+.post_bottom .mobile_left, .mobile_right{
     display: flex;
     align-items: center;
 }
 
-.post-bottom .bottom-icon{
+.post_bottom .bottom_icon{
     width: 25px;
     height: 25px;
     margin-right: 8px;
-} */
+}

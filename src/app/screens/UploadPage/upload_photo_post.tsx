@@ -6,31 +6,39 @@ import assert from "assert";
 import { Definer } from "../../../lib/definer";
 import PostApiService from "../../apiServices/postApiService";
 import { NavLink } from "react-router-dom";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 export function UploadPhotoPost(props: any) {
     /** INITIALIZATIONS **/
     const [file, setFile] = useState<File | null>(null);
+
     const [photoPostData, setPhotoPostData] = useState<UploadPost>({
         post_title: "",
-        post_content: ""
+        post_content: "",
     });
 
     /** HANDLERS **/
-    const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = e.target.files ? e.target.files[0] : null;
-        if (selectedFile) {
-            const fileExtension = selectedFile.name.split('.').pop()?.toLowerCase();
-            if (fileExtension && ['png', 'jpeg', 'jpg'].includes(fileExtension)) {
-                setFile(selectedFile);
-                setPhotoPostData({
-                    ...photoPostData,
-                    post_content: selectedFile.name
-                });
-            } else {
-                console.log("Please select a file with .png, .jpeg, or .jpg format.");
-            }
+    const handlePhotoChange = (e: any) => {
+        try {
+            console.log("handlePhotoChange ::  e.target.files :: ", e.target.files);
+            const file = e.target.files[0];
+    
+            const fileType = file['type'],
+                validTypes = ['image/lpg', 'image/jpeg', 'image/png'];
+            assert.ok(validTypes.includes(fileType) && file, Definer.input_err2);
+    
+            // Fayl nomini "post_content"ga yozish
+            photoPostData.post_content = file;
+            setPhotoPostData({ ...photoPostData });
+    
+            // Faylni URL.createObjectURL orqali joylash
+            setFile(file);
+        } catch(err) {
+            console.log(`ERROR :: handlePhotoChange, ${err}`);
+            sweetErrorHandling(err).then();
         }
-    };
+    }
+    
     
     const changePhotoPostTitleHandle = useCallback(
         (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -44,6 +52,7 @@ export function UploadPhotoPost(props: any) {
 
     const handlePostButton = async () => {
         try {
+            assert.ok(verifiedMemberData, Definer.auth_err1)
             assert.ok(
                 photoPostData.post_title !== "" &&
                 photoPostData.post_content !== "" &&
@@ -51,12 +60,9 @@ export function UploadPhotoPost(props: any) {
             );
 
             const postService = new PostApiService();
-            const formData = new FormData();
-            formData.append("post_title", photoPostData.post_title);
-            if (file) {
-                formData.append("post_content", file);
-            }
-            await postService.createPhotoPost(formData);
+            await postService.createPhotoPost(photoPostData);
+            // console.log("post_title:", formData.get("post_title"));
+
             await sweetTopSmallSuccessAlert("Post is created successfully!");
 
             setPhotoPostData({ post_title: "", post_content: "" });
@@ -96,7 +102,8 @@ export function UploadPhotoPost(props: any) {
                         <div className="photos">
                             {file ? (
                                 <img
-                                    src={URL.createObjectURL(file)}
+                                    src={file ? URL.createObjectURL(file) : ''}
+
                                     alt=""
                                     className="uploaded_image"
                                 />
@@ -106,7 +113,7 @@ export function UploadPhotoPost(props: any) {
                         </div>
                         <div className="file_input">
                             <span>Add Photo</span>
-                            <input type="file" onChange={handlePhotoChange} className="Upload_file" />
+                            <input type="file" onChange={handlePhotoChange} className="Upload_file" id="postContent"/>
                         </div>
                     </div>
                 </div>
