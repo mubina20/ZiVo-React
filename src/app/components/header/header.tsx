@@ -21,7 +21,6 @@ export function Header() {
                     <NavLink to={'/my-page'}><img className='icon' src="/icons/user.png" alt="notification" /></NavLink>
                 </div>
             </div>
-            
         </div>
     )
 }
