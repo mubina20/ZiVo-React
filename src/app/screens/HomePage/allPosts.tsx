@@ -23,6 +23,7 @@ const allPostsRetriever = createSelector(
 export function AllPosts(props: any) {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
+    const { handleMemberSelect } = props;
 
     /** HANDLERS **/
     useEffect(() => {
@@ -50,7 +51,11 @@ export function AllPosts(props: any) {
                             <div className="post_container" key={post._id}>
                                 <div className="post_data">
                                     <div className="post_top">
-                                        <div className="user_container">
+                                        <div 
+                                            className="user_container" 
+                                            key={post?.member?._id} 
+                                            onClick={() => handleMemberSelect(post?.member?._id)}
+                                        >
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 
@@ -59,6 +64,7 @@ export function AllPosts(props: any) {
                                                 alt="" 
                                                 className="post_user_icon"
                                                 style={{borderRadius: "50%"}}
+                                                
                                             />
                                             <div className="user_info">
                                                 <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>@{post.member.mb_nick}</Typography>
@@ -89,7 +95,11 @@ export function AllPosts(props: any) {
                             <div className="post_container" key={post._id}>
                                 <div className="post_data">
                                     <div className="post_top">
-                                        <div className="user_container">
+                                        <div 
+                                            className="user_container" 
+                                            key={post?.member?._id} 
+                                            onClick={() => handleMemberSelect(post?.member?._id)}
+                                        >
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 
@@ -135,7 +145,11 @@ export function AllPosts(props: any) {
                             <div className="post_container" key={post._id}>
                                 <div className="post_data">
                                     <div className="post_top">
-                                        <div className="user_container">
+                                        <div 
+                                            className="user_container" 
+                                            key={post?.member?._id} 
+                                            onClick={() => handleMemberSelect(post?.member?._id)}
+                                        >
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 

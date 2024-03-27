@@ -1,24 +1,23 @@
-import { Box, Container, Stack, Tab, Typography } from "@mui/material";
+import { Box, Container, Stack, Tab } from "@mui/material";
 import "../../../css/home.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper';
-import { useEffect, useReducer, useState } from "react";
+import { useState } from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/scrollbar'
-import PostApiService from "../../apiServices/postApiService";
-import { Post } from "../../../types/post";
-
-import { setAllPosts } from "./slice";
-import { retrieveAllPosts } from "./selector";
-import { serverApi } from "../../../lib/config";
+import 'swiper/css/scrollbar';
 import { AllPosts } from "./allPosts";
 import { AllVideoPosts } from "./allVideoPosts";
 import { AllPhotoPosts } from "./allPhotoPosts";
 import { AllArticlePosts } from "./allArticlePosts";
+import { Member } from "../../../types/user";
+import { setAllMembers, setChosenMember } from "../MemberPage/slice";
+import { Dispatch, createSelector } from "@reduxjs/toolkit";
+import { retrieveChosenMember } from "../MemberPage/selector";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import MemberApiService from "../../apiServices/memberApiService";
 
 const members = [
     { id: 1, nickName: 'samo_ping12' },
@@ -28,36 +27,64 @@ const members = [
     { id: 5, nickName: 'samo_ping12' }
 ];
 
+const actionDispatch = (dispatch: Dispatch) => ({
+    setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
+    setAllMembers: (data: Member[]) => 
+        dispatch(setAllMembers(data))
+});
+
+const chosenMemberRetriever = createSelector(
+    retrieveChosenMember, 
+    (chosenMember) => ({
+        chosenMember
+    })
+);
+
 export function Home() {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
+    const [allMembers, setAllMembers] = useState<Member[]>([]);
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const {
+        setChosenMember,
+    } = actionDispatch(useDispatch());
 
     /** HANDLERS **/
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
+    const handleMemberSelect = async (memberId: any) => {
+        try {
+            const memberService = new MemberApiService();
+            const chosenMemberData = await memberService.getChosenMember(memberId);
+            dispatch(setChosenMember(chosenMemberData)); 
+            history.push(`/member/${chosenMemberData._id}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
+
     return(
         <Container>
             <div className="main">
-                <Box className="story-wrapper" style={{ width: '1000px', }} flexDirection={'row'} sx={{ }}>
+                <Box className="story-wrapper" style={{ width: '1000px', }} flexDirection={'row'}>
                     <Swiper
-                        className="ddddddd"
                         slidesPerView={7}
                         centeredSlides={true}
-                        // direction={'horizontal'} 
                         spaceBetween={30}
-                        // navigation
-                        // pagination={{ clickable: true }}
                         scrollbar={{ draggable: true }}
                     >
                         {members.map((member) => {
                             return (
-                                <div className="hori">
+                                <div>
                                     <SwiperSlide
                                         key={member.id}
                                         style={{ cursor: 'pointer' }}
                                         className="slide"
+                                        
                                     >
                                         <div className="user-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
@@ -92,18 +119,33 @@ export function Home() {
                                     style={{marginTop: "50px"}}
                                 >
                                     <Tab label="All Posts" value="1"/>
-                                    <Tab label="All Video Posts" value="2"/>
-                                    <Tab label="All Photo Posts" value="3"/>
-                                    <Tab label="All Article Posts" value="4"/>
+                                    <Tab label="Video Posts" value="2"/>
+                                    <Tab label="Photo Posts" value="3"/>
+                                    <Tab label="Article Posts" value="4"/>
                                 </TabList>
                             </Stack>
                             <TabPanel value="1"> 
-                                <AllPosts 
+                            <AllPosts  
+                                setChosenMember={setChosenMember}
+                                handleMemberSelect={handleMemberSelect}
+                            /> 
+
+                            </TabPanel>
+                            <TabPanel value="2"> 
+                                <AllVideoPosts 
+                                    handleMemberSelect={handleMemberSelect}
                                 /> 
                             </TabPanel>
-                            <TabPanel value="2"> <AllVideoPosts /> </TabPanel>
-                            <TabPanel value="3"> <AllPhotoPosts /> </TabPanel>
-                            <TabPanel value="4"> <AllArticlePosts /> </TabPanel>
+                            <TabPanel value="3"> 
+                                <AllPhotoPosts
+                                    handleMemberSelect={handleMemberSelect} 
+                                /> 
+                            </TabPanel>
+                            <TabPanel value="4"> 
+                                <AllArticlePosts
+                                    handleMemberSelect={handleMemberSelect}
+                                /> 
+                            </TabPanel>
                     </TabContext>
 
             </div>

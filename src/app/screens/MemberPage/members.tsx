@@ -32,39 +32,30 @@ const chosenMemberRetriever = createSelector(
     (chosenMember) => ({
         chosenMember
     })
-  );
+);
 
 export function MembersPage() {
-    // const { allMembers } = useSelector(allMembersRetriever);
-
-    // useEffect(() =>{
-    //     const memberService = new MemberApiService();
-    //     memberService.getAllMembers()
-    //     .then((data) => setAllMembers(data))
-	// 	.catch((err) => console.log(err));
-    // }, []);
-
+    /** INITIALIZATIONS **/
     const [allMembers, setAllMembers] = useState<Member[]>([]);
 
-    // const [chosenMember, setChosenMember] = useState<any>(null);
     const dispatch = useDispatch();
     const history = useHistory();
     const {
         setChosenMember,
-      } = actionDispatch(useDispatch());
+    } = actionDispatch(useDispatch());
     
 
     /* HANDLERS **/
     const handleMemberSelect = async (memberId: any) => {
         try {
-          const memberService = new MemberApiService();
-          const chosenMemberData = await memberService.getChosenMember(memberId);
-          dispatch(setChosenMember(chosenMemberData)); // Redux yoki context API orqali ma'lumotlarni saqlash
-          history.push(`/member/${chosenMemberData._id}`); // OtherPage-ga o'tish
+            const memberService = new MemberApiService();
+            const chosenMemberData = await memberService.getChosenMember(memberId);
+            dispatch(setChosenMember(chosenMemberData)); 
+            history.push(`/member/${chosenMemberData._id}`); 
         } catch (error) {
-          console.error("Error while fetching chosen member:", error);
+            console.error("ERROR handleMemberSelect ::", error);
         }
-      };
+    };
 
     useEffect(() => {
         const fetchAllMembers = async () => {

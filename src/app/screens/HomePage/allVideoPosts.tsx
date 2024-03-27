@@ -22,6 +22,7 @@ const allPostsRetriever = createSelector(
 export function AllVideoPosts(props: any) {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
+    const { handleMemberSelect } = props;
 
     /** HANDLERS **/
     useEffect(() => {
@@ -46,7 +47,11 @@ export function AllVideoPosts(props: any) {
                         <div className="post_container" key={post._id}>
                                 <div className="post_data">
                                     <div className="post_top">
-                                        <div className="user_container">
+                                        <div 
+                                            className="user_container"
+                                            key={post?.member?._id} 
+                                            onClick={() => handleMemberSelect(post?.member?._id)}
+                                        >
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 
