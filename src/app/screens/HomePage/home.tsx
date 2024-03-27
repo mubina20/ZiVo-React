@@ -1,7 +1,7 @@
 import { Box, Container, Stack, Tab } from "@mui/material";
 import "../../../css/home.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -12,12 +12,16 @@ import { AllVideoPosts } from "./allVideoPosts";
 import { AllPhotoPosts } from "./allPhotoPosts";
 import { AllArticlePosts } from "./allArticlePosts";
 import { Member } from "../../../types/user";
-import { setAllMembers, setChosenMember } from "../MemberPage/slice";
+import { setAllMembers, setChosenMember, setMemberFollowings } from "../MemberPage/slice";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { retrieveChosenMember } from "../MemberPage/selector";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MemberApiService from "../../apiServices/memberApiService";
+import { retrieveMemberFollowings } from "../MemberPage/selector";
+import { Following, FollowSearchObj } from "../../../types/follow";
+import { verifiedMemberData } from "../../apiServices/verify";
+import FollowApiService from "../../apiServices/followApiService";
 
 const members = [
     { id: 1, nickName: 'samo_ping12' },
@@ -28,6 +32,7 @@ const members = [
 ];
 
 const actionDispatch = (dispatch: Dispatch) => ({
+    setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
     setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
     setAllMembers: (data: Member[]) => 
         dispatch(setAllMembers(data))
@@ -40,10 +45,15 @@ const chosenMemberRetriever = createSelector(
     })
 );
 
+const memberFollowingsRetriever = createSelector(retrieveMemberFollowings, (memberFollowings) => ({
+	memberFollowings,
+}));
+
 export function Home() {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
     const [allMembers, setAllMembers] = useState<Member[]>([]);
+    
 
     const dispatch = useDispatch();
     const history = useHistory();

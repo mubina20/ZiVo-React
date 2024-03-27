@@ -75,7 +75,7 @@
 /* Right Container */
 .right_container {
     margin-top: 62px;
-    width: 260px;
+    width: 270px;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -84,7 +84,7 @@
     border-left: 1px solid #FF007A;
     color: white;
     padding: 0 30px;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 .right_container .followings_container{
     display: flex;
@@ -96,6 +96,7 @@
 .right_container .followings_container .user_icon{
     width: 50px;
     cursor: pointer;
+    border-radius: 50%;
 }
 .right_container .followings_container .following_info .nickName{
     transition: 0.5s;

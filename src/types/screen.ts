@@ -1,3 +1,4 @@
+import { Follower, Following } from "./follow";
 import { Post } from "./post";
 import { Member } from "./user";
 
@@ -13,7 +14,8 @@ export interface MemberPageState {
     savedPosts: Post[];
     likedPosts: Post[];
     chosenMember: Member | null;
-    myFollowers: any[];
+    memberFollowers: Follower[];
+    memberFollowings: Following[];
 };
 
 /*** HOME PAGE ***/
