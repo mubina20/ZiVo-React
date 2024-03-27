@@ -16,6 +16,7 @@ import MemberApiService from "./apiServices/memberApiService";
 import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../lib/sweetAlert";
 import { Definer } from "../lib/definer";
 import { EditProfile } from "./screens/MemberPage/editProfile";
+import { AuthPage } from "./screens/AuthenticationPage";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -34,7 +35,7 @@ function App() {
           {verifiedMemberData ? (
             <HomePage />
           ) : (
-            <AuthenticationPage 
+            <AuthPage 
               open={open}
               handleOpenModal={handleOpenModal}
               handleModalClose={handleModalClose}
