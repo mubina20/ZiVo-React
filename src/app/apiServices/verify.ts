@@ -10,11 +10,11 @@ if (cookies.get("access_token")) {
     if (memberDataJson) {
         let member_data = JSON.parse(memberDataJson);
 
-        if (member_data.mb_profile_image) {
-            member_data.mb_profile_image = `${serverApi}/${member_data.mb_profile_image}`.replace(/\\/g,'/');
-        } else {
-            member_data.mb_profile_image = "/auth/default_user.svg";
-        }
+    //     if (member_data.mb_profile_image) {
+    //         member_data.mb_profile_image = `${serverApi}/${member_data?.mb_profile_image}`.replace(/\\/g,'/');
+    //     } else {
+    //         member_data.mb_profile_image = "/icons/user.png";
+    //     }
         verifiedMemberData = member_data;
     }
 } else {

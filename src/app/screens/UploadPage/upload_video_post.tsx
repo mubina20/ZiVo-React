@@ -6,6 +6,7 @@ import assert from "assert";
 import PostApiService from "../../apiServices/postApiService";
 import { Definer } from "../../../lib/definer";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 export function UploadVideoPost(props: any) {
     /** INITIALIZATIONS **/
@@ -16,15 +17,28 @@ export function UploadVideoPost(props: any) {
     });
 
     /** HANDLERS **/
-    const handleVideoChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = e.target.files ? e.target.files[0] : null;
-        setFile(selectedFile);
-        if (selectedFile) {
-            setVideoPostData({
-                ...videoPostData,
-                post_content: selectedFile.name
-            });
-        }
+    const handleVideoChange = (e: any) => {
+        console.log("handleVideoChange ::  e.target.files :: ", e.target.files);
+        const selectedVideoFile = e.target.files[0];
+
+        const fileType = selectedVideoFile['type'];
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const validTypes = ['video/mp4'];
+
+        assert.ok(validTypes.includes(fileType) && selectedVideoFile, Definer.input_err2);
+
+        videoPostData.post_content = selectedVideoFile;
+            setVideoPostData({ ...videoPostData });
+
+            setFile(selectedVideoFile);
+
+        // setFile(selectedVideoFile);
+        // if (selectedVideoFile) {
+        //     setVideoPostData({
+        //         ...videoPostData,
+        //         post_content: selectedVideoFile.name
+        //     });
+        // }
     };
 
     const changeVideoPostTitleHandle = useCallback(
@@ -39,6 +53,7 @@ export function UploadVideoPost(props: any) {
 
     const handleVideoPostButton = async () => {
         try {
+            assert.ok(verifiedMemberData, Definer.auth_err1);
             assert.ok(
                 videoPostData.post_title !== "" &&
                 videoPostData.post_content !== "" &&
@@ -46,12 +61,7 @@ export function UploadVideoPost(props: any) {
             );
 
             const postService = new PostApiService();
-            const formData = new FormData();
-            formData.append("post_title", videoPostData.post_title);
-            if (file) {
-                formData.append("post_content", file);
-            }
-            await postService.createVideoPost(formData);
+            await postService.createVideoPost(videoPostData);
             await sweetTopSmallSuccessAlert("Post is created successfully!");
 
             setVideoPostData({ post_title: "", post_content: "" });
@@ -91,7 +101,7 @@ export function UploadVideoPost(props: any) {
                         <div className="photos">
                         {file ? (
                             <video controls className="uploaded_image">
-                                <source src={URL.createObjectURL(file)} type="video/mp4" />
+                                <source src={file ? URL.createObjectURL(file) : ''} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         ) : (

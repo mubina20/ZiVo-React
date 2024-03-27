@@ -29,6 +29,8 @@
 .visit_page_box .page_top .left_info .user_icon{
     width: 132px;
     height: 132px;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
 .visit_page_box .page_top .left_info .nickname{

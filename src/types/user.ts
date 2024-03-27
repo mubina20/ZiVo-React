@@ -14,6 +14,8 @@ export interface Member {
     mb_type:string;
     mb_status:string;
     mb_address?: string;
+    mb_hobby?: string;
+    mb_school?: string;
     mb_description?: string;
     mb_country?: string;
     mb_profile_image?: string;

@@ -7,11 +7,15 @@ import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import MemberApiService from "../../apiServices/memberApiService";
 import { setAllMembers } from "./slice";
 import { Member } from "../../../types/user";
-import { retrieveMembers } from "./selector";
+import { retrieveChosenMember, retrieveMembers } from "./selector";
 import { useSelector } from "react-redux";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setChosenMember } from "./slice";
 
 const actionDispatch = (dispatch: Dispatch) => ({
+    setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
     setAllMembers: (data: Member[]) => 
         dispatch(setAllMembers(data))
 });
@@ -22,6 +26,13 @@ const allMembersRetriever = createSelector(
         allMembers
     })
 );
+
+const chosenMemberRetriever = createSelector(
+    retrieveChosenMember, 
+    (chosenMember) => ({
+        chosenMember
+    })
+  );
 
 export function MembersPage() {
     // const { allMembers } = useSelector(allMembersRetriever);
@@ -34,6 +45,26 @@ export function MembersPage() {
     // }, []);
 
     const [allMembers, setAllMembers] = useState<Member[]>([]);
+
+    // const [chosenMember, setChosenMember] = useState<any>(null);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const {
+        setChosenMember,
+      } = actionDispatch(useDispatch());
+    
+
+    /* HANDLERS **/
+    const handleMemberSelect = async (memberId: any) => {
+        try {
+          const memberService = new MemberApiService();
+          const chosenMemberData = await memberService.getChosenMember(memberId);
+          dispatch(setChosenMember(chosenMemberData)); // Redux yoki context API orqali ma'lumotlarni saqlash
+          history.push(`/member/${chosenMemberData._id}`); // OtherPage-ga o'tish
+        } catch (error) {
+          console.error("Error while fetching chosen member:", error);
+        }
+      };
 
     useEffect(() => {
         const fetchAllMembers = async () => {
@@ -69,7 +100,7 @@ export function MembersPage() {
                             : "/icons/user.png";
                         console.log("Profile image:", profile_image);
                             return(
-                            <div className="card" key={member._id}>
+                            <div className="card" key={member._id} onClick={() => handleMemberSelect(member._id)}>
                                 <div className="close_box">
                                     <div className="close"><img src="/icons/other/close.png" alt="" width={"15px"}/></div>
                                 </div>

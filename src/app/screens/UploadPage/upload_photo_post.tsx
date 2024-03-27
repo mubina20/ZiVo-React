@@ -21,18 +21,18 @@ export function UploadPhotoPost(props: any) {
     const handlePhotoChange = (e: any) => {
         try {
             console.log("handlePhotoChange ::  e.target.files :: ", e.target.files);
-            const file = e.target.files[0];
+            const selectedPhotoFile = e.target.files[0];
     
-            const fileType = file['type'],
+            const fileType = selectedPhotoFile['type'],
                 validTypes = ['image/lpg', 'image/jpeg', 'image/png'];
-            assert.ok(validTypes.includes(fileType) && file, Definer.input_err2);
+            assert.ok(validTypes.includes(fileType) && selectedPhotoFile, Definer.input_err2);
     
             // Fayl nomini "post_content"ga yozish
-            photoPostData.post_content = file;
+            photoPostData.post_content = selectedPhotoFile;
             setPhotoPostData({ ...photoPostData });
     
             // Faylni URL.createObjectURL orqali joylash
-            setFile(file);
+            setFile(selectedPhotoFile);
         } catch(err) {
             console.log(`ERROR :: handlePhotoChange, ${err}`);
             sweetErrorHandling(err).then();

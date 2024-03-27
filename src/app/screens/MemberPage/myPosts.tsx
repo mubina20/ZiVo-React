@@ -5,27 +5,24 @@ import PostApiService from "../../apiServices/postApiService";
 import { verifiedMemberData } from "../../apiServices/verify";
 import { serverApi } from "../../../lib/config";
 
-export function MyPosts() {
-    const [allPosts, setAllPosts] = useState<Post[]>([]);
+export function MyPosts(props: any) {
+    const filteredPosts = props.filteredPosts;
+    const setAllPosts = props.setAllPosts;
 
     /** HANDLERS **/
     useEffect(() => {
-        const allPostsData = async () => {
+        const fetchAllPosts = async () => {
             try {
                 const postService = new PostApiService();
                 const allPostsData = await postService.getAllPosts();
                 setAllPosts(allPostsData);
             } catch (err) {
-                console.error('Error while fetching members:', err);
+                console.error('Error while fetching posts:', err);
             }
         };
 
-        allPostsData();
-    }, []);
-    // console.log("allPosts", allPosts);
-    console.log("props > allPosts", allPosts);
-    const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
-    console.log("filteredPosts", filteredPosts)
+        fetchAllPosts(); 
+    }, [setAllPosts]);
 
     return (
         <div className="page_bottom">
@@ -42,7 +39,19 @@ export function MyPosts() {
                         </div>
                     ) : post.post_type === "article" ? (
                         // Article Post
-                        <p>This is Article</p>
+                        <div className="post">
+                            <div 
+                                className="article_post"
+                                style={{
+                                    background: post?.post_bg_color ? post?.post_bg_color : "grey",
+                                    color: post?.post_text_color ? post?.post_text_color : "black",
+                                    textAlign: post.post_align === "center" ? "center" : "left"
+
+                                }}
+                            >
+                                {post.post_content}
+                            </div>
+                        </div>
                     ) : (
                         // Video Post
                         <div key={post._id}>

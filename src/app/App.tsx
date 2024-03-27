@@ -15,6 +15,7 @@ import React, { useState } from "react";
 import MemberApiService from "./apiServices/memberApiService";
 import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../lib/sweetAlert";
 import { Definer } from "../lib/definer";
+import { EditProfile } from "./screens/MemberPage/editProfile";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -50,11 +51,18 @@ function App() {
             handleModalClose={handleModalClose}
           />
         </Route>
-        <Route path="/member/:mb_id">
-          <OtherPage />
+        <Route path="/member/:memberId">
+          <OtherPage 
+            open={open}
+            handleOpenModal={handleOpenModal}
+            handleModalClose={handleModalClose}
+          />
         </Route>
         <Route path="/short-contents">
           <ShortContents />
+        </Route>
+        <Route path="/edit">
+          <EditProfile />
         </Route>
         <Route path="/upload-post">
           <UploadPostPage />

@@ -5,23 +5,46 @@ import { LeftSidebar } from "../../components/sidebars/left_sidebar";
 import { Link } from "react-router-dom";
 import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MyPosts } from "./myPosts";
 import { MySavedPosts } from "./mySavedPosts";
 import { MyFavoritePosts } from "./myFavoritePosts";
 import Modal from '@mui/material/Modal';
 import { verifiedMemberData } from "../../apiServices/verify";
 import moment from "moment";
+import { serverApi } from "../../../lib/config";
+import { Post } from "../../../types/post";
+import PostApiService from "../../apiServices/postApiService";
 
 export function MyPage(props: any) {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
     const { open, handleOpenModal, handleModalClose } = props;
+    const [allPosts, setAllPosts] = useState<Post[]>([]);
 
     /** HANDLERS **/
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
+
+    /** HANDLERS **/
+    useEffect(() => {
+        const allPostsData = async () => {
+            try {
+                const postService = new PostApiService();
+                const allPostsData = await postService.getAllPosts();
+                setAllPosts(allPostsData);
+            } catch (err) {
+                console.error('Error while fetching members:', err);
+            }
+        };
+
+        allPostsData();
+    }, []);
+    // console.log("allPosts", allPosts);
+    console.log("props > allPosts", allPosts);
+    const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
+    console.log("filteredPosts", filteredPosts);
 
     return(
         <div>
@@ -33,7 +56,17 @@ export function MyPage(props: any) {
                     <div className="visit_page_box">
                         <div className="page_top">
                             <div className="left_info">
-                                <img src="/icons/user.png" alt="" className="user_icon" />
+                                <img
+                                    src={
+                                        verifiedMemberData?.mb_profile_image 
+                                        ? `${serverApi}/${verifiedMemberData.mb_profile_image}`  
+                                        : "/icons/user.png"
+                                    } 
+                                    alt="" 
+                                    width={"100px"}
+                                    height={"100px"}
+                                    style={{borderRadius: "50%"}}
+                                />
                                 <Typography className="nickname">@{verifiedMemberData?.mb_nick}</Typography>
                                 <button className="story-btn"><img src="/icons/post/plus.png" alt="" width={"15px"}/>Upload Story</button>
                             </div>
@@ -50,7 +83,7 @@ export function MyPage(props: any) {
                                         </div>
                                         <div className="group">
                                             <Typography className="text">Posts</Typography>
-                                            <span className="count">100</span>
+                                            <span className="count">{filteredPosts.length}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +159,7 @@ export function MyPage(props: any) {
                                                         <div className="info">{verifiedMemberData?.mb_address}</div>
                                                     </div>
                                                     <div className="information">
-                                                        <div className="info_category">Name</div>
+                                                        <div className="info_category">Account creation date</div>
                                                         <div className="info">{moment(verifiedMemberData?.createdAt).format("YYYY-MM-DD")}</div>
                                                     </div>
                                                 </div>
@@ -139,7 +172,8 @@ export function MyPage(props: any) {
                                 <Box className='line' />
 
                                 <div className="upload_post_btn">
-                                    <button className="edit-profile">Edit Profile</button>
+                                    <Link to={"/edit"}><button className="edit-profile">Edit Profile</button></Link>
+                                    
                                     <Link to={"/upload-post"} style={{textDecoration: "none"}}>
                                         <button className="upload-post">
                                             <img src="/icons/post/plus.png" alt="" width={"15px"}/>
@@ -147,7 +181,7 @@ export function MyPage(props: any) {
                                         </button>
                                     </Link>
                                 </div>
-                                <TabPanel value="1"> <MyPosts /> </TabPanel>
+                                <TabPanel value="1"> <MyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
                                 <TabPanel value="2"> <MySavedPosts /> </TabPanel>
                                 <TabPanel value="3"> <MyFavoritePosts /> </TabPanel>
                             </TabContext>

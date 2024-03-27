@@ -40,17 +40,20 @@ class PostApiService {
         }
     };
 
-    public async createVideoPost(data: any) {
+    public async createVideoPost(data: UploadPost) {
         try {
-            const result = await axios.post(
-                this.path + "/post/create/video", 
-                    data, 
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        }
-                    }
-            );
+            const formData = new FormData();
+            formData.append("post_title", data.post_title);
+            formData.append("post_content", data.post_content);
+
+            const result = await axios(`${this.path}/post/create/video`, {
+                method: "POST",
+                data: formData,
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
     
             console.log(data);
     
