@@ -26,6 +26,12 @@ function App() {
   const handleOpenModal = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
 
+  // const handleOpenFollowersModal = () => setOpen(true);
+  // const handleCloseFollowersModal = () => setOpen(false);
+
+  // const handleOpenFollowingsModal = () => setOpen(true);
+  // const handleCloseFollowingsModal = () => setOpen(false);
+
   // LogOut Request
   
   return (
@@ -50,6 +56,10 @@ function App() {
             open={open}
             handleOpenModal={handleOpenModal}
             handleModalClose={handleModalClose}
+            handleOpenFollowersModal={handleOpenModal}
+            handleCloseFollowersModal={handleModalClose}
+            handleOpenFollowingsModal={handleOpenModal}
+            handleCloseFollowingsModal={handleModalClose}
           />
         </Route>
         <Route path="/member/:memberId">

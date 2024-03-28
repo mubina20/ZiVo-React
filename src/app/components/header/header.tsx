@@ -1,6 +1,8 @@
 import {Stack } from '@mui/material';
 import "../../../css/header.css"
 import { NavLink } from 'react-router-dom';
+import { verifiedMemberData } from '../../apiServices/verify';
+import { serverApi } from '../../../lib/config';
 
 export function Header() {
     return(
@@ -18,7 +20,17 @@ export function Header() {
                 <div className='icons'>
                     <img className='icon' src="/icons/notification.png" alt="notification" />
                     <NavLink to={'/chat'}><img className='icon' src="/icons/chat.png" alt="notification" /></NavLink>
-                    <NavLink to={'/my-page'}><img className='icon' src="/icons/user.png" alt="notification" /></NavLink>
+                    <NavLink to={'/my-page'}>
+                        <img  
+                            src={
+                                verifiedMemberData?.mb_profile_image 
+                                ? `${serverApi}/${verifiedMemberData.mb_profile_image}`  
+                                : "/icons/user.png"
+                            } 
+                            alt="notification"
+                            className='icon'
+                        />
+                    </NavLink>
                 </div>
             </div>
         </div>

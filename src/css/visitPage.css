@@ -107,6 +107,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 
 .visit_page_box .page_top .right_info .info .group .count{

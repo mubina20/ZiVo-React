@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
@@ -15,19 +15,83 @@ import moment from "moment";
 import { serverApi } from "../../../lib/config";
 import { Post } from "../../../types/post";
 import PostApiService from "../../apiServices/postApiService";
+import { createSelector, Dispatch } from "@reduxjs/toolkit";
+import { Follower, Following, FollowSearchObj } from "../../../types/follow";
+import { setMemberFollowers, setMemberFollowings } from "./slice";
+import { retrieveMemberFollowers, retrieveMemberFollowings } from "./selector";
+import { useDispatch, useSelector } from "react-redux";
+import FollowApiService from "../../apiServices/followApiService";
+import { FollowersModal } from "./followersModal";
+import { FollowingsModal } from "./followingsModal";
+
+// REDUX SLICE
+const actionDispatch = (dispach: Dispatch) => ({
+    setMemberFollowings: (data: Following[]) => dispach(setMemberFollowings(data)),
+    setMemberFollowers: (data: Follower[]) =>
+        dispach(setMemberFollowers(data)),
+});
+
+// REDUX SELECTOR
+const memberFollowersRetriever = createSelector(
+    retrieveMemberFollowers,
+    (memberFollowers) => ({
+        memberFollowers
+    })
+);
+
+const memberFollowingsRetriever = createSelector(
+    retrieveMemberFollowings, 
+    (memberFollowings) => ({
+        memberFollowings
+    })
+);
 
 export function MyPage(props: any) {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
-    const { open, handleOpenModal, handleModalClose } = props;
+    const { 
+        open, 
+        handleOpenModal, 
+        handleModalClose 
+    } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
 
+	const { setMemberFollowers } = actionDispatch(useDispatch());
+	const { memberFollowers } = useSelector(memberFollowersRetriever);
+	const [followersSearchObj, setFollowersSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
+
+    const { setMemberFollowings } = actionDispatch(useDispatch());
+	const { memberFollowings } = useSelector(memberFollowingsRetriever);
+	const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
+
+    const [openFollowersModal, setOpenFollowersModal] = useState(false);
+    const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
+
+    
+
+
     /** HANDLERS **/
+
+    // Handle my Follower
+    const handleOpenFollowersModal = () => {
+        setOpenFollowersModal(true);
+    };
+    const handleCloseFollowersModal = () => {
+        setOpenFollowersModal(false);
+    };
+
+    // Handle my Followings
+    const handleOpenFollowingsModal = () => {
+        setOpenFollowingsModal(true);
+    };
+    const handleCloseFollowingsModal = () => {
+        setOpenFollowingsModal(false);
+    };
+
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
-    /** HANDLERS **/
     useEffect(() => {
         const allPostsData = async () => {
             try {
@@ -45,6 +109,24 @@ export function MyPage(props: any) {
     console.log("props > allPosts", allPosts);
     const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
     console.log("filteredPosts", filteredPosts);
+
+    // Followers
+    useEffect(() => {
+		const followService = new FollowApiService();
+		followService
+			.getMemberFollowers(followersSearchObj)
+			.then((data) => setMemberFollowers(data))
+			.catch((err) => console.log(err));
+	}, [followersSearchObj]);
+
+    // Followings
+    useEffect(() => {
+		const followService = new FollowApiService();
+		followService
+			.getMemberFollowings(followingsSearchObj)
+			.then((data) => setMemberFollowings(data))
+			.catch((err) => console.log(err));
+	}, [followingsSearchObj]);
 
     return(
         <div>
@@ -74,15 +156,29 @@ export function MyPage(props: any) {
                                 <div className="info">
                                     <div className="my_data">
                                         <div className="group">
-                                            <Typography className="text">Followers</Typography>
-                                            <span className="count">35.8K</span>
+                                            <div className="text" onClick={handleOpenFollowersModal}>
+                                                Followers
+                                                <FollowersModal 
+                                                    open={openFollowersModal} 
+                                                    handleClose={handleCloseFollowersModal}
+                                                    memberFollowers={memberFollowers}
+                                                />
+                                            </div>
+                                            <span className="count">{memberFollowers.length}</span>
                                         </div>
                                         <div className="group">
-                                            <Typography className="text">Followings</Typography>
-                                            <span className="count">35</span>
+                                            <div className="text" onClick={handleOpenFollowingsModal}>
+                                                Followings
+                                                <FollowingsModal 
+                                                    open={openFollowingsModal} 
+                                                    handleCloseFollowings={handleCloseFollowingsModal}
+                                                    memberFollowings={memberFollowings}
+                                                />
+                                            </div>
+                                            <span className="count">{memberFollowings.length}</span>
                                         </div>
                                         <div className="group">
-                                            <Typography className="text">Posts</Typography>
+                                            <div className="text">Posts</div>
                                             <span className="count">{filteredPosts.length}</span>
                                         </div>
                                     </div>

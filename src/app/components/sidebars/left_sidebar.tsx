@@ -1,28 +1,41 @@
 import { Box, Typography } from "@mui/material";
 import "../../../css/sidebar.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { verifiedMemberData } from "../../apiServices/verify";
 import MemberApiService from "../../apiServices/memberApiService";
 import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { Definer } from "../../../lib/definer";
+import { serverApi } from "../../../lib/config";
 
 export function LeftSidebar() {
+    /** INITIALIZATIONS **/
 
     /** HANDLERS **/
     const handleLogOutRequest = async () => {
         try {
-          const memberApiService = new MemberApiService();
-          await memberApiService.logOutRequest();
-          await sweetTopSmallSuccessAlert("success", 700, true);
+            const memberApiService = new MemberApiService();
+            await memberApiService.logOutRequest();
+            await sweetTopSmallSuccessAlert("success", 700, true);
         } catch (err: any) {
-          console.log(err);
-          sweetFailureProvider(Definer.general_err1);
+            console.log(err);
+            sweetFailureProvider(Definer.general_err1);
         }
-      };
+    };
     return(
         <div className="container">
             <div className="user_container">
-                <img src="/icons/user.png" alt="" className="user_icon"/>
+                <Link to={"/my-page"}>
+                    <img 
+                        src={
+                            verifiedMemberData?.mb_profile_image 
+                            ? `${serverApi}/${verifiedMemberData.mb_profile_image}`  
+                            : "/icons/user.png"
+                        } 
+                        alt="" 
+                        className="user_icon"
+                    />
+                </Link>
+                
                 <div className="user_info">
                     <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>{verifiedMemberData?.mb_name}</Typography>
                     <Typography className="name" style={{opacity: "0.56"}}>@{verifiedMemberData?.mb_nick}</Typography>
