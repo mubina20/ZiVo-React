@@ -7,6 +7,11 @@ import { setAllPosts } from './slice';
 import { retrieveAllPosts } from './selector';
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import moment from 'moment';
+import assert from 'assert';
+import { verifiedMemberData } from '../../apiServices/verify';
+import { Definer } from '../../../lib/definer';
+import MemberApiService from '../../apiServices/memberApiService';
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
 
 const actionDispatch = (dispatch: Dispatch) => ({
     setAllPosts: (data: Post[]) => 
@@ -42,6 +47,90 @@ export function AllPosts(props: any) {
     // console.log("allPosts", allPosts);
     // const {allPosts} = props;
     console.log("props > allPosts", allPosts);
+
+    const photoPostLike = async (e: any, id: string) => {
+        try {
+            assert.ok(verifiedMemberData, Definer.auth_err1);
+            
+            const memberService = new MemberApiService();
+            const likeResult = await memberService.memberLikeTarget({
+                like_ref_id: id,
+                group_type: "photo",
+            });
+            assert.ok(likeResult, Definer.general_err1);
+            
+            const updatedPosts = allPosts.map(post => {
+                if (post._id === id) {
+                    return {
+                        ...post,
+                        post_likes: likeResult.like_status
+                    };
+                }
+                return post;
+            });
+            setAllPosts(updatedPosts);
+            await sweetTopSmallSuccessAlert("success", 700, false);
+        } catch (err: any) {
+            console.log(`ERROR :: targetLikeTop, ${err}`);
+            sweetErrorHandling(err).then();
+        }
+    };
+
+    const articlePostLike = async (e: any, id: string) => {
+        try {
+            assert.ok(verifiedMemberData, Definer.auth_err1);
+            
+            const memberService = new MemberApiService();
+            const likeResult = await memberService.memberLikeTarget({
+                like_ref_id: id,
+                group_type: "article",
+            });
+            assert.ok(likeResult, Definer.general_err1);
+            
+            const updatedPosts = allPosts.map(post => {
+                if (post._id === id) {
+                    return {
+                        ...post,
+                        post_likes: likeResult.like_status
+                    };
+                }
+                return post;
+            });
+            setAllPosts(updatedPosts);
+            await sweetTopSmallSuccessAlert("success", 700, false);
+        } catch (err: any) {
+            console.log(`ERROR :: targetLikeTop, ${err}`);
+            sweetErrorHandling(err).then();
+        }
+    };
+
+    const videoPostLike = async (e: any, id: string) => {
+        try {
+            assert.ok(verifiedMemberData, Definer.auth_err1);
+            
+            const memberService = new MemberApiService();
+            const likeResult = await memberService.memberLikeTarget({
+                like_ref_id: id,
+                group_type: "video",
+            });
+            assert.ok(likeResult, Definer.general_err1);
+            
+            const updatedPosts = allPosts.map(post => {
+                if (post._id === id) {
+                    return {
+                        ...post,
+                        post_likes: likeResult.like_status
+                    };
+                }
+                return post;
+            });
+            setAllPosts(updatedPosts);
+            await sweetTopSmallSuccessAlert("success", 700, false);
+        } catch (err: any) {
+            console.log(`ERROR :: targetLikeTop, ${err}`);
+            sweetErrorHandling(err).then();
+        }
+    };
     return (
         <div>
             <div className="post">
@@ -82,7 +171,12 @@ export function AllPosts(props: any) {
 
                                 <div className="post_bottom">
                                     <div className="left">
-                                        <img src="/icons/post/like.png" alt="" className="bottom_icon"/><span style={{marginRight: "50px"}}>464K</span>
+                                    <img 
+                                            src={post?.post_likes > 0 ? "/icons/post/heart.png" : "/icons/post/like.png" }
+                                            onClick={(e) => photoPostLike(e, post._id)}
+                                            alt="" className="bottom_icon"
+                                        />
+                                        <span style={{marginRight: "50px"}}>{post.post_likes}</span>
                                         <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
                                     </div>
                                     <div className="right">
@@ -132,7 +226,12 @@ export function AllPosts(props: any) {
 
                                 <div className="post_bottom">
                                     <div className="left">
-                                        <img src="/icons/post/like.png" alt="" className="bottom_icon"/><span style={{marginRight: "50px"}}>464K</span>
+                                        <img 
+                                            src={post?.post_likes > 0 ? "/icons/post/heart.png" : "/icons/post/like.png" }
+                                            onClick={(e) => articlePostLike(e, post._id)}
+                                            alt="" className="bottom_icon"
+                                    />
+                                        <span style={{marginRight: "50px"}}>{post.post_likes}</span>
                                         <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
                                     </div>
                                     <div className="right">
@@ -184,7 +283,12 @@ export function AllPosts(props: any) {
 
                                 <div className="post_bottom">
                                     <div className="left">
-                                        <img src="/icons/post/like.png" alt="" className="bottom_icon"/><span style={{marginRight: "50px"}}>464K</span>
+                                        <img 
+                                            src={post?.post_likes > 0 ? "/icons/post/heart.png" : "/icons/post/like.png" }
+                                            onClick={(e) => videoPostLike(e, post._id)}
+                                            alt="" className="bottom_icon"
+                                        />
+                                        <span style={{marginRight: "50px"}}>{post.post_likes}</span>
                                         <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
                                     </div>
                                     <div className="right">

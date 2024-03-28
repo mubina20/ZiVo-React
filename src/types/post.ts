@@ -22,7 +22,7 @@ export interface Post {
     post_bg_color: string;
     post_align: string;
     post_text_color: string;
-    // me_liked: MeLiked[];
+    me_liked: MeLiked[];
 };
 
 export interface UploadPost {

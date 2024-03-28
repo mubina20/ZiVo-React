@@ -3,6 +3,7 @@ import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/definer";
 import { Member } from "../../types/user";
+import { MemberLiken } from "../../types/like";
 
 class MemberApiService {
     static getChosenMember(arg0: string) {
@@ -113,6 +114,28 @@ class MemberApiService {
             return member;
         } catch (err: any) {
             console.log(`ERROR :: getAllMembers: ${err.message}`);
+            throw err;
+        }
+    };
+
+    public async memberLikeTarget(data: any): Promise<MemberLiken> {
+        try {
+            const url = "/member-liked";
+            const result = await axios.post(
+                this.path + url, 
+                data, 
+                { withCredentials: true }
+            );
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+
+            console.log("memberLikeTarget STATE ::", result.data.data);
+            const like_result: MemberLiken = result.data.data;
+
+            return like_result;
+        } catch (err: any) {
+            console.log(`ERROR :: memberLikeTarget: ${err.message}`);
             throw err;
         }
     };
