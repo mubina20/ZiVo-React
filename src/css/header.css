@@ -54,7 +54,6 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-    border-radius: 50%;
 }
 
 
@@ -64,7 +63,7 @@
 .mobile-navbar {
     position: fixed;
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 62px;
     justify-content: space-between;
     align-items: center;
