@@ -12,6 +12,7 @@
     bottom: 0;
     background: #000000;
     border-top: 4px solid #FF007A;
+    z-index: 5;
 }
 
 .footer-navigation {

@@ -3,13 +3,14 @@
     height: 100%;
     background: rgb(39, 37, 37);
     display: flex;
+    justify-content: center;
 }
 .edit_container{
     width: 800px;
-    height: 900px;
-    background: rgb(170, 164, 164);
+    height: 1200px;
+    /* background: rgb(170, 164, 164); */
+    color: white;
     margin-top: 100px;
-    margin-left: 27%;
 }
 .my_profile_image_container{
     position: relative;
@@ -55,16 +56,60 @@
     border: none;
     padding: 10px;
     border-radius: 5px;
+    min-width: 300px;
+    font-size: 18px;
 }
 .member_info_input:focus {
-    
+    outline: none;
+    background: rgb(193, 193, 193);
 }
 .information_birthday{
     width: 100%;
-    border: 1px solid #e00e0e;
     background: white;
-    color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 .information_birthday:focus{
     outline: none;
 }
+
+textarea {
+    font-size: 20px;
+    border-radius: 5px;
+    font-family:"Times New Roman", Times, serif;  
+    padding: 10px;
+    border: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+#genderSelect {
+    height: 53px;
+    margin-top: 9px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+#genderSelect:focus {
+    outline: none;
+}
+
+.button button {
+    width: 209%;
+    cursor: pointer;
+    height: 50px;
+    border: none;
+    margin-top: 50px;
+    background: linear-gradient(to left, #FF007A, blue);
+    font-size: 20px;
+    color: white;
+}
+
+
+/* Mobile */
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import "../../../css/editProfile.css"
 import { Header } from '../../components/header/header'
 import { LeftSidebar } from '../../components/sidebars/left_sidebar'
@@ -11,8 +11,11 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { MobileHeader } from '../../components/header/mobileHeader';
+import { MobileFooter } from '../../components/footer/mobileFooter';
 
-export function EditProfile() {
+export function MobileEditProfile() {
+
     /** INITIALIZATIONS **/
     const [gender, setGender] = useState<string>('');
     // const [file, setFile] = useState(verifiedMemberData.mb_profile_image ? `${serverApi}/${verifiedMemberData?.mb_profile_image}`  : "/icons/user.png");
@@ -24,37 +27,27 @@ export function EditProfile() {
     };
     
     const handleImagePreviewer = (e: any) => {
-		try {
-			console.log("handleImagePreviewer ::  e.target.files :: ", e.target.files);
-			const file = e.target.files[0];
+        try {
+            console.log("handleImagePreviewer ::  e.target.files :: ", e.target.files);
+            const file = e.target.files[0];
 
-			const fileType = file.type;
+            const fileType = file.type;
             const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-			assert.ok(validTypes.includes(fileType) && file, Definer.input_err2);
+            assert.ok(validTypes.includes(fileType) && file, Definer.input_err2);
 
-			// memberUpdate.mb_image = file;
-			// setMemberUpdate({ ...memberUpdate });
-			// setFile(URL.createObjectURL(file));
-		} catch (err) {
-			console.log(`ERROR :: handleImagePreviewer, ${err}`);
-			sweetErrorHandling(err).then();
-		}
-	};
-
-    function Confirm() {
-        if (window.confirm("Confirm complete editing")) {
-            alert("Success complete of editing");
-        } else {
-            alert("Canceled");
+            // memberUpdate.mb_image = file;
+            // setMemberUpdate({ ...memberUpdate });
+            // setFile(URL.createObjectURL(file));
+        } catch (err) {
+            console.log(`ERROR :: handleImagePreviewer, ${err}`);
+            sweetErrorHandling(err).then();
         }
-    }
-
+    };
     return (
         <div>
-            <Header />
-            <LeftSidebar />
-
-            <div className="edit_page">
+            <MobileHeader/>
+            <MobileFooter/>
+            <div className="edit_page" style={{height: "2100px"}}>
                 <div className="edit_container">
                     <div className="my_profile_image_container">
                         <img 
@@ -70,7 +63,7 @@ export function EditProfile() {
                         <input type="file" accept="image/jpeg, image/png, image/webp" onChange={handleImagePreviewer} className='profile_image_upload'/>
 
                     </div>
-                    <div className="member_info">
+                    <div className="member_info" style={{display: "flex", flexDirection: "column", width: "100%"}}>
                         <div className="information_container">
                             <span>Name</span>
                             <input 
@@ -153,7 +146,7 @@ export function EditProfile() {
                                 style={{resize: "none"}}
                             ></textarea>
                         </div>
-                        <div className="information_container">
+                        <div className="information_container" style={{zIndex: "1"}}>
                             <span>Birhtday</span>
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 <DemoContainer components={['DatePicker']}>
@@ -174,7 +167,7 @@ export function EditProfile() {
                             </select>
                         </div>
                         <div className='button'>
-                            <button onClick={Confirm}>Complete editing</button>
+                            <button style={{width: "100%"}}>Complete editing</button>
                         </div>
                     </div>
                 </div>

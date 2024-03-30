@@ -14,10 +14,13 @@ import React, { useState } from "react";
 import { EditProfile } from "./screens/MemberPage/editProfile";
 import { AuthPage } from "./screens/AuthenticationPage";
 import { ChosenPost } from "./screens/postPage/chosenPost";
+import useDeviceSize from "./hooks";
+import { MobileEditProfile } from "./screens/MemberPage/mobileEditProfile";
 
 function App() {
   /** INITIALIZATIONS **/
   const [open, setOpen] = React.useState(false);
+  const { isDesktop, isMobile, isTablet } = useDeviceSize();
 
   /** HANDLERS **/
   const handleOpenModal = () => setOpen(true);
@@ -70,7 +73,21 @@ function App() {
           <ShortContents />
         </Route>
         <Route path="/edit">
-          <EditProfile />
+          {isDesktop && (
+            <div>
+              <EditProfile />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileEditProfile />
+            </div>
+          )}
         </Route>
         <Route path="/upload-post">
           <UploadPostPage />
