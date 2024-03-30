@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "../css/App.css"
-import { AuthenticationPage } from "./screens/AuthenticationPage/auth";
+import "../css/App.css";
 import { MembersPage } from "./screens/MemberPage/members";
 import { HelpPage } from "./screens/HelpPage/help";
 
@@ -12,11 +11,9 @@ import { ChatPage } from "./screens/ChatPage/chat";
 import { OtherPage } from "./screens/MemberPage/otherPage";
 import { UploadPostPage } from "./screens/UploadPage/uploadPost";
 import React, { useState } from "react";
-import MemberApiService from "./apiServices/memberApiService";
-import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../lib/sweetAlert";
-import { Definer } from "../lib/definer";
 import { EditProfile } from "./screens/MemberPage/editProfile";
 import { AuthPage } from "./screens/AuthenticationPage";
+import { ChosenPost } from "./screens/postPage/chosenPost";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -77,6 +74,9 @@ function App() {
         </Route>
         <Route path="/upload-post">
           <UploadPostPage />
+        </Route>
+        <Route path="/post/:postId">
+          <ChosenPost />
         </Route>
         <Route path="/chat">
           <ChatPage />

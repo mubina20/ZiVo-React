@@ -1,0 +1,18 @@
+.chosen_post_page{
+    width: 100%;
+    height: 100vh;
+    background: rgb(47, 46, 46);
+    display: flex;
+}
+.page_left{
+    width: 65%;
+    background: red;
+}
+.page_right{
+    width: 35%;
+    background: blue;
+}
+
+
+
+
