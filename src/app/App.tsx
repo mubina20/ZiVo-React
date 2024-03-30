@@ -16,6 +16,8 @@ import { AuthPage } from "./screens/AuthenticationPage";
 import { ChosenPost } from "./screens/postPage/chosenPost";
 import useDeviceSize from "./hooks";
 import { MobileEditProfile } from "./screens/MemberPage/mobileEditProfile";
+import { MobileMyPage } from "./screens/MemberPage/mobileMyPage";
+import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -52,22 +54,50 @@ function App() {
           <MembersPage />
         </Route>
         <Route path="/my-page">
-          <MyPage 
-            open={open}
-            handleOpenModal={handleOpenModal}
-            handleModalClose={handleModalClose}
-            handleOpenFollowersModal={handleOpenModal}
-            handleCloseFollowersModal={handleModalClose}
-            handleOpenFollowingsModal={handleOpenModal}
-            handleCloseFollowingsModal={handleModalClose}
-          />
+          {isDesktop && (
+            <div>
+              <MyPage 
+                open={open}
+                handleOpenModal={handleOpenModal}
+                handleModalClose={handleModalClose}
+                handleOpenFollowersModal={handleOpenModal}
+                handleCloseFollowersModal={handleModalClose}
+                handleOpenFollowingsModal={handleOpenModal}
+                handleCloseFollowingsModal={handleModalClose}
+              />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileMyPage />
+            </div>
+          )}
         </Route>
         <Route path="/member/:memberId">
-          <OtherPage 
-            open={open}
-            handleOpenModal={handleOpenModal}
-            handleModalClose={handleModalClose}
-          />
+          {isDesktop && (
+            <div>
+              <OtherPage 
+                open={open}
+                handleOpenModal={handleOpenModal}
+                handleModalClose={handleModalClose}
+              />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileOtherPage />
+            </div>
+          )}
         </Route>
         <Route path="/short-contents">
           <ShortContents />

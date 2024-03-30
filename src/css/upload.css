@@ -1,7 +1,7 @@
 body{
-    /* height: 200svh; */
+    height: 100vh;
     background: linear-gradient(#0c131f, #264569);
-    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .upload_big_container {

@@ -274,3 +274,96 @@
     display: flex;
     justify-content: center;
 }
+
+
+
+/* Mobile */
+
+
+.page-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.left-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin-right: 20px;
+}
+
+.story-btn {
+    background: linear-gradient(180deg, #4D0025 0%, #FF007A 100%);;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.right-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button {
+    max-height: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    border: none;
+    /* margin-top: -100px; */
+}
+
+.edit_profile {
+    background: #777777;
+    color: white;
+}
+
+.upload-post {
+    background: var(--ff-007-a, #FF007A);
+}
+
+.user-data-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.user-data {
+    margin-top: 30px;
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    justify-content: center;
+    color: white;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-data-title {
+    color: #868383;
+}
+
+.page-center {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+} 
+
+.line {
+    width: 76%;
+}

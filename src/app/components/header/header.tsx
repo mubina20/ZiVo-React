@@ -19,7 +19,7 @@ export function Header() {
 
                 <div className='icons'>
                     <img className='icon' src="/icons/notification.png" alt="notification" />
-                    <NavLink to={'/chat'}><img className='icon' src="/icons/chat.png" alt="notification" /></NavLink>
+                    <NavLink to={'/chat'}><img className='icon' src="/icons/chat.png" alt="chat" /></NavLink>
                     <NavLink to={'/my-page'}>
                         <img  
                             src={
@@ -27,7 +27,7 @@ export function Header() {
                                 ? `${serverApi}/${verifiedMemberData.mb_profile_image}`  
                                 : "/icons/user.png"
                             } 
-                            alt="notification"
+                            alt="my page"
                             className='icon'
                         />
                     </NavLink>

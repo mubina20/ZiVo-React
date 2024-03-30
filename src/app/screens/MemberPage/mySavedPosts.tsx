@@ -1,3 +1,5 @@
+import '../../../css/visitPage.css'
+
 export function MySavedPosts() {
     return (
         <div className="page_bottom">

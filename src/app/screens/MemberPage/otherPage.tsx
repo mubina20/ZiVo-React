@@ -175,56 +175,56 @@ export function OtherPage(props: any) {
                         <Box className='line' />
 
                         <div className="page_bottom">
-            {filteredPosts && filteredPosts.length > 0 ? (
-                filteredPosts.map((post: Post) => (
-                    post.post_type === "photo" ? (
-                        // Photo Post
-                        <div key={post._id}>
-                            <div className="post">
-                                <img src={`${serverApi}/${post?.post_content}`} alt="" width="300px"/>
-                                {post.post_title}
-                                {/* {post.post_content} */}
-                            </div>
-                        </div>
-                    ) : post.post_type === "article" ? (
-                        // Article Post
-                        <div className="post">
-                            <div 
-                                className="article_post"
-                                style={{
-                                    background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                    color: post?.post_text_color ? post?.post_text_color : "black",
-                                    textAlign: post.post_align === "center" ? "center" : "left"
+                            {filteredPosts && filteredPosts.length > 0 ? (
+                                filteredPosts.map((post: Post) => (
+                                    post.post_type === "photo" ? (
+                                        // Photo Post
+                                        <div key={post._id}>
+                                            <div className="post">
+                                                <img src={`${serverApi}/${post?.post_content}`} alt="" width="300px"/>
+                                                {post.post_title}
+                                                {/* {post.post_content} */}
+                                            </div>
+                                        </div>
+                                    ) : post.post_type === "article" ? (
+                                        // Article Post
+                                        <div className="post">
+                                            <div 
+                                                className="article_post"
+                                                style={{
+                                                    background: post?.post_bg_color ? post?.post_bg_color : "grey",
+                                                    color: post?.post_text_color ? post?.post_text_color : "black",
+                                                    textAlign: post.post_align === "center" ? "center" : "left"
 
-                                }}
-                            >
-                                {post.post_content}
-                            </div>
+                                                }}
+                                            >
+                                                {post.post_content}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        // Video Post
+                                        <div key={post._id}>
+                                            <div className="post">
+                                                <video
+                                                    loop
+                                                    // playsInline
+                                                    controls
+                                                    width={"100%"}
+                                                >
+                                                    <source
+                                                        src={`${serverApi}/${post?.post_content}`}
+                                                        type="video/mp4"
+                                                    />
+                                                </video>
+                                            </div>
+                                        </div>
+                                    )
+                                ))
+                            ) : (
+                                <div>Post hali yo'q</div>
+                            )}
                         </div>
-                    ) : (
-                        // Video Post
-                        <div key={post._id}>
-                            <div className="post">
-                                <video
-                                    loop
-                                    // playsInline
-                                    controls
-                                    width={"100%"}
-                                >
-                                    <source
-                                        src={`${serverApi}/${post?.post_content}`}
-                                        type="video/mp4"
-                                    />
-                                </video>
-                            </div>
-                        </div>
-                    )
-                ))
-            ) : (
-                <div>Post hali yo'q</div>
-            )}
                     </div>
-                </div>
                 </div>
             </div>
         </div>

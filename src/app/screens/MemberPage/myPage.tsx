@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
@@ -148,6 +149,7 @@ export function MyPage(props: any) {
                                     width={"100px"}
                                     height={"100px"}
                                     style={{borderRadius: "50%"}}
+                                    
                                 />
                                 <Typography className="nickname">@{verifiedMemberData?.mb_nick}</Typography>
                                 <button className="story-btn"><img src="/icons/post/plus.png" alt="" width={"15px"}/>Upload Story</button>
