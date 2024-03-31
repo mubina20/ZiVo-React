@@ -50,11 +50,7 @@ const memberFollowingsRetriever = createSelector(
 export function MyPage(props: any) {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
-    const { 
-        open, 
-        handleOpenModal, 
-        handleModalClose 
-    } = props;
+    const { open, handleOpenModal, handleModalClose } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
 
 	const { setMemberFollowers } = actionDispatch(useDispatch());
@@ -65,21 +61,18 @@ export function MyPage(props: any) {
 	const { memberFollowings } = useSelector(memberFollowingsRetriever);
 	const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
 
-    const [openFollowersModal, setOpenFollowersModal] = useState(false);
+    const [openFollowersModal, setOpenFollowersModal] = React.useState(false);
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
 
-    
 
 
     /** HANDLERS **/
 
+    const handleOpenFollowersModal = () => setOpenFollowersModal(true);
+    const handleCloseFollowersModal = () => setOpenFollowersModal(false);
     // Handle my Follower
-    const handleOpenFollowersModal = () => {
-        setOpenFollowersModal(true);
-    };
-    const handleCloseFollowersModal = () => {
-        setOpenFollowersModal(false);
-    };
+    // const  = () => (true);
+    // const  = () => setOpenFollowersModal(false);
 
     // Handle my Followings
     const handleOpenFollowingsModal = () => {
@@ -107,9 +100,9 @@ export function MyPage(props: any) {
         allPostsData();
     }, []);
     // console.log("allPosts", allPosts);
-    console.log("props > allPosts", allPosts);
+    // console.log("props > allPosts", allPosts);
     const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
-    console.log("filteredPosts", filteredPosts);
+    // console.log("filteredPosts", filteredPosts);
 
     // Followers
     useEffect(() => {
@@ -161,8 +154,9 @@ export function MyPage(props: any) {
                                             <div className="text" onClick={handleOpenFollowersModal}>
                                                 Followers
                                                 <FollowersModal 
-                                                    open={openFollowersModal} 
-                                                    handleClose={handleCloseFollowersModal}
+                                                    openFollowersModal={openFollowersModal} 
+                                                    handleOpenFollowersModal={handleOpenFollowersModal}
+                                                    handleCloseFollowersModal={handleCloseFollowersModal}
                                                     memberFollowers={memberFollowers}
                                                 />
                                             </div>

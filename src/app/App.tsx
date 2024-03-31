@@ -60,10 +60,6 @@ function App() {
                 open={open}
                 handleOpenModal={handleOpenModal}
                 handleModalClose={handleModalClose}
-                handleOpenFollowersModal={handleOpenModal}
-                handleCloseFollowersModal={handleModalClose}
-                handleOpenFollowingsModal={handleOpenModal}
-                handleCloseFollowingsModal={handleModalClose}
               />
             </div>
           )}

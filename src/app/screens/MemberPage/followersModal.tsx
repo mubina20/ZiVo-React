@@ -12,7 +12,18 @@ import { useHistory } from 'react-router-dom';
 
 export function FollowersModal(props: any) {
     const history = useHistory();
-    const { open, handleClose, memberFollowers, handleCloseFollowersModal } = props;
+    const {memberFollowers} = props;
+
+
+    const { open, handleCloseFollowersModal, openFollowersModal } = props;
+    console.log(handleCloseFollowersModal)
+    console.log(openFollowersModal)
+
+    // const handleClose = () => handleCloseFollowersModal;
+    // console.log(handleClose)
+
+
+
     const [followerRebuild, setFollowerRebuild] = useState<Boolean>(false);
 
     const subscribeHandler = async (e: any, id: string) => {
@@ -40,8 +51,8 @@ export function FollowersModal(props: any) {
         <div>
             <Modal
                 className="followers_modal_container"
-                open={open}
-                onClose={handleClose} 
+                open={openFollowersModal}
+                onClose={handleCloseFollowersModal} 
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -52,12 +63,13 @@ export function FollowersModal(props: any) {
                             src="/icons/other/close.png" 
                             alt="" 
                             className='followers_close'
-                            onClick={handleClose}
+                            onClick={handleCloseFollowersModal}
                         />
+                        <button onClick={handleCloseFollowersModal}>Close</button>
                     </div>
                     <div className="followers_container">
                         {memberFollowers.map((follower: Follower) => {
-                            console.log("follower", follower);
+                            // console.log("follower", follower);
                             const image_url = follower?.subscriber_member_data?.mb_profile_image
                                 ? `${serverApi}/${follower.subscriber_member_data.mb_profile_image}`
                                 : '/icons/user.png';

@@ -56,7 +56,7 @@ export function FollowingsModal(props: any) {
                     </div>
                     <div className="followers_container">
                         {memberFollowings.map((following: Following) => {
-                            console.log("follower", following);
+                            // console.log("follower", following);
                             const image_url = following?.follow_member_data?.mb_profile_image
                                 ? `${serverApi}/${following.follow_member_data.mb_profile_image}`
                                 : '/icons/user.png';
