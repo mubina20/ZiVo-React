@@ -18,6 +18,7 @@ import useDeviceSize from "./hooks";
 import { MobileEditProfile } from "./screens/MemberPage/mobileEditProfile";
 import { MobileMyPage } from "./screens/MemberPage/mobileMyPage";
 import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
+import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -119,7 +120,21 @@ function App() {
           <UploadPostPage />
         </Route>
         <Route path="/post/:postId">
-          <ChosenPost />
+          {isDesktop && (
+            <div>
+              <ChosenPost />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileChosenPost />
+            </div>
+          )}
         </Route>
         <Route path="/chat">
           <ChatPage />

@@ -9,18 +9,26 @@ export function ChosenPost() {
     return (
         <div className='chosen_post_page'>
             <div className="page_left">
-                <div className="left-1">
-                    <img src="/icons/other/close.png" alt="" className='left_icon'/>
-                </div>
-                <div className="left-2">
                     <img 
                         src="https://www.holidayidea.com.my/promo/img/frntbck2.jpg" 
                         alt="" 
-                        className='left_content'
+                        className='left_content_bg'
+                        style={{opacity: "0.2"}}
                     />
-                </div>
-                <div className="left-3">
-                    <img src="/icons/post/bookmark.png" alt="" className='left_icon' />
+                <div className='left_inside' style={{position: "absolute", display: "flex"}}>
+                    <div className="left-1">
+                        <img src="/icons/other/close.png" alt="" className='left_icon'/>
+                    </div>
+                    <div className="left-2">
+                        <img 
+                            src="https://www.holidayidea.com.my/promo/img/frntbck2.jpg" 
+                            alt="" 
+                            className='left_content'
+                        />
+                    </div>
+                    <div className="left-3">
+                        <img src="/icons/post/bookmark.png" alt="" className='left_icon' />
+                    </div>
                 </div>
             </div>
 
