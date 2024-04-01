@@ -19,6 +19,7 @@ import { MobileEditProfile } from "./screens/MemberPage/mobileEditProfile";
 import { MobileMyPage } from "./screens/MemberPage/mobileMyPage";
 import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
+import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -117,7 +118,22 @@ function App() {
           )}
         </Route>
         <Route path="/upload-post">
-          <UploadPostPage />
+          {isDesktop && (
+            <div>
+              <UploadPostPage />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileUploadPost />
+            </div>
+          )}
+          
         </Route>
         <Route path="/post/:postType/:postId">
           {isDesktop && (
