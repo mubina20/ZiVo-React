@@ -119,7 +119,7 @@ function App() {
         <Route path="/upload-post">
           <UploadPostPage />
         </Route>
-        <Route path="/post/:postId">
+        <Route path="/post/:postType/:postId">
           {isDesktop && (
             <div>
               <ChosenPost />

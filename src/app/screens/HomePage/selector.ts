@@ -27,3 +27,7 @@ export const retrieveMyFollowings = createSelector(
     selectHomePage,
     (HomePage) => HomePage.myFollowings
 );
+export const retrieveChosenPost = createSelector(
+    selectHomePage,
+    (HomePage) => HomePage.chosenPost
+);

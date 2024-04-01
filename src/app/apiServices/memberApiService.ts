@@ -4,6 +4,7 @@ import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/definer";
 import { Member } from "../../types/user";
 import { MemberLiken } from "../../types/like";
+import { Post } from "../../types/post";
 
 class MemberApiService {
     static getChosenMember(arg0: string) {
@@ -94,7 +95,7 @@ class MemberApiService {
             console.log(`ERROR :: getChosenMember: ${err.message}`);
             throw err;
         }
-    };
+    }; 
 
     public async getAllMembers() {
         try {

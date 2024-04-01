@@ -8,7 +8,8 @@ const initialState: HomePageState = {
     allVideoPosts: [],
     allArticlePosts: [],
     myFollowingsStory: [],
-    myFollowings: []
+    myFollowings: [],
+    chosenPost: null
 };
 
 const HomePageSlice = createSlice({
@@ -32,6 +33,9 @@ const HomePageSlice = createSlice({
         },
         setMyFollowings: (state, action) => {
             state.myFollowings = action.payload
+        },
+        setChosenPost: (state, action) => {
+            state.chosenPost = action.payload
         }
     }
 });
@@ -42,7 +46,8 @@ export const {
     setAllVideoPosts,
     setAllArticlePosts,
     setMyFollowingsStory,
-    setMyFollowings
+    setMyFollowings,
+    setChosenPost
 } = HomePageSlice.actions;
 
 const HomePageReducer = HomePageSlice.reducer;

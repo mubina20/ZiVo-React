@@ -110,6 +110,23 @@ class PostApiService {
             throw err;
         }
     };
+
+    public async getChosenPost(id: string, postType: string): Promise<Post> {
+        try {
+            const url = `/post/${postType}/${id}`;
+            const result = await axios.get(this.path + url, {withCredentials: true});
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            console.log("getChosenArticlePost DATA ::", result.data.data);
+
+            const post: Post = result.data.data;
+            return post;
+        } catch (err: any) {
+            console.log(`ERROR :: getChosenArticlePost: ${err.message}`);
+            throw err;
+        }
+    };
     
 };
 

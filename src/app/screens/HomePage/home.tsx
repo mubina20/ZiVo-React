@@ -22,6 +22,9 @@ import { retrieveMemberFollowings } from "../MemberPage/selector";
 import { Following, FollowSearchObj } from "../../../types/follow";
 import { verifiedMemberData } from "../../apiServices/verify";
 import FollowApiService from "../../apiServices/followApiService";
+import PostApiService from "../../apiServices/postApiService";
+import { setChosenPost } from "./slice";
+import { Post } from "../../../types/post";
 
 const members = [
     { id: 1, nickName: 'samo_ping12' },
@@ -33,6 +36,7 @@ const members = [
 
 const actionDispatch = (dispatch: Dispatch) => ({
     setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
+    setChosenPost: (data: Post) => dispatch(setChosenPost(data)),
     setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
     setAllMembers: (data: Member[]) => 
         dispatch(setAllMembers(data))
@@ -44,6 +48,13 @@ const chosenMemberRetriever = createSelector(
         chosenMember
     })
 );
+
+// const chosenMemberRetriever = createSelector(
+//     retrieveChosenMember, 
+//     (chosenMember) => ({
+//         chosenMember
+//     })
+// );
 
 const memberFollowingsRetriever = createSelector(retrieveMemberFollowings, (memberFollowings) => ({
 	memberFollowings,
@@ -72,6 +83,17 @@ export function Home() {
             const chosenMemberData = await memberService.getChosenMember(memberId);
             dispatch(setChosenMember(chosenMemberData)); 
             history.push(`/member/${chosenMemberData._id}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
+
+    const handlePostSelect = async (postType: any, postId: any) => {
+        try {
+            const postService = new PostApiService();
+            const chosenPostData = await postService.getChosenPost(postType, postId);
+            dispatch(setChosenPost(chosenPostData)); 
+            history.push(`/post/${chosenPostData.post_type}/${chosenPostData._id}`); 
         } catch (error) {
             console.error("ERROR handleMemberSelect ::", error);
         }
@@ -138,6 +160,7 @@ export function Home() {
                             <AllPosts  
                                 setChosenMember={setChosenMember}
                                 handleMemberSelect={handleMemberSelect}
+                                handlePostSelect={handlePostSelect}
                             /> 
 
                             </TabPanel>

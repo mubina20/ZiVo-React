@@ -26,5 +26,6 @@ export interface HomePageState {
     allArticlePosts: Post[];
     myFollowingsStory: Post[];
     myFollowings: any[];
+    chosenPost: Post | null;
 }
 

@@ -11,6 +11,7 @@
     justify-content: center;
     flex: 2;
     position: relative;
+    font-size: 25px;
     /* opacity: 0.2; */
 }
 .left_inside{
@@ -19,7 +20,7 @@
     justify-content: space-between;
     flex: 2;
     position: relative;
-    
+    /* width: 100%; */
 }
 .left_icon{
     margin-top: 20px;
@@ -28,7 +29,7 @@
     cursor: pointer;
 }
 .left-2{
-    width: 70%;
+    width: 100%;
     height: 100vh;
     /* background: rgb(72, 72, 87); */
     display: flex;
@@ -39,14 +40,17 @@
 .left_content_bg{
     width: 100%;
     height: 100%;
+    opacity: 0.3;
 }
 .left_content{
     width: 100%;
-    height: auto;
+    min-height: auto;
     box-shadow: 100px 100px 100px 1000px rgba(0, 0, 0, 0.663);
 }
-
-
+.left_article_content{
+    width: 693px;
+    height: 573px
+}
 
 .page_right{
     /* width: 32%; */
@@ -89,6 +93,8 @@
 }
 .user_img{
     width: 70px;
+    height: 70px;
+    cursor: pointer;
 }
 .post_description{
     color: #fff;
@@ -102,7 +108,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    justify-content: end;
+    justify-content: start;
 }
 .like{
     margin-top: 10px;
@@ -146,7 +152,8 @@
 }
 .comment_user_img{
     width: 50px;
-    height: 50px;     
+    height: 50px; 
+    cursor: pointer;    
 }
 .info{
     display: flex;
@@ -196,7 +203,6 @@
 .add_comment_container img {
     transition: 0.5s;
 }
-
 
 .add_comment_container img:hover {
     transform: scale(1.2);

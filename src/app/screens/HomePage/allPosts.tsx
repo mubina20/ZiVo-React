@@ -29,6 +29,7 @@ export function AllPosts(props: any) {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
     const { handleMemberSelect } = props;
+    const { handlePostSelect } = props;
 
     /** HANDLERS **/
     useEffect(() => {
@@ -165,7 +166,7 @@ export function AllPosts(props: any) {
                                     <Typography className="post_desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
                                 </div>
 
-                                <div className="post_content">
+                                <div className="post_content" onClick={() => handlePostSelect(post?._id, "photo")}>
                                     <img src={`${serverApi}/${post?.post_content}`} alt=""/>
                                 </div>
 
@@ -220,6 +221,7 @@ export function AllPosts(props: any) {
                                         textAlign: post.post_align === "center" ? "center" : "left"
 
                                     }}
+                                    onClick={() => handlePostSelect(post?._id, "article")}
                                 >
                                     {post.post_content}
                                 </div>
@@ -265,10 +267,10 @@ export function AllPosts(props: any) {
                                         </div>
                                         <img src={"/icons/post/bookmark.png"} alt="" className="icon"/>
                                     </div>
-                                    <Typography className="post_desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
+                                    <Typography className="post_desctiption">{post.post_title}</Typography>
                                 </div>
 
-                                <div className="post_content">
+                                <div className="post_content" onClick={() => handlePostSelect(post?._id, "video")}>
                                     <video
                                         loop
                                         playsInline
