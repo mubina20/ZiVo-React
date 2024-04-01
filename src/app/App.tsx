@@ -20,6 +20,7 @@ import { MobileMyPage } from "./screens/MemberPage/mobileMyPage";
 import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
 import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
+import { MobileMembersPage } from "./screens/MemberPage/mobileMembersPage";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -53,7 +54,22 @@ function App() {
           )}
         </Route>
         <Route path="/members">
-          <MembersPage />
+          {isDesktop && (
+            <div>
+              <MembersPage />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileMembersPage />
+            </div>
+          )}
+          
         </Route>
         <Route path="/my-page">
           {isDesktop && (
