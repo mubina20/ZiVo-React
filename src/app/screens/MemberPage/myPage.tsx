@@ -64,17 +64,10 @@ export function MyPage(props: any) {
     const [openFollowersModal, setOpenFollowersModal] = React.useState(false);
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
 
-
-
     /** HANDLERS **/
-
     const handleOpenFollowersModal = () => setOpenFollowersModal(true);
     const handleCloseFollowersModal = () => setOpenFollowersModal(false);
-    // Handle my Follower
-    // const  = () => (true);
-    // const  = () => setOpenFollowersModal(false);
 
-    // Handle my Followings
     const handleOpenFollowingsModal = () => {
         setOpenFollowingsModal(true);
     };

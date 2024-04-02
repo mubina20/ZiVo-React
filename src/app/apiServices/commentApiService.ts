@@ -30,23 +30,27 @@ class CommentApiService {
         }
     };
 
-    // public async findChosenPostComments(data: Comment): Promise<Comment[]> {
-    //     try {
-    //         const url = `/follow/followers?mb_id=${data.mb_id}`;
+    public async findChosenPostComments(post_id: string): Promise<Comment[]> {
+        try {
+            const url = "/comment/chosenPostComments";
+            const result = await axios.post(
+                this.path + url, 
+                { post_id: post_id },
+                { withCredentials: true }
+            );
 
-    //         const result = await axios.get(this.path + url, {withCredentials: true});
 
-    //         assert.ok(result?.data, Definer.general_err1);
-    //         assert.ok(result?.data?.state != "fail", result?.data?.message);
-    //         console.log("getMemberFollowers STATE ::", result.data.state);
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state != "fail", result?.data?.message);
+            console.log("findChosenPostComments STATE ::", result.data.state);
 
-    //         const followers: Follower[] = result.data.data;
-    //         return followers;
-    //     } catch (err: any) {
-    //         console.log(`ERROR :: getMemberFollowers ${err.message}`);
-    //         throw err;
-    //     }
-    // };
+            const comments: Comment[] = result.data.data;
+            return comments;
+        } catch (err: any) {
+            console.log(`ERROR :: findChosenPostComments ${err.message}`);
+            throw err;
+        }
+    };
 
     
 };

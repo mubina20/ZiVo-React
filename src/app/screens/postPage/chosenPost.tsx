@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Post } from '../../../types/post';
 import PostApiService from '../../apiServices/postApiService';
-import { setAllPosts, setChosenPost } from '../HomePage/slice';
+import { setChosenPost } from '../HomePage/slice';
 import { serverApi } from '../../../lib/config';
 import moment from 'moment';
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
@@ -13,6 +13,8 @@ import assert from 'assert';
 import { Definer } from '../../../lib/definer';
 import { verifiedMemberData } from '../../apiServices/verify';
 import MemberApiService from '../../apiServices/memberApiService';
+import CommentApiService from '../../apiServices/commentApiService';
+import { Comment } from '../../../types/comment';
 
 interface RouteParams {
     postId: string;
@@ -25,6 +27,7 @@ export function ChosenPost(props: any) {
     const { postId } = useParams<RouteParams>();
     const { postType } = useParams<RouteParams>();
     const [post, setPost] = useState<Post>();
+    const [comments, setComments] = useState<Comment[]>();
     const dispatch = useDispatch();
 
     /** HANDLERS **/
@@ -48,6 +51,22 @@ export function ChosenPost(props: any) {
         handleChosenPost();
     }, [dispatch, postId]);
 
+    useEffect(() => {
+        const findComments = async () => {
+            try {
+                const commentServive = new CommentApiService();
+                const postComments = await commentServive.findChosenPostComments(postId);
+                
+                setComments(postComments);
+                console.log("comments ::", postComments);
+            } catch (error) {
+                console.error("ERROR handleMemberSelect ::", error);
+            }
+        };
+
+        findComments();
+    }, []);
+
     const handlePostLike = async (e: any, id: any) => {
         try {
             assert.ok(verifiedMemberData, Definer.auth_err1);
@@ -65,6 +84,34 @@ export function ChosenPost(props: any) {
         } catch (err: any) {
             console.log(`ERROR :: targetLikeTop, ${err}`);
             sweetErrorHandling(err).then();
+        }
+    };
+
+    const handleCommentLike = async (e: any, id: any) => {
+        try {
+            assert.ok(verifiedMemberData, Definer.auth_err1);
+            
+            const memberService = new MemberApiService();
+            const likeResult = await memberService.memberLikeTarget({
+                like_ref_id: id,
+                group_type: "comment",
+            });
+            assert.ok(likeResult, Definer.general_err1);
+            
+            // const updatedPosts = post?.post_likes = likeResult.like_status;
+            // setAllPosts(updatedPosts);
+            await sweetTopSmallSuccessAlert("success", 700, false);
+        } catch (err: any) {
+            console.log(`ERROR :: handleCommentLike, ${err}`);
+            sweetErrorHandling(err).then();
+        }
+    };
+
+    const handleMemberSelect = async (memberId: any) => {
+        try {
+            history.push(`/member/${memberId}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
         }
     };
 
@@ -148,20 +195,25 @@ export function ChosenPost(props: any) {
             <div className="page_right">
                 <div className="author_info_container">
                     <div className="author_container">
-                        <div className="user_container">
+                        <div className="user_container" onClick={() => handleMemberSelect(post?.member?._id)}>
                             <img 
                                 src={
                                     post?.member?.mb_profile_image 
                                     ? `${serverApi}/${post?.member.mb_profile_image}`  
-                                    : "/icons/user.png"} 
+                                    : "/icons/user.png"
+                                } 
                                 alt="" 
                                 className="user_img"
                                 style={{borderRadius: "50%"}}
                                 
                             />
                             <div className="user_info">
-                                <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>@{post?.member.mb_nick}</Typography>
-                                <Typography className="name" style={{opacity: "0.56", fontSize: "13px"}}>{moment(post?.createdAt).format("YYYY-MM-DD")}</Typography>
+                                <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>
+                                    @{post?.member.mb_nick}
+                                </Typography>
+                                <Typography className="name" style={{opacity: "0.56", fontSize: "13px"}}>
+                                    {moment(post?.createdAt).format("YYYY-MM-DD")}
+                                </Typography>
                             </div>
                             
                         </div>
@@ -171,7 +223,7 @@ export function ChosenPost(props: any) {
                         <Typography>{post?.post_title}</Typography>
                     </div>
                     <div className="like_container">
-                        {post?.post_likes && post.post_likes > 0 ? (
+                        {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
                             <img 
                                 src="/icons/post/heart.png" 
                                 onClick={(e) => handlePostLike(e, post?._id)}
@@ -191,55 +243,57 @@ export function ChosenPost(props: any) {
                 </div>
 
                 <div className="comment_title">
-                    <Typography className='title'>Comments (100)</Typography>
+                    <Typography className='title'>Comments ({comments?.length ? comments?.length : 0})</Typography>
                 </div>
 
                 <div className="comments_container">
-                    <div className="comment_box">
-                        <div className="comment_user_container">
-                            <img 
-                                src={"/icons/user.png"} 
-                                alt="" 
-                                className="comment_user_img"                                
-                            />
-                            <div className="comment_user_info">
-                                <div className="info">
-                                    <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}}>@samo_ping12</Typography>
-                                    <Typography style={{opacity: "0.56", fontSize: "11px"}}> 2024-02-15</Typography>
-                                </div>
-                                <div className="comment_content">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias laboriosam, corporis, consequuntur ratione nemo, sunt ex voluptas in minima laudantium tempora commodi accusamus maiores? Iusto obcaecati quibusdam consequatur sit ipsa.</p>
-                                </div>
-                            </div>
-                            <div className="comment_like">
-                                <img src="/icons/post/like.png" alt="" className='likE'/>
-                                <Typography style={{fontSize: "12px"}}>30K</Typography>
-                            </div>
-                        </div>
-                    </div>
+                    {comments?.map((comment: Comment) => {
+                        return(
+                            <div className="comment_box" key={comment._id}>
+                                <div className="comment_user_container">
+                                    <img  
+                                        src={
+                                            comment?.member?.mb_profile_image 
+                                            ? `${serverApi}/${comment?.member.mb_profile_image}`  
+                                            : "/icons/user.png"
+                                        } 
+                                        alt="" 
+                                        className="comment_user_img"                                
+                                    />
+                                    <div className="comment_user_info">
+                                        <div className="info">
+                                            <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}}>@{comment.member.mb_nick}</Typography>
+                                            <Typography style={{opacity: "0.56", fontSize: "11px"}}>{moment(comment?.createdAt).format("YYYY-MM-DD")}</Typography>
+                                        </div>
+                                        <div className="comment_content">
+                                            <p>{comment?.comment}</p>
+                                        </div>
+                                    </div>
+                                    <div className="comment_like">
+                                    {comment?.me_liked && comment?.me_liked[0]?.my_favorite ? (
+                                        <img 
+                                            src="/icons/post/heart.png" 
+                                            onClick={(e) => handleCommentLike(e, comment?._id)}
+                                            alt="" 
+                                            className="likE"
+                                        />
+                                    ) : (
+                                        <img 
+                                            src="/icons/post/like.png" 
+                                            onClick={(e) => handleCommentLike(e, comment?._id)}
+                                            alt="" 
+                                            className="likE"
+                                        />
+                                    )}
 
-                    <div className="comment_box">
-                        <div className="comment_user_container">
-                            <img 
-                                src={"/icons/user.png"} 
-                                alt="" 
-                                className="comment_user_img"                                
-                            />
-                            <div className="comment_user_info">
-                                <div className="info">
-                                    <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}}>@samo_ping12</Typography>
-                                    <Typography style={{opacity: "0.56", fontSize: "11px"}}> 2024-02-15</Typography>
-                                </div>
-                                <div className="comment_content">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                                        {/* <img src="/icons/post/like.png" alt="" className='likE'/> */}
+                                        <Typography style={{fontSize: "12px"}}>{comment.comment_likes}</Typography>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="comment_like">
-                                <img src="/icons/post/like.png" alt="" className='likE'/>
-                                <Typography style={{fontSize: "12px"}}>30K</Typography>
-                            </div>
-                        </div>
-                    </div>
+                        )
+                    })}
+                    
                 </div>
                 
                 <div className="add_comment_container">

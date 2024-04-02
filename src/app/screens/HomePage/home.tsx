@@ -49,13 +49,6 @@ const chosenMemberRetriever = createSelector(
     })
 );
 
-// const chosenMemberRetriever = createSelector(
-//     retrieveChosenMember, 
-//     (chosenMember) => ({
-//         chosenMember
-//     })
-// );
-
 const memberFollowingsRetriever = createSelector(retrieveMemberFollowings, (memberFollowings) => ({
 	memberFollowings,
 }));
