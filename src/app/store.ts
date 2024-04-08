@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import MemberPageReducer from './screens/MemberPage/slice';
 import HomePageReducer from './screens/HomePage/slice';
+import ChatPageReducer from './screens/ChatPage/slice';
 
 export const store = configureStore({
   reducer: {
     homePage: HomePageReducer,
-    memberPage: MemberPageReducer
+    memberPage: MemberPageReducer,
+    chatPage: ChatPageReducer
   },
 });
 

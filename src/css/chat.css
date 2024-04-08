@@ -143,6 +143,7 @@
 .chatting_container .chat .chat_profile .profile_image{
     width: 54px;
     height: 54px;
+    border-radius: 50%;
 }
 
 .chatting_container .chat:hover{
@@ -300,7 +301,7 @@
     height: auto;
     padding: 10px;
     border-radius: 18px 18px 0px 18px;
-    background: var(--ff-007-a, #FF007A);
+    background: #ff007a7a;
     display: flex;
 }
 .chat_right_container .conversation_container .conversation .my_message_container .my_message .read{

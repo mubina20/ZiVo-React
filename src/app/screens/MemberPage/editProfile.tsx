@@ -173,9 +173,10 @@ export function EditProfile() {
                                 <option value="female">Female</option>
                             </select>
                         </div>
-                        <div className='button'>
+                        
+                    </div>
+                    <div className='button'>
                             <button onClick={Confirm}>Complete editing</button>
-                        </div>
                     </div>
                 </div>
             </div>

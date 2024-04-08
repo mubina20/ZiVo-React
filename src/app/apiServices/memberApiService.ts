@@ -65,8 +65,7 @@ class MemberApiService {
     public async logOutRequest() {
         try {
             const result = await axios.post(
-                this.path + "/logout", 
-                { withCredentials: true }
+                this.path + "/logout"
             );
 
             assert.ok(result?.data, Definer.general_err1);
@@ -99,14 +98,12 @@ class MemberApiService {
 
     public async getAllMembers() {
         try {
-            const result = await axios.get(
-                this.path + "/members", 
-                { withCredentials: true }
-            );
+            const url = '/members';
+            const result = await axios.get(this.path + url, { withCredentials: true });
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("getAllMembers STATE ::", result.data.state);
+            // console.log("getAllMembers STATE ::", result.data.state);
 
             const member: Member[] = result.data.data;
 

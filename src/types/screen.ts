@@ -1,3 +1,4 @@
+import { Chats } from "./chat";
 import { Follower, Following } from "./follow";
 import { Post } from "./post";
 import { Member } from "./user";
@@ -6,6 +7,7 @@ import { Member } from "./user";
 export interface AppRootState {
     homePage: HomePageState;
     memberPage: MemberPageState;
+    chatPage: ChatPageState;
 };
 
 /*** MEMBER PAGE ***/
@@ -27,5 +29,9 @@ export interface HomePageState {
     myFollowingsStory: Post[];
     myFollowings: any[];
     chosenPost: Post | null;
+};
+
+export interface ChatPageState {
+    findMyChats: Chats[];
 }
 

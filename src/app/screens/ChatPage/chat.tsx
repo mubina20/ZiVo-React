@@ -1,8 +1,30 @@
 import { Stack, Typography } from "@mui/material";
 import "../../../css/chat.css";
 import { ChatPageSidebar } from "../../components/sidebars/chat_page_sidebar";
+import { useEffect, useState } from "react";
+import ChatApiService from "../../apiServices/chatApiService";
+import { Chats } from "../../../types/chat";
+import { serverApi } from "../../../lib/config";
 
 export function ChatPage() {
+    const [chats, setChats] = useState<Chats[]>();
+
+    useEffect(() => {
+        const findMyChats = async () => {
+            try {
+                const chatService = new ChatApiService();
+                const myChats = await chatService.findMyChats();
+                setChats(myChats);
+                console.log("myChats ::", myChats);
+            } catch (error) {
+                console.error("ERROR handleMemberSelect ::", error);
+            }
+        };
+    
+        findMyChats();
+    },[]); 
+    
+
     return(
         <div>
             <ChatPageSidebar />
@@ -14,203 +36,37 @@ export function ChatPage() {
                                 <img className='search_icon' src="/icons/search.png" alt='search-icon'/>
                             </Stack>
 
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! fgfagdfsghfagfsagagagdafgdfagdagdafgdfg</div>
-                                            <div className="checking"></div>
+                            {chats?.map((chat: Chats) => {
+                                return(
+                                    <div className="chatting_container" key={chat._id}>
+                                        <div className="chat">
+                                            <div className="chat_profile">
+                                                <img 
+                                                    src={
+                                                        chat?.receiver_id?.mb_profile_image 
+                                                            ? `${serverApi}/${chat?.receiver_id?.mb_profile_image}` 
+                                                            : "/icons/user.png"
+                                                    } 
+                                                    alt="" 
+                                                    className="profile_image"
+                                                />
+                                            </div>
+                                            <div className="chat_info">
+                                                <div className="chat_top_info">
+                                                    <Typography className="nickname">
+                                                        {chat?.receiver_id?.mb_nick}
+                                                    </Typography>
+                                                    <span className="date">2024-02-24</span>
+                                                </div>
+                                                <div className="chat_bottom_info">
+                                                    <div className="message">Hello</div>
+                                                    <div className="checking"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!!</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="chatting_container">
-                                <div className="chat">
-                                    <div className="chat_profile">
-                                        <img src="/icons/user.png" alt="" className="profile_image"/>
-                                    </div>
-                                    <div className="chat_info">
-                                        <div className="chat_top_info">
-                                            <Typography className="nickname">samo_pin12</Typography>
-                                            <span className="date">2024-02-07</span>
-                                        </div>
-                                        <div className="chat_bottom_info">
-                                            <div className="message">Hello World!! This is NodeJS</div>
-                                            <div className="checking"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                )
+                            })}
                         </div>
 
                         <div className="chat_right_container">

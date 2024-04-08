@@ -57,20 +57,28 @@ export function MembersPage() {
         }
     };
 
-    useEffect(() => {
-        const fetchAllMembers = async () => {
-            try {
-                const memberService = new MemberApiService();
-                const allMembersData = await memberService.getAllMembers();
-                setAllMembers(allMembersData);
-            } catch (err) {
-                console.error('Error while fetching members:', err);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchAllMembers = async () => {
+    //         try {
+    //             const memberService = new MemberApiService();
+    //             const allMembersData = await memberService.getAllMembers();
+    //             setAllMembers(allMembersData);
+    //         } catch (err) {
+    //             console.error('Error while fetching members:', err);
+    //         }
+    //     };
 
-        fetchAllMembers();
+    //     fetchAllMembers();
+    // }, []);
+    // console.log(allMembers);
+
+    useEffect(() => {
+        const memberService = new MemberApiService();
+        memberService
+        .getAllMembers()
+        .then((data) => setAllMembers(data))
+        .catch((err) => console.log("ERROR :: AllRestaurants,", err));
     }, []);
-    console.log(allMembers);
 
     return(
         <div>
@@ -89,7 +97,7 @@ export function MembersPage() {
                             const profile_image = member?.mb_profile_image
                             ? `${serverApi}/${member?.mb_profile_image}`
                             : "/icons/user.png";
-                        console.log("Profile image:", profile_image);
+                        // console.log("Profile image:", profile_image);
                             return(
                             <div className="card" key={member._id} onClick={() => handleMemberSelect(member._id)}>
                                 <div className="close_box">
