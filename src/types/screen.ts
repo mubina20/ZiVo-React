@@ -1,4 +1,4 @@
-import { Chats } from "./chat";
+import { Chats, ChosenChat } from "./chat";
 import { Follower, Following } from "./follow";
 import { Post } from "./post";
 import { Member } from "./user";
@@ -33,5 +33,6 @@ export interface HomePageState {
 
 export interface ChatPageState {
     findMyChats: Chats[];
+    selectedChat: ChosenChat | null;
 }
 

@@ -81,7 +81,7 @@
 
 /* Chat Left Container */
 .big_chat_container .chat_container .chat_left_container{
-    width: 370px;
+    width: 270px;
     height: 100%;
     background: #121212;
     border-right: 1px solid #FF007A;
@@ -130,14 +130,16 @@
 }
 .chatting_container .chat{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     color: #fff;
-    width: 96%;
+    width: 98%;
     height: 65px;
     gap: 10px;
     overflow: hidden;
     margin-bottom: 8px;
+    padding: 0 5px;
+    margin-left: 5px;
 }
 
 .chatting_container .chat .chat_profile .profile_image{
@@ -157,7 +159,9 @@
     margin: -5px 0 7px 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 42px;
+    width: 178px;
 }
 .chatting_container .chat .chat_info .chat_top_info .nickname{
     font-size: 16px;
@@ -330,6 +334,8 @@
 .chat_right_container .conversation_container .conversation .friend_message_container .profile{
     width: 45px;
     height: 45px;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
 

@@ -150,11 +150,11 @@ export function Home() {
                                 </TabList>
                             </Stack>
                             <TabPanel value="1"> 
-                            <AllPosts  
-                                setChosenMember={setChosenMember}
-                                handleMemberSelect={handleMemberSelect}
-                                handlePostSelect={handlePostSelect}
-                            /> 
+                                <AllPosts  
+                                    setChosenMember={setChosenMember}
+                                    handleMemberSelect={handleMemberSelect}
+                                    handlePostSelect={handlePostSelect}
+                                /> 
 
                             </TabPanel>
                             <TabPanel value="2"> 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { Chats } from "../../types/chat";
+import { Chats, ChosenChat } from "../../types/chat";
 import assert from "assert";
 import { Definer } from "../../lib/definer";
 
@@ -27,6 +27,23 @@ class ChatApiService {
             throw err;
         }
     }
+
+    public async getSelectedChat(id: string): Promise<ChosenChat> {
+        try {
+            const url = `/chat/${id}`;
+            const result = await axios.get(this.path + url, {withCredentials: true});
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            // console.log("getSelectedChat DATA ::", result.data.data);
+
+            const chat: ChosenChat = result.data.data;
+            return chat;
+        } catch (err: any) {
+            console.log(`ERROR :: getChosenArticlePost: ${err.message}`);
+            throw err;
+        }
+    };
 };
 
 export default ChatApiService;

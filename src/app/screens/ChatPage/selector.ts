@@ -7,3 +7,7 @@ export const retrieveFindMyChats = createSelector(
     selectChatPage,
     (ChatPage) => ChatPage.findMyChats
 );
+export const retrieveSelectedChat = createSelector(
+    selectChatPage,
+    (ChatPage) => ChatPage.selectedChat
+);

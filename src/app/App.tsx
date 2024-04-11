@@ -7,7 +7,7 @@ import { verifiedMemberData } from "./apiServices/verify";
 import { HomePage } from "./screens/HomePage";
 import { ShortContents } from "./screens/ShortContentsPage/shortContent";
 import { MyPage } from "./screens/MemberPage/myPage";
-import { ChatPage } from "./screens/ChatPage/chat";
+import { ChatPage } from "./screens/ChatPage/chatPage";
 import { OtherPage } from "./screens/MemberPage/otherPage";
 import { UploadPostPage } from "./screens/UploadPage/uploadPost";
 import React, { useState } from "react";

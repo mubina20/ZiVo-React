@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ChatPageState } from "../../../types/screen";
 
 const initialState: ChatPageState = {
-    findMyChats: []
+    findMyChats: [],
+    selectedChat: null
 };
 
 const chatPageSlice = createSlice({
@@ -11,11 +12,17 @@ const chatPageSlice = createSlice({
     reducers: {
         setFindMyChats: (state, action) => {
             state.findMyChats = action.payload;
+        },
+        setSelectedChat: (state, action) => {
+            state.selectedChat = action.payload;
         }
     }
 });
 
-export const { setFindMyChats } = chatPageSlice.actions;
+export const { 
+    setFindMyChats,
+    setSelectedChat
+} = chatPageSlice.actions;
 
 const ChatPageReducer = chatPageSlice.reducer;
 export default ChatPageReducer;
