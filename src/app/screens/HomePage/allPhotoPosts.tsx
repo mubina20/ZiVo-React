@@ -28,6 +28,7 @@ export function AllPhotoPosts(props: any) {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
     const { handleMemberSelect } = props;
+    const { handlePostSelect } = props;
 
     /** HANDLERS **/
     useEffect(() => {
@@ -104,7 +105,7 @@ export function AllPhotoPosts(props: any) {
                                 <Typography className="post_desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
                             </div>
 
-                            <div className="post_content">
+                            <div className="post_content" onClick={() => handlePostSelect(post?._id, "photo")}>
                                 <img src={`${serverApi}/${post?.post_content}`} alt=""/>
                             </div>
 

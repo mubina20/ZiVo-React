@@ -28,6 +28,7 @@ export function AllArticlePosts(props: any) {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
     const { handleMemberSelect } = props;
+    const { handlePostSelect } = props;
     const refs: any = useRef([]);
 
     /** HANDLERS **/
@@ -112,6 +113,7 @@ export function AllArticlePosts(props: any) {
                                         textAlign: post.post_align === "center" ? "center" : "left"
 
                                     }}
+                                    onClick={() => handlePostSelect(post?._id, "article")}
                                 >
                                     {post.post_content}
                                 </div>

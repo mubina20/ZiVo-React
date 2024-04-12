@@ -172,11 +172,21 @@ export function AllPosts(props: any) {
 
                                 <div className="post_bottom">
                                     <div className="left">
-                                    <img 
-                                            src={post?.post_likes > 0 ? "/icons/post/heart.png" : "/icons/post/like.png" }
-                                            onClick={(e) => photoPostLike(e, post._id)}
-                                            alt="" className="bottom_icon"
-                                        />
+                                        {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
+                                            <img 
+                                                src="/icons/post/heart.png" 
+                                                onClick={(e) => photoPostLike(e, post?._id)}
+                                                alt="" 
+                                                className="bottom_icon"
+                                            />
+                                        ) : (
+                                            <img 
+                                                src="/icons/post/like.png" 
+                                                onClick={(e) => photoPostLike(e, post?._id)}
+                                                alt="" 
+                                                className="bottom_icon"
+                                            />
+                                        )}
                                         <span style={{marginRight: "50px"}}>{post.post_likes}</span>
                                         <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
                                     </div>

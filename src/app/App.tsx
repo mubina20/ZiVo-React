@@ -66,7 +66,7 @@ function App() {
           )}
           {isMobile && (
             <div>
-              {/* <MobileMembersPage /> */}
+              <MobileMembersPage />
             </div>
           )}
           

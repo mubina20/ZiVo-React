@@ -42,21 +42,21 @@ const actionDispatch = (dispatch: Dispatch) => ({
         dispatch(setAllMembers(data))
 });
 
-const chosenMemberRetriever = createSelector(
-    retrieveChosenMember, 
-    (chosenMember) => ({
-        chosenMember
-    })
-);
+// const chosenMemberRetriever = createSelector(
+//     retrieveChosenMember, 
+//     (chosenMember) => ({
+//         chosenMember
+//     })
+// );
 
-const memberFollowingsRetriever = createSelector(retrieveMemberFollowings, (memberFollowings) => ({
-	memberFollowings,
-}));
+// const memberFollowingsRetriever = createSelector(retrieveMemberFollowings, (memberFollowings) => ({
+// 	memberFollowings,
+// }));
 
 export function Home() {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
-    const [allMembers, setAllMembers] = useState<Member[]>([]);
+    // const [allMembers, setAllMembers] = useState<Member[]>([]);
     
 
     const dispatch = useDispatch();
@@ -160,16 +160,19 @@ export function Home() {
                             <TabPanel value="2"> 
                                 <AllVideoPosts 
                                     handleMemberSelect={handleMemberSelect}
+                                    handlePostSelect={handlePostSelect}
                                 /> 
                             </TabPanel>
                             <TabPanel value="3"> 
                                 <AllPhotoPosts
                                     handleMemberSelect={handleMemberSelect} 
+                                    handlePostSelect={handlePostSelect}
                                 /> 
                             </TabPanel>
                             <TabPanel value="4"> 
                                 <AllArticlePosts
                                     handleMemberSelect={handleMemberSelect}
+                                    handlePostSelect={handlePostSelect}
                                 /> 
                             </TabPanel>
                     </TabContext>
