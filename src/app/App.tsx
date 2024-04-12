@@ -168,7 +168,10 @@ function App() {
             </div>
           )}
         </Route>
-        <Route path="/chat">
+        <Route exact path="/chat" >
+          <ChatPage />
+        </Route>
+        <Route path="/chat/:chatId">
           <ChatPage />
         </Route>
         <Route path="/help">

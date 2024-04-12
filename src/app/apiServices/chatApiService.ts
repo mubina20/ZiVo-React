@@ -44,6 +44,28 @@ class ChatApiService {
             throw err;
         }
     };
+
+    public async createMessage(data: any) {
+        try {
+            const url = "/chat/message";
+            const result = await axios.post(
+                this.path + url, 
+                data, 
+                { withCredentials: true }
+            );
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+
+            console.log("createMessage STATE ::", result.data.data);
+            const like_result = result.data.data;
+
+            return like_result;
+        } catch (err: any) {
+            console.log(`ERROR :: createMessage: ${err.message}`);
+            throw err;
+        }
+    };
 };
 
 export default ChatApiService;

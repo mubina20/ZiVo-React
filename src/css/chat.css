@@ -267,7 +267,7 @@
     justify-content: center;
 }
 .chat_right_container .conversation_container .conversation{
-    margin-top: 30px;
+    margin-top: 70px;
     width: 70%;
     height: auto;
     background: transparent;
@@ -409,7 +409,8 @@
 }
 .chat_right_container .chat_bottom .chat_bottom_container .input_box .input_sticker{
     width: 25px;
-    height: 25px;    
+    height: 25px;  
+    cursor: pointer;
 }
 .chat_right_container .chat_bottom .chat_bottom_container .input_box .sticker{
     position: absolute;
@@ -417,11 +418,3 @@
     width: 25px;
     height: 25px;    
 }
-
-
-
-
-
-
-
-

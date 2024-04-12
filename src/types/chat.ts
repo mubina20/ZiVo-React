@@ -15,3 +15,9 @@ export interface ChosenChat {
     message_reaction: string;
     createdAt: Date
 }
+
+export interface CreateMessage {
+    sender_id: string;
+    chat_id: string;
+    message: string;
+}
