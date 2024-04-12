@@ -10,6 +10,7 @@ import { setSelectedChat } from "./slice";
 import { SelectedChat } from "./selectedChat";
 import { retrieveSelectedChat } from "./selector";
 import { useHistory } from "react-router-dom";
+import { serverApi } from "../../../lib/config";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -42,6 +43,31 @@ export function ChatPage() {
         }
     };
 
+    // useEffect(() => {
+    //     const chatService = new ChatApiService();
+    //     const socket = new WebSocket(`ws://${serverApi}`);
+
+    //     socket.onmessage = async (e: any) => {
+    //         const newData = JSON.parse(e.data);
+    //         setChats(newData);
+    //     }
+    //     const findMyChats = async () => {
+    //         try{
+    //             const myChats = await chatService.findMyChats();
+    //             setChats(myChats);
+    //             console.log("myChats", myChats);
+    //         } catch(err) {
+    //             console.log(" ERROR: findMyChats", err);
+    //         }
+    //     };
+
+    
+    //     findMyChats();
+    //     return () => {
+    //         socket.close();
+    //     }
+    // },[]); 
+
     useEffect(() => {
         const findMyChats = async () => {
             try {
@@ -55,7 +81,7 @@ export function ChatPage() {
         };
     
         findMyChats();
-    },[]); 
+    },[]);
     
 
     return(
@@ -71,6 +97,7 @@ export function ChatPage() {
 
                         <SelectedChat 
                             selectedChat={selectedChat}
+                            setSelectedChat={setSelectedChat}
                         />
                         
                     </div>

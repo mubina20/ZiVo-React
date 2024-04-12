@@ -10,10 +10,12 @@ import { useParams } from 'react-router-dom';
 import assert from 'assert';
 import ChatApiService from '../../apiServices/chatApiService';
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
+import io from 'socket.io-client';
 
 export function SelectedChat(props: any) {
     /** INITIALIZATIONS **/
     const { selectedChat } = props;
+    const { setSelectedChat } = props;
     console.log("selectedChat::::", selectedChat);
 
     const { chatId } = useParams<{ chatId: string }>();
@@ -25,30 +27,43 @@ export function SelectedChat(props: any) {
 
     /** HANDLERS **/
     const handleMessage = (e: any) => {
-		messageData.message = e.target.value;
-		setMessageData({ ...messageData });
-	};
+        setMessageData({ ...messageData, message: e.target.value });
+    };
 
     const handleSendButton = async () => {
         try {
-            // assert.ok(
-            //     articlePostData.post_content !== "",
-            //     Definer.input_err1
-            // );
-
-            console.log("messageData ::", messageData);
             const chatService = new ChatApiService();
-
             await chatService.createMessage(messageData);
-            // await sweetTopSmallSuccessAlert("Post is created successfully!");
-
+    
+            // Xabarni yuborganidan so'ng, xabarlarning yangilanishi kerak
+            // setMessageData({ ...messageData, message: "" }); // Bu qismni o'chirib tashlaysiz
+    
+            // Xabarlarni yangilash uchun chat ma'lumoti o'qilib, yangi xabarlarni olish
+            // Masalan:
+            const updatedChat = await chatService.getSelectedChat(chatId); // chatId o'zgaruvchisi chatning identifikatoriga mos keladi
+            setSelectedChat(updatedChat); // setSelectedChat ning ma'lumoti yangilang
         } catch (error) {
             console.log(`ERROR :: handlePostButton, ${error}`);
             sweetErrorHandling(error).then();
         }
     };
-
     
+    
+    
+
+    useEffect(() => {
+        const socket = io(serverApi);
+
+        socket.on('message', (message: string) => {
+            console.log('Received message:', message);
+            // Handle receiving messages here
+        });
+
+        return () => {
+            socket.disconnect();
+        };
+    }, [chatId]); // Add chatId as a dependency to re-establish connection when it changes
+
     return (
         (selectedChat && selectedChat.length > 0 ? (
             <div className="chat_right_container">
