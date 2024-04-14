@@ -29,9 +29,10 @@
 
 .card{
     width: 160px;
-    height: 235px;
+    height: 245px;
     border-radius: 16px;
-    border: 1px solid #535353;
+    border: 1px solid #fff;
+    background: #1e1e1e56;
     display: flex;
     flex-direction: column;
 }
@@ -49,7 +50,7 @@
 .close{
     width: 28px;
     height: 28px;
-    background: #3f3b3b;
+    background: #ffffff34;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -101,4 +102,13 @@
 .mobile-members{
     height: auto;
     margin-top: 100px;
+}
+
+.members_page_modal{
+    width: 500px;
+    height: 670px;
+    background: rgb(0, 0, 0);
+    margin: auto;
+    color: #fff;
+    border: 1px solid #FF007A;
 }

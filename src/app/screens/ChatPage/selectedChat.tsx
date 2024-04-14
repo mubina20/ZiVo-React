@@ -35,19 +35,42 @@ export function SelectedChat(props: any) {
             const chatService = new ChatApiService();
             await chatService.createMessage(messageData);
     
-            // Xabarni yuborganidan so'ng, xabarlarning yangilanishi kerak
-            // setMessageData({ ...messageData, message: "" }); // Bu qismni o'chirib tashlaysiz
-    
-            // Xabarlarni yangilash uchun chat ma'lumoti o'qilib, yangi xabarlarni olish
-            // Masalan:
-            const updatedChat = await chatService.getSelectedChat(chatId); // chatId o'zgaruvchisi chatning identifikatoriga mos keladi
-            setSelectedChat(updatedChat); // setSelectedChat ning ma'lumoti yangilang
+            setMessageData({ ...messageData, message: "" }); 
+
+            const updatedChat = await chatService.getSelectedChat(chatId); 
+            setSelectedChat(updatedChat);
         } catch (error) {
             console.log(`ERROR :: handlePostButton, ${error}`);
             sweetErrorHandling(error).then();
         }
     };
     
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
 

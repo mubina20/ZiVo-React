@@ -58,9 +58,9 @@ class ChatApiService {
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
 
             console.log("createMessage STATE ::", result.data.data);
-            const like_result = result.data.data;
+            const message_result = result.data.data;
 
-            return like_result;
+            return message_result;
         } catch (err: any) {
             console.log(`ERROR :: createMessage: ${err.message}`);
             throw err;

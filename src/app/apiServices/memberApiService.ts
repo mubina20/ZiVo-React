@@ -28,7 +28,7 @@ class MemberApiService {
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
             console.log("Login STATE :: ", result.data.state);
 
-            const member = result.data.data;
+            const member: Member = result.data.data;
             localStorage.setItem("member_data", JSON.stringify(member));
             console.log("Login MEMBER :: ", member);
 

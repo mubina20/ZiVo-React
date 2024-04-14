@@ -43,6 +43,24 @@ export function ChatPage() {
         }
     };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     // useEffect(() => {
     //     const chatService = new ChatApiService();
     //     const socket = new WebSocket(`ws://${serverApi}`);

@@ -163,7 +163,7 @@ export function AllPosts(props: any) {
                                         </div>
                                         <img src={"/icons/post/bookmark.png"} alt="" className="icon"/>
                                     </div>
-                                    <Typography className="post_desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
+                                    <Typography className="post_desctiption">{post.post_title}</Typography>
                                 </div>
 
                                 <div className="post_content" onClick={() => handlePostSelect(post?._id, "photo")}>

@@ -138,7 +138,10 @@ export function MyPage(props: any) {
                                     
                                 />
                                 <Typography className="nickname">@{verifiedMemberData?.mb_nick}</Typography>
-                                <button className="story-btn"><img src="/icons/post/plus.png" alt="" width={"15px"}/>Upload Story</button>
+                                <Link to={"/upload-story"} style={{textDecoration: "none"}}>
+                                    <button className="story-btn"><img src="/icons/post/plus.png" alt="" width={"15px"}/>Upload Story</button>
+                                </Link>
+                                
                             </div>
                             <div className="right_info">
                                 <div className="info">
