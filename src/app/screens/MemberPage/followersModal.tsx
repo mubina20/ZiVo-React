@@ -16,8 +16,8 @@ export function FollowersModal(props: any) {
 
 
     const { open, handleCloseFollowersModal, openFollowersModal } = props;
-    console.log(handleCloseFollowersModal)
-    console.log(openFollowersModal)
+    // console.log(handleCloseFollowersModal);
+    // console.log(openFollowersModal);
 
     // const handleClose = () => handleCloseFollowersModal;
     // console.log(handleClose)

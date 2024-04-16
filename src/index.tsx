@@ -8,6 +8,7 @@ import "./css/index.css";
 
 import { ThemeProvider } from "@mui/material/styles";
 import theme from './app/components/theme/theme';
+import { socket, SocketContext } from './app/context/socket';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -16,7 +17,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <SocketContext.Provider value={socket}>
+          <App />
+        </SocketContext.Provider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>

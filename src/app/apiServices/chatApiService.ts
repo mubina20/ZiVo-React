@@ -14,8 +14,11 @@ class ChatApiService {
 
     public async findMyChats(){
         try{
+            const abortController = new AbortController();
+            const signal = abortController.signal;
+
             const url = "/chat",
-                result = await axios.get(this.path + url, { withCredentials: true });
+                result = await axios.get(this.path + url, { signal, withCredentials: true });
             assert.ok(result, Definer.general_err1);
 
             const myChats: Chats[] = result.data.data;
@@ -30,13 +33,16 @@ class ChatApiService {
 
     public async getSelectedChat(id: string): Promise<ChosenChat> {
         try {
+            const abortController = new AbortController();
+            const signal = abortController.signal;
+    
             const url = `/chat/${id}`;
-            const result = await axios.get(this.path + url, {withCredentials: true});
-
+            const result = await axios.get(this.path + url, { signal, withCredentials: true });
+    
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
             // console.log("getSelectedChat DATA ::", result.data.data);
-
+    
             const chat: ChosenChat = result.data.data;
             return chat;
         } catch (err: any) {
@@ -44,15 +50,20 @@ class ChatApiService {
             throw err;
         }
     };
+    
 
     public async createMessage(data: any) {
         try {
+            const abortController = new AbortController();
+            const signal = abortController.signal;
+
             const url = "/chat/message";
             const result = await axios.post(
                 this.path + url, 
                 data, 
-                { withCredentials: true }
+                { signal, withCredentials: true }
             );
+            console.log("data", data)
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);

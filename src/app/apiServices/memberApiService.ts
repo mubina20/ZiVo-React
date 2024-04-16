@@ -98,8 +98,11 @@ class MemberApiService {
 
     public async getAllMembers() {
         try {
+            const abortController = new AbortController();
+            const signal = abortController.signal;
+
             const url = '/members';
-            const result = await axios.get(this.path + url, { withCredentials: true });
+            const result = await axios.get(this.path + url, { signal, withCredentials: true });
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);

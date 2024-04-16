@@ -21,3 +21,19 @@ export interface CreateMessage {
     chat_id: string;
     message: string;
 }
+
+export interface Chatmessage {
+    msg: string;
+    chat_id: string;
+    sender_id: string;
+    createdAt: Date;
+    mb_profile_image: string;
+};
+
+export interface ChatGreetMsg {
+    text: string;
+};
+
+export interface ChatInfoMsg {
+    total: number;
+};

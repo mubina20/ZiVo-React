@@ -282,13 +282,13 @@
 
 
 
-.infoModalContainer {
+/* .infoModalContainer {
     width: 90%;
     height: 90%;
     overflow: scroll;
     animation-name: modal;
     animation-duration: 1s;
-}
+} */
 
 @keyframes modal {
     to {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
@@ -24,6 +24,9 @@ import { useDispatch, useSelector } from "react-redux";
 import FollowApiService from "../../apiServices/followApiService";
 import { FollowersModal } from "./followersModal";
 import { FollowingsModal } from "./followingsModal";
+import assert from "assert";
+import { Definer } from "../../../lib/definer";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 // REDUX SLICE
 const actionDispatch = (dispach: Dispatch) => ({
@@ -49,6 +52,7 @@ const memberFollowingsRetriever = createSelector(
 
 export function MyPage(props: any) {
     /** INITIALIZATIONS **/
+    const history = useHistory();
     const [value, setValue] = useState("1");
     const { open, handleOpenModal, handleModalClose } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
@@ -60,6 +64,7 @@ export function MyPage(props: any) {
     const { setMemberFollowings } = actionDispatch(useDispatch());
 	const { memberFollowings } = useSelector(memberFollowingsRetriever);
 	const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
+    const [followRebuild, setFollowerRebuild] = useState<Boolean>(false);
 
     const [openFollowersModal, setOpenFollowersModal] = React.useState(false);
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
@@ -68,12 +73,17 @@ export function MyPage(props: any) {
     const handleOpenFollowersModal = () => setOpenFollowersModal(true);
     const handleCloseFollowersModal = () => setOpenFollowersModal(false);
 
+    // const handleOpenFollowingsModal = () => setOpenFollowingsModal(true);
+    // const handleCloseFollowingsModal = () => setOpenFollowingsModal(false);
+
     const handleOpenFollowingsModal = () => {
         setOpenFollowingsModal(true);
     };
+    
     const handleCloseFollowingsModal = () => {
         setOpenFollowingsModal(false);
     };
+    
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -95,7 +105,7 @@ export function MyPage(props: any) {
     // console.log("allPosts", allPosts);
     // console.log("props > allPosts", allPosts);
     const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
-    // console.log("filteredPosts", filteredPosts);
+        // console.log("filteredPosts", filteredPosts);
 
     // Followers
     useEffect(() => {
@@ -114,6 +124,27 @@ export function MyPage(props: any) {
 			.then((data) => setMemberFollowings(data))
 			.catch((err) => console.log(err));
 	}, [followingsSearchObj]);
+
+    const unsubscribeHandler = async (e: any, id: string) => {
+		try {
+			e.stopPropagation();
+			assert.ok(verifiedMemberData, Definer.auth_err1);
+
+			const followService = new FollowApiService();
+			await followService.unsubscribe(id);
+
+			await sweetTopSmallSuccessAlert('successfully unsubscribed', 700, false);
+			setFollowerRebuild(!followRebuild);
+		} catch (error: any) {
+			console.log(error);
+			sweetErrorHandling(error).then();
+		}
+	};
+
+    const visitMemberHandler = (mb_id: string) => {
+		history.push(`/member/${mb_id}`);
+		document.location.reload();
+	};
 
     return(
         <div>
@@ -149,23 +180,58 @@ export function MyPage(props: any) {
                                         <div className="group">
                                             <div className="text" onClick={handleOpenFollowersModal}>
                                                 Followers
-                                                <FollowersModal 
-                                                    openFollowersModal={openFollowersModal} 
-                                                    handleOpenFollowersModal={handleOpenFollowersModal}
-                                                    handleCloseFollowersModal={handleCloseFollowersModal}
-                                                    memberFollowers={memberFollowers}
-                                                />
+                                                
                                             </div>
                                             <span className="count">{memberFollowers.length}</span>
                                         </div>
                                         <div className="group">
                                             <div className="text" onClick={handleOpenFollowingsModal}>
                                                 Followings
-                                                <FollowingsModal 
-                                                    open={openFollowingsModal} 
-                                                    handleCloseFollowings={handleCloseFollowingsModal}
-                                                    memberFollowings={memberFollowings}
-                                                />
+                                                <Modal
+    className="infoModalContainer"
+    open={openFollowingsModal}
+    onClose={handleCloseFollowingsModal}
+    aria-labelledby="modal-modal-title"
+    aria-describedby="modal-modal-description"
+>
+
+                <div className='followers_modal_box'> 
+                    <div className="followers_modal_closing">
+                        <span>Followings</span>
+                        <img 
+                            src="/icons/other/close.png" 
+                            alt="" 
+                            className='followers_close'
+                            onClick={handleCloseFollowingsModal}
+                        />
+                        <button onClick={handleCloseFollowingsModal}>ssadfadf</button>
+                    </div>
+                    <div className="followers_container">
+                        {memberFollowings.map((following: Following) => {
+                            console.log("following", following);
+                            const image_url = following?.follow_member_data?.mb_profile_image
+                                ? `${serverApi}/${following.follow_member_data.mb_profile_image}`
+                                : '/icons/user.png';
+                            return(
+                                <div className="follower_container" key={following?._id}>
+                                    <div className="follower_info">
+                                        <img src={image_url} alt="" className='follower_avatar' onClick={() => visitMemberHandler(following?.follow_id)}/>
+                                        <span>@{following?.follow_member_data.mb_nick}</span>
+                                    </div>
+                                    {true &&(
+                                        <button
+                                            className="follow_btn un_follow_btn"
+                                            onClick={(e) => unsubscribeHandler(e, following?.follow_id)}
+                                        >
+                                            Unfollow
+                                        </button>
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </Modal>
                                             </div>
                                             <span className="count">{memberFollowings.length}</span>
                                         </div>

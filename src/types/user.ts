@@ -2,7 +2,6 @@ import { MeFollowed } from "./follow";
 import { MeLiked } from "./post";
 
 export interface Member {
-    some(arg0: (following: any) => boolean): unknown;
     _id: string;
     mb_name: string;
     mb_surname: string;
