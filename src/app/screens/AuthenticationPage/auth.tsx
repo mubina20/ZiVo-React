@@ -22,7 +22,6 @@ export function AuthenticationPage(props: any) {
         mb_birthday: Date | null = null,
 
         mb_gender: string = "",
-        mb_email: string = "",
         mb_phone: string = "",
         mb_password: string = "";
 
@@ -32,10 +31,7 @@ export function AuthenticationPage(props: any) {
         const [nick, SetNick] = useState("");
         const [surname, setSurname] = useState("");
         const [password, setPassword] = useState("");
-        const [email, setEmail] = useState("");
         const [phone, setPhone] = useState("");
-
-
         const [gender, setGender] = useState('');
     
     // HANDLERS 
@@ -64,12 +60,6 @@ export function AuthenticationPage(props: any) {
     // const handleUserGender = (e: any) => {
     //     mb_gender = e.target.value;
     // };
-
-    const handleUserEmail = (e: any) => {
-        mb_email = e.target.value;
-        setEmail(mb_email);
-        console.log("mb_email", mb_email);
-    };
 
     const handleUserPhone = (e: any) => {
         mb_phone = e.target.value;
@@ -106,15 +96,15 @@ export function AuthenticationPage(props: any) {
     const handleSignupRequest = async () => {
         try {
             // Barcha inputlarni tekshiramiz
-            const is_phone_or_email_filled = (phone != "" && email == "") || (phone == "" && email != "");
             const is_other_fields_filled = nick != "" && 
                                         name != "" && 
                                         surname != "" && 
                                         password != "" && 
                                         gender != "" && 
+                                        phone != "" && 
                                         selectedDate != new Date(0); 
     
-            assert.ok(is_phone_or_email_filled && is_other_fields_filled, Definer.input_err1);
+            assert.ok(is_other_fields_filled, Definer.input_err1);
     
             const signup_data = {
                 mb_nick: nick,
@@ -123,7 +113,6 @@ export function AuthenticationPage(props: any) {
                 mb_password: password,
                 mb_gender: gender,
                 mb_phone: phone,
-                mb_email: email,
                 mb_birthday: selectedDate, 
             };
     
@@ -216,18 +205,8 @@ export function AuthenticationPage(props: any) {
                                 <div className="signup_input_container">
                                     <input type="password" placeholder='Password' onChange={handleUserPassword} name='mb_password' className='signup_input'/>
                                 </div>
-                                
-                                <div className="or_container">
-                                    Enter Email or Phone number
-                                    <div className="or">
-                                        <div className="or_signup_input_container">
-                                            <input type="text" placeholder='Email' onChange={handleUserEmail} name='mb_email' className='signup_input'/>
-                                        </div>
-                                        <div className="or_signup_input_container">
-                                            <input type="text" placeholder='Phone number' onChange={handleUserPhone} name='mb_phone' className='signup_input'/>
-                                        </div>
-                                    </div>
-                                    
+                                <div className="signup_input_container">
+                                    <input type="text" placeholder='Phone number' onChange={handleUserPhone} name='mb_phone' className='signup_input'/>
                                 </div>
                                 
                                 <div className="signup_input_container">
