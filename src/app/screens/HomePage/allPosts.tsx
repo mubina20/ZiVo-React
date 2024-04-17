@@ -32,19 +32,15 @@ export function AllPosts(props: any) {
     const { handlePostSelect } = props;
 
     /** HANDLERS **/
+    
     useEffect(() => {
-        const allPostsData = async () => {
-            try {
-                const postService = new PostApiService();
-                const allPostsData = await postService.getAllPosts();
-                setAllPosts(allPostsData);
-            } catch (err) {
-                console.error('Error while fetching members:', err);
-            }
-        };
-
-        allPostsData();
+        const postService = new PostApiService();
+        postService
+        .getAllPosts()
+        .then((data) => setAllPosts(data))
+        .catch((err) => console.log("ERROR :: AllRestaurants,", err));
     }, []);
+
     // console.log("allPosts", allPosts);
     // const {allPosts} = props;
     console.log("props > allPosts", allPosts);

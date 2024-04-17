@@ -403,6 +403,9 @@
     margin-left: 48px;
     color: #fff;
 }
+.chat_right_container .chat_bottom .chat_bottom_container .input_box .chat_bottom_input:focus{
+    outline: none;
+}
 .chat_right_container .chat_bottom .chat_bottom_container .input_box .two_icons{
     display: flex;
     gap: 30px;
