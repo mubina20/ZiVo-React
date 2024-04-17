@@ -26,7 +26,7 @@ export interface Post {
 };
 
 export interface UploadPost {
-    post_title: string ;
+    post_title?: string ;
     post_content: string ;
     post_bg_color?: string;
     post_text_color?: string;

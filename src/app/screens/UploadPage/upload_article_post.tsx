@@ -76,7 +76,8 @@ export function UploadArticlePost(props: any) {
             const postService = new PostApiService();
 
             await postService.createArticlePost(articlePostData);
-            await sweetTopSmallSuccessAlert("Post is created successfully!");
+            await sweetTopSmallSuccessAlert('Information modified successfully!', 700, false);
+    		window.location.href = '/my-page';
 
         } catch (error) {
             console.log(`ERROR :: handlePostButton, ${error}`);

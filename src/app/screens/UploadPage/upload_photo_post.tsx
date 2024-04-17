@@ -61,10 +61,8 @@ export function UploadPhotoPost(props: any) {
             const postService = new PostApiService();
             await postService.createPhotoPost(photoPostData);
 
-            await sweetTopSmallSuccessAlert("Post is created successfully!");
-
-            setPhotoPostData({ post_title: "", post_content: "" });
-            setFile(null);
+            await sweetTopSmallSuccessAlert('Information modified successfully!', 700, false);
+    		window.location.href = '/my-page';
         } catch (error) {
             console.log(`ERROR :: handlePostButton, ${error}`);
             sweetErrorHandling(error).then();

@@ -54,10 +54,9 @@ export function UploadVideoPost(props: any) {
 
             const postService = new PostApiService();
             await postService.createVideoPost(videoPostData);
-            await sweetTopSmallSuccessAlert("Post is created successfully!");
+            await sweetTopSmallSuccessAlert('Information modified successfully!', 700, false);
+    		window.location.href = '/my-page';
 
-            setVideoPostData({ post_title: "", post_content: "" });
-            setFile(null);
         } catch (error) {
             console.log(`ERROR :: handlePostButton, ${error}`);
             sweetErrorHandling(error).then();
@@ -86,7 +85,7 @@ export function UploadVideoPost(props: any) {
                             Your browser does not support the video tag.
                         </video>
                     ) : (
-                        <div className="upload_photo">You can see your chosen photo here!</div>
+                        <div className="upload_photo">You can see your chosen video here!</div>
                     )}
                     </div>
                     <input type="file" onChange={handleVideoChange} className="Upload_file" accept="video/mp4" />

@@ -14,7 +14,8 @@ class PostApiService {
     public async createPhotoPost(data: UploadPost) {
         try {
             const formData = new FormData();
-            formData.append("post_title", data.post_title);
+            // formData.append("post_title", data.post_title);
+            formData.append("post_title", data.post_title || "");
             formData.append("post_content", data.post_content);
 
             const result = await axios(`${this.path}/post/create/photo`, {
@@ -43,7 +44,8 @@ class PostApiService {
     public async createVideoPost(data: UploadPost) {
         try {
             const formData = new FormData();
-            formData.append("post_title", data.post_title);
+            // formData.append("post_title", data.post_title);
+            formData.append("post_title", data.post_title || "");
             formData.append("post_content", data.post_content);
 
             const result = await axios(`${this.path}/post/create/video`, {
