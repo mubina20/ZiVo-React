@@ -10,6 +10,7 @@ body{
     justify-content: center;
     background: #101010;
     min-height: 100vh;
+    background-attachment: fixed;
 }
 .upload_container{
     margin-top: 100px;
@@ -39,17 +40,19 @@ body{
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: end;
+    width: 480px;
+    border-radius: 25px;
 }
 .photos{
-    width: 93%;
-    padding: 15px;
-    height: 270px;
+    width: 600px;
+    height: 500px;
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
 }
 .uploaded_image{
     width: 100%;
     height: 100%;
-    border-radius: 10px;
     object-fit: cover;
 }
 
@@ -73,6 +76,7 @@ body{
     height: 100%;
     cursor: pointer;
     opacity: 0;
+    border-radius: 25px;
 }
 
 /* Photo Panel */
@@ -80,59 +84,65 @@ body{
     width: 100%;
     height: 400px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 100px;
 }
 .photo_panel_left{
-    width: 45%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 130px;
-    /* border: 2px solid red; */
+    margin-top: 70px;
 }
 .photo_panel_left textarea{
-    width: 370px;
-    height: 130px;
+    width: 600px;
+    height: 140px;
     resize: none;
-    background: rgb(187, 187, 187);
-    color: #000000;
+    background: rgba(0, 0, 0, 0.31);
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
     padding: 15px;
+    border: 1px solid #ffffff6c;
+    border-radius: 25px;
 }
 .upload_button{
-    width: 135px;
+    width: 165px;
     height: 50px;
-    border-radius: 20px;
+    border-radius: 15px;
     background: transparent;
-    border: 1px solid #fff;
+    border: 1px solid #ffffff6c;
     color: #ffffff;
     font-size: 18px;
     cursor: pointer;
 }
 .cencel{
-    background: #888888;
+    background: #0a001b;
 }
 textarea::placeholder{
     color: rgb(109, 108, 108);
 }
 .buttons{
+    margin-top: 50px;
     display: flex;
     gap: 100px;
+    justify-content: center;
+    width: 600px;
 }
 .upload_photo{
-    width: 99%;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #fff;
+    border: 1px solid #ffffff6c;
+    background: rgba(0, 0, 0, 0.31);
     font-size: 18px;
+    border-radius: 25px;
+    
 }
 
 .photo_panel_right{
-    width: 45%;
+    width: 480px;
     /* border: 2px solid red; */
 }
 
@@ -140,7 +150,7 @@ textarea::placeholder{
 .article_panel_container{
     width: 100%;
     height: 600px;
-    /* background: blue; */
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -149,22 +159,29 @@ textarea::placeholder{
     width: auto;
     height: auto;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 50px;
     /* background: red; */
+}
+.article_left{
+    display: flex;
+    flex-direction: column;
+}
+.article_right{
+    margin-top: 90px;
 }
 
 .article_title_textarea {
-    width: 560px;
-    height: 300px;
+    width: 480px;
+    height: 355px;
     resize: none;
-    background: rgb(187, 187, 187);
+    border: 1px solid #ffffff6c;
+    background: rgba(0, 0, 0, 0.31);
     color: #fff;
     font-size: 20px;
     font-weight: 700;
     padding: 15px;
     font-family: initial;
-    border-radius: 10px;
+    border-radius: 25px;
 }
 
 .change-color_btn{
@@ -215,6 +232,7 @@ textarea::placeholder{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 /* Mobile */

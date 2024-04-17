@@ -74,45 +74,40 @@ export function UploadVideoPost(props: any) {
 
     return (
         <div className="upload_post_bottom">
-            <h3>Upload Video Post</h3>
             <div className="photo_panel_container">
                 <div className="photo_panel_left">
+                <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px"}}>Video title</span>
                     <textarea
                         placeholder="Post title"
                         className="post_title_textarea"
                         value={videoPostData.post_title}
                         onChange={changeVideoPostTitleHandle}
                     ></textarea>
-                    <div className="buttons">
-                        <NavLink to={"/my-page"}>
-                            <button className="upload_button cencel">Back</button>
-                        </NavLink>
-                        
-                        <button
-                            className="upload_button"
-                            onClick={handleVideoPostButton}
-                        >
-                            Upload
-                        </button>
-                    </div>
+                    
                 </div>
-                <div className="photo_panel_right">
-                    <div className="upload_image_box">
-                        <div className="photos">
-                        {file ? (
-                            <video controls className="uploaded_image">
-                                <source src={file ? URL.createObjectURL(file) : ''} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        ) : (
-                            <div className="upload_photo">You can see your chosen photo here!</div>
-                        )}
-                        </div>
-                        <div className="file_input">
-                            <span>Add Video</span>
-                            <input type="file" onChange={handleVideoChange} className="Upload_file" accept="video/mp4" />
-                        </div>
+                <div className="upload_image_box">
+                    <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px", marginTop: "40px"}}>Video</span>
+                    <div className="photos">
+                    {file ? (
+                        <video controls className="uploaded_image">
+                            <source src={file ? URL.createObjectURL(file) : ''} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    ) : (
+                        <div className="upload_photo">You can see your chosen photo here!</div>
+                    )}
                     </div>
+                    <input type="file" onChange={handleVideoChange} className="Upload_file" accept="video/mp4" />
+                    
+                </div>
+                <div className="buttons">
+                    <button className="upload_button cencel">Back</button>
+                    <button
+                        className="upload_button"
+                        onClick={handleVideoPostButton}
+                    >
+                        Upload
+                    </button>
                 </div>
             </div>
         </div>

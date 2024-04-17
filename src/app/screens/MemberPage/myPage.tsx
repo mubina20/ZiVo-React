@@ -29,10 +29,10 @@ import { Definer } from "../../../lib/definer";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 // REDUX SLICE
-const actionDispatch = (dispach: Dispatch) => ({
-    setMemberFollowings: (data: Following[]) => dispach(setMemberFollowings(data)),
+const actionDispatch = (dispatch: Dispatch) => ({
+    setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
     setMemberFollowers: (data: Follower[]) =>
-        dispach(setMemberFollowers(data)),
+        dispatch(setMemberFollowers(data)),
 });
 
 // REDUX SELECTOR

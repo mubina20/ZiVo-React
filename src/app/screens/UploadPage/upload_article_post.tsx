@@ -5,10 +5,12 @@ import assert from "assert";
 import { Definer } from "../../../lib/definer";
 import PostApiService from "../../apiServices/postApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { useHistory } from "react-router-dom";
 
 export function UploadArticlePost(props: any) {
     /** INITIALIZATIONS **/
     const [backgroundColor, setBackgroundColor] = useState('');
+    const history = useHistory();
     const [textColor, setTextColor] = useState('');
     const [lastSelectedBGColor, setLastSelectedBGColor] = useState('');
     const [lastSelectedColor, setLastSelectedColor] = useState('');
@@ -82,25 +84,40 @@ export function UploadArticlePost(props: any) {
         }
     };
 
+    const goBack = () => {
+        history.goBack(); 
+    };
+
     return (
         <div className="upload_post_bottom">
-            <h3>Upload Article Post</h3>
             <div className="article_panel_container">
                 <div className="article_container">
-                    <textarea 
-                        style={{ backgroundColor, color: textColor }}
-                        placeholder="Article post"
-                        className="article_title_textarea"
-                        onChange={handleArticleContent}
-                    ></textarea>
-                    <div className="change-color-buttons">
-                        <span className="bg-span">Background color</span>
-                        <input type="color" onChange={handleColorChange} className="input-color"/>
+                    <div className="article_left">
+                        <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px", marginTop: "40px"}}>Photo</span>
+                        <textarea 
+                            style={{ backgroundColor, color: textColor }}
+                            placeholder="Article post"
+                            className="article_title_textarea"
+                            onChange={handleArticleContent}
+                        ></textarea>
                     </div>
-                    <div className="change-color-buttons">
-                        <span className="bg-span">text color</span>
-                        <input type="color" onChange={handleTextColorChange} className="input-color"/>
+                    
+                    <div className="article_right">
+                        <div className="change-color-buttons">
+                            <span className="bg-span">Background color</span>
+                            <input type="color" onChange={handleColorChange} className="input-color"/>
+                        </div>
+                        <div className="change-color-buttons">
+                            <span className="bg-span">text color</span>
+                            <input type="color" onChange={handleTextColorChange} className="input-color"/>
+                        </div>
+                        <div className="change-color-buttons" style={{marginTop: "130px"}}>
+                            <span className="bg-span" onClick={handleCenterText}>Text Center</span>
+                        </div>
                     </div>
+                </div>
+                <div className="buttons" style={{marginTop: "100px"}}>
+                    <button className="upload_button cencel" onClick={goBack}>Back</button>
                     <button
                         className="upload_button"
                         onClick={handlePostButton}
@@ -109,8 +126,6 @@ export function UploadArticlePost(props: any) {
                     </button>
                 </div>
             </div>
-            <img src="/icons/post/center-align.png" alt="" height={"100px"}  onClick={handleCenterText}/>
-            
         </div>
     );
 };

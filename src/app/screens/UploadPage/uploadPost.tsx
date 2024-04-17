@@ -47,7 +47,7 @@ export function UploadPostPage(props: any) {
                     <div className="upload_text">Upload Post</div>
                     <div className="upload_post_center">
                         <TabContext value={value}>
-                            <Stack className="upload_page_tabs_container">
+                            <div className="upload_page_tabs_container">
                                 <TabList 
                                     onChange={handleChange} 
                                     textColor={"inherit"}
@@ -59,7 +59,7 @@ export function UploadPostPage(props: any) {
                                     <Tab className={classes.tab} label="video" value="2"/>
                                     <Tab className={classes.tab} label="article" value="3"/>
                                 </TabList>
-                            </Stack>
+                            </div>
                             <TabPanel value="1"><UploadPhotoPost /></TabPanel>
                             <TabPanel value="2"><UploadVideoPost /></TabPanel>
                             <TabPanel value="3"><UploadArticlePost /></TabPanel>

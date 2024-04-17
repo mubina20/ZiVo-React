@@ -5,12 +5,13 @@ import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/swee
 import assert from "assert";
 import { Definer } from "../../../lib/definer";
 import PostApiService from "../../apiServices/postApiService";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { verifiedMemberData } from "../../apiServices/verify";
 
 export function UploadPhotoPost(props: any) {
     /** INITIALIZATIONS **/
     const [file, setFile] = useState<File | null>(null);
+    const history = useHistory();
 
     const [photoPostData, setPhotoPostData] = useState<UploadPost>({
         post_title: "",
@@ -27,11 +28,9 @@ export function UploadPhotoPost(props: any) {
                 validTypes = ['image/lpg', 'image/jpeg', 'image/png'];
             assert.ok(validTypes.includes(fileType) && selectedPhotoFile, Definer.input_err2);
     
-            // Fayl nomini "post_content"ga yozish
             photoPostData.post_content = selectedPhotoFile;
             setPhotoPostData({ ...photoPostData });
     
-            // Faylni URL.createObjectURL orqali joylash
             setFile(selectedPhotoFile);
         } catch(err) {
             console.log(`ERROR :: handlePhotoChange, ${err}`);
@@ -61,7 +60,6 @@ export function UploadPhotoPost(props: any) {
 
             const postService = new PostApiService();
             await postService.createPhotoPost(photoPostData);
-            // console.log("post_title:", formData.get("post_title"));
 
             await sweetTopSmallSuccessAlert("Post is created successfully!");
 
@@ -73,49 +71,47 @@ export function UploadPhotoPost(props: any) {
         }
     };
 
+    const goBack = () => {
+        history.goBack(); 
+    };
+
     return (
         <div className="upload_post_bottom">
-            <h3>Upload Photo Post</h3>
             <div className="photo_panel_container">
                 <div className="photo_panel_left">
+                    <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px"}}>Photo title</span>
                     <textarea
                         placeholder="Post title"
                         className="post_title_textarea"
                         value={photoPostData.post_title}
                         onChange={changePhotoPostTitleHandle}
                     ></textarea>
-                    <div className="buttons">
-                        <NavLink to={"/my-page"}>
-                            <button className="upload_button cencel">Back</button>
-                        </NavLink>
-                        
-                        <button
-                            className="upload_button"
-                            onClick={handlePostButton}
-                        >
-                            Upload
-                        </button>
-                    </div>
+                    
                 </div>
-                <div className="photo_panel_right">
-                    <div className="upload_image_box">
-                        <div className="photos">
-                            {file ? (
-                                <img
-                                    src={file ? URL.createObjectURL(file) : ''}
+                <div className="upload_image_box">
+                    <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px", marginTop: "40px"}}>Photo</span>
+                    <div className="photos">
+                        {file ? (
+                            <img
+                                src={file ? URL.createObjectURL(file) : ''}
 
-                                    alt=""
-                                    className="uploaded_image"
-                                />
-                            ) : (
-                                <div className="upload_photo">You can see your chosen photo here!</div>
-                            )}
-                        </div>
-                        <div className="file_input">
-                            <span>Add Photo</span>
-                            <input type="file" onChange={handlePhotoChange} className="Upload_file" id="postContent"/>
-                        </div>
+                                alt=""
+                                className="uploaded_image"
+                            />
+                        ) : (
+                            <div className="upload_photo">You can see your chosen photo here!</div>
+                        )}
                     </div>
+                    <input type="file" onChange={handlePhotoChange} className="Upload_file" id="postContent"/>
+                </div>
+                <div className="buttons">
+                    <button className="upload_button cencel" onClick={goBack}>Back</button>
+                    <button
+                        className="upload_button"
+                        onClick={handlePostButton}
+                    >
+                        Upload
+                    </button>
                 </div>
             </div>
         </div>
