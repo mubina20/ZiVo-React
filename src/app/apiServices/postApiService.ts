@@ -3,6 +3,7 @@ import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/definer";
 import { Post, UploadPost } from "../../types/post";
+import { CreateComment } from "../../types/comment";
 
 class PostApiService {
     private readonly path: string;
@@ -129,7 +130,28 @@ class PostApiService {
             throw err;
         }
     };
+
+    public async createComment(data: CreateComment) {
+        try {
+            const result = await axios.post(
+                this.path + "/comment/createComment", 
+                data,
+                {withCredentials: true}
+            );
     
+            console.log(data);
+    
+            assert.ok(result?.data, Definer.post_error1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+    
+            const comment = result.data.data;
+            console.log("comment result::", comment);
+            return comment;
+        } catch (err: any) {
+            console.log(`ERROR :: createArticlePost: ${err.message}`);
+            throw err;
+        }
+    };    
 };
 
 export default PostApiService;

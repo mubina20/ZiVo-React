@@ -14,7 +14,7 @@ import { Definer } from '../../../lib/definer';
 import { verifiedMemberData } from '../../apiServices/verify';
 import MemberApiService from '../../apiServices/memberApiService';
 import CommentApiService from '../../apiServices/commentApiService';
-import { Comment } from '../../../types/comment';
+import { Comment, CreateComment } from '../../../types/comment';
 
 interface RouteParams {
     postId: string;
@@ -29,6 +29,11 @@ export function ChosenPost(props: any) {
     const [post, setPost] = useState<Post>();
     const [comments, setComments] = useState<Comment[]>();
     const dispatch = useDispatch();
+    const [createComment, setCreateComment] = useState<CreateComment>({
+        mb_id: verifiedMemberData._id,
+		post_id: postId,
+		comment: ""
+	});
 
     /** HANDLERS **/
     const handleGoBack = () => {
@@ -87,6 +92,11 @@ export function ChosenPost(props: any) {
         }
     };
 
+    const handleComment = (e: any) => {
+		createComment.comment = e.target.value;
+		setCreateComment({ ...createComment });
+	};
+
     const handleCommentLike = async (e: any, id: any) => {
         try {
             assert.ok(verifiedMemberData, Definer.auth_err1);
@@ -115,9 +125,84 @@ export function ChosenPost(props: any) {
         }
     };
 
+    const handleSendButton = async () => {
+        try {
+            // Yozilgan kommentni yuborish uchun PostApiService dan foydalanish
+            const postService = new PostApiService();
+            await postService.createComment(createComment);
+    
+            // Yozilgan kommentni qo'shish
+            // setComments(prevComments => {
+            //     // comments o'zgaruvchisini tekshirib ko'rish
+            //     if (prevComments === undefined) {
+            //         // Agar comments undefined bo'lsa, uni bo'sh massivga o'zgartirish
+            //         return [result];
+            //     } else {
+            //         // Aks holda, comments o'zgaruvchisiga resultni qo'shish
+            //         return [...prevComments, result];
+            //     }
+            // });
+            
+    
+            // // Komment yozilgandan so'ng inputni tozalash
+            // setCreateComment({ ...createComment, comment: "" });
+    
+            window.location.reload();
+            // Foydalanuvchiga muvaffaqiyatli yuborildi xabarnomasi chiqarish
+            await sweetTopSmallSuccessAlert("Comment sent successfully!", 700, false);
+        } catch (error) {
+            // Xato bo'lsa uni qaytarish
+            console.log(`ERROR :: handleSendButton, ${error}`);
+            sweetErrorHandling(error).then();
+        }
+    };
+    
+
     return (
         <div className='chosen_post_page'>
             <div className="page_left">
+                <div className="left-1">
+                    <img src="/icons/other/white_close.png" alt="" className='left_icon' onClick={handleGoBack}/>
+                </div>
+                <div className="left-2">
+                        {post?.post_type === "photo" ? (
+                            <img 
+                                src={`${serverApi}/${post?.post_content}`}
+                                alt="" 
+                                className='left_content'
+                            />
+                        ) : post?.post_type === "article" ? (
+                            <div className="left_content">
+                                <div 
+                                    className="left_article_content"
+                                    style={{
+                                        background: post?.post_bg_color ? post?.post_bg_color : "grey",
+                                        color: post?.post_text_color ? post?.post_text_color : "black",
+                                        textAlign: post.post_align === "center" ? "center" : "left"
+
+                                    }}
+                                >
+                                    {post.post_content}
+                                </div>
+                            </div>
+                            
+                        ) : post?.post_type === "video" ? (
+                            <video 
+                                src={`${serverApi}/${post?.post_content}`} 
+                                className="left_content" 
+                                controls
+                            >
+                                Your browser does not support the video tag.
+                            </video>
+                        ) : (
+                            <div>Unsupported post type</div>
+                        )}
+                    </div>
+                <div className="left-3">
+                    
+                </div>
+            </div>
+            {/* <div className="page_left">
                 {post?.post_type === "photo" ? (
                     <img 
                         src={`${serverApi}/${post?.post_content}`}
@@ -190,7 +275,7 @@ export function ChosenPost(props: any) {
                         <img src="/icons/post/bookmark.png" alt="" className='left_icon' />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="page_right">
                 <div className="author_info_container">
@@ -222,23 +307,28 @@ export function ChosenPost(props: any) {
                     <div className="post_description">
                         <Typography>{post?.post_title}</Typography>
                     </div>
-                    <div className="like_container">
-                        {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
-                            <img 
-                                src="/icons/post/heart.png" 
-                                onClick={(e) => handlePostLike(e, post?._id)}
-                                alt="" 
-                                className="like"
-                            />
-                        ) : (
-                            <img 
-                                src="/icons/post/like.png" 
-                                onClick={(e) => handlePostLike(e, post?._id)}
-                                alt="" 
-                                className="like"
-                            />
-                        )}
-                        <Typography style={{marginTop: "8px"}}>{post?.post_likes}</Typography>
+                    <div className="like_save_container">
+                        <div className="like_container">
+                            {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
+                                <img 
+                                    src="/icons/post/heart.png" 
+                                    onClick={(e) => handlePostLike(e, post?._id)}
+                                    alt="" 
+                                    className="like"
+                                />
+                            ) : (
+                                <img 
+                                    src="/icons/post/like.png" 
+                                    onClick={(e) => handlePostLike(e, post?._id)}
+                                    alt="" 
+                                    className="like"
+                                />
+                            )}
+                            <Typography style={{marginTop: "8px"}}>{post?.post_likes}</Typography>
+                        </div>
+                        <div className="">
+                            <img src="/icons/post/bookmark.png" alt="" className='left_icon' />
+                        </div>
                     </div>
                 </div>
 
@@ -293,12 +383,11 @@ export function ChosenPost(props: any) {
                             </div>
                         )
                     })}
-                    
                 </div>
                 
                 <div className="add_comment_container">
-                    <input type="text" placeholder='Comment...' className='comment_input'/>
-                    <img src="/icons/chat/sent.png" alt="" width={'30px'} style={{marginLeft: "-50px", cursor: "pointer"}}/>
+                    <input type="text" placeholder='Comment...' className='comment_input' onChange={handleComment}/>
+                    <img src="/icons/chat/sent.png" alt="" width={'30px'} style={{marginLeft: "-50px", cursor: "pointer"}} onClick={handleSendButton}/>
                 </div>
 
             </div>

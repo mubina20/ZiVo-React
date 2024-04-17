@@ -6,20 +6,11 @@
 }
 .page_left{
     /* width: 69%; */
-    /* background: rgb(231, 162, 162); */
-    display: flex;
-    justify-content: center;
-    flex: 2;
-    position: relative;
-    /* opacity: 0.2; */
-}
-.left_inside{
+    background: rgba(0, 0, 0, 0.925);
     display: flex;
     padding: 0 10px;
     justify-content: space-between;
     flex: 2;
-    position: relative;
-    
 }
 .left_icon{
     margin-top: 20px;
@@ -29,7 +20,7 @@
 }
 .left-2{
     width: 70%;
-    height: 100vh;
+    max-height: 100vh;
     /* background: rgb(72, 72, 87); */
     display: flex;
     justify-content: center;
@@ -43,7 +34,7 @@
 .left_content{
     width: 100%;
     height: auto;
-    box-shadow: 100px 100px 100px 1000px rgba(0, 0, 0, 0.663);
+    /* box-shadow: 100px 100px 100px 1000px rgba(0, 0, 0, 0.663); */
 }
 
 
@@ -57,7 +48,7 @@
 .author_info_container{
     background: #302f2f;
     width: 95%;
-    height: 220px;
+    height: 250px;
     padding: 15px;
     margin: auto;
     margin-top: 15px;
@@ -89,13 +80,19 @@
 }
 .user_img{
     width: 70px;
+    height: 70px;
 }
 .post_description{
     color: #fff;
     /* background: rgb(139, 139, 107); */
     width: 100%;
-    height: 45%;
+    height: 35%;
     padding: 5px;
+}
+.like_save_container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -10px;
 }
 .like_container{
     color: #fff;
@@ -146,7 +143,8 @@
 }
 .comment_user_img{
     width: 50px;
-    height: 50px;     
+    height: 50px; 
+    border-radius: 50%;    
 }
 .info{
     display: flex;
@@ -168,7 +166,7 @@
 .add_comment_container{
     width: 100%;
     height: 80px;
-    border-top: 1px solid white;
+    /* border-top: 1px solid white; */
     position: absolute;
     display: flex;
     justify-content: center;
