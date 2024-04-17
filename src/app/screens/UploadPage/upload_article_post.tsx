@@ -93,7 +93,7 @@ export function UploadArticlePost(props: any) {
             <div className="article_panel_container">
                 <div className="article_container">
                     <div className="article_left">
-                        <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px", marginTop: "40px"}}>Photo</span>
+                        <span style={{fontSize: "20px", fontWeight: "700", marginBottom: "13px", marginTop: "40px"}}>Article</span>
                         <textarea 
                             style={{ backgroundColor, color: textColor }}
                             placeholder="Article post"

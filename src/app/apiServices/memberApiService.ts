@@ -2,7 +2,7 @@ import assert from "assert";
 import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/definer";
-import { Member } from "../../types/user";
+import { Member, MemberUpdateData } from "../../types/user";
 import { MemberLiken } from "../../types/like";
 import { Post } from "../../types/post";
 
@@ -137,6 +137,73 @@ class MemberApiService {
             return like_result;
         } catch (err: any) {
             console.log(`ERROR :: memberLikeTarget: ${err.message}`);
+            throw err;
+        }
+    };
+
+    public async updateMemberData(data: MemberUpdateData): Promise<Member> {
+        try {
+            let formData = new FormData();
+
+            formData.append("mb_name", data.mb_name || "");
+            formData.append("mb_surname", data.mb_surname || "");
+            formData.append("mb_country", data.mb_country || "");
+            formData.append("mb_school", data.mb_school || "");
+            formData.append("mb_hobby", data.mb_hobby || "");
+            formData.append("mb_description", data.mb_description || "");
+            formData.append("mb_profile_image", data.mb_profile_image || "");
+
+            let requestData = {
+                mb_name: data.mb_name || "",
+                mb_surname: data.mb_surname || "",
+                mb_country: data.mb_country || "",
+                mb_school: data.mb_school || "",
+                mb_hobby: data.mb_hobby || "",
+                mb_description: data.mb_description || "",
+                mb_profile_image: data.mb_profile_image || ""
+            };
+
+            let result;
+
+            if(data.mb_profile_image){
+                // console.log("if");
+                result = await axios(`${this.path}/member/update`, {
+                    method: "POST",
+                    data: formData,
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+            } else {
+                // console.log("else");
+                result = await axios.post(`${this.path}/member/update`, requestData, {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+            }
+
+            // const result = await axios(`${this.path}/member/update`, {
+            //     method: "POST",
+            //     data: formData,
+            //     withCredentials: true,
+            //     headers: {
+            //         "Content-Type": "multipart/form-data"
+            //     }
+            // });
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            console.log("updateMemberData STATE ::", result.data.state);
+
+            const member: Member = result.data.data;
+            localStorage.setItem("member_data", JSON.stringify(member));
+
+            return member;
+        } catch (err: any) {
+            console.log(`ERROR :: updateMemberData: ${err.message}`);
             throw err;
         }
     };

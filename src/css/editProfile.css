@@ -60,30 +60,23 @@
     border-radius: 5px;
     min-width: 300px;
     font-size: 18px;
-}
-.member_info_input:focus {
-    outline: none;
-    background: rgb(193, 193, 193);
-}
-.information_birthday{
-    width: 100%;
-    background: white;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #8a8989;
+    color: #fff;
 }
 .information_birthday:focus{
     outline: none;
 }
-
 textarea {
     font-size: 20px;
     border-radius: 5px;
     font-family:"Times New Roman", Times, serif;  
     padding: 10px;
     border: none;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #8a8989;
+    color: #fff;
 }
-
 textarea:focus {
     outline: none;
 }
@@ -112,7 +105,3 @@ textarea:focus {
     color: white;
     border-radius: 10px;
 }
-
-
-/* Mobile */
-

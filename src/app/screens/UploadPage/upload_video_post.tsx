@@ -31,14 +31,6 @@ export function UploadVideoPost(props: any) {
             setVideoPostData({ ...videoPostData });
 
             setFile(selectedVideoFile);
-
-        // setFile(selectedVideoFile);
-        // if (selectedVideoFile) {
-        //     setVideoPostData({
-        //         ...videoPostData,
-        //         post_content: selectedVideoFile.name
-        //     });
-        // }
     };
 
     const changeVideoPostTitleHandle = useCallback(

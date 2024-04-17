@@ -32,13 +32,9 @@ export interface Member {
 export interface MemberUpdateData {
     mb_name?: string | null;
     mb_surname?: string | null;
-    mb_nick?: string | null;
-    mb_birthday?: number | null;
-    mb_gender?: string | null;
-    mb_email?: string | null;
-    mb_phone?: string | null;
-    mb_address?: string | null;
+    mb_school?: string | null;
     mb_description?: string | null;
+    mb_hobby?: string | null;
     mb_country?: string | null;
     mb_profile_image?: string | null;
 };
