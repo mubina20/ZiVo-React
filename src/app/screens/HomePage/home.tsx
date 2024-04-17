@@ -93,91 +93,89 @@ export function Home() {
     };
 
     return(
-        <Container>
-            <div className="main">
-                <Box className="story-wrapper" style={{ width: '1000px', }} flexDirection={'row'}>
-                    <Swiper
-                        slidesPerView={7}
-                        centeredSlides={true}
-                        spaceBetween={30}
-                        scrollbar={{ draggable: true }}
-                    >
-                        {members.map((member) => {
-                            return (
-                                <div>
-                                    <SwiperSlide
-                                        key={member.id}
-                                        style={{ cursor: 'pointer' }}
-                                        className="slide"
-                                        
-                                    >
-                                        <div className="user-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
-                                                <circle cx="45" cy="45" r="44" stroke="url(#paint0_angular_35_88)" strokeWidth="2" />
-                                                <defs>
-                                                    <radialGradient id="paint0_angular_35_88" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45 45) rotate(90) scale(45)">
-                                                        <stop offset="0.0961368" stopColor="#FF007A" />
-                                                        <stop offset="0.329601" stopColor="#780039" />
-                                                        <stop offset="0.622687" stopColor="#FF007A" />
-                                                        <stop offset="0.87147" stopColor="#7F003D" />
-                                                    </radialGradient>
-                                                </defs>
-                                            </svg>
-                                            <img src="/icons/user.png" alt="user" width={"82px"} />
-                                            <p>@{member.nickName}</p>
-                                        </div>
-                                    </SwiperSlide>
-                                </div>
-                            );
-                        })}
-                    </Swiper>
-                </Box>
-
-                <TabContext value={value}>
-                            <Stack className="upload_page_tabs_container">
-                                <TabList 
-                                    onChange={handleChange} 
-                                    textColor={"primary"}
-                                    TabIndicatorProps={{
-                                        style: { backgroundColor: "#FF007A"}
-                                    }}
-                                    style={{marginTop: "50px"}}
+        <div className="main">
+            <Box className="story-wrapper" style={{ width: '1000px', }} flexDirection={'row'}>
+                <Swiper
+                    slidesPerView={7}
+                    centeredSlides={true}
+                    spaceBetween={30}
+                    scrollbar={{ draggable: true }}
+                >
+                    {members.map((member) => {
+                        return (
+                            <div>
+                                <SwiperSlide
+                                    key={member.id}
+                                    style={{ cursor: 'pointer' }}
+                                    className="slide"
+                                    
                                 >
-                                    <Tab label="All Posts" value="1"/>
-                                    <Tab label="Video Posts" value="2"/>
-                                    <Tab label="Photo Posts" value="3"/>
-                                    <Tab label="Article Posts" value="4"/>
-                                </TabList>
-                            </Stack>
-                            <TabPanel value="1"> 
-                                <AllPosts  
-                                    setChosenMember={setChosenMember}
-                                    handleMemberSelect={handleMemberSelect}
-                                    handlePostSelect={handlePostSelect}
-                                /> 
+                                    <div className="user-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
+                                            <circle cx="45" cy="45" r="44" stroke="url(#paint0_angular_35_88)" strokeWidth="2" />
+                                            <defs>
+                                                <radialGradient id="paint0_angular_35_88" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45 45) rotate(90) scale(45)">
+                                                    <stop offset="0.0961368" stopColor="#FF007A" />
+                                                    <stop offset="0.329601" stopColor="#780039" />
+                                                    <stop offset="0.622687" stopColor="#FF007A" />
+                                                    <stop offset="0.87147" stopColor="#7F003D" />
+                                                </radialGradient>
+                                            </defs>
+                                        </svg>
+                                        <img src="/icons/user.png" alt="user" width={"82px"} />
+                                        <p>@{member.nickName}</p>
+                                    </div>
+                                </SwiperSlide>
+                            </div>
+                        );
+                    })}
+                </Swiper>
+            </Box>
 
-                            </TabPanel>
-                            <TabPanel value="2"> 
-                                <AllVideoPosts 
-                                    handleMemberSelect={handleMemberSelect}
-                                    handlePostSelect={handlePostSelect}
-                                /> 
-                            </TabPanel>
-                            <TabPanel value="3"> 
-                                <AllPhotoPosts
-                                    handleMemberSelect={handleMemberSelect} 
-                                    handlePostSelect={handlePostSelect}
-                                /> 
-                            </TabPanel>
-                            <TabPanel value="4"> 
-                                <AllArticlePosts
-                                    handleMemberSelect={handleMemberSelect}
-                                    handlePostSelect={handlePostSelect}
-                                /> 
-                            </TabPanel>
-                    </TabContext>
+            <TabContext value={value}>
+                        <Stack className="upload_page_tabs_container">
+                            <TabList 
+                                onChange={handleChange} 
+                                textColor={"primary"}
+                                TabIndicatorProps={{
+                                    style: { backgroundColor: "#FF007A"}
+                                }}
+                                style={{marginTop: "50px"}}
+                            >
+                                <Tab label="All Posts" value="1"/>
+                                <Tab label="Video Posts" value="2"/>
+                                <Tab label="Photo Posts" value="3"/>
+                                <Tab label="Article Posts" value="4"/>
+                            </TabList>
+                        </Stack>
+                        <TabPanel value="1"> 
+                            <AllPosts  
+                                setChosenMember={setChosenMember}
+                                handleMemberSelect={handleMemberSelect}
+                                handlePostSelect={handlePostSelect}
+                            /> 
 
-            </div>
-        </Container>
+                        </TabPanel>
+                        <TabPanel value="2"> 
+                            <AllVideoPosts 
+                                handleMemberSelect={handleMemberSelect}
+                                handlePostSelect={handlePostSelect}
+                            /> 
+                        </TabPanel>
+                        <TabPanel value="3"> 
+                            <AllPhotoPosts
+                                handleMemberSelect={handleMemberSelect} 
+                                handlePostSelect={handlePostSelect}
+                            /> 
+                        </TabPanel>
+                        <TabPanel value="4"> 
+                            <AllArticlePosts
+                                handleMemberSelect={handleMemberSelect}
+                                handlePostSelect={handlePostSelect}
+                            /> 
+                        </TabPanel>
+                </TabContext>
+
+        </div>
     )
 }

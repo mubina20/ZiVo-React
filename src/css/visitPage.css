@@ -1,14 +1,16 @@
 .visit_container {
-    margin-left: 300px;
     display: flex;
     justify-content: center;
     color: #fff;
+    background: #101010;
+    min-height: 100vh;
 }
 
 .visit_container .visit_page_container {
     margin-top: 100px;
     display: flex;
     margin-bottom: 50px;
+    margin-left: 300px;
 }
 
 .visit_container .visit_page_container .visit_page_box{

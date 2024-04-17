@@ -39,6 +39,11 @@ const light = {
                 body: { background: "#f4f6f8", height: "100%", minHeight: "100%" },
             },
         },
+    },
+    body: {
+        background: "black",
+        height: "100%",
+        minHeight: "100vh"
     }
 };
 

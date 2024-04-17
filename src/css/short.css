@@ -2,6 +2,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    background: #101010;
+    min-height: 100vh;
 }
 
 .shorts_container{

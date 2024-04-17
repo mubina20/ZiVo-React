@@ -1,8 +1,9 @@
 .main {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    background: #101010;
+    min-height: 100vh;
 }
 
 /* Story */
