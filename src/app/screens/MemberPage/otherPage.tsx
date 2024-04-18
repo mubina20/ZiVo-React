@@ -11,8 +11,12 @@ import { serverApi } from "../../../lib/config";
 import { Post } from "../../../types/post";
 import PostApiService from "../../apiServices/postApiService";
 import { Member } from "../../../types/user";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import moment from "moment";
+import { CreateChat } from "../../../types/chat";
+import { verifiedMemberData } from "../../apiServices/verify";
+import ChatApiService from "../../apiServices/chatApiService";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 interface RouteParams {
     memberId: string;
@@ -21,11 +25,16 @@ interface RouteParams {
 
 export function OtherPage(props: any) {
     /** INITIALIZATIONS **/
+    const history = useHistory();
     const chosenMember = useSelector(retrieveChosenMember);
     const { memberId } = useParams<RouteParams>();
     const { open, handleOpenModal, handleModalClose } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
     const [member, setMember] = useState<Member>();
+    const [createChat, setCreateChat] = useState<CreateChat>({
+        sender_id: verifiedMemberData._id,
+		receiver_id: memberId
+	});
 
     /** HANDLERS **/
     useEffect(() => {
@@ -61,6 +70,20 @@ export function OtherPage(props: any) {
             chosenMemberData();
         }
     }, [memberId]);
+
+    const handleCreateChatButton = async () => {
+        try {
+            const chatService = new ChatApiService();
+            const result = await chatService.createChat(createChat);
+            const chat_id = result._id;
+    
+            // window.location.reload();
+            history.push(`/chat/${chat_id}`);
+        } catch (error) {
+            console.log(`ERROR :: handleSendButton, ${error}`);
+            sweetErrorHandling(error).then();
+        }
+    };
     
     return(
         <div>
@@ -83,7 +106,7 @@ export function OtherPage(props: any) {
                                 />
                                 <Typography className="nickname">@{member?.mb_nick}</Typography>
                                 <button className="follow_btn" style={{marginBottom: "10px"}}>Follow</button>
-                                <button className="follow_btn" style={{background: "rgb(96 138 255)"}}>Message</button>
+                                <button className="follow_btn" style={{background: "rgb(96 138 255)"}} onClick={handleCreateChatButton}>Message</button>
                             </div>
                             <div className="right_info">
                                 <div className="info">

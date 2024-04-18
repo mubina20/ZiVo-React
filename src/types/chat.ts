@@ -34,6 +34,7 @@ export interface ChatGreetMsg {
     text: string;
 };
 
-export interface ChatInfoMsg {
-    total: number;
+export interface CreateChat {
+    sender_id: string;
+    receiver_id: string;
 };

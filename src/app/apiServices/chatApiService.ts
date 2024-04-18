@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { Chats, ChosenChat } from "../../types/chat";
+import { Chats, ChosenChat, CreateChat } from "../../types/chat";
 import assert from "assert";
 import { Definer } from "../../lib/definer";
 
@@ -74,6 +74,28 @@ class ChatApiService {
             return message_result;
         } catch (err: any) {
             console.log(`ERROR :: createMessage: ${err.message}`);
+            throw err;
+        }
+    };
+
+    public async createChat(data: CreateChat) {
+        try {
+            const result = await axios.post(
+                this.path + "/chat/create", 
+                data,
+                {withCredentials: true}
+            );
+    
+            console.log(data);
+    
+            assert.ok(result?.data, Definer.post_error1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+    
+            const chat = result.data.data;
+            console.log("chat result::", chat);
+            return chat;
+        } catch (err: any) {
+            console.log(`ERROR :: createArticlePost: ${err.message}`);
             throw err;
         }
     };

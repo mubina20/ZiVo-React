@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SocketContext } from '../../context/socket';
-import { ChatGreetMsg, ChatInfoMsg, Chatmessage, ChosenChat, CreateMessage } from '../../../types/chat';
+import { ChatGreetMsg, Chatmessage, ChosenChat, CreateMessage } from '../../../types/chat';
 import { verifiedMemberData } from '../../apiServices/verify';
 import { serverApi } from '../../../lib/config';
 import moment from 'moment';

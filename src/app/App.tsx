@@ -21,6 +21,7 @@ import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
 import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
 import { MobileMembersPage } from "./screens/MemberPage/mobileMembersPage";
+import { SelectedChat } from "./screens/ChatPage/selectedChat";
 
 function App() {
   /** INITIALIZATIONS **/
