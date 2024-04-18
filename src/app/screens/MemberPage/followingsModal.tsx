@@ -46,7 +46,7 @@ export function FollowingsModal(props: any) {
             >
                 <div className='followers_modal_box'> 
                     <div className="followers_modal_closing">
-                        <span>Followers</span>
+                        <span>Followings</span>
                         <img 
                             src="/icons/other/close.png" 
                             alt="" 

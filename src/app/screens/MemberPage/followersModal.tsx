@@ -13,16 +13,7 @@ import { useHistory } from 'react-router-dom';
 export function FollowersModal(props: any) {
     const history = useHistory();
     const {memberFollowers} = props;
-
-
-    const { open, handleCloseFollowersModal, openFollowersModal } = props;
-    // console.log(handleCloseFollowersModal);
-    // console.log(openFollowersModal);
-
-    // const handleClose = () => handleCloseFollowersModal;
-    // console.log(handleClose)
-
-
+    const { handleCloseFollowersModal, open } = props;
 
     const [followerRebuild, setFollowerRebuild] = useState<Boolean>(false);
 
@@ -51,7 +42,7 @@ export function FollowersModal(props: any) {
         <div>
             <Modal
                 className="followers_modal_container"
-                open={openFollowersModal}
+                open={open}
                 onClose={handleCloseFollowersModal} 
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"

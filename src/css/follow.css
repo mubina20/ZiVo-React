@@ -32,9 +32,22 @@
 }
 .followers_container{
     overflow-y: scroll;
-    height: 89%;
+    height:89%;
     width: 100%;
 }
+.followers_container::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.followers_container::-webkit-scrollbar-thumb {
+    background-color: #3f3f3f; 
+    border-radius: 5px; 
+    
+}
+
+
+
+
 .follower_container{
     width: 100%;
     /* background: red; */

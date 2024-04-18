@@ -177,11 +177,11 @@ export function MobileMyPage(props: any) {
                                         <div className="data">
                                             <div className="user-data-title" onClick={handleOpenFollowingsModal}>
                                                 Followings
-                                                <FollowingsModal 
+                                                {/* <FollowingsModal 
                                                     open={openFollowingsModal} 
                                                     handleCloseFollowings={handleCloseFollowingsModal}
                                                     memberFollowings={memberFollowings}
-                                                />
+                                                /> */}
                                             </div>
                                             <span className="user-data-count">{memberFollowings.length}</span>
                                         </div>

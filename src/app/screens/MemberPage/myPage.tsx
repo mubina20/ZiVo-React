@@ -66,7 +66,7 @@ export function MyPage(props: any) {
 	const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
     const [followRebuild, setFollowerRebuild] = useState<Boolean>(false);
 
-    const [openFollowersModal, setOpenFollowersModal] = React.useState(false);
+    const [openFollowersModal, setOpenFollowersModal] = useState(false);
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
 
     /** HANDLERS **/
@@ -180,14 +180,25 @@ export function MyPage(props: any) {
                                         <div className="group">
                                             <div className="text" onClick={handleOpenFollowersModal}>
                                                 Followers
-                                                
+                                                <FollowersModal 
+                                                    open={openFollowersModal}
+                                                    memberFollowers={memberFollowers}
+                                                    handleCloseFollowersModal={handleCloseFollowersModal}
+                                                />
+
                                             </div>
                                             <span className="count">{memberFollowers.length}</span>
                                         </div>
                                         <div className="group">
                                             <div className="text" onClick={handleOpenFollowingsModal}>
                                                 Followings
-                                                <Modal
+                                                <FollowingsModal 
+                                                    open={openFollowingsModal}
+                                                    memberFollowings={memberFollowings}
+                                                    handleCloseFollowings={handleCloseFollowingsModal}
+                                                />
+
+                                                {/* <Modal
     className="infoModalContainer"
     open={openFollowingsModal}
     onClose={handleCloseFollowingsModal}
@@ -231,7 +242,7 @@ export function MyPage(props: any) {
                         })}
                     </div>
                 </div>
-            </Modal>
+            </Modal> */}
                                             </div>
                                             <span className="count">{memberFollowings.length}</span>
                                         </div>
