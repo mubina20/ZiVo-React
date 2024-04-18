@@ -23,6 +23,8 @@ import FollowApiService from "../../apiServices/followApiService";
 import { Follower, Following, FollowSearchObj } from "../../../types/follow";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { setChosenMember, setMemberFollowers, setMemberFollowings } from "./slice";
+import assert from "assert";
+import { Definer } from "../../../lib/definer";
 
 interface RouteParams {
     memberId: string;
@@ -77,6 +79,7 @@ export function OtherPage(props: any) {
     const { setMemberFollowers } = actionDispatch(useDispatch());
 	const { memberFollowers } = useSelector(memberFollowersRetriever);
 	const [followersSearchObj, setFollowersSearchObj] = useState<FollowSearchObj>({ mb_id: memberId });
+    console.log("memberFollowers", memberFollowers)
 
     const { setMemberFollowings } = actionDispatch(useDispatch());
 	const { memberFollowings } = useSelector(memberFollowingsRetriever);
@@ -161,6 +164,38 @@ export function OtherPage(props: any) {
 			.then((data) => setMemberFollowings(data))
 			.catch((err) => console.log(err));
 	}, [followingsSearchObj]);
+
+    const subscribeHandler = async (e: any, id: any) => {
+        try {
+            e.stopPropagation();
+            assert.ok(verifiedMemberData, Definer.auth_err1);
+        
+            const followService = new FollowApiService();
+            await followService.subscribe(id);
+        
+            setFollowerRebuild(!followRebuild);
+            await sweetTopSmallSuccessAlert("subscribed successfully", 700, false);
+        } catch (err: any) {
+            console.log(err);
+            sweetErrorHandling(err).then();
+        }
+    };
+
+    const unsubscribeHandler = async (e: any, id: any) => {
+		try {
+			e.stopPropagation();
+			assert.ok(verifiedMemberData, Definer.auth_err1);
+
+			const followService = new FollowApiService();
+			await followService.unsubscribe(id);
+
+			await sweetTopSmallSuccessAlert('successfully unsubscribed', 700, false);
+			setFollowerRebuild(!followRebuild);
+		} catch (error: any) {
+			console.log(error);
+			sweetErrorHandling(error).then();
+		}
+	};
     
     return(
         <div>
@@ -182,7 +217,28 @@ export function OtherPage(props: any) {
                                     className="user_icon" 
                                 />
                                 <Typography className="nickname">@{chosenMember?.mb_nick}</Typography>
-                                <button className="follow_btn" style={{marginBottom: "10px"}}>Follow</button>
+                                {/* <button className="follow_btn" style={{marginBottom: "10px"}}> */}
+                                    {/* Follow */}
+                                    {memberFollowers ? (
+                                        memberFollowers[0]?.subscriber_id === verifiedMemberData._id ? (
+                                            <button
+                                                className="follow_btn"
+                                                style={{ backgroundColor: "#f10101f2" }}
+                                                onClick={(e) => unsubscribeHandler(e, chosenMember?._id)}
+                                            >
+                                                UNFOLLOW
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="follow_btn"
+                                                // style={{marginBottom: "10px"}}
+                                                onClick={(e) => subscribeHandler(e, chosenMember?._id)}
+                                            >
+                                                FOLLOW 
+                                            </button>
+                                        )
+                                    ) : null}
+                                {/* </button> */}
                                 <button className="follow_btn" style={{background: "rgb(96 138 255)"}} onClick={handleCreateChatButton}>Message</button>
                             </div>
                             <div className="right_info">
