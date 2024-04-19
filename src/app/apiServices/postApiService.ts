@@ -17,6 +17,7 @@ class PostApiService {
             const formData = new FormData();
             // formData.append("post_title", data.post_title);
             formData.append("post_title", data.post_title || "");
+            formData.append("post_type", data.post_type || "");
             formData.append("post_content", data.post_content);
 
             const result = await axios(`${this.path}/post/create/photo`, {
@@ -47,6 +48,7 @@ class PostApiService {
             const formData = new FormData();
             // formData.append("post_title", data.post_title);
             formData.append("post_title", data.post_title || "");
+            formData.append("post_type", data.post_type || "");
             formData.append("post_content", data.post_content);
 
             const result = await axios(`${this.path}/post/create/video`, {

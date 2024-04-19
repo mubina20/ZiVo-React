@@ -5,9 +5,9 @@ import { LeftSidebar } from '../../components/sidebars/left_sidebar';
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { makeStyles } from '@mui/styles';
-import { UploadVideoPost } from "./upload_video_post";
-import { UploadPhotoPost } from "./uplaod_photo_post";
-import { UploadArticlePost } from "./upload_article_post";
+import { UploadPhotoStory } from "./uplaod_photo_story";
+import { UploadVideoStory } from "./upload_video_story";
+import { UploadArticleStory } from "./upload_article_story";
 
 const useStyles = makeStyles({
     tabs: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     }, 
 });
 
-export function UploadPostPage(props: any) {
+export function UplaodStory(props: any) {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
     const classes = useStyles();
@@ -60,9 +60,9 @@ export function UploadPostPage(props: any) {
                                     <Tab className={classes.tab} label="article" value="3"/>
                                 </TabList>
                             </div>
-                            <TabPanel value="1"><UploadPhotoPost /></TabPanel>
-                            <TabPanel value="2"><UploadVideoPost /></TabPanel>
-                            <TabPanel value="3"><UploadArticlePost /></TabPanel>
+                            <TabPanel value="1"><UploadPhotoStory /></TabPanel>
+                            <TabPanel value="2"><UploadVideoStory /></TabPanel>
+                            <TabPanel value="3"><UploadArticleStory /></TabPanel>
                         </TabContext>
                     </div>
                 </div>

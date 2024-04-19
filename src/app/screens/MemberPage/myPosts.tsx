@@ -76,7 +76,7 @@ export function MyPosts(props: any) {
                                 {post.post_content}
                             </div>
                         </div>
-                    ) : (
+                    ) : post.post_type === "video" ? (
                         // Video Post
                         <div key={post._id}>
                             <div className="post" onClick={() => handlePostSelect(post?._id, "video")}>
@@ -93,10 +93,12 @@ export function MyPosts(props: any) {
                                 </video>
                             </div>
                         </div>
+                    ) : (
+                        <div>No posts yet</div>
                     )
                 ))
             ) : (
-                <div>Post hali yo'q</div>
+                <div>No posts yet</div>
             )}
 
 

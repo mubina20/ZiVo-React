@@ -31,5 +31,6 @@ export interface UploadPost {
     post_bg_color?: string;
     post_text_color?: string;
     post_align?: string;
+    post_type?: string;
 };
 

@@ -22,6 +22,7 @@ import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
 import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
 import { MobileMembersPage } from "./screens/MemberPage/mobileMembersPage";
 import { SelectedChat } from "./screens/ChatPage/selectedChat";
+import { UplaodStory } from "./screens/UploadPage/uploadStory";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -155,7 +156,7 @@ function App() {
         <Route path="/upload-story">
           {isDesktop && (
             <div>
-              <UploadPostPage />
+              <UplaodStory />
             </div>
           )}
           {isTablet && (
@@ -165,7 +166,7 @@ function App() {
           )}
           {isMobile && (
             <div>
-              <MobileUploadPost />
+              {/* <MobileUploadPost /> */}
             </div>
           )}
           

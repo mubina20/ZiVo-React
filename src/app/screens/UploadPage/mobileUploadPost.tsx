@@ -6,7 +6,7 @@ import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { makeStyles } from '@mui/styles';
 import { UploadVideoPost } from "./upload_video_post";
-import { UploadPhotoPost } from "./upload_photo_post";
+import { UploadPhotoPost } from "./uplaod_photo_post";
 import { UploadArticlePost } from "./upload_article_post";
 import { Link } from "react-router-dom";
 import { MobileHeader } from "../../components/header/mobileHeader";

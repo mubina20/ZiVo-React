@@ -297,7 +297,7 @@ export function MyPage(props: any) {
                                                     </div>
                                                     <div className="information">
                                                         <div className="info_category">Birthday</div>
-                                                        <div className="info">{verifiedMemberData?.mb_birthday}</div>
+                                                        <div className="info">{moment(verifiedMemberData?.mb_birthday).format('YYYY-MM-DD')}</div>
                                                     </div>
                                                     <div className="information">
                                                         <div className="info_category">Gender</div>
@@ -319,10 +319,7 @@ export function MyPage(props: any) {
                                                         <div className="info_category">Hobby</div>
                                                         <div className="info">{verifiedMemberData?.mb_hobby}</div>
                                                     </div>
-                                                    <div className="information">
-                                                        <div className="info_category">Address</div>
-                                                        <div className="info">{verifiedMemberData?.mb_address}</div>
-                                                    </div>
+                                                    
                                                     <div className="information">
                                                         <div className="info_category">Account creation date</div>
                                                         <div className="info">{moment(verifiedMemberData?.createdAt).format("YYYY-MM-DD")}</div>

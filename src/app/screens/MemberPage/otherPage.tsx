@@ -383,48 +383,48 @@ export function OtherPage(props: any) {
                                 >
                                     <div className="infoModal">
                                         <div className="member_info_closing">
-                                            <span>@{member?.mb_nick}<span>'s Information</span></span>
+                                            <span>@{chosenMember?.mb_nick}<span>'s Information</span></span>
                                             <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="close"/>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Name</div>
-                                            <div className="info">{member?.mb_name}</div>
+                                            <div className="info">{chosenMember?.mb_name}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Surname</div>
-                                            <div className="info">{member?.mb_surname}</div>
+                                            <div className="info">{chosenMember?.mb_surname}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Birthday</div>
-                                            <div className="info">{member?.mb_birthday}</div>
+                                            <div className="info">{moment(chosenMember?.mb_birthday).format('YYYY-MM-DD')}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Gender</div>
-                                            <div className="info">{member?.mb_gender}</div>
+                                            <div className="info">{chosenMember?.mb_gender}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Country</div>
-                                            <div className="info">{member?.mb_country}</div>
+                                            <div className="info">{chosenMember?.mb_country}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">School</div>
-                                            <div className="info">{member?.mb_school}</div>
+                                            <div className="info">{chosenMember?.mb_school}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Description</div>
-                                            <div className="info">{member?.mb_description}</div>
+                                            <div className="info">{chosenMember?.mb_description}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Hobby</div>
-                                            <div className="info">{member?.mb_hobby}</div>
+                                            <div className="info">{chosenMember?.mb_hobby}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Address</div>
-                                            <div className="info">{member?.mb_address}</div>
+                                            <div className="info">{chosenMember?.mb_address}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Join</div>
-                                            <div className="info">{moment(member?.createdAt).format("YYYY-MM-DD")}</div>
+                                            <div className="info">{moment(chosenMember?.createdAt).format("YYYY-MM-DD")}</div>
                                         </div>
                                     </div>
                                 </Modal>
