@@ -222,8 +222,8 @@ export function AllPosts(props: any) {
                                 <div 
                                     className="post_content"
                                     style={{
-                                        background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                        color: post?.post_text_color ? post?.post_text_color : "black",
+                                        background: post?.post_bg_color ? post?.post_bg_color : "#000",
+                                        color: post?.post_text_color ? post?.post_text_color : "#fff",
                                         textAlign: post.post_align === "center" ? "center" : "left"
 
                                     }}
@@ -247,7 +247,7 @@ export function AllPosts(props: any) {
                                     </div>
                                 </div>
                             </div>
-                        ) : (
+                        ) : post.post_type === "video" ? (
                             // Video Post
                             <div className="post_container" key={post._id}>
                                 <div className="post_data">
@@ -304,6 +304,8 @@ export function AllPosts(props: any) {
                                     </div>
                                 </div>
                             </div>
+                        ) : (
+                            null
                         )
                     ))}
                 </div>

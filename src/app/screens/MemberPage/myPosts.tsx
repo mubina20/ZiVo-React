@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "../../../css/visitPage.css";
 import { Post } from "../../../types/post";
 import PostApiService from "../../apiServices/postApiService";
-import { verifiedMemberData } from "../../apiServices/verify";
 import { serverApi } from "../../../lib/config";
 import { setChosenPost } from "../HomePage/slice";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -67,8 +66,8 @@ export function MyPosts(props: any) {
                             <div 
                                 className="article_post"
                                 style={{
-                                    background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                    color: post?.post_text_color ? post?.post_text_color : "black",
+                                    background: post?.post_bg_color ? post?.post_bg_color : "#000",
+                                    color: post?.post_text_color ? post?.post_text_color : "#fff",
                                     textAlign: post.post_align === "center" ? "center" : "left"
 
                                 }}
@@ -83,8 +82,9 @@ export function MyPosts(props: any) {
                                 <video
                                     loop
                                     // playsInline
-                                    controls
+                                    // controls
                                     width={"100%"}
+                                    style={{border: "1px solid #000", background: "#000"}}
                                 >
                                     <source
                                         src={`${serverApi}/${post?.post_content}`}
@@ -94,30 +94,12 @@ export function MyPosts(props: any) {
                             </div>
                         </div>
                     ) : (
-                        <div>No posts yet</div>
+                        null
                     )
                 ))
             ) : (
-                <div>No posts yet</div>
+                <div style={{marginLeft: "400px", marginTop: "100px"}}>No posts yet</div>
             )}
-
-
-
-            {/* <div className="post">
-                <img src="https://www.animalfriends.co.uk/siteassets/media/images/article-images/cat-articles/51_afi_article1_the-secret-language-of-cats.png" alt="" />
-            </div>
-            <div className="post">
-                <img src="https://www.animalfriends.co.uk/siteassets/media/images/article-images/cat-articles/51_afi_article1_the-secret-language-of-cats.png" alt="" />
-            </div>
-            <div className="post">
-                <img src="https://www.animalfriends.co.uk/siteassets/media/images/article-images/cat-articles/51_afi_article1_the-secret-language-of-cats.png" alt="" />
-            </div>
-            <div className="post">
-                <img src="https://www.animalfriends.co.uk/siteassets/media/images/article-images/cat-articles/51_afi_article1_the-secret-language-of-cats.png" alt="" />
-            </div>
-            <div className="post">
-                <img src="https://www.animalfriends.co.uk/siteassets/media/images/article-images/cat-articles/51_afi_article1_the-secret-language-of-cats.png" alt="" />
-            </div> */}
         </div>
     )
 }

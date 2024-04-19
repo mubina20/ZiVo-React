@@ -19,21 +19,16 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export function MembersPage() {
     /** INITIALIZATIONS **/
     const [allMembers, setAllMembers] = useState<Member[]>([]);
-
     const dispatch = useDispatch();
     const history = useHistory();
     const {
         setChosenMember,
     } = actionDispatch(useDispatch());
-
     const [open, setOpen] = useState(false);
-
     const [selectedMember, setSelectedMember] = useState<Member | null>(null); 
-
-    // useEffect(() => {
-    //     setInformationModalOpen(false); // Modalni ochishni avvaldan to'xtatish
-    // }, []);
     
+    
+    /* HANDLERS **/
     const handleOpenModal = (member: Member) => {
         setSelectedMember(member);  
         setOpen(true);  
@@ -44,8 +39,6 @@ export function MembersPage() {
         setOpen(false);  
     };
 
-
-    /* HANDLERS **/
     const handleMemberSelect = async (memberId: any) => {
         try {
             const memberService = new MemberApiService();
@@ -84,7 +77,7 @@ export function MembersPage() {
                             : "/icons/user.png";
                             return(
                             <div className="card" key={member._id}>
-                                <div className="user_info" style={{marginTop: "30px"}}>
+                                <div className="user_info" style={{marginTop: "10px"}}>
                                     <img src={profile_image} alt="" className="user_icon" onClick={() => handleMemberSelect(member._id)}/>
                                     <Typography style={{fontSize: "15px", cursor: "pointer"}} onClick={() => handleMemberSelect(member._id)}>{member.mb_name}</Typography>
                                     <Typography style={{fontSize: "12px", opacity: "0.5"}}>@{member.mb_nick}</Typography>

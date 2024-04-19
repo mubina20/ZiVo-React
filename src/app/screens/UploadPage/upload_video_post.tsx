@@ -13,7 +13,8 @@ export function UploadVideoPost(props: any) {
     const [file, setFile] = useState<File | null>(null);
     const [videoPostData, setVideoPostData] = useState<UploadPost>({
         post_title: "",
-        post_content: ""
+        post_content: "",
+        post_type: "video"
     });
 
     /** HANDLERS **/

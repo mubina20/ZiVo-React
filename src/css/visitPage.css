@@ -26,6 +26,11 @@
     gap: 130px;
     padding: 0 30px;
 }
+.left_info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /* Top Left Info */
 .visit_page_box .page_top .left_info .user_icon{
@@ -37,7 +42,7 @@
 
 .visit_page_box .page_top .left_info .nickname{
     font-size: 20px;
-    margin: 10px 0 60px 0;
+    margin: 10px 0 30px 0;
 }
 
 .visit_page_box .page_top .left_info .story-btn{
@@ -120,8 +125,12 @@
     }
 
 .visit_page_box .page_top .right_info .description{
-    color: rgb(196, 193, 193);
-    width: 500px;
+    background: rgba(24, 24, 24, 1);
+    width: 485px;
+    height: 126px;
+    border-radius: 20px;
+    padding: 15px;
+    color: rgba(186, 186, 186, 1);
 }
 
 /* Center */
@@ -183,6 +192,7 @@
     grid-template-areas: 'a a a a';
     justify-content: start;
     gap: 10px;
+    margin-left: -30px;
 }
 .visit_page_box .page_bottom .post{
     width: 206.756px;
@@ -193,13 +203,18 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+    font-size: 11px;
+    /* padding: 2px; */
+}
+.article_post{
+    padding: 5px;
 }
 
 /* Edit Profile */
 .edit-profile{
     width: 135px;
     height: 38px;
-    background: #777777;
+    background: rgba(67, 76, 90, 1);
     color: #fff;
     font-size: 16px;
     border: none;

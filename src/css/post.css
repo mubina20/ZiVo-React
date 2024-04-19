@@ -33,12 +33,12 @@
 }
 .left_content{
     width: 100%;
-    height: auto;
+    max-height: auto;
     /* box-shadow: 100px 100px 100px 1000px rgba(0, 0, 0, 0.663); */
 }
-
-
-
+.left_article_content{
+    height: 500px;
+}
 .page_right{
     /* width: 32%; */
     flex: 1;

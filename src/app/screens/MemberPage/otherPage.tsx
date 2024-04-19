@@ -25,6 +25,7 @@ import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { setChosenMember, setMemberFollowers, setMemberFollowings } from "./slice";
 import assert from "assert";
 import { Definer } from "../../../lib/definer";
+import { setChosenPost } from "../HomePage/slice";
 
 interface RouteParams {
     memberId: string;
@@ -34,8 +35,8 @@ interface RouteParams {
 const actionDispatch = (dispatch: Dispatch) => ({
     setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
     setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
-    setMemberFollowers: (data: Follower[]) =>
-        dispatch(setMemberFollowers(data)),
+    setMemberFollowers: (data: Follower[]) => dispatch(setMemberFollowers(data)),
+    setChosenPost: (data: Post) => dispatch(setChosenPost(data))
 });
 
 // REDUX SELECTOR
@@ -64,6 +65,11 @@ const memberFollowingsRetriever = createSelector(
 export function OtherPage(props: any) {
     /** INITIALIZATIONS **/
     const history = useHistory();
+    const dispatch = useDispatch();
+    const {
+        setChosenPost,
+    } = actionDispatch(useDispatch());
+
     const { chosenMember } = useSelector(chosenMemberRetriever);
     const { setChosenMember} = actionDispatch(useDispatch());
     console.log("Chosen Member::", chosenMember)
@@ -196,6 +202,17 @@ export function OtherPage(props: any) {
 			sweetErrorHandling(error).then();
 		}
 	};
+
+    const handlePostSelect = async (postType: any, postId: any) => {
+        try {
+            const postService = new PostApiService();
+            const chosenPostData = await postService.getChosenPost(postType, postId);
+            dispatch(setChosenPost(chosenPostData)); 
+            history.push(`/post/${chosenPostData.post_type}/${chosenPostData._id}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
     
     return(
         <div>
@@ -239,7 +256,7 @@ export function OtherPage(props: any) {
                                         )
                                     ) : null}
                                 {/* </button> */}
-                                <button className="follow_btn" style={{background: "rgb(96 138 255)"}} onClick={handleCreateChatButton}>Message</button>
+                                <button className="follow_btn" style={{background: "#fff", color: "#000"}} onClick={handleCreateChatButton}>Message</button>
                             </div>
                             <div className="right_info">
                                 <div className="info">
@@ -438,7 +455,7 @@ export function OtherPage(props: any) {
                                     post.post_type === "photo" ? (
                                         // Photo Post
                                         <div key={post._id}>
-                                            <div className="post">
+                                            <div className="post" onClick={() => handlePostSelect(post?._id, "photo")}>
                                                 <img src={`${serverApi}/${post?.post_content}`} alt="" width="300px"/>
                                                 {post.post_title}
                                                 {/* {post.post_content} */}
@@ -446,7 +463,7 @@ export function OtherPage(props: any) {
                                         </div>
                                     ) : post.post_type === "article" ? (
                                         // Article Post
-                                        <div className="post">
+                                        <div className="post" onClick={() => handlePostSelect(post?._id, "article")}>
                                             <div 
                                                 className="article_post"
                                                 style={{
@@ -459,10 +476,10 @@ export function OtherPage(props: any) {
                                                 {post.post_content}
                                             </div>
                                         </div>
-                                    ) : (
+                                    ) : post.post_type === "video" ? (
                                         // Video Post
                                         <div key={post._id}>
-                                            <div className="post">
+                                            <div className="post" onClick={() => handlePostSelect(post?._id, "video")}>
                                                 <video
                                                     loop
                                                     // playsInline
@@ -476,10 +493,12 @@ export function OtherPage(props: any) {
                                                 </video>
                                             </div>
                                         </div>
+                                    ) : (
+                                        null
                                     )
                                 ))
                             ) : (
-                                <div>Post hali yo'q</div>
+                                <div style={{marginLeft: "400px", marginTop: "100px"}}>No posts yet</div>
                             )}
                         </div>
                     </div>
