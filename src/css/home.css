@@ -11,13 +11,37 @@
     margin-top: 100px;
     color: #C1C1C1;
     width: 1000px;
-}
-.story-wrapper img {
-    margin-left: -86px;
+    /* max-width: 500px; */
 }
 .story-wrapper svg {
     margin-bottom: -4px;
 }
+.user-icon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.storyContent{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #FF007A;
+}
+.storyContentArticle{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #FF007A;
+    text-align: center;
+    overflow: hidden;
+    font-size: 7px;
+}
+/* .user{
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    cursor: pointer;
+} */
 
 /* post-mode */
 .post-mode {

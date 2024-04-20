@@ -202,80 +202,6 @@ export function ChosenPost(props: any) {
                     
                 </div>
             </div>
-            {/* <div className="page_left">
-                {post?.post_type === "photo" ? (
-                    <img 
-                        src={`${serverApi}/${post?.post_content}`}
-                        alt="" 
-                        className='left_content_bg'
-                    />
-                ) : post?.post_type === "article" ? (
-                    <div className="left_content_bg">
-                        <div 
-                            // className="left_article_content"
-                            style={{
-                                height: "100vh",
-                                background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                color: post?.post_text_color ? post?.post_text_color : "black",
-                                textAlign: post.post_align === "center" ? "center" : "left"
-
-                            }}
-                        >
-                            {post.post_content}
-                        </div>
-                    </div>
-                    
-                ) : post?.post_type === "video" ? (
-                    <video 
-                        src={`${serverApi}/${post?.post_content}`} 
-                        className="left_content_bg" 
-                    ></video>
-                ) : (
-                    <div>Unsupported post type</div>
-                )}
-                <div className='left_inside' style={{position: "absolute", display: "flex"}}>
-                    <div className="left-1">
-                        <img src="/icons/other/close.png" alt="" className='left_icon' onClick={handleGoBack}/>
-                    </div>
-                    <div className="left-2">
-                        {post?.post_type === "photo" ? (
-                            <img 
-                                src={`${serverApi}/${post?.post_content}`}
-                                alt="" 
-                                className='left_content'
-                            />
-                        ) : post?.post_type === "article" ? (
-                            <div className="left_content">
-                                <div 
-                                    className="left_article_content"
-                                    style={{
-                                        background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                        color: post?.post_text_color ? post?.post_text_color : "black",
-                                        textAlign: post.post_align === "center" ? "center" : "left"
-
-                                    }}
-                                >
-                                    {post.post_content}
-                                </div>
-                            </div>
-                            
-                        ) : post?.post_type === "video" ? (
-                            <video 
-                                src={`${serverApi}/${post?.post_content}`} 
-                                className="left_content" 
-                                controls
-                            >
-                                Your browser does not support the video tag.
-                            </video>
-                        ) : (
-                            <div>Unsupported post type</div>
-                        )}
-                    </div>
-                    <div className="left-3">
-                        <img src="/icons/post/bookmark.png" alt="" className='left_icon' />
-                    </div>
-                </div>
-            </div> */}
 
             <div className="page_right">
                 <div className="author_info_container">
@@ -302,7 +228,17 @@ export function ChosenPost(props: any) {
                             </div>
                             
                         </div>
-                        <div className="follows_btn">Follow</div>
+                        {
+                            post?.member._id === verifiedMemberData._id ? (
+                                <div className="my_post_controll">
+                                    <button className="controll" style={{background: "#000"}}>Delete</button>
+                                    <button className="controll" style={{background: "#29022e"}}>Pause</button>
+                                </div>
+                            ) : (
+                                <div className="follows_btn">Follow</div>
+                            )
+                        }
+                        
                     </div>
                     <div className="post_description">
                         <Typography>{post?.post_title}</Typography>

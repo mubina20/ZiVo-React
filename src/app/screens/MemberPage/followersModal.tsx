@@ -56,7 +56,6 @@ export function FollowersModal(props: any) {
                             className='followers_close'
                             onClick={handleCloseFollowersModal}
                         />
-                        <button onClick={handleCloseFollowersModal}>Close</button>
                     </div>
                     <div className="followers_container">
                         {memberFollowers.map((follower: Follower) => {

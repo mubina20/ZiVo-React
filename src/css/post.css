@@ -33,7 +33,7 @@
 }
 .left_content{
     width: 100%;
-    max-height: auto;
+    max-height: 100vh;
     /* box-shadow: 100px 100px 100px 1000px rgba(0, 0, 0, 0.663); */
 }
 .left_article_content{
@@ -46,9 +46,9 @@
     position: relative;
 }
 .author_info_container{
-    background: #302f2f;
+    background: #1d1d1d85;
     width: 95%;
-    height: 250px;
+    height: 210px;
     padding: 15px;
     margin: auto;
     margin-top: 15px;
@@ -74,6 +74,16 @@
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
+}
+.controll{
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
 }
 .user_info{
     color: #fff;

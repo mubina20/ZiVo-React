@@ -194,6 +194,9 @@ function App() {
         <Route path="/chat/:chatId">
           <ChatPage />
         </Route>
+        <Route path="/stories/:mb_nick/:story_id">
+          <div>This is story Modalllllllllllllll</div>
+        </Route>
         <Route path="/help">
           <HelpPage />
         </Route>

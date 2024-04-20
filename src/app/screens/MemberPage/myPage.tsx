@@ -70,17 +70,26 @@ export function MyPage(props: any) {
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
 
     /** HANDLERS **/
-    const handleOpenFollowersModal = () => setOpenFollowersModal(true);
-    const handleCloseFollowersModal = () => setOpenFollowersModal(false);
-
-    // const handleOpenFollowingsModal = () => setOpenFollowingsModal(true);
-    // const handleCloseFollowingsModal = () => setOpenFollowingsModal(false);
-
+    const handleOpenFollowersModal = () => {
+        setOpenFollowersModal(true);
+    };
     const handleOpenFollowingsModal = () => {
         setOpenFollowingsModal(true);
     };
+
+    const handleCloseFollowersModal = (event: {
+        stopPropagation: () => void;
+    }) => {
+        event.stopPropagation(); 
+        // console.log("Closing Followers Modal");
+        setOpenFollowersModal(false);
+    };
     
-    const handleCloseFollowingsModal = () => {
+    const handleCloseFollowingsModal = (event: {
+        stopPropagation: () => void;
+    }) => {
+        event.stopPropagation(); 
+        // console.log("Closing Followings Modal");
         setOpenFollowingsModal(false);
     };
     
@@ -197,52 +206,6 @@ export function MyPage(props: any) {
                                                     memberFollowings={memberFollowings}
                                                     handleCloseFollowings={handleCloseFollowingsModal}
                                                 />
-
-                                                {/* <Modal
-    className="infoModalContainer"
-    open={openFollowingsModal}
-    onClose={handleCloseFollowingsModal}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
->
-
-                <div className='followers_modal_box'> 
-                    <div className="followers_modal_closing">
-                        <span>Followings</span>
-                        <img 
-                            src="/icons/other/close.png" 
-                            alt="" 
-                            className='followers_close'
-                            onClick={handleCloseFollowingsModal}
-                        />
-                        <button onClick={handleCloseFollowingsModal}>ssadfadf</button>
-                    </div>
-                    <div className="followers_container">
-                        {memberFollowings.map((following: Following) => {
-                            console.log("following", following);
-                            const image_url = following?.follow_member_data?.mb_profile_image
-                                ? `${serverApi}/${following.follow_member_data.mb_profile_image}`
-                                : '/icons/user.png';
-                            return(
-                                <div className="follower_container" key={following?._id}>
-                                    <div className="follower_info">
-                                        <img src={image_url} alt="" className='follower_avatar' onClick={() => visitMemberHandler(following?.follow_id)}/>
-                                        <span>@{following?.follow_member_data.mb_nick}</span>
-                                    </div>
-                                    {true &&(
-                                        <button
-                                            className="follow_btn un_follow_btn"
-                                            onClick={(e) => unsubscribeHandler(e, following?.follow_id)}
-                                        >
-                                            Unfollow
-                                        </button>
-                                    )}
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </Modal> */}
                                             </div>
                                             <span className="count">{memberFollowings.length}</span>
                                         </div>

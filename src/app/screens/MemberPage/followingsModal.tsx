@@ -51,7 +51,7 @@ export function FollowingsModal(props: any) {
                             src="/icons/other/close.png" 
                             alt="" 
                             className='followers_close'
-                            onClick={handleClose}
+                            onClick={handleCloseFollowings}
                         />
                     </div>
                     <div className="followers_container">
