@@ -245,10 +245,10 @@ export function MyPage(props: any) {
                                                 aria-labelledby="modal-modal-title"
                                                 aria-describedby="modal-modal-description"
                                             >
-                                                <div className="infoModal">
+                                                <div style={{width: "100%"}}>
                                                     <div className="member_info_closing">
                                                         <span>@{verifiedMemberData?.mb_nick}<span>'s Information</span></span>
-                                                        <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="close"/>
+                                                        <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="info_close"/>
                                                     </div>
                                                     <div className="information">
                                                         <div className="info_category">Name</div>

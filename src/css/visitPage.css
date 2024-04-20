@@ -251,7 +251,7 @@
     border: 2px solid #FF007A;
 }
 .member_info_closing{
-    width: 476px;
+    width: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -268,7 +268,7 @@
     font-size: 1.4rem;
     color: #fff;
 }
-.close{
+.info_close{
     width: 30px;
     height: 30px;
     cursor: pointer;

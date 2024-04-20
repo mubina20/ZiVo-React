@@ -96,17 +96,26 @@ export function OtherPage(props: any) {
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
 
     /** HANDLERS **/
-    const handleOpenFollowersModal = () => setOpenFollowersModal(true);
-    const handleCloseFollowersModal = () => setOpenFollowersModal(false);
-
-    // const handleOpenFollowingsModal = () => setOpenFollowingsModal(true);
-    // const handleCloseFollowingsModal = () => setOpenFollowingsModal(false);
-
+    const handleOpenFollowersModal = () => {
+        setOpenFollowersModal(true);
+    };
     const handleOpenFollowingsModal = () => {
         setOpenFollowingsModal(true);
     };
+
+    const handleCloseFollowersModal = (event: {
+        stopPropagation: () => void;
+    }) => {
+        event.stopPropagation(); 
+        // console.log("Closing Followers Modal");
+        setOpenFollowersModal(false);
+    };
     
-    const handleCloseFollowingsModal = () => {
+    const handleCloseFollowingsModal = (event: {
+        stopPropagation: () => void;
+    }) => {
+        event.stopPropagation(); 
+        // console.log("Closing Followings Modal");
         setOpenFollowingsModal(false);
     };
 
@@ -284,7 +293,7 @@ export function OtherPage(props: any) {
                                                                     src="/icons/other/close.png" 
                                                                     alt="" 
                                                                     className='followers_close'
-                                                                    onClick={handleCloseFollowingsModal}
+                                                                    onClick={handleCloseFollowersModal}
                                                                 />
                                                             </div>
                                                             <div className="followers_container">
@@ -300,20 +309,6 @@ export function OtherPage(props: any) {
                                                                                 <img src={image_url} alt="" className='follower_avatar'/>
                                                                                 <span>@{follower.subscriber_member_data.mb_nick}</span>
                                                                             </div>
-                                                                            {/* { true &&
-                                                                                (follower?.me_followed && follower.me_followed[0]?.my_following ? (
-                                                                                    <span className="friend" >
-                                                                                        Friend
-                                                                                    </span>
-                                                                                ) : (
-                                                                                    <button
-                                                                                    className="follow_btn"
-                                                                                    onClick={(e) => subscribeHandler(e, follower?.subscriber_id)}
-                                                                                    >
-                                                                                    Follow
-                                                                                    </button>
-                                                                                ))
-                                                                            } */}
                                                                         </div>
                                                                     )
                                                                 })}
@@ -358,14 +353,6 @@ export function OtherPage(props: any) {
                                                                                 <img src={image_url} alt="" className='follower_avatar'/>
                                                                                 <span>@{following?.follow_member_data.mb_nick}</span>
                                                                             </div>
-                                                                            {/* {true &&(
-                                                                                <button
-                                                                                    className="follow_btn un_follow_btn"
-                                                                                    onClick={(e) => unsubscribeHandler(e, following?.follow_id)}
-                                                                                >
-                                                                                    Unfollow
-                                                                                </button>
-                                                                            )} */}
                                                                         </div>
                                                                     )
                                                                 })}
@@ -398,10 +385,13 @@ export function OtherPage(props: any) {
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description"
                                 >
-                                    <div className="infoModal">
+                                    <div style={{width: "100%"}}>
                                         <div className="member_info_closing">
                                             <span>@{chosenMember?.mb_nick}<span>'s Information</span></span>
-                                            <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="close"/>
+                                            <div>
+                                                <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="info_close"/>
+                                            </div>
+                                            
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Name</div>
@@ -457,8 +447,6 @@ export function OtherPage(props: any) {
                                         <div key={post._id}>
                                             <div className="post" onClick={() => handlePostSelect(post?._id, "photo")}>
                                                 <img src={`${serverApi}/${post?.post_content}`} alt="" width="300px"/>
-                                                {post.post_title}
-                                                {/* {post.post_content} */}
                                             </div>
                                         </div>
                                     ) : post.post_type === "article" ? (
@@ -483,8 +471,9 @@ export function OtherPage(props: any) {
                                                 <video
                                                     loop
                                                     // playsInline
-                                                    controls
+                                                    // controls
                                                     width={"100%"}
+                                                    style={{border: "1px solid #000", background: "#000"}}
                                                 >
                                                     <source
                                                         src={`${serverApi}/${post?.post_content}`}
