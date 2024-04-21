@@ -23,39 +23,25 @@ import { Following, FollowSearchObj } from "../../../types/follow";
 import { verifiedMemberData } from "../../apiServices/verify";
 import FollowApiService from "../../apiServices/followApiService";
 import PostApiService from "../../apiServices/postApiService";
-import { setChosenPost } from "./slice";
+import { setChosenPost, setChosenStory } from "./slice";
 import { Post } from "../../../types/post";
 import { serverApi } from "../../../lib/config";
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 5
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 4
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2
-    }
-  };
-
-const members = [
-    { id: 1, nickName: 'samo_ping12' },
-    { id: 2, nickName: 'samo_ping12' },
-    { id: 3, nickName: 'samo_ping12' },
-    { id: 4, nickName: 'samo_ping12' },
-    { id: 5, nickName: 'samo_ping12' }
-];
+// const members = [
+//     { id: 1, nickName: 'samo_ping12' },
+//     { id: 2, nickName: 'samo_ping12' },
+//     { id: 3, nickName: 'samo_ping12' },
+//     { id: 4, nickName: 'samo_ping12' },
+//     { id: 5, nickName: 'samo_ping12' }
+// ];
 
 const actionDispatch = (dispatch: Dispatch) => ({
     setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
     setChosenPost: (data: Post) => dispatch(setChosenPost(data)),
+    setChosenStory: (data: Post) => dispatch(setChosenStory(data)),
     setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
     setAllMembers: (data: Member[]) => 
         dispatch(setAllMembers(data))
@@ -89,24 +75,12 @@ export function Home() {
 
     const { memberFollowings } = useSelector(memberFollowingsRetriever);
     const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
-    const [open, setOpen] = useState(false);
     const [allPosts, setAllPosts] = useState<Post[]>([]);
 
     /** HANDLERS **/
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
-
-    const handleOpenModal = () => {
-        // setSelectedMember(member);  
-        setOpen(true);  
-    };
-    
-    const handleCloseModal = () => {
-        // setSelectedMember(null); 
-        setOpen(false);  
-    };
-
     const handleMemberSelect = async (memberId: any) => {
         try {
             const memberService = new MemberApiService();
@@ -124,6 +98,16 @@ export function Home() {
             const chosenPostData = await postService.getChosenPost(postType, postId);
             dispatch(setChosenPost(chosenPostData)); 
             history.push(`/post/${chosenPostData.post_type}/${chosenPostData._id}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
+    const handleStorySelct = async (story_type: any, story_id: any) => {
+        try {
+            const postService = new PostApiService();
+            const chosenStoryData = await postService.getChosenPost(story_type, story_id);
+            dispatch(setChosenStory(chosenStoryData)); 
+            history.push(`/stories/${chosenStoryData.member.mb_nick}/${chosenStoryData.post_type}/${chosenStoryData._id}`); 
         } catch (error) {
             console.error("ERROR handleMemberSelect ::", error);
         }
@@ -216,10 +200,10 @@ export function Home() {
 {allPosts.length > 0 ? (
     allPosts.map((post: Post) => {
         return (
-            <div className="user-icon" key={post._id}>
+            <div className="user-icon">
                 {post.post_type === "photoStory" && (
-                    <div>
-                        <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" />
+                    <div key={post._id} >
+                        <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" onClick={() => handleStorySelct(post?._id, "photoStory")}/>
                         <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
                             @{post.member?.mb_nick}
                         </p>
@@ -228,13 +212,14 @@ export function Home() {
                 {post.post_type === "articleStory" && (
                     <div>
                         <div 
+                            key={post._id} onClick={() => handleStorySelct(post?._id, "articleStory")}
                             className="storyContentArticle"
                             style={{
                                 background: post?.post_bg_color ? post?.post_bg_color : "#000",
                                 color: post?.post_text_color ? post?.post_text_color : "#fff",
                                 // textAlign: post.post_align === "center" ? "center" : "left"
                             }}
-                            onClick={() => handlePostSelect(post?._id, "article")}
+                            // onClick={() => handlePostSelect(post?._id, "article")}
                         >
                             {post.post_content}
                         </div>
@@ -244,7 +229,7 @@ export function Home() {
                     </div>
                 )}
                 {post.post_type === "videoStory" && (
-                    <div>
+                    <div key={post._id} onClick={() => handleStorySelct(post?._id, "videoStory")}>
                         <video
                             loop
                             playsInline

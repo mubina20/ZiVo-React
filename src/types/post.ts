@@ -34,3 +34,8 @@ export interface UploadPost {
     post_type?: string;
 };
 
+export interface UpdatePost{
+    post_id: string;
+    post_status: string;
+}
+

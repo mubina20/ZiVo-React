@@ -29,6 +29,7 @@ export interface HomePageState {
     myFollowingsStory: Post[];
     myFollowings: any[];
     chosenPost: Post | null;
+    chosenStory: Post | null;
 };
 
 export interface ChatPageState {

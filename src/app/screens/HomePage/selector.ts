@@ -31,3 +31,7 @@ export const retrieveChosenPost = createSelector(
     selectHomePage,
     (HomePage) => HomePage.chosenPost
 );
+export const retrieveChosenStory = createSelector(
+    selectHomePage,
+    (HomePage) => HomePage.chosenStory
+);

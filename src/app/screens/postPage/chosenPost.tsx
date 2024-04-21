@@ -62,10 +62,15 @@ export function ChosenPost(props: any) {
                 const commentServive = new CommentApiService();
                 const postComments = await commentServive.findChosenPostComments(postId);
                 
-                setComments(postComments);
-                console.log("comments ::", postComments);
+                if (postComments.length > 0) {
+                    setComments(postComments);
+                } else {
+                    setComments([]); 
+                }
+
+                // console.log("comments ::", postComments);
             } catch (error) {
-                console.error("ERROR handleMemberSelect ::", error);
+                console.error("ERROR findComments ::", error);
             }
         };
 
@@ -82,9 +87,6 @@ export function ChosenPost(props: any) {
                 group_type: postType,
             });
             assert.ok(likeResult, Definer.general_err1);
-            
-            // const updatedPosts = post?.post_likes = likeResult.like_status;
-            // setAllPosts(updatedPosts);
             await sweetTopSmallSuccessAlert("success", 700, false);
         } catch (err: any) {
             console.log(`ERROR :: targetLikeTop, ${err}`);
@@ -107,9 +109,7 @@ export function ChosenPost(props: any) {
                 group_type: "comment",
             });
             assert.ok(likeResult, Definer.general_err1);
-            
-            // const updatedPosts = post?.post_likes = likeResult.like_status;
-            // setAllPosts(updatedPosts);
+
             await sweetTopSmallSuccessAlert("success", 700, false);
         } catch (err: any) {
             console.log(`ERROR :: handleCommentLike, ${err}`);
@@ -119,7 +119,11 @@ export function ChosenPost(props: any) {
 
     const handleMemberSelect = async (memberId: any) => {
         try {
-            history.push(`/member/${memberId}`); 
+            if(memberId === verifiedMemberData._id){
+                history.push('/my-page');
+            } else{
+                history.push(`/member/${memberId}`)
+            }
         } catch (error) {
             console.error("ERROR handleMemberSelect ::", error);
         }
@@ -127,31 +131,12 @@ export function ChosenPost(props: any) {
 
     const handleSendButton = async () => {
         try {
-            // Yozilgan kommentni yuborish uchun PostApiService dan foydalanish
             const postService = new PostApiService();
             await postService.createComment(createComment);
     
-            // Yozilgan kommentni qo'shish
-            // setComments(prevComments => {
-            //     // comments o'zgaruvchisini tekshirib ko'rish
-            //     if (prevComments === undefined) {
-            //         // Agar comments undefined bo'lsa, uni bo'sh massivga o'zgartirish
-            //         return [result];
-            //     } else {
-            //         // Aks holda, comments o'zgaruvchisiga resultni qo'shish
-            //         return [...prevComments, result];
-            //     }
-            // });
-            
-    
-            // // Komment yozilgandan so'ng inputni tozalash
-            // setCreateComment({ ...createComment, comment: "" });
-    
             window.location.reload();
-            // Foydalanuvchiga muvaffaqiyatli yuborildi xabarnomasi chiqarish
             await sweetTopSmallSuccessAlert("Comment sent successfully!", 700, false);
         } catch (error) {
-            // Xato bo'lsa uni qaytarish
             console.log(`ERROR :: handleSendButton, ${error}`);
             sweetErrorHandling(error).then();
         }
@@ -231,8 +216,20 @@ export function ChosenPost(props: any) {
                         {
                             post?.member._id === verifiedMemberData._id ? (
                                 <div className="my_post_controll">
-                                    <button className="controll" style={{background: "#000"}}>Delete</button>
-                                    <button className="controll" style={{background: "#29022e"}}>Pause</button>
+                                    <button className="controll">
+                                        <img src="/icons/post/trash.png" alt="" width={"20px"} height={"20px"}/>
+                                    </button>
+                                    {post?.member._id === verifiedMemberData._id && post?.post_status === "active" ? (
+                                        <button className="controll">
+                                            <img src="/icons/post/padlock.png" alt="" width={"20px"} height={"20px"}/>
+                                        </button>
+                                    ) : (
+                                        <button className="controll">
+                                            <img src="/icons/post/open-padlock.png" alt="" width={"20px"} height={"20px"}/>
+                                        </button>
+                                        
+                                    )}
+                                    
                                 </div>
                             ) : (
                                 <div className="follows_btn">Follow</div>

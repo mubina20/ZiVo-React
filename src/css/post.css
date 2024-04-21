@@ -76,14 +76,17 @@
     cursor: pointer;
 }
 .controll{
-    width: 100px;
+    width: 72px;
+    height: 44px;
     padding: 5px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 15px;
     color: #fff;
+    background: transparent;
     cursor: pointer;
     border: none;
     margin-left: 10px;
+    border: 1px solid #FF007A;
 }
 .user_info{
     color: #fff;
@@ -372,4 +375,104 @@
 
 .modal-input:focus {
     outline: none;
+}
+
+
+/* Chosen Story Page */
+.chosen_story_page{
+    width: 100%;
+    height: 100vh;
+    background: #101010;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.story_left{
+    width: 30%;
+    height: 95%;
+    background: #000000;
+    padding: 20px 0;
+    position: relative;
+}
+.story_close{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.story_container{
+    background: black;
+    height: 84%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.story{
+    max-width: 100%;
+    max-height: 100%;
+}
+.story_title{
+    width: 100%;
+    max-height: 200px;
+    padding: 10px 10px;
+    color: "#fff"
+}
+.story_bottom{
+    position: absolute;
+    bottom: 0;
+    /* background: rgb(77, 77, 76); */
+    width: 100%;
+    max-height: 9%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+}
+.story_icon{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+.story_commenting{
+    width: 100%;
+    /* height: 5px; */
+    border-radius: 26.5px;
+    border: 1px solid #FFF;
+    background: transparent;
+    padding: 10px 15px;
+    color: #fff;
+}
+
+.story_right{
+    width: 30%;
+    height: 95%;
+    /* background: rgb(75, 75, 75); */
+    color: #fff;
+    padding-left: 20px;
+}
+.story_comments_container{
+    width: 100%;
+    max-height: 90%;
+    min-height: 90%;
+    /* background: whit */
+    padding: 15px;
+    color: #fff;
+    overflow-y: scroll;
+}
+.story_comment_user_container{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.story_comments_container::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.story_comments_container::-webkit-scrollbar-thumb {
+    background-color: #3f3f3f; 
+    border-radius: 5px; 
+    
 }

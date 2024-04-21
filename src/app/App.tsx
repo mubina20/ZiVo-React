@@ -21,8 +21,8 @@ import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
 import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
 import { MobileMembersPage } from "./screens/MemberPage/mobileMembersPage";
-import { SelectedChat } from "./screens/ChatPage/selectedChat";
 import { UplaodStory } from "./screens/UploadPage/uploadStory";
+import { ChosenStory } from "./screens/postPage/chosenStory";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -194,8 +194,8 @@ function App() {
         <Route path="/chat/:chatId">
           <ChatPage />
         </Route>
-        <Route path="/stories/:mb_nick/:story_id">
-          <div>This is story Modalllllllllllllll</div>
+        <Route path="/stories/:mb_nick/:storyType/:storyId">
+          <ChosenStory />
         </Route>
         <Route path="/help">
           <HelpPage />
