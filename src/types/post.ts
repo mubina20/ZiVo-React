@@ -37,5 +37,6 @@ export interface UploadPost {
 export interface UpdatePost{
     post_id: string;
     post_status: string;
+    post_type: string;
 }
 

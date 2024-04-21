@@ -2,7 +2,7 @@ import assert from "assert";
 import axios from "axios";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/definer";
-import { Post, UploadPost } from "../../types/post";
+import { Post, UpdatePost, UploadPost } from "../../types/post";
 import { CreateComment } from "../../types/comment";
 
 class PostApiService {
@@ -149,6 +149,28 @@ class PostApiService {
             const comment = result.data.data;
             console.log("comment result::", comment);
             return comment;
+        } catch (err: any) {
+            console.log(`ERROR :: createArticlePost: ${err.message}`);
+            throw err;
+        }
+    };   
+    
+    public async updatePost(data: UpdatePost) {
+        try {
+            const result = await axios.post(
+                this.path + "/comment/createComment", 
+                data,
+                {withCredentials: true}
+            );
+    
+            console.log(data);
+    
+            assert.ok(result?.data, Definer.post_error1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+    
+            const updatedPost = result.data.data;
+            console.log("updatedPost result::", updatedPost);
+            return updatedPost;
         } catch (err: any) {
             console.log(`ERROR :: createArticlePost: ${err.message}`);
             throw err;
