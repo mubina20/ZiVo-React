@@ -8,8 +8,6 @@ import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { MyPosts } from "./myPosts";
-import { MySavedPosts } from "./mySavedPosts";
-import { MyFavoritePosts } from "./myFavoritePosts";
 import Modal from '@mui/material/Modal';
 import { verifiedMemberData } from "../../apiServices/verify";
 import moment from "moment";
@@ -27,6 +25,8 @@ import { FollowingsModal } from "./followingsModal";
 import assert from "assert";
 import { Definer } from "../../../lib/definer";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { Stories } from "./stories";
+import { MySavedPosts } from "./mySavedPosts";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -233,8 +233,8 @@ export function MyPage(props: any) {
                                         }}
                                     >
                                         <Tab label={<img src="/icons/other/posts.png" alt="" className="center_icon" />} value="1" />
-                                        <Tab label={<img src="/icons/other/save.png" alt="" className="center_icon" />} value="2" />
-                                        <Tab label={<img src="/icons/other/heart.png" alt="" className="center_icon" />} value="3" />
+                                        <Tab label={<img src="/icons/other/story.png" alt="" className="center_icon" />} value="2" />
+                                        <Tab label={<img src="/icons/other/save.png" alt="" className="center_icon" />} value="3" />
                                         <div className="my-page-information" onClick={handleOpenModal}><Typography>Information</Typography></div>  
 
                                         <div>
@@ -307,8 +307,8 @@ export function MyPage(props: any) {
                                     </Link>
                                 </div>
                                 <TabPanel value="1"> <MyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
-                                <TabPanel value="2"> <MySavedPosts /> </TabPanel>
-                                <TabPanel value="3"> <MyFavoritePosts /> </TabPanel>
+                                <TabPanel value="2"> <Stories filteredPosts={filteredPosts} setAllPosts={setAllPosts} /> </TabPanel>
+                                <TabPanel value="3"> <MySavedPosts /> </TabPanel>
                             </TabContext>
                         </div>
                     </div>

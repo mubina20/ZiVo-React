@@ -6,7 +6,6 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { MyPosts } from "./myPosts";
 import { MySavedPosts } from "./mySavedPosts";
-import { MyFavoritePosts } from "./myFavoritePosts";
 import Modal from '@mui/material/Modal';
 import { verifiedMemberData } from "../../apiServices/verify";
 import moment from "moment";
@@ -24,6 +23,7 @@ import { FollowingsModal } from "./followingsModal";
 import { MobileHeader } from "../../components/header/mobileHeader";
 import { MobileFooter } from "../../components/footer/mobileFooter";
 import "../../../css/visitPage.css";
+import { Stories } from "./stories";
 
 
 // REDUX SLICE
@@ -274,8 +274,8 @@ export function MobileMyPage(props: any) {
                                     <Box className='line' />
 
                                     <TabPanel value="1"> <MyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
-                                    <TabPanel value="2"> <MySavedPosts /> </TabPanel>
-                                    <TabPanel value="3"> <MyFavoritePosts /> </TabPanel>
+                                    <TabPanel value="2"> <Stories filteredPosts={filteredPosts} setAllPosts={setAllPosts} /> </TabPanel>
+                                <TabPanel value="3"> <MySavedPosts /> </TabPanel>
                                 </TabContext>
                             </div>
                     </div>

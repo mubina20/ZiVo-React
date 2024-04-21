@@ -44,7 +44,7 @@ export function UplaodStory(props: any) {
             <LeftSidebar />
             <div className="upload_big_container">
                 <div className="upload_container">
-                    <div className="upload_text">Upload Post</div>
+                    <div className="upload_text">Upload Story</div>
                     <div className="upload_post_center">
                         <TabContext value={value}>
                             <div className="upload_page_tabs_container">

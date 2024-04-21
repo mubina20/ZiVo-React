@@ -5,8 +5,6 @@ import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
 import { MyPosts } from "./myPosts";
-import { MySavedPosts } from "./mySavedPosts";
-import { MyFavoritePosts } from "./myFavoritePosts";
 import Modal from '@mui/material/Modal';
 import { verifiedMemberData } from "../../apiServices/verify";
 import moment from "moment";

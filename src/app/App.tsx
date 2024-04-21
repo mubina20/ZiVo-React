@@ -200,6 +200,12 @@ function App() {
         <Route path="/help">
           <HelpPage />
         </Route>
+        <Route path="/life">
+          <div>Still in progress.</div>
+        </Route>
+        <Route path="/settings">
+          <div>Still in progress.</div>
+        </Route>
       </Switch>
     </Router>
   );
