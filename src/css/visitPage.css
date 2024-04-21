@@ -142,10 +142,10 @@
     z-index: 1;
 }
 .other_page_center{
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 50px; */
 }
 
 .visit_page_box .center_icon{
@@ -197,6 +197,19 @@
 .visit_page_box .page_bottom .post{
     width: 206.756px;
     height: 247px;
+}
+.story_post{
+    width: 206.756px;
+    height: 247px;
+    border: 2px solid #b80059;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.story_post img, video{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .visit_page_box .page_bottom .post img, video, .article_post{

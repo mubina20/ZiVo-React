@@ -313,17 +313,15 @@ export function ChosenStory() {
                                     className='story'
                                 />
                             ) : story?.post_type === "articleStory" ? (
-                                <div className="story">
-                                    <div 
-                                        className="left_article_content"
-                                        style={{
-                                            background: story?.post_bg_color ? story?.post_bg_color : "grey",
-                                            color: story?.post_text_color ? story?.post_text_color : "black",
-                                            textAlign: story.post_align === "center" ? "center" : "left"
-                                        }}
-                                    >
-                                        {story.post_content}
-                                    </div>
+                                <div 
+                                    className="story_aricle"
+                                    style={{
+                                        background: story?.post_bg_color ? story?.post_bg_color : "#080808",
+                                        color: story?.post_text_color ? story?.post_text_color : "#fff",
+                                        textAlign: story.post_align === "center" ? "center" : "left"
+                                    }}
+                                >
+                                    {story.post_content}
                                 </div>
                             ) : story?.post_type === "videoStory" ? (
                                 <video 

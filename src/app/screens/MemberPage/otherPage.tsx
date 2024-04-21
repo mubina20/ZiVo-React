@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal, Typography, Tab, Stack } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
@@ -17,15 +17,16 @@ import { CreateChat } from "../../../types/chat";
 import { verifiedMemberData } from "../../apiServices/verify";
 import ChatApiService from "../../apiServices/chatApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
-import Popup from 'reactjs-popup';
-import { FollowingsModal } from "./followingsModal";
 import FollowApiService from "../../apiServices/followApiService";
 import { Follower, Following, FollowSearchObj } from "../../../types/follow";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { setChosenMember, setMemberFollowers, setMemberFollowings } from "./slice";
 import assert from "assert";
 import { Definer } from "../../../lib/definer";
 import { setChosenPost } from "../HomePage/slice";
+import { MyPosts } from "./myPosts";
+import { Stories } from "./stories";
 
 interface RouteParams {
     memberId: string;
@@ -46,14 +47,12 @@ const chosenMemberRetriever = createSelector(
         chosenMember
     })
 );
-
 const memberFollowersRetriever = createSelector(
     retrieveMemberFollowers,
     (memberFollowers) => ({
         memberFollowers
     })
 );
-
 const memberFollowingsRetriever = createSelector(
     retrieveMemberFollowings, 
     (memberFollowings) => ({
@@ -61,14 +60,10 @@ const memberFollowingsRetriever = createSelector(
     })
 );
 
-
 export function OtherPage(props: any) {
     /** INITIALIZATIONS **/
     const history = useHistory();
-    const dispatch = useDispatch();
-    const {
-        setChosenPost,
-    } = actionDispatch(useDispatch());
+    const [value, setValue] = useState("1");
 
     const { chosenMember } = useSelector(chosenMemberRetriever);
     const { setChosenMember} = actionDispatch(useDispatch());
@@ -76,7 +71,6 @@ export function OtherPage(props: any) {
     const { memberId } = useParams<RouteParams>();
     const { open, handleOpenModal, handleModalClose } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
-    const [member, setMember] = useState<Member>();
     const [createChat, setCreateChat] = useState<CreateChat>({
         sender_id: verifiedMemberData._id,
 		receiver_id: memberId
@@ -85,7 +79,6 @@ export function OtherPage(props: any) {
     const { setMemberFollowers } = actionDispatch(useDispatch());
 	const { memberFollowers } = useSelector(memberFollowersRetriever);
 	const [followersSearchObj, setFollowersSearchObj] = useState<FollowSearchObj>({ mb_id: memberId });
-    console.log("memberFollowers", memberFollowers)
 
     const { setMemberFollowings } = actionDispatch(useDispatch());
 	const { memberFollowings } = useSelector(memberFollowingsRetriever);
@@ -107,7 +100,6 @@ export function OtherPage(props: any) {
         stopPropagation: () => void;
     }) => {
         event.stopPropagation(); 
-        // console.log("Closing Followers Modal");
         setOpenFollowersModal(false);
     };
     
@@ -115,11 +107,14 @@ export function OtherPage(props: any) {
         stopPropagation: () => void;
     }) => {
         event.stopPropagation(); 
-        // console.log("Closing Followings Modal");
         setOpenFollowingsModal(false);
     };
 
     /** HANDLERS **/
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+    };
+
     useEffect(() => {
         const allPostsData = async () => {
             try {
@@ -127,14 +122,13 @@ export function OtherPage(props: any) {
                 const allPostsData = await postService.getAllPosts();
                 setAllPosts(allPostsData);
             } catch (err) {
-                console.error('Error while fetching members:', err);
+                console.error('Error allPostsData:', err);
             }
         };
 
         allPostsData();
     }, []);
     const filteredPosts = allPosts.filter(post => post.member._id === chosenMember?._id);
-    // console.log("filteredPosts", filteredPosts);
 
     useEffect(() => {
         if(memberId === verifiedMemberData?._id) {
@@ -212,17 +206,6 @@ export function OtherPage(props: any) {
 		}
 	};
 
-    const handlePostSelect = async (postType: any, postId: any) => {
-        try {
-            const postService = new PostApiService();
-            const chosenPostData = await postService.getChosenPost(postType, postId);
-            dispatch(setChosenPost(chosenPostData)); 
-            history.push(`/post/${chosenPostData.post_type}/${chosenPostData._id}`); 
-        } catch (error) {
-            console.error("ERROR handleMemberSelect ::", error);
-        }
-    };
-    
     return(
         <div>
             <Header />
@@ -243,7 +226,6 @@ export function OtherPage(props: any) {
                                     className="user_icon" 
                                 />
                                 <Typography className="nickname">@{chosenMember?.mb_nick}</Typography>
-                                {/* <button className="follow_btn" style={{marginBottom: "10px"}}> */}
                                     {/* Follow */}
                                     {memberFollowers ? (
                                         memberFollowers[0]?.subscriber_id === verifiedMemberData._id ? (
@@ -257,7 +239,6 @@ export function OtherPage(props: any) {
                                         ) : (
                                             <button
                                                 className="follow_btn"
-                                                // style={{marginBottom: "10px"}}
                                                 onClick={(e) => subscribeHandler(e, chosenMember?._id)}
                                             >
                                                 FOLLOW 
@@ -375,8 +356,28 @@ export function OtherPage(props: any) {
                             </div>
                         </div>
                         <div className="other_page_center">
-                            <img src="/icons/other/posts.png" alt="" className="center_icon"/>
-                            <Typography style={{cursor: "pointer"}} onClick={handleOpenModal}>Information</Typography>
+                            <TabContext value={value}>
+                                <Stack className="my_page_stack">
+                                    <div className="my_page_tablist">
+                                        <TabList 
+                                        onChange={handleChange} 
+                                        textColor={"inherit"}
+                                        TabIndicatorProps={{
+                                            style: { backgroundColor: "#FF007A" }
+                                        }}
+                                    >
+                                        <Tab label={<img src="/icons/other/posts.png" alt="" className="center_icon" />} value="1" />
+                                        <Tab label={<img src="/icons/other/story.png" alt="" className="center_icon" />} value="2" />
+                                        <div className="my-page-information" onClick={handleOpenModal}><Typography>Information</Typography></div>
+                                    </TabList>
+                                    </div>
+                                </Stack>
+                                <Box className='line' />
+                                
+                                <TabPanel value="1"> <MyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts} /> </TabPanel>
+                                <TabPanel value="2"> <Stories filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
+                            </TabContext>
+                            {/* <Typography style={{cursor: "pointer"}} onClick={handleOpenModal}>Information</Typography> */}
                             <div>
                                 <Modal
                                     className="infoModalContainer"
@@ -437,61 +438,7 @@ export function OtherPage(props: any) {
                                 </Modal>
                             </div>
                         </div>
-                        <Box className='line' />
-
-                        <div className="page_bottom">
-                            {filteredPosts && filteredPosts.length > 0 ? (
-                                filteredPosts.map((post: Post) => (
-                                    post.post_type === "photo" ? (
-                                        // Photo Post
-                                        <div key={post._id}>
-                                            <div className="post" onClick={() => handlePostSelect(post?._id, "photo")}>
-                                                <img src={`${serverApi}/${post?.post_content}`} alt="" width="300px"/>
-                                            </div>
-                                        </div>
-                                    ) : post.post_type === "article" ? (
-                                        // Article Post
-                                        <div className="post" onClick={() => handlePostSelect(post?._id, "article")}>
-                                            <div 
-                                                className="article_post"
-                                                style={{
-                                                    background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                                    color: post?.post_text_color ? post?.post_text_color : "black",
-                                                    textAlign: post.post_align === "center" ? "center" : "left"
-
-                                                }}
-                                            >
-                                                {post.post_content}
-                                            </div>
-                                        </div>
-                                    ) : post.post_type === "video" ? (
-                                        // Video Post
-                                        <div key={post._id}>
-                                            <div className="post" onClick={() => handlePostSelect(post?._id, "video")}>
-                                                <video
-                                                    loop
-                                                    // playsInline
-                                                    // controls
-                                                    width={"100%"}
-                                                    style={{border: "1px solid #000", background: "#000"}}
-                                                >
-                                                    <source
-                                                        src={`${serverApi}/${post?.post_content}`}
-                                                        type="video/mp4"
-                                                    />
-                                                </video>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        null
-                                    )
-                                ))
-                            ) : (
-                                <div style={{marginLeft: "400px", marginTop: "100px"}}>No posts yet</div>
-                            )}
-                        </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
