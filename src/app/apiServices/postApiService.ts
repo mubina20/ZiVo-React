@@ -155,10 +155,10 @@ class PostApiService {
         }
     };   
     
-    public async updatePost(data: UpdatePost) {
+    public async editPost(data: UpdatePost) {
         try {
             const result = await axios.post(
-                this.path + "/comment/createComment", 
+                this.path + "/post/edit", 
                 data,
                 {withCredentials: true}
             );

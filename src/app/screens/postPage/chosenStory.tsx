@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom';
-import { Post } from '../../../types/post';
+import { Post, UpdatePost } from '../../../types/post';
 import { useDispatch } from 'react-redux';
 import PostApiService from '../../apiServices/postApiService';
 import { setChosenPost } from '../HomePage/slice';
@@ -20,8 +20,6 @@ interface RouteParams {
     storyType: string;
 }
 
-
-
 export function ChosenStory() {
     /** INITIALIZATIONS **/
     const history = useHistory();
@@ -34,6 +32,11 @@ export function ChosenStory() {
         mb_id: verifiedMemberData._id,
 		post_id: storyId,
 		comment: ""
+	});
+    const [updatePost, setUpdatePost] = useState<UpdatePost>({
+        post_id: storyId,
+		post_status: "delete",
+		post_type: storyType
 	});
     const textInput: any = useRef(null);
 
@@ -122,6 +125,18 @@ export function ChosenStory() {
         }
     };
 
+    const handleDeleteStory = async () => {
+        try {
+            const postService = new PostApiService();
+            await postService.editPost(updatePost);     
+
+            window.location.href = '/my-page';
+        } catch (error) {
+            console.log(`ERROR :: handleDeleteStory, ${error}`);
+            sweetErrorHandling(error).then();
+        }
+    };
+
     const handleStoryLike = async (e: any, id: any, type: any) => {
         try {
             assert.ok(verifiedMemberData, Definer.auth_err1);
@@ -136,7 +151,7 @@ export function ChosenStory() {
             await sweetTopSmallSuccessAlert("success", 700, false);
             window.location.reload();
         } catch (err: any) {
-            console.log(`ERROR :: targetLikeTop, ${err}`);
+            console.log(`ERROR :: handleStoryLike, ${err}`);
             sweetErrorHandling(err).then();
         }
     };
@@ -152,7 +167,6 @@ export function ChosenStory() {
                                 className="user_container" 
                                 key={story?.member?._id} 
                                 style={{gap: "0", padding: "0 10px"}}
-                                // onClick={() => handleMemberSelect(post?.member?._id)}
                             >
                                 <img 
                                     src={
@@ -224,46 +238,43 @@ export function ChosenStory() {
                                     <img src="/icons/post/heart.png" alt="" className='story_icon'/>
                                     <Typography style={{fontSize: "12px", opacity: "0.5"}}>{story?.post_likes}</Typography>
                                 </div>
-                                <img src="/icons/post/trash.png" alt=""  className='story_icon'/>
+                                <img src="/icons/post/trash.png" alt=""  className='story_icon' onClick={handleDeleteStory}/>
                             </div>
-
                         </div>
-
 
                         <div className="story_right">
                             <span className='comment_title'>Comment({comments.length})</span>
-
                             <div className="story_comments_container">
-                    {comments?.map((comment: Comment) => { 
-                        return(
-                            <div className="">
-                                <div className="story_comment_user_container">
-                                    <img  
-                                        src={
-                                            comment?.member?.mb_profile_image 
-                                            ? `${serverApi}/${comment?.member.mb_profile_image}`  
-                                            : "/icons/user.png"
-                                        } 
-                                        alt="" 
-                                        className="comment_user_img"  
-                                        onClick={() => handleMemberSelect(comment.member._id)}                              
-                                    />
-                                    <div className="comment_user_info">
-                                        <div className="info">
-                                            <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}} onClick={() => handleMemberSelect(comment.member._id)} >
-                                                @{comment.member.mb_nick}
-                                            </Typography>
-                                            <Typography style={{opacity: "0.56", fontSize: "11px"}}>{moment(comment?.createdAt).format("YYYY-MM-DD")}</Typography>
+                                {comments?.map((comment: Comment) => { 
+                                    return(
+                                        <div className="">
+                                            <div className="story_comment_user_container">
+                                                <img  
+                                                    src={
+                                                        comment?.member?.mb_profile_image 
+                                                        ? `${serverApi}/${comment?.member.mb_profile_image}`  
+                                                        : "/icons/user.png"
+                                                    } 
+                                                    alt="" 
+                                                    className="comment_user_img"  
+                                                    onClick={() => handleMemberSelect(comment.member._id)}                              
+                                                />
+                                                <div className="comment_user_info">
+                                                    <div className="info">
+                                                        <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}} onClick={() => handleMemberSelect(comment.member._id)} >
+                                                            @{comment.member.mb_nick}
+                                                        </Typography>
+                                                        <Typography style={{opacity: "0.56", fontSize: "11px"}}>{moment(comment?.createdAt).format("YYYY-MM-DD")}</Typography>
+                                                    </div>
+                                                    <div className="comment_content">
+                                                        <p>{comment?.comment}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="comment_content">
-                                            <p>{comment?.comment}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    )
+                                })} 
                             </div>
-                        )
-                    })} 
-                </div>
                         </div>
                     </div>
                 ) : (
@@ -272,7 +283,6 @@ export function ChosenStory() {
                             className="user_container" 
                             key={story?.member?._id} 
                             style={{gap: "0", padding: "0 10px"}}
-                            // onClick={() => handleMemberSelect(post?.member?._id)}
                         >
                             <img 
                                 src={
@@ -310,13 +320,11 @@ export function ChosenStory() {
                                             background: story?.post_bg_color ? story?.post_bg_color : "grey",
                                             color: story?.post_text_color ? story?.post_text_color : "black",
                                             textAlign: story.post_align === "center" ? "center" : "left"
-
                                         }}
                                     >
                                         {story.post_content}
                                     </div>
                                 </div>
-                                
                             ) : story?.post_type === "videoStory" ? (
                                 <video 
                                     src={`${serverApi}/${story?.post_content}`} 
