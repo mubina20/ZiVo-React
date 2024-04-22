@@ -1,11 +1,8 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { Link, useHistory } from "react-router-dom";
 import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
-import { MyPosts } from "./myPosts";
-import { MySavedPosts } from "./mySavedPosts";
 import Modal from '@mui/material/Modal';
 import { verifiedMemberData } from "../../apiServices/verify";
 import moment from "moment";
@@ -22,8 +19,9 @@ import { FollowersModal } from "./followersModal";
 import { FollowingsModal } from "./followingsModal";
 import { MobileHeader } from "../../components/header/mobileHeader";
 import { MobileFooter } from "../../components/footer/mobileFooter";
-import "../../../css/visitPage.css";
-import { Stories } from "./stories";
+import "../../../css/mobileVistiPage.css";
+import { MobileMyPosts } from "./mobileMyPosts";
+import { MobileStories } from "./mobileStories";
 
 
 // REDUX SLICE
@@ -73,20 +71,26 @@ export function MobileMyPage(props: any) {
 
 
     /** HANDLERS **/
-
-    // Handle my Follower
     const handleOpenFollowersModal = () => {
         setOpenFollowersModal(true);
     };
-    const handleCloseFollowersModal = () => {
-        setOpenFollowersModal(false);
-    };
-
-    // Handle my Followings
     const handleOpenFollowingsModal = () => {
         setOpenFollowingsModal(true);
     };
-    const handleCloseFollowingsModal = () => {
+
+    const handleCloseFollowersModal = (event: {
+        stopPropagation: () => void;
+    }) => {
+        event.stopPropagation(); 
+        // console.log("Closing Followers Modal");
+        setOpenFollowersModal(false);
+    };
+    
+    const handleCloseFollowingsModal = (event: {
+        stopPropagation: () => void;
+    }) => {
+        event.stopPropagation(); 
+        // console.log("Closing Followings Modal");
         setOpenFollowingsModal(false);
     };
 
@@ -135,10 +139,10 @@ export function MobileMyPage(props: any) {
             <MobileHeader/>
             <MobileFooter/>
 
-            <div className="visit-contianer" style={{marginTop: "80px"}}>
+            <div className="visit-contianer">
                 <div className="visit-page-contianer">
                     <div className="visit-page-box">
-                        <div className="page-top">
+                        <div className="page-top" style={{padding: "0px 20px"}}>
                             <div className="left-info">
                                 <img
                                     src={
@@ -152,23 +156,17 @@ export function MobileMyPage(props: any) {
                                     style={{borderRadius: "50%"}}
                                 />
                                 <Typography className="nickname" style={{margin: "10px 0"}}>@{verifiedMemberData?.mb_nick}</Typography>
-                                <button className="story-btn"><img src="/icons/post/plus.png" alt="" width={"15px"}/>Upload Story</button>
                             </div>
-                            <div className="right-info">
-                                <button className="edit_profile button">Edit Profile</button>
-                                <button className="upload-post button"><img src="/icons/post/plus.png" alt="" width={"15px"}/>Upload Post</button>
-                            </div>
-                        </div>
-                        <div className="user-data-container">
+                            <div className="mobile-user-data-container">
                                 <div className="user-data-wrapper">
-                                    <div className="user-data">
+                                    <div className="user-data" style={{gap: "20px"}}>
                                         <div className="data">
                                             <div className="user-data-title" onClick={handleOpenFollowersModal}>
                                                 Followers
                                                 <FollowersModal 
-                                                    open={openFollowersModal} 
-                                                    handleClose={handleCloseFollowersModal}
+                                                    open={openFollowersModal}
                                                     memberFollowers={memberFollowers}
+                                                    handleCloseFollowersModal={handleCloseFollowersModal}
                                                 />
                                             </div>
                                             <span className="user-data-count">{memberFollowers.length}</span>
@@ -177,11 +175,11 @@ export function MobileMyPage(props: any) {
                                         <div className="data">
                                             <div className="user-data-title" onClick={handleOpenFollowingsModal}>
                                                 Followings
-                                                {/* <FollowingsModal 
+                                                <FollowingsModal 
                                                     open={openFollowingsModal} 
                                                     handleCloseFollowings={handleCloseFollowingsModal}
                                                     memberFollowings={memberFollowings}
-                                                /> */}
+                                                />
                                             </div>
                                             <span className="user-data-count">{memberFollowings.length}</span>
                                         </div>
@@ -191,96 +189,100 @@ export function MobileMyPage(props: any) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="user-description">
+                                <div className="my_page_mobile_description">
                                     <p>{verifiedMemberData?.mb_description}</p>
                                 </div>
                             </div>
-                            <div className="page-center">
-                                <TabContext value={value}>
-                                    <Stack className="my-page-stack">
-                                        <div className="my-page-tablist">
-                                            <TabList 
-                                            onChange={handleChange} 
-                                            textColor={"inherit"}
-                                            TabIndicatorProps={{
-                                                style: { backgroundColor: "#FF007A" }
-                                            }}
-                                        >
-                                            <Tab label={<img src="/icons/other/posts.png" alt="" width={"20px"} className="center_icon" />} value="1" />
-                                            <Tab label={<img src="/icons/other/save.png" alt=""  width={"20px"}className="center-icon" />} value="2" />
-                                            <Tab label={<img src="/icons/other/heart.png" alt=""  width={"20px"}className="center-icon" />} value="3" />
-                                            <div className="my_page_information" style={{marginTop: "10px", color: "white"}} onClick={handleOpenModal}><Typography>Information</Typography></div>  
-
-                                            <div>
-                                                <Modal
-                                                    className="infoModalContainer"
-                                                    open={open}
-                                                    onClose={handleModalClose}
-                                                    aria-labelledby="modal-modal-title"
-                                                    aria-describedby="modal-modal-description"
-                                                >
-                                                    <div className="infoModal">
-                                                        <div className="member_info_closing">
-                                                            <span>@{verifiedMemberData?.mb_nick}<span>'s Information</span></span>
-                                                            <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="close"/>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Name</div>
-                                                            <div className="info">{verifiedMemberData?.mb_name}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Surname</div>
-                                                            <div className="info">{verifiedMemberData?.mb_surname}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Birthday</div>
-                                                            <div className="info">{verifiedMemberData?.mb_birthday}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Gender</div>
-                                                            <div className="info">{verifiedMemberData?.mb_gender}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Country</div>
-                                                            <div className="info">{verifiedMemberData?.mb_country}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">School</div>
-                                                            <div className="info">{verifiedMemberData?.mb_school}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Description</div>
-                                                            <div className="info">{verifiedMemberData?.mb_description}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Hobby</div>
-                                                            <div className="info">{verifiedMemberData?.mb_hobby}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Address</div>
-                                                            <div className="info">{verifiedMemberData?.mb_address}</div>
-                                                        </div>
-                                                        <div className="information">
-                                                            <div className="info_category">Account creation date</div>
-                                                            <div className="info">{moment(verifiedMemberData?.createdAt).format("YYYY-MM-DD")}</div>
-                                                        </div>
+                        </div>
+                    </div>
+                    <div className="mobile_buttons">
+                        <button className="mobile_story_button"><img src="/icons/post/plus.png" alt="" width={"10px"}/>Upload Story</button>
+                    </div>
+                        <div className="page-center">
+                            <TabContext value={value}>
+                                <Stack className="my-page-stack">
+                                    <div className="my-page-tablist" style={{marginLeft: "-20px"}}>
+                                        <TabList 
+                                        onChange={handleChange} 
+                                        textColor={"inherit"}
+                                        TabIndicatorProps={{
+                                            style: { backgroundColor: "#FF007A" }
+                                        }}
+                                    >
+                                        <Tab label={<img src="/icons/other/posts.png" alt="" className="mobile_center_icon" />} value="1" />
+                                        <Tab label={<img src="/icons/other/story.png" alt="" className="mobile_center_icon" />} value="2" />
+                                        <Tab label={<img src="/icons/other/save.png" alt="" className="mobile_center_icon" />} value="3" />
+                                    <div className="mobile_page_information" onClick={handleOpenModal}><Typography>Information</Typography></div>
+                                        <div>
+                                            <Modal
+                                                className="infoModalContainer"
+                                                open={open}
+                                                onClose={handleModalClose}
+                                                aria-labelledby="modal-modal-title"
+                                                aria-describedby="modal-modal-description"
+                                                style={{width: "100%"}}
+                                            >
+                                                <div className="infoModal">
+                                                    <div className="member_info_closing" style={{width: "90%"}}>
+                                                        <span>@{verifiedMemberData?.mb_nick}<span>'s Information</span></span>
+                                                        <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="close"/>
                                                     </div>
-                                                </Modal>
-                                            </div>
-                                        </TabList>
+                                                    <div className="information">
+                                                        <div className="info_category">Name</div>
+                                                        <div className="info">{verifiedMemberData?.mb_name}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Surname</div>
+                                                        <div className="info">{verifiedMemberData?.mb_surname}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Birthday</div>
+                                                        <div className="info">{verifiedMemberData?.mb_birthday}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Gender</div>
+                                                        <div className="info">{verifiedMemberData?.mb_gender}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Country</div>
+                                                        <div className="info">{verifiedMemberData?.mb_country}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">School</div>
+                                                        <div className="info">{verifiedMemberData?.mb_school}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Description</div>
+                                                        <div className="info">{verifiedMemberData?.mb_description}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Hobby</div>
+                                                        <div className="info">{verifiedMemberData?.mb_hobby}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Address</div>
+                                                        <div className="info">{verifiedMemberData?.mb_address}</div>
+                                                    </div>
+                                                    <div className="information">
+                                                        <div className="info_category">Account creation date</div>
+                                                        <div className="info">{moment(verifiedMemberData?.createdAt).format("YYYY-MM-DD")}</div>
+                                                    </div>
+                                                </div>
+                                            </Modal>
                                         </div>
-                                        
-                                    </Stack>
-                                    <Box className='line' />
+                                    </TabList>
+                                    </div>
+                                    
+                                </Stack>
+                                <Box className='line' style={{width: "100%", marginTop: "-2px"}}/>
 
-                                    <TabPanel value="1"> <MyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
-                                    <TabPanel value="2"> <Stories filteredPosts={filteredPosts} setAllPosts={setAllPosts} /> </TabPanel>
-                                <TabPanel value="3"> <MySavedPosts /> </TabPanel>
-                                </TabContext>
-                            </div>
+                                <TabPanel value="1"> <MobileMyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts} /> </TabPanel>
+                                <TabPanel value="2"> <MobileStories filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
+                                <TabPanel value="3"> <div style={{color: "#fff"}}>This is saved posts TalPanel</div> </TabPanel>
+                            </TabContext>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     )
 }

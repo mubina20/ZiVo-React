@@ -12,34 +12,19 @@ import { AllVideoPosts } from "./allVideoPosts";
 import { AllPhotoPosts } from "./allPhotoPosts";
 import { AllArticlePosts } from "./allArticlePosts";
 import { Member } from "../../../types/user";
-import { setAllMembers, setChosenMember, setMemberFollowings } from "../MemberPage/slice";
-import { Dispatch, createSelector } from "@reduxjs/toolkit";
-import { retrieveChosenMember } from "../MemberPage/selector";
-import { useDispatch, useSelector } from "react-redux";
+import { setAllMembers, setChosenMember } from "../MemberPage/slice";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MemberApiService from "../../apiServices/memberApiService";
-import { retrieveMemberFollowings } from "../MemberPage/selector";
-import { Following, FollowSearchObj } from "../../../types/follow";
-import { verifiedMemberData } from "../../apiServices/verify";
-import FollowApiService from "../../apiServices/followApiService";
 import PostApiService from "../../apiServices/postApiService";
 import { setChosenPost, setChosenStory } from "./slice";
 import { Post } from "../../../types/post";
 import { serverApi } from "../../../lib/config";
-
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
-// const members = [
-//     { id: 1, nickName: 'samo_ping12' },
-//     { id: 2, nickName: 'samo_ping12' },
-//     { id: 3, nickName: 'samo_ping12' },
-//     { id: 4, nickName: 'samo_ping12' },
-//     { id: 5, nickName: 'samo_ping12' }
-// ];
+import { Dispatch } from "@reduxjs/toolkit";
 
 const actionDispatch = (dispatch: Dispatch) => ({
-    setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
     setChosenPost: (data: Post) => dispatch(setChosenPost(data)),
     setChosenStory: (data: Post) => dispatch(setChosenStory(data)),
     setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
@@ -47,24 +32,9 @@ const actionDispatch = (dispatch: Dispatch) => ({
         dispatch(setAllMembers(data))
 });
 
-// const chosenMemberRetriever = createSelector(
-//     retrieveChosenMember, 
-//     (chosenMember) => ({
-//         chosenMember
-//     })
-// );
-
-const memberFollowingsRetriever = createSelector(
-    retrieveMemberFollowings, 
-    (memberFollowings) => ({
-	    memberFollowings
-    })
-);
-
 export function Home() {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
-    // const [allMembers, setAllMembers] = useState<Member[]>([]);
     
 
     const dispatch = useDispatch();
@@ -73,8 +43,6 @@ export function Home() {
         setChosenMember,
     } = actionDispatch(useDispatch());
 
-    const { memberFollowings } = useSelector(memberFollowingsRetriever);
-    const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
     const [allPosts, setAllPosts] = useState<Post[]>([]);
 
     /** HANDLERS **/
@@ -126,15 +94,6 @@ export function Home() {
 
         allPostsData();
     }, []);
-
-    useEffect(() => {
-		const followService = new FollowApiService();
-		followService
-			.getMemberFollowings(followingsSearchObj)
-			.then((data) => setMemberFollowings(data))
-			.catch((err) => console.log(err));
-	}, [followingsSearchObj]);
-    // console.log("HOMEPAGE > member Followings :: ", memberFollowings);
 
     const handleVisitFollowingPage = (mb_id: string) => {
 		history.push(`/member/${mb_id}`);

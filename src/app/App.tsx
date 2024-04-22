@@ -90,7 +90,11 @@ function App() {
           )}
           {isMobile && (
             <div>
-              <MobileMyPage />
+              <MobileMyPage 
+                open={open}
+                handleOpenModal={handleOpenModal}
+                handleModalClose={handleModalClose}
+              />
             </div>
           )}
         </Route>
@@ -111,7 +115,11 @@ function App() {
           )}
           {isMobile && (
             <div>
-              <MobileOtherPage />
+              <MobileOtherPage 
+                open={open}
+                handleOpenModal={handleOpenModal}
+                handleModalClose={handleModalClose}
+              />
             </div>
           )}
         </Route>

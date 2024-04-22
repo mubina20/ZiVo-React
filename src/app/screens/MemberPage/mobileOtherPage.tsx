@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import {  Stack, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useEffect, useState } from "react";
@@ -13,22 +13,25 @@ import { Post } from "../../../types/post";
 import PostApiService from "../../apiServices/postApiService";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { Follower, Following, FollowSearchObj } from "../../../types/follow";
-import { setMemberFollowers, setMemberFollowings } from "./slice";
-import { retrieveMemberFollowers, retrieveMemberFollowings } from "./selector";
+import { setChosenMember, setMemberFollowers, setMemberFollowings } from "./slice";
+import { retrieveChosenMember, retrieveMemberFollowers, retrieveMemberFollowings } from "./selector";
 import { useDispatch, useSelector } from "react-redux";
 import FollowApiService from "../../apiServices/followApiService";
 import { FollowersModal } from "./followersModal";
 import { FollowingsModal } from "./followingsModal";
 import { MobileHeader } from "../../components/header/mobileHeader";
 import { MobileFooter } from "../../components/footer/mobileFooter";
-import "../../../css/visitPage.css";
+import "../../../css/mobileVistiPage.css";
+import { MobileStories } from "./mobileStories";
+import { MobileMyPosts } from "./mobileMyPosts";
+import { Member } from "../../../types/user";
 
 
 // REDUX SLICE
-const actionDispatch = (dispach: Dispatch) => ({
-    setMemberFollowings: (data: Following[]) => dispach(setMemberFollowings(data)),
-    setMemberFollowers: (data: Follower[]) =>
-        dispach(setMemberFollowers(data)),
+const actionDispatch = (dispatch: Dispatch) => ({
+    setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
+    setMemberFollowings: (data: Following[]) => dispatch(setMemberFollowings(data)),
+    setMemberFollowers: (data: Follower[]) => dispatch(setMemberFollowers(data)),
 });
 
 // REDUX SELECTOR
@@ -38,31 +41,41 @@ const memberFollowersRetriever = createSelector(
         memberFollowers
     })
 );
-
 const memberFollowingsRetriever = createSelector(
     retrieveMemberFollowings, 
     (memberFollowings) => ({
         memberFollowings
     })
 );
+const chosenMemberRetriever = createSelector(
+    retrieveChosenMember,
+    (chosenMember) => ({
+        chosenMember
+    })
+);
+interface RouteParams {
+    memberId: string;
+}
 
 export function MobileOtherPage(props: any) {
     /** INITIALIZATIONS **/
     const [value, setValue] = useState("1");
+    const { memberId } = useParams<RouteParams>();
     const { 
         open, 
         handleOpenModal, 
         handleModalClose 
     } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
+    const { chosenMember } = useSelector(chosenMemberRetriever);
 
 	const { setMemberFollowers } = actionDispatch(useDispatch());
 	const { memberFollowers } = useSelector(memberFollowersRetriever);
-	const [followersSearchObj, setFollowersSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
+	const [followersSearchObj, setFollowersSearchObj] = useState<FollowSearchObj>({ mb_id: memberId });
 
     const { setMemberFollowings } = actionDispatch(useDispatch());
 	const { memberFollowings } = useSelector(memberFollowingsRetriever);
-	const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: verifiedMemberData?._id });
+	const [followingsSearchObj, setFollowingsSearchObj] = useState<FollowSearchObj>({ mb_id: memberId });
 
     const [openFollowersModal, setOpenFollowersModal] = useState(false);
     const [openFollowingsModal, setOpenFollowingsModal] = useState(false);
@@ -106,7 +119,7 @@ export function MobileOtherPage(props: any) {
     }, []);
     // console.log("allPosts", allPosts);
     console.log("props > allPosts", allPosts);
-    const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
+    const filteredPosts = allPosts.filter(post => post.member._id === chosenMember?._id);
     console.log("filteredPosts", filteredPosts);
 
     // Followers
@@ -132,32 +145,27 @@ export function MobileOtherPage(props: any) {
             <MobileHeader/>
             <MobileFooter/>
 
-            <div className="visit-contianer" style={{marginTop: "80px"}}>
+            <div className="visit-contianer">
                 <div className="visit-page-contianer">
                     <div className="visit-page-box">
-                        <div className="page-top" style={{padding: "10px"}}>
+                        <div className="page-top" style={{padding: "0px 20px"}}>
                             <div className="left-info">
                                 <img
                                     src={
-                                        verifiedMemberData?.mb_profile_image 
-                                        ? `${serverApi}/${verifiedMemberData.mb_profile_image}`  
+                                        chosenMember?.mb_profile_image 
+                                        ? `${serverApi}/${chosenMember.mb_profile_image}`  
                                         : "/icons/user.png"
-                                    } 
+                                    }  
                                     alt="User profile img" 
                                     width={"80px"}
                                     height={"80px"}
                                     style={{borderRadius: "50%"}}
                                 />
-                                <Typography className="nickname" style={{margin: "10px 0"}}>@{verifiedMemberData?.mb_nick}</Typography>
+                                <Typography className="nickname" style={{margin: "10px 0"}}>@{chosenMember?.mb_nick}</Typography>
                             </div>
-                            <div className="right-info">
-                                <button className="edit_profile button" style={{borderRadius: "21px"}}>Follow</button>
-                                <button className="upload-post button" style={{color: "white", borderRadius: "21px"}}>Message</button>
-                            </div>
-                        </div>
-                        <div className="user-data-container">
+                            <div className="mobile-user-data-container">
                                 <div className="user-data-wrapper">
-                                    <div className="user-data">
+                                    <div className="user-data" style={{gap: "20px"}}>
                                         <div className="data">
                                             <div className="user-data-title" onClick={handleOpenFollowersModal}>
                                                 Followers
@@ -187,19 +195,118 @@ export function MobileOtherPage(props: any) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="user-description" style={{color: "white"}}>
+                                <div className="my_page_mobile_description">
                                     <p>{verifiedMemberData?.mb_description}</p>
                                 </div>
                             </div>
-                            <div className="page-center" style={{color: "white"}}>
-                                <div style={{display: "flex", alignItems: "center", gap: "30px"}}>
+                        </div>
+                        <div className="mobile_buttons">
+                            <button className="mobile_button" style={{background: "#FF007A"}}>Follow</button>
+                            <button className="mobile_button" style={{background: "#fff", color: "#000"}}>Message</button>
+                        </div>
+                        
+
+
+
+
+
+                            <div className="other_page_center">
+                            <TabContext value={value}>
+                                <Stack className="my_page_stack">
+                                    <div className="my_page_tablist">
+                                        <TabList 
+                                        onChange={handleChange} 
+                                        textColor={"inherit"}
+                                        TabIndicatorProps={{
+                                            style: { backgroundColor: "#FF007A" }
+                                        }}
+                                    >
+                                        <Tab label={<img src="/icons/other/posts.png" alt="" className="mobile_center_icon" />} value="1" />
+                                        <Tab label={<img src="/icons/other/story.png" alt="" className="mobile_center_icon" />} value="2" />
+                                        <div className="mobile_page_information" onClick={handleOpenModal}><Typography>Information</Typography></div>
+                                    </TabList>
+                                    </div>
+                                </Stack>
+                                <Box className='line' style={{marginTop: "-2px"}}/>
+                                
+                                <TabPanel value="1"> <MobileMyPosts filteredPosts={filteredPosts} setAllPosts={setAllPosts} /> </TabPanel>
+                                <TabPanel value="2"> <MobileStories filteredPosts={filteredPosts} setAllPosts={setAllPosts}/> </TabPanel>
+                            </TabContext>
+
+
+
+
+
+                            
+                            <div>
+                                <Modal
+                                    className="infoModalContainer"
+                                    open={open}
+                                    onClose={handleModalClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <div style={{width: "100%"}}>
+                                        <div className="member_info_closing">
+                                            <span>@{chosenMember?.mb_nick}<span>'s Information</span></span>
+                                            <div>
+                                                <img src="/icons/other/close.png" alt="" onClick={handleModalClose} className="info_close"/>
+                                            </div>
+                                            
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Name</div>
+                                            <div className="info">{chosenMember?.mb_name}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Surname</div>
+                                            <div className="info">{chosenMember?.mb_surname}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Birthday</div>
+                                            <div className="info">{moment(chosenMember?.mb_birthday).format('YYYY-MM-DD')}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Gender</div>
+                                            <div className="info">{chosenMember?.mb_gender}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Country</div>
+                                            <div className="info">{chosenMember?.mb_country}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">School</div>
+                                            <div className="info">{chosenMember?.mb_school}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Description</div>
+                                            <div className="info">{chosenMember?.mb_description}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Hobby</div>
+                                            <div className="info">{chosenMember?.mb_hobby}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Address</div>
+                                            <div className="info">{chosenMember?.mb_address}</div>
+                                        </div>
+                                        <div className="information">
+                                            <div className="info_category">Join</div>
+                                            <div className="info">{moment(chosenMember?.createdAt).format("YYYY-MM-DD")}</div>
+                                        </div>
+                                    </div>
+                                </Modal>
+                            </div>
+                        </div>
+                            {/* <div className="page-center" style={{color: "white"}}> */}
+                                {/* <div style={{display: "flex", alignItems: "center", gap: "30px"}}>
                                     <img src="/icons/other/posts.png" alt="" className="center_icon" width={"25px"}/>
                                     <Typography style={{cursor: "pointer"}} onClick={handleOpenModal}>Information</Typography>
                                     
-                                </div>
-                                <div className="line"></div>
+                                </div> */}
+                                {/* <div className="line"></div> */}
 
-                                <div>
+                                {/* <div> */}
                                     {/* <Modal
                                         className="infoModalContainer"
                                         open={open}
@@ -254,63 +361,13 @@ export function MobileOtherPage(props: any) {
                                             </div>
                                         </div>
                                     </Modal> */}
-                                </div>
-                            <div>
-                            <div className="page_bottom" style={{marginTop: "50px"}}>
-                                {filteredPosts && filteredPosts.length > 0 ? (
-                                    filteredPosts.map((post: Post) => (
-                                        post.post_type === "photo" ? (
-                                            // Photo Post
-                                            <div key={post._id}>
-                                                <div className="post">
-                                                    <img src={`${serverApi}/${post?.post_content}`} alt="" width="300px"/>
-                                                    {post.post_title}
-                                                    {/* {post.post_content} */}
-                                                </div>
-                                            </div>
-                                        ) : post.post_type === "article" ? (
-                                            // Article Post
-                                            <div className="post">
-                                                <div 
-                                                    className="article_post"
-                                                    style={{
-                                                        background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                                        color: post?.post_text_color ? post?.post_text_color : "black",
-                                                        textAlign: post.post_align === "center" ? "center" : "left"
+                                {/* </div> */}
+                            {/* <div> */}
 
-                                                    }}
-                                                >
-                                                    {post.post_content}
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            // Video Post
-                                            <div key={post._id}>
-                                                <div className="post">
-                                                    <video
-                                                        loop
-                                                        // playsInline
-                                                        controls
-                                                        width={"100%"}
-                                                    >
-                                                        <source
-                                                            src={`${serverApi}/${post?.post_content}`}
-                                                            type="video/mp4"
-                                                        />
-                                                    </video>
-                                                </div>
-                                            </div>
-                                        )
-                                    ))
-                                ) : (
-                                    <div>Post hali yo'q</div>
-                                )}
-                            </div>
+                            
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     )
 }

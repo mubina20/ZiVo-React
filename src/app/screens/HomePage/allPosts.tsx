@@ -13,18 +13,6 @@ import { Definer } from '../../../lib/definer';
 import MemberApiService from '../../apiServices/memberApiService';
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
 
-const actionDispatch = (dispatch: Dispatch) => ({
-    setAllPosts: (data: Post[]) => 
-        dispatch(setAllPosts(data))
-});
-
-const allPostsRetriever = createSelector(
-    retrieveAllPosts,
-    (allPosts) => ({
-        allPosts
-    })
-);
-
 export function AllPosts(props: any) {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);

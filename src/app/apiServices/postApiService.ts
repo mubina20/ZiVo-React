@@ -175,7 +175,28 @@ class PostApiService {
             console.log(`ERROR :: createArticlePost: ${err.message}`);
             throw err;
         }
-    };    
+    };   
+    
+    public async getAllSavedPosts() {
+        try {
+            const result = await axios.get(
+                this.path + "/post/all-savedPosts", 
+                { withCredentials: true }
+            );
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state !== "fail", result?.data?.message);
+            console.log("getAllPosts STATE ::", result.data.state);
+
+            const savedPosts = result.data.data;
+            console.log("savedPosts", savedPosts);
+
+            return savedPosts;
+        } catch (err: any) {
+            console.log(`ERROR :: getAllgetAllPostsMembers: ${err.message}`);
+            throw err;
+        }
+    };
 };
 
 export default PostApiService;
