@@ -1,53 +1,237 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "../../../css/post.css";
-import { Modal } from '@mui/material';
+import { Modal, Typography } from '@mui/material';
+import { useHistory, useParams } from 'react-router-dom';
+import { Post } from '../../../types/post';
+import { useDispatch } from 'react-redux';
+import { Comment, CreateComment } from '../../../types/comment';
+import { verifiedMemberData } from '../../apiServices/verify';
+import PostApiService from '../../apiServices/postApiService';
+import { setChosenPost } from '../HomePage/slice';
+import CommentApiService from '../../apiServices/commentApiService';
+import { Definer } from '../../../lib/definer';
+import assert from 'assert';
+import MemberApiService from '../../apiServices/memberApiService';
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from '../../../lib/sweetAlert';
+import { serverApi } from '../../../lib/config';
+import moment from 'moment';
+
+interface RouteParams {
+    postId: string;
+    postType: string;
+}
 
 export function MobileChosenPost() {
     /** INITIALIZATIONS **/
-  const [openComment, setOpenComment] = useState(false);
+    const [openComment, setOpenComment] = useState(false);
 
-  /** HANDLERS **/
-  const handleOpenCommentModal = () => setOpenComment(true);
-  const handleCloseCommentModal = () => setOpenComment(false);
+    
+    const history = useHistory();
+    const { postId } = useParams<RouteParams>();
+    const { postType } = useParams<RouteParams>();
+    const [post, setPost] = useState<Post>();
+    const [comments, setComments] = useState<Comment[]>();
+    const dispatch = useDispatch();
+    const textInput: any = useRef(null);
+    const [createComment, setCreateComment] = useState<CreateComment>({
+        mb_id: verifiedMemberData._id,
+		post_id: postId,
+		comment: ""
+	});
+    
+    /** HANDLERS **/
+    const handleOpenCommentModal = () => setOpenComment(true);
+    const handleCloseCommentModal = () => setOpenComment(false);
+
+    const handleGoBack = () => {
+        history.goBack(); 
+        history.goForward();
+    };
+
+    useEffect(() => {
+        const handleChosenPost = async () => {
+            try {
+                const postService = new PostApiService();
+                const chosenPostData = await postService.getChosenPost(postId, postType); 
+                dispatch(setChosenPost(chosenPostData)); 
+                setPost(chosenPostData);
+            } catch (error) {
+                console.error("ERROR while fetching chosen post:", error);
+            }
+        };
+    
+        handleChosenPost();
+    }, [dispatch, postId]);
+
+    useEffect(() => {
+        const findComments = async () => {
+            try {
+                const commentServive = new CommentApiService();
+                const postComments = await commentServive.findChosenPostComments(postId);
+                
+                if (postComments.length > 0) {
+                    setComments(postComments);
+                } else {
+                    setComments([]); 
+                }
+
+                // console.log("comments ::", postComments);
+            } catch (error) {
+                console.error("ERROR findComments ::", error);
+            }
+        };
+
+        findComments();
+    }, []);
+
+    const handlePostLike = async (e: any, id: any) => {
+        try {
+            assert.ok(verifiedMemberData, Definer.auth_err1);
+            
+            const memberService = new MemberApiService();
+            const likeResult = await memberService.memberLikeTarget({
+                like_ref_id: id,
+                group_type: postType,
+            });
+            assert.ok(likeResult, Definer.general_err1);
+            await sweetTopSmallSuccessAlert("success", 700, false);
+            window.location.reload();
+        } catch (err: any) {
+            console.log(`ERROR :: targetLikeTop, ${err}`);
+            sweetErrorHandling(err).then();
+        }
+    };
+
+    const handleComment = (e: any) => {
+		createComment.comment = e.target.value;
+		setCreateComment({ ...createComment });
+	};
+
+    const getKeyHandler = (e: any) => {
+		try {
+			if (e.key == 'Enter') {
+				assert.ok(createComment.comment, Definer.input_err3);
+				handleSendButton();
+			}
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	};
+
+    const handleMemberSelect = async (memberId: any) => {
+        try {
+            if(memberId === verifiedMemberData._id){
+                history.push('/my-page');
+            } else{
+                history.push(`/member/${memberId}`)
+            }
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
+
+    const handleSendButton = async () => {
+        try {
+            const postService = new PostApiService();
+            await postService.createComment(createComment);
+    
+            window.location.reload();
+            await sweetTopSmallSuccessAlert("Comment sent successfully!", 700, false);
+        } catch (error) {
+            console.log(`ERROR :: handleSendButton, ${error}`);
+            sweetErrorHandling(error).then();
+        }
+    };
+
     return (
         <div className='mobile-post-container'>
-            <img src="/icons/other/close.png" alt="" className='close-button'/>
+            <img src="/icons/other/close.png" alt="" className='close-button' onClick={handleGoBack}/>
             <div className='mobile-post-img-wrapper'>
-                {/* <img src="https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D" alt="" className='mobile-post-img'/> */}
-                {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnOrOwY43A2IXz1v0yLjmHVWj0d2_YMm_6eA&usqp=CAU" alt="" className='mobile-post-img'/> */}
-                <img src="https://www.holidayidea.com.my/promo/img/frntbck2.jpg" alt="" className='mobile-post-img'/>
+                {post?.post_type === "photo" ? (
+                    <img 
+                        src={`${serverApi}/${post?.post_content}`}
+                        alt="" 
+                        className='mobile-post-img'
+                    />
+                ) : post?.post_type === "article" ? (
+                    <div className="left_content">
+                        <div 
+                            className="left_article_content"
+                            style={{
+                                background: post?.post_bg_color ? post?.post_bg_color : "grey",
+                                color: post?.post_text_color ? post?.post_text_color : "black",
+                                textAlign: post.post_align === "center" ? "center" : "left"
+
+                            }}
+                        >
+                            {post.post_content}
+                        </div>
+                    </div>
+                    
+                ) : post?.post_type === "video" ? (
+                    <video 
+                        src={`${serverApi}/${post?.post_content}`} 
+                        className="mobile-post-img" 
+                        controls
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                ) : (
+                    <div>Unsupported post type</div>
+                )}
             </div>
             <div className="post-left-data-wrapper">
-                <img src="/icons/post/like.png" alt="" />    
+                {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
+                    <img 
+                        src="/icons/post/heart.png" 
+                        onClick={(e) => handlePostLike(e, post?._id)}
+                        alt="" 
+                        className="like"
+                    />
+                ) : (
+                    <img 
+                        src="/icons/post/like.png" 
+                        onClick={(e) => handlePostLike(e, post?._id)}
+                        alt="" 
+                        className="like"
+                    />
+                )}    
                 <img src="/icons/post/chat.png" alt=""  onClick={handleOpenCommentModal}/>
                 <img src="/icons/post/share.png" alt="" />
                 <img src="/icons/post/bookmark.png" alt="" />
             </div> 
             <div className="post-user-data-wrapper">
                 <div className="user-data">
-                    <img src="/icons/user.png" alt="" width={"50px"}/>
+                    <img 
+                        src={
+                            post?.member?.mb_profile_image 
+                            ? `${serverApi}/${post?.member.mb_profile_image}`  
+                            : "/icons/user.png"
+                        } 
+                        alt="" 
+                        width={"50px"}
+                        height={"50px"}
+                        style={{borderRadius: "50%", cursor: "pointer"}}
+                        onClick={() => handleMemberSelect(post?.member?._id)}
+                    />
                     <div>
-                        <p className="username">
-                            @Krodeg
+                        <p className="username" onClick={() => handleMemberSelect(post?.member?._id)}>
+                            @{post?.member.mb_nick}
                         </p>
                         <p className="date">
-                            2024.3.31
+                            {moment(post?.createdAt).format("YYYY-MM-DD")}
                         </p>
                     </div>
                 </div>
             </div>
             <div className="description-wrapper">
                 <p className="description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus itaque excepturi aut molestiae, consequuntur corporis veniam quod quaerat amet numquam, illo, eligendi voluptatum id impedit inventore. Excepturi non exercitationem ipsa nulla esse aliquam, unde vel animi laborum distinctio accusantium magnam natus cumque voluptatibus magni expedita obcaecati reiciendis quos cupiditate perferendis omnis ducimus? Minima quam vero porro reiciendis laboriosam odio voluptatem quos ut deserunt doloribus dolores quae nemo libero voluptate asperiores, deleniti saepe expedita! Odio itaque ipsam eos tenetur quibusdam facere a corrupti enim! Neque deleniti, harum voluptatibus animi provident culpa doloribus earum hic aspernatur architecto in nam voluptatum adipisci dolore?
+                    {post?.post_title}
                 </p>
             </div>
 
-
-
-
-
             <Modal
-                className="infoModalContainer"
+                className="mobileInfoModalContainer"
                 open={openComment}
                 onClose={handleCloseCommentModal }
                 aria-labelledby="modal-modal-title"
@@ -57,56 +241,28 @@ export function MobileChosenPost() {
                     <div style={{position: "fixed"}}>
                         <img src="/icons/other/close.png" alt="" className='close-button' onClick={handleCloseCommentModal}/>
                     </div>
-                    <div className="modal-user-comment-wrapper">
-                        <img src="/icons/user.png" alt="" className='modal-user-profile'/>
-                        <div className="modal-user-data">
-                            <div style={{display: "flex", gap: "20px", alignItems: "center"}}>
-                                <p className="modal-username">@Krodeg</p>
-                                <p className="modal-date">2024-04-01</p>
+                    {comments?.map((comment: Comment) => {
+                        return(
+                            <div className="modal-user-comment-wrapper">
+                                <img src={
+                                            comment?.member?.mb_profile_image 
+                                            ? `${serverApi}/${comment?.member.mb_profile_image}`  
+                                            : "/icons/user.png"
+                                        } alt="" className='modal-user-profile' onClick={() => handleMemberSelect(comment?.member?._id)}/>
+                                <div className="modal-user-data">
+                                    <div style={{display: "flex", gap: "20px", alignItems: "center"}}>
+                                        <p className="modal-username">@{comment.member.mb_nick}</p>
+                                        <p className="modal-date">{moment(comment?.createdAt).format("YYYY-MM-DD")}</p>
+                                    </div>
+                                    <div>
+                                        <p className="modal-description">{comment?.comment}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <p className="modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet vero atque blanditiis repudiandae maiores doloribus, quas ab veritatis eaque consequatur delectus tempore perferendis quidem modi dolorem facere iusto tenetur qui. Eos unde laudantium non earum rerum vel ipsam aut numquam. Dolorem ipsa, perspiciatis tempora commodi eos, ex error placeat porro voluptas repellendus eveniet molestiae vel maiores culpa saepe suscipit minus at. Veritatis veniam quasi sed amet id quam vero inventore consectetur dignissimos ducimus fugiat earum mollitia rerum vel fugit voluptate, quo quibusdam quae illo corrupti sunt est blanditiis. Recusandae dicta ducimus adipisci minus dignissimos! Unde sunt accusantium alias veniam odit ex quidem voluptates repellendus porro nesciunt, itaque eos magni laboriosam nostrum. Autem nostrum odio debitis officia atque, expedita quaerat soluta amet non error magnam odit qui illum delectus architecto fugit minus ullam! Magnam autem soluta molestiae, quibusdam ratione deleniti asperiores accusamus perferendis dicta, voluptas temporibus cumque ipsum, dolorum consectetur voluptate suscipit non velit! Dignissimos voluptatum aut numquam dolore facere, placeat officia molestias repellat? Accusamus saepe eum itaque voluptatibus reprehenderit enim consequuntur fugit esse. Vitae totam dolore commodi eius et maiores ab reprehenderit? Ipsum, ad reprehenderit tempore obcaecati doloribus delectus fugit, quod in impedit aperiam, labore est pariatur deleniti incidunt molestiae!</p>
-                            </div>
-                            <div style={{display: "flex", flexDirection: "column", marginTop: "10px", alignItems: "end", fontSize: "13px", justifyContent: "center"}}>
-                                <img src="/icons/post/like.png" alt="" className='modal-like'/>
-                                <p className="modal-like-count">30K</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="modal-user-comment-wrapper">
-                        <img src="/icons/user.png" alt="" className='modal-user-profile'/>
-                        <div className="modal-user-data">
-                            <div style={{display: "flex", gap: "20px", alignItems: "center"}}>
-                                <p className="modal-username">@Krodeg</p>
-                                <p className="modal-date">2024-04-01</p>
-                            </div>
-                            <div>
-                                <p className="modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet vero atque blanditiis repudiandae maiores doloribus, quas ab veritatis eaque consequatur delectus tempore perferendis quidem modi dolorem facere iusto tenetur qui. Eos unde laudantium non earum rerum vel ipsam aut numquam. Dolorem ipsa, perspiciatis tempora commodi eos, ex error placeat porro voluptas repellendus eveniet molestiae vel maiores culpa saepe suscipit minus at. Veritatis veniam quasi sed amet id quam vero inventore consectetur dignissimos ducimus fugiat earum mollitia rerum vel fugit voluptate, quo quibusdam quae illo corrupti sunt est blanditiis. Recusandae dicta ducimus adipisci minus dignissimos! Unde sunt accusantium alias veniam odit ex quidem voluptates repellendus porro nesciunt, itaque eos magni laboriosam nostrum. Autem nostrum odio debitis officia atque, expedita quaerat soluta amet non error magnam odit qui illum delectus architecto fugit minus ullam! Magnam autem soluta molestiae, quibusdam ratione deleniti asperiores accusamus perferendis dicta, voluptas temporibus cumque ipsum, dolorum consectetur voluptate suscipit non velit! Dignissimos voluptatum aut numquam dolore facere, placeat officia molestias repellat? Accusamus saepe eum itaque voluptatibus reprehenderit enim consequuntur fugit esse. Vitae totam dolore commodi eius et maiores ab reprehenderit? Ipsum, ad reprehenderit tempore obcaecati doloribus delectus fugit, quod in impedit aperiam, labore est pariatur deleniti incidunt molestiae!</p>
-                            </div>
-                            <div style={{display: "flex", flexDirection: "column", marginTop: "10px", alignItems: "end", fontSize: "13px", justifyContent: "center"}}>
-                                <img src="/icons/post/like.png" alt="" className='modal-like'/>
-                                <p className="modal-like-count">30K</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="modal-user-comment-wrapper">
-                        <img src="/icons/user.png" alt="" className='modal-user-profile'/>
-                        <div className="modal-user-data">
-                            <div style={{display: "flex", gap: "20px", alignItems: "center"}}>
-                                <p className="modal-username">@Krodeg</p>
-                                <p className="modal-date">2024-04-01</p>
-                            </div>
-                            <div>
-                                <p className="modal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet vero atque blanditiis repudiandae maiores doloribus, quas ab veritatis eaque consequatur delectus tempore perferendis quidem modi dolorem facere iusto tenetur qui. Eos unde laudantium non earum rerum vel ipsam aut numquam. Dolorem ipsa, perspiciatis tempora commodi eos, ex error placeat porro voluptas repellendus eveniet molestiae vel maiores culpa saepe suscipit minus at. Veritatis veniam quasi sed amet id quam vero inventore consectetur dignissimos ducimus fugiat earum mollitia rerum vel fugit voluptate, quo quibusdam quae illo corrupti sunt est blanditiis. Recusandae dicta ducimus adipisci minus dignissimos! Unde sunt accusantium alias veniam odit ex quidem voluptates repellendus porro nesciunt, itaque eos magni laboriosam nostrum. Autem nostrum odio debitis officia atque, expedita quaerat soluta amet non error magnam odit qui illum delectus architecto fugit minus ullam! Magnam autem soluta molestiae, quibusdam ratione deleniti asperiores accusamus perferendis dicta, voluptas temporibus cumque ipsum, dolorum consectetur voluptate suscipit non velit! Dignissimos voluptatum aut numquam dolore facere, placeat officia molestias repellat? Accusamus saepe eum itaque voluptatibus reprehenderit enim consequuntur fugit esse. Vitae totam dolore commodi eius et maiores ab reprehenderit? Ipsum, ad reprehenderit tempore obcaecati doloribus delectus fugit, quod in impedit aperiam, labore est pariatur deleniti incidunt molestiae!</p>
-                            </div>
-                            <div style={{display: "flex", flexDirection: "column", marginTop: "10px", alignItems: "end", fontSize: "13px", justifyContent: "center"}}>
-                                <img src="/icons/post/like.png" alt="" className='modal-like'/>
-                                <p className="modal-like-count">30K</p>
-                            </div>
-                        </div>
-                    </div>
+                        )
+                    })}                    
                     <div className="modal-input-wrapper">
-                        <input type="text" className='modal-input' placeholder='Comment...'/>
+                        <input type="text" className='modal-input' placeholder='Comment...' onChange={handleComment} onKeyDown={getKeyHandler} ref={textInput}/>
                     </div>
                 </div>
             </Modal>

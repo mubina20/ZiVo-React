@@ -293,13 +293,14 @@
 
 
 
-/* .infoModalContainer {
-    width: 90%;
-    height: 90%;
+.mobileInfoModalContainer {
+    width: 100%;
+    height: 100%;
     overflow: scroll;
     animation-name: modal;
     animation-duration: 1s;
-} */
+    background: #000;
+}
 
 @keyframes modal {
     to {
@@ -328,11 +329,14 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    color: #fff;
 }
 
 .modal-user-profile {
     width: 60px;
     height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .modal-date {
@@ -350,10 +354,10 @@
 }
 
 .modal-input-wrapper {
-    width: 89%;
+    width: 100%;
     height: 10%;
     position: fixed;
-    bottom: 5%;
+    bottom: 0;
     background-color: black;
     border-top: 2px solid #FF007A;
     border-bottom: 2px solid #FF007A;
