@@ -92,15 +92,12 @@ export function MobileMembersPage() {
                             : "/icons/user.png";
                         console.log("Profile image:", profile_image);
                             return(
-                            <div className="card" key={member._id} onClick={() => handleMemberSelect(member._id)}>
-                                <div className="close_box">
-                                    <div className="close"><img src="/icons/other/close.png" alt="" width={"15px"}/></div>
-                                </div>
+                            <div className="mobile_card" key={member._id} onClick={() => handleMemberSelect(member._id)}>
                                 <div className="user_info">
-                                    <img src={profile_image} alt="" className="user_icon"/>
+                                    <img src={profile_image} alt="" className="mobile_user_icon"/>
                                     <Typography style={{fontSize: "15px", cursor: "pointer"}}>{member.mb_name}</Typography>
                                     <Typography style={{fontSize: "12px", opacity: "0.5"}}>@{member.mb_nick}</Typography>
-                                    <button className="follow_btn">Follow</button>
+                                    <button className="mobile_info_btn">Information</button>
                                 </div>
                             </div>
                             )

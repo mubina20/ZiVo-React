@@ -3,26 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-.user_icon svg {
-    margin-bottom: -89px;
-    margin-left: -4.5px;
-}
-
-
-
 .post-container {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 573px;
-    background: rgb(78, 78, 187);
+    /* background: rgb(78, 78, 187); */
     margin-top: 100px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     margin: auto;
-    z-index: -1;
+    z-index: 1;
     margin-bottom: 50px;
 }
 
@@ -93,4 +85,61 @@
     width: 25px;
     height: 25px;
     margin-right: 8px;
+    cursor: pointer;
 }
+.mobile-main{
+    background: #101010;
+    margin-top: -10px;
+}
+.mobile_home_stories{
+    display: flex;
+    margin: 70px auto;
+    width: 94%;
+    height: 120px;
+    overflow-x: scroll;
+    color: #fff;
+    gap: 15px;
+    font-size: 13px;
+    /* background: red; */
+}
+.mobileStoryContent{
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    border: 2px solid #FF007A;
+}
+.mobileStoryContentArticle{
+    margin-top: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    border: 2px solid #FF007A;
+    display: flex;
+    justify-content: center;
+    font-size: 5px;
+    overflow: hidden;
+}
+.story_box{
+    display: flex;
+    /* background: blue; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mobile-post-data{
+    display: flex;
+    background: #000000;
+    width: 100%;
+    height: 150px;
+    padding: 20px 30px;
+    color: #ffffff;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+
+
+
+

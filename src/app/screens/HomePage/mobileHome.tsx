@@ -17,7 +17,7 @@ import 'swiper/css/scrollbar'
 import PostApiService from "../../apiServices/postApiService";
 import { Post } from "../../../types/post";
 
-import { setAllPosts } from "./slice";
+import { setAllPosts, setChosenPost, setChosenStory } from "./slice";
 import { retrieveAllPosts } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { AllPosts } from "./allPosts";
@@ -25,19 +25,26 @@ import { AllVideoPosts } from "./allVideoPosts";
 import { AllPhotoPosts } from "./allPhotoPosts";
 import { AllArticlePosts } from "./allArticlePosts";
 import moment from 'moment';
+import { Dispatch } from '@reduxjs/toolkit';
+import { setAllMembers, setChosenMember } from '../MemberPage/slice';
+import { Member } from '../../../types/user';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { verifiedMemberData } from '../../apiServices/verify';
 
-const members = [
-    { id: 1, nickName: 'samo_ping12' },
-    { id: 2, nickName: 'samo_ping12' },
-    { id: 3, nickName: 'samo_ping12' },
-    { id: 4, nickName: 'samo_ping12' },
-    { id: 5, nickName: 'samo_ping12' }
-];
+const actionDispatch = (dispatch: Dispatch) => ({
+    setChosenPost: (data: Post) => dispatch(setChosenPost(data)),
+    setChosenStory: (data: Post) => dispatch(setChosenStory(data)),
+    setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
+    setAllMembers: (data: Member[]) => dispatch(setAllMembers(data))
+});
 
 export function MobileHome() {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
     const [value, setValue] = useState("1");
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     /** HANDLERS **/
     useEffect(() => {
@@ -55,7 +62,40 @@ export function MobileHome() {
     }, []);
     // console.log("allPosts", allPosts);
     // const {allPosts} = props;
-    console.log("props > allPosts", allPosts);
+    // console.log("props > allPosts", allPosts);
+
+    const handlePostSelect = async (postType: any, postId: any) => {
+        try {
+            const postService = new PostApiService();
+            const chosenPostData = await postService.getChosenPost(postType, postId);
+            dispatch(setChosenPost(chosenPostData)); 
+            history.push(`/post/${chosenPostData.post_type}/${chosenPostData._id}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
+    const handleStorySelct = async (story_type: any, story_id: any) => {
+        try {
+            const postService = new PostApiService();
+            const chosenStoryData = await postService.getChosenPost(story_type, story_id);
+            dispatch(setChosenStory(chosenStoryData)); 
+            history.push(`/stories/${chosenStoryData.member.mb_nick}/${chosenStoryData.post_type}/${chosenStoryData._id}`); 
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
+
+    const handleMemberSelect = async (memberId: any) => {
+        try {
+            if(memberId === verifiedMemberData._id){
+                history.push('/my-page');
+            } else{
+                history.push(`/member/${memberId}`)
+            }
+        } catch (error) {
+            console.error("ERROR handleMemberSelect ::", error);
+        }
+    };
 
     
 
@@ -69,70 +109,75 @@ export function MobileHome() {
             <MobileFooter />
             
             <div className="mobile-main">
-                <div style={{display: "flex", margin: "70px 0 70px 20px", width: "90%", overflow: "scroll", color: "white", fontSize: "13px", gap: "15px"}}>
-                    {members.map((member) => {
-                        return (
-                            <div className="user_icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
-                                    <circle cx="45" cy="45" r="44" stroke="url(#paint0_angular_35_88)" strokeWidth="2" />
-                                    <defs>
-                                        <radialGradient id="paint0_angular_35_88" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45 45) rotate(90) scale(45)">
-                                            <stop offset="0.0961368" stopColor="#FF007A" />
-                                            <stop offset="0.329601" stopColor="#780039" />
-                                            <stop offset="0.622687" stopColor="#FF007A" />
-                                            <stop offset="0.87147" stopColor="#7F003D" />
-                                        </radialGradient>
-                                    </defs>
-                                </svg>
-                                <img src="/icons/user.png" alt="user" width={"82px"} />
-                                <p>@{member.nickName}</p>
-                            </div>
-                        );
-                    })}
+                <div className='mobile_home_stories'>
+                {allPosts.length > 0 ? (
+    allPosts.map((post: Post) => {
+        return (
+            <div className="user-icon">
+                {post.post_type === "photoStory" && (
+                    <div key={post._id} className='story_box'>
+                        <img src={`${serverApi}/${post?.post_content}`} className="mobileStoryContent" alt="user" onClick={() => handleStorySelct(post?._id, "photoStory")}/>
+                        <p onClick={() => handleMemberSelect(post.member?.mb_nick)}>
+                            @{post.member?.mb_nick}
+                        </p>
+                    </div>
+                )}
+                {post.post_type === "articleStory" && (
+                    <div className='story_box'>
+                        <div 
+                            key={post._id} onClick={() => handleStorySelct(post?._id, "articleStory")}
+                            className="mobileStoryContentArticle"
+                            style={{
+                                background: post?.post_bg_color ? post?.post_bg_color : "#000",
+                                color: post?.post_text_color ? post?.post_text_color : "#fff",
+                                // textAlign: post.post_align === "center" ? "center" : "left"
+                            }}
+                            // onClick={() => handlePostSelect(post?._id, "article")}
+                        >
+                            {post.post_content}
+                        </div>
+                        <p onClick={() => handleMemberSelect(post.member?.mb_nick)}>
+                            @{post.member?.mb_nick}
+                        </p>
+                    </div>
+                )}
+                {post.post_type === "videoStory" && (
+                    <div key={post._id} className='story_box' onClick={() => handleStorySelct(post?._id, "videoStory")}>
+                        <video
+                            loop
+                            playsInline
+                            className="mobileStoryContent"
+                        >
+                            <source
+                                src={`${serverApi}/${post?.post_content}`}
+                                type="video/mp4"
+                            />
+                        </video>
+                        <p onClick={() => handleMemberSelect(post.member?.mb_nick)}>
+                            @{post.member?.mb_nick}
+                        </p>
+                    </div>
+                )}
+                {post.post_type !== "videoStory" && post.post_type !== "articleStory" && post.post_type !== "photoStory" && (
+    null
+)}
+
+            </div>
+        );
+    })
+) : (
+    <div>hech nima yo'q</div>
+)}
                 </div>
 
                 <div className="mobile-post">
-                    {/* <div className="post-container">
-                        <div className="post-data">
-                            <div className="post-top">
-                                <div className="user-container">
-                                    <img
-                                        src='/icons/user.png' 
-                                        alt="" 
-                                        className="post-user-icon"
-                                        style={{borderRadius: "50%"}}
-                                    />
-                                    <div className="user-info">
-                                        <Typography className="name" style={{fontSize: "16px", cursor: "pointer"}}>@samo_ping12</Typography>
-                                        <Typography className="name" style={{opacity: "0.56", fontSize: "13px"}}>2024.07.10</Typography>
-                                    </div>
-                                </div>
-                                <img src={"/icons/post/bookmark.png"} alt="" className="icon"/>
-                            </div>
-                            <Typography className="post-desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
-                        </div>
-
-                        <div className="post-content">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQWdcQ6mvC3TyHVt4IjXt2s42VSon8woXN-A&usqp=CAU" alt="" />
-                        </div>
-
-                        <div className="post-bottom">
-                            <div className="mobile-left">
-                                <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                <img src="/icons/post/chat.png" alt="" className="bottom-icon"/><span>100</span>
-                            </div>
-                            <div className="mobile-right">
-                                <img src="/icons/post/share.png" alt="" className="bottom-icon"/>
-                            </div>
-                        </div>
-                    </div> */}
                     {allPosts.map((post: Post) => (
                         post.post_type === "photo" ? (
                             // Photo Post
-                            <div className="post-container" key={post._id}>
-                                <div className="post-data">
+                            <div className="post-container" key={post._id} >
+                                <div className="mobile-post-data" style={{borderRadius: "none"}}>
                                     <div className="post-top">
-                                        <div className="user-container">
+                                        <div className="user-container" onClick={() => handleMemberSelect(post?.member?._id)}>
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 
@@ -149,7 +194,7 @@ export function MobileHome() {
                                         </div>
                                         <img src={"/icons/post/bookmark.png"} alt="" className="icon"/>
                                     </div>
-                                    <Typography className="post-desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
+                                    <Typography className="post-desctiption">{post.post_title}</Typography>
                                 </div>
 
                                 <div className="post-content">
@@ -159,7 +204,7 @@ export function MobileHome() {
                                 <div className="post-bottom">
                                     <div className="mobile-left">
                                         <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon"/><span>100</span>
+                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon" onClick={() => handlePostSelect(post?._id, "photo")}/><span>100</span>
                                     </div>
                                     <div className="mobile-right">
                                         <img src="/icons/post/share.png" alt="" className="bottom-icon"/>
@@ -169,9 +214,9 @@ export function MobileHome() {
                         ) : post.post_type === "article" ? (
                             // Article Post
                             <div className="post-container" key={post._id}>
-                                <div className="post-data">
+                                <div className="mobile-post-data">
                                     <div className="post-top">
-                                        <div className="user-container">
+                                        <div className="user-container" onClick={() => handleMemberSelect(post?.member?._id)}>
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 
@@ -205,19 +250,19 @@ export function MobileHome() {
                                 <div className="post-bottom">
                                     <div className="mobile-left">
                                         <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon"/><span>100</span>
+                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon" onClick={() => handlePostSelect(post?._id, "article")}/><span>100</span>
                                     </div>
                                     <div className="mobile-right">
                                         <img src="/icons/post/share.png" alt="" className="bottom-icon"/>
                                     </div>
                                 </div>
                             </div>
-                        ) : (
+                        ) : post.post_type === "video" ? (
                             // Video Post
                             <div className="post-container" key={post._id}>
-                                <div className="post-data">
+                                <div className="mobile-post-data">
                                     <div className="post-top">
-                                        <div className="user-container">
+                                        <div className="user-container" onClick={() => handleMemberSelect(post?.member?._id)}>
                                             <img 
                                                 src={
                                                     post?.member?.mb_profile_image 
@@ -234,7 +279,7 @@ export function MobileHome() {
                                         </div>
                                         <img src={"/icons/post/bookmark.png"} alt="" className="icon"/>
                                     </div>
-                                    <Typography className="post-desctiption">Lorem ipsum lorem ipsum lorem ipsum lorem ipsum</Typography>
+                                    <Typography className="post-desctiption">{post?.post_title}</Typography>
                                 </div>
 
                                 <div className="post-content">
@@ -253,13 +298,15 @@ export function MobileHome() {
                                 <div className="post-bottom">
                                     <div className="mobile-left">
                                         <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon"/><span>100</span>
+                                        <img src="/icons/post/chat.png" onClick={() => handlePostSelect(post?._id, "video")} alt="" className="bottom-icon"/><span>100</span>
                                     </div>
                                     <div className="mobile-right">
                                         <img src="/icons/post/share.png" alt="" className="bottom-icon"/>
                                     </div>
                                 </div>
                             </div>
+                        ): (
+                            null
                         )
                     ))}
                 </div>

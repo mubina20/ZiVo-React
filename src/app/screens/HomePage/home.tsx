@@ -204,6 +204,9 @@ export function Home() {
                         </p>
                     </div>
                 )}
+                {post.post_type !== "videoStory" && post.post_type !== "articleStory" && post.post_type !== "photoStory" && (
+    null
+)}
             </div>
         );
     })

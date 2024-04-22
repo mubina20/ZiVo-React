@@ -96,9 +96,34 @@
     height: auto;
     padding: 0 20px;
     display: grid;
-    grid-template-areas: 'a a';
-    gap: 20px;
+    grid-template-areas: 'a a a';
+    gap: 5px;
     margin-bottom: 100px;
+}
+.mobile_card{
+    width: 120px;
+    height: 160px;
+    border-radius: 16px;
+    border: 1px solid #fff;
+    background: #1e1e1e56;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mobile_user_icon{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+.mobile_info_btn{
+    width: 77px;
+    height: 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #fe067e;
+    font-size: 13px;
+    color: #fff;
 }
 
 .mobile-members{
