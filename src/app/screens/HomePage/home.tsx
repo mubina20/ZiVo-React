@@ -103,121 +103,121 @@ export function Home() {
     return(
         <div className="main">
             <div className="story-wrapper">
-            <Carousel
-  additionalTransfrom={0}
-  arrows
-  autoPlaySpeed={3000}
-  centerMode={false}
-  className=""
-  containerClass="container-with-dots"
-  dotListClass=""
-  draggable
-  focusOnSelect={false}
-  infinite
-  itemClass=""
-  keyBoardControl
-  minimumTouchDrag={80}
-  pauseOnHover
-  renderArrowsWhenDisabled={false}
-  renderButtonGroupOutside={false}
-  renderDotsOutside={false}
-  responsive={{
-    desktop: {
-      breakpoint: {
-        max: 3000,
-        min: 1024
-      },
-      items: 3,
-      partialVisibilityGutter: 40
-    },
-    mobile: {
-      breakpoint: {
-        max: 464,
-        min: 0
-      },
-      items: 1,
-      partialVisibilityGutter: 30
-    },
-    tablet: {
-      breakpoint: {
-        max: 1024,
-        min: 464
-      },
-      items: 2,
-      partialVisibilityGutter: 30
-    }
-  }}
-  rewind={false}
-  rewindWithAnimation={false}
-  rtl={false}
-  shouldResetAutoplay
-  showDots={false}
-  sliderClass=""
-  slidesToSlide={1}
-  swipeable
->
-{allPosts.length > 0 ? (
-    allPosts.map((post: Post) => {
-        return (
-            <div className="user-icon">
-                {post.post_type === "photoStory" && (
-                    <div key={post._id} >
-                        <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" onClick={() => handleStorySelct(post?._id, "photoStory")}/>
-                        <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
-                            @{post.member?.mb_nick}
-                        </p>
-                    </div>
-                )}
-                {post.post_type === "articleStory" && (
-                    <div>
-                        <div 
-                            key={post._id} onClick={() => handleStorySelct(post?._id, "articleStory")}
-                            className="storyContentArticle"
-                            style={{
-                                background: post?.post_bg_color ? post?.post_bg_color : "#000",
-                                color: post?.post_text_color ? post?.post_text_color : "#fff",
-                                // textAlign: post.post_align === "center" ? "center" : "left"
-                            }}
-                            // onClick={() => handlePostSelect(post?._id, "article")}
-                        >
-                            {post.post_content}
-                        </div>
-                        <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
-                            @{post.member?.mb_nick}
-                        </p>
-                    </div>
-                )}
-                {post.post_type === "videoStory" && (
-                    <div key={post._id} onClick={() => handleStorySelct(post?._id, "videoStory")}>
-                        <video
-                            loop
-                            playsInline
-                            className="storyContent"
-                        >
-                            <source
-                                src={`${serverApi}/${post?.post_content}`}
-                                type="video/mp4"
-                            />
-                        </video>
-                        <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
-                            @{post.member?.mb_nick}
-                        </p>
-                    </div>
-                )}
-                {post.post_type !== "videoStory" && post.post_type !== "articleStory" && post.post_type !== "photoStory" && (
-    null
-)}
-            </div>
-        );
-    })
-) : (
-    <div>hech nima yo'q</div>
-)}
+            {/* <Carousel
+                additionalTransfrom={0}
+                arrows
+                autoPlaySpeed={3000}
+                centerMode={false}
+                className=""
+                containerClass="container-with-dots"
+                dotListClass=""
+                draggable
+                focusOnSelect={false}
+                infinite
+                itemClass=""
+                keyBoardControl
+                minimumTouchDrag={80}
+                pauseOnHover
+                renderArrowsWhenDisabled={false}
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                responsive={{
+                    desktop: {
+                    breakpoint: {
+                        max: 3000,
+                        min: 1024
+                    },
+                    items: 3,
+                    partialVisibilityGutter: 40
+                    },
+                    mobile: {
+                    breakpoint: {
+                        max: 464,
+                        min: 0
+                    },
+                    items: 1,
+                    partialVisibilityGutter: 30
+                    },
+                    tablet: {
+                    breakpoint: {
+                        max: 1024,
+                        min: 464
+                    },
+                    items: 2,
+                    partialVisibilityGutter: 30
+                    }
+                }}
+                rewind={false}
+                rewindWithAnimation={false}
+                rtl={false}
+                shouldResetAutoplay
+                showDots={false}
+                sliderClass=""
+                slidesToSlide={1}
+                swipeable
+                >
+                    {allPosts.length > 0 ? (
+                        allPosts.map((post: Post) => {
+                            return (
+                                <div className="user-icon">
+                                    {post.post_type === "photoStory" && (
+                                        <div key={post._id} >
+                                            <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" onClick={() => handleStorySelct(post?._id, "photoStory")}/>
+                                            <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
+                                                @{post.member?.mb_nick}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {post.post_type === "articleStory" && (
+                                        <div>
+                                            <div 
+                                                key={post._id} onClick={() => handleStorySelct(post?._id, "articleStory")}
+                                                className="storyContentArticle"
+                                                style={{
+                                                    background: post?.post_bg_color ? post?.post_bg_color : "#000",
+                                                    color: post?.post_text_color ? post?.post_text_color : "#fff",
+                                                    // textAlign: post.post_align === "center" ? "center" : "left"
+                                                }}
+                                                // onClick={() => handlePostSelect(post?._id, "article")}
+                                            >
+                                                {post.post_content}
+                                            </div>
+                                            <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
+                                                @{post.member?.mb_nick}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {post.post_type === "videoStory" && (
+                                        <div key={post._id} onClick={() => handleStorySelct(post?._id, "videoStory")}>
+                                            <video
+                                                loop
+                                                playsInline
+                                                className="storyContent"
+                                            >
+                                                <source
+                                                    src={`${serverApi}/${post?.post_content}`}
+                                                    type="video/mp4"
+                                                />
+                                            </video>
+                                            <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
+                                                @{post.member?.mb_nick}
+                                            </p>
+                                        </div>
+                                    )}
+                                    {post.post_type !== "videoStory" && post.post_type !== "articleStory" && post.post_type !== "photoStory" && (
+                        null
+                    )}
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <div>hech nima yo'q</div>
+                    )}
 
-</Carousel>
-                {/* <Swiper
+                </Carousel> */}
+                <Swiper
                     // slidesPerView={7}
-                    // centeredSlides={true}
+                    centeredSlides={true}
                     spaceBetween={30}
                     scrollbar={{ draggable: true }}
                 >
@@ -285,7 +285,7 @@ export function Home() {
                     )}
 
 
-                </Swiper> */}
+                </Swiper>
             </div>
 
             <TabContext value={value}>

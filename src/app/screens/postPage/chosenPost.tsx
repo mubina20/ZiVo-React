@@ -313,11 +313,12 @@ export function ChosenPost(props: any) {
                                             : "/icons/user.png"
                                         } 
                                         alt="" 
-                                        className="comment_user_img"                                
+                                        className="comment_user_img"    
+                                        onClick={() => handleMemberSelect(comment?.member?._id)}                            
                                     />
                                     <div className="comment_user_info">
                                         <div className="info">
-                                            <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}}>@{comment.member.mb_nick}</Typography>
+                                            <Typography className="name" style={{fontSize: "15px", cursor: "pointer"}} onClick={() => handleMemberSelect(comment?.member?._id)}>@{comment.member.mb_nick}</Typography>
                                             <Typography style={{opacity: "0.56", fontSize: "11px"}}>{moment(comment?.createdAt).format("YYYY-MM-DD")}</Typography>
                                         </div>
                                         <div className="comment_content">

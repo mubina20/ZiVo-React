@@ -21,6 +21,7 @@ export function LeftSidebar() {
             sweetFailureProvider(Definer.general_err1);
         }
     };
+    
     return(
         <div className="container">
             <div className="user_container">
@@ -76,7 +77,7 @@ export function LeftSidebar() {
                             <img src="/icons/left-sidebar-icons/setting.png" alt="" className="icon"/><span>Settings</span>
                         </div>
                     </NavLink>
-                    <div className="section"  onClick={handleLogOutRequest}>
+                    <div className="section" onClick={handleLogOutRequest}>
                         <img src="/icons/left-sidebar-icons/logout.png" alt="" className="icon"/><span>LogOut</span>
                     </div>
                 </div>

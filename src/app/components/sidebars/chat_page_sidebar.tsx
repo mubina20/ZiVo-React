@@ -1,12 +1,18 @@
 import { Box } from "@mui/material";
 import "../../../css/chat.css";
 import { NavLink } from "react-router-dom";
+import { verifiedMemberData } from "../../apiServices/verify";
+import { serverApi } from "../../../lib/config";
 
 export function ChatPageSidebar() {
     return(
         <div className="chat_page_sidebar">
             <div className="account">
-                <NavLink to={'/my-page'}><img src="/icons/user.png" alt="" className="user_icon"/></NavLink>
+                <NavLink to={'/my-page'}><img src={
+                            verifiedMemberData?.mb_profile_image 
+                            ? `${serverApi}/${verifiedMemberData.mb_profile_image}`  
+                            : "/icons/user.png"
+                        } alt="" className="user_icon"/></NavLink>
             </div>
 
             <Box className='sidebar_line' />
