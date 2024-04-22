@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
 import "../../../css/post.css";
 import { useHistory, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Post } from '../../../types/post';
+import { Post, UpdatePost } from '../../../types/post';
 import PostApiService from '../../apiServices/postApiService';
 import { setChosenPost } from '../HomePage/slice';
 import { serverApi } from '../../../lib/config';
@@ -29,16 +29,35 @@ export function ChosenPost(props: any) {
     const [post, setPost] = useState<Post>();
     const [comments, setComments] = useState<Comment[]>();
     const dispatch = useDispatch();
+    const textInput: any = useRef(null);
     const [createComment, setCreateComment] = useState<CreateComment>({
         mb_id: verifiedMemberData._id,
 		post_id: postId,
 		comment: ""
 	});
 
+    const [updatePost, setUpdatePost] = useState<UpdatePost>({
+        post_id: postId,
+		post_status: "delete",
+		post_type: postType
+	});
+
     /** HANDLERS **/
     const handleGoBack = () => {
         history.goBack(); 
         history.goForward();
+    };
+
+    const handleDeleteStory = async () => {
+        try {
+            const postService = new PostApiService();
+            await postService.editPost(updatePost);     
+
+            window.location.href = '/my-page';
+        } catch (error) {
+            console.log(`ERROR :: handleDeleteStory, ${error}`);
+            sweetErrorHandling(error).then();
+        }
     };
 
     useEffect(() => {
@@ -77,6 +96,17 @@ export function ChosenPost(props: any) {
         findComments();
     }, []);
 
+    const getKeyHandler = (e: any) => {
+		try {
+			if (e.key == 'Enter') {
+				assert.ok(createComment.comment, Definer.input_err3);
+				handleSendButton();
+			}
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	};
+
     const handlePostLike = async (e: any, id: any) => {
         try {
             assert.ok(verifiedMemberData, Definer.auth_err1);
@@ -88,6 +118,7 @@ export function ChosenPost(props: any) {
             });
             assert.ok(likeResult, Definer.general_err1);
             await sweetTopSmallSuccessAlert("success", 700, false);
+            window.location.reload();
         } catch (err: any) {
             console.log(`ERROR :: targetLikeTop, ${err}`);
             sweetErrorHandling(err).then();
@@ -111,6 +142,7 @@ export function ChosenPost(props: any) {
             assert.ok(likeResult, Definer.general_err1);
 
             await sweetTopSmallSuccessAlert("success", 700, false);
+            window.location.reload();
         } catch (err: any) {
             console.log(`ERROR :: handleCommentLike, ${err}`);
             sweetErrorHandling(err).then();
@@ -217,7 +249,7 @@ export function ChosenPost(props: any) {
                             post?.member._id === verifiedMemberData._id ? (
                                 <div className="my_post_controll">
                                     <button className="controll">
-                                        <img src="/icons/post/trash.png" alt="" width={"20px"} height={"20px"}/>
+                                        <img src="/icons/post/trash.png" alt="" width={"20px"} height={"20px"} onClick={handleDeleteStory}/>
                                     </button>
                                     {post?.member._id === verifiedMemberData._id && post?.post_status === "active" ? (
                                         <button className="controll">
@@ -232,7 +264,7 @@ export function ChosenPost(props: any) {
                                     
                                 </div>
                             ) : (
-                                <div className="follows_btn">Follow</div>
+                                null
                             )
                         }
                         
@@ -319,7 +351,8 @@ export function ChosenPost(props: any) {
                 </div>
                 
                 <div className="add_comment_container">
-                    <input type="text" placeholder='Comment...' className='comment_input' onChange={handleComment}/>
+                    <input type="text" placeholder='Comment...' className='comment_input' onChange={handleComment} ref={textInput}
+                                    onKeyDown={getKeyHandler}/>
                     <img src="/icons/chat/sent.png" alt="" width={'30px'} style={{marginLeft: "-50px", cursor: "pointer"}} onClick={handleSendButton}/>
                 </div>
 

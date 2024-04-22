@@ -151,7 +151,7 @@ export function OtherPage(props: any) {
     
             history.push(`/chat/${chat_id}`);
         } catch (error) {
-            console.log(`ERROR :: handleSendButton, ${error}`);
+            console.log(`ERROR :: handleCreateChatButton, ${error}`);
             sweetErrorHandling(error).then();
         }
     };
@@ -184,6 +184,7 @@ export function OtherPage(props: any) {
         
             setFollowerRebuild(!followRebuild);
             await sweetTopSmallSuccessAlert("subscribed successfully", 700, false);
+            window.location.reload();
         } catch (err: any) {
             console.log(err);
             sweetErrorHandling(err).then();
@@ -198,8 +199,9 @@ export function OtherPage(props: any) {
 			const followService = new FollowApiService();
 			await followService.unsubscribe(id);
 
-			await sweetTopSmallSuccessAlert('successfully unsubscribed', 700, false);
 			setFollowerRebuild(!followRebuild);
+			await sweetTopSmallSuccessAlert('successfully unsubscribed', 700, false);
+            window.location.reload();
 		} catch (error: any) {
 			console.log(error);
 			sweetErrorHandling(error).then();

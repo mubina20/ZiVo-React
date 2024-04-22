@@ -1,13 +1,7 @@
 import "../../../css/upload.css";
 import React, { useState } from "react";
-import { Header } from '../../components/header/header';
-import { LeftSidebar } from '../../components/sidebars/left_sidebar';
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { makeStyles } from '@mui/styles';
-import { UploadVideoPost } from "./upload_video_post";
-import { UploadPhotoPost } from "./uplaod_photo_post";
-import { UploadArticlePost } from "./upload_article_post";
 import { Link } from "react-router-dom";
 import { MobileHeader } from "../../components/header/mobileHeader";
 import { MobileFooter } from "../../components/footer/mobileFooter";
@@ -27,7 +21,7 @@ export function MobileUploadPost() {
         <div>
             <MobileHeader />
             <MobileFooter />
-            <div className="upload_big_container">
+            <div className="mobile_upload_big_container">
                 <div className="upload_container" style={{marginLeft: "0", width: "100%"}}>
                     <div className="upload_text" style={{textAlign: "center", marginBottom: "40px"}}>Upload Post</div>
                     <div className="upload_post_center">

@@ -10,7 +10,7 @@ body{
     justify-content: center;
     background: #101010;
     min-height: 100vh;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
 }
 .upload_container{
     margin-top: 100px;
@@ -236,3 +236,12 @@ textarea::placeholder{
 }
 
 /* Mobile */
+
+.mobile_upload_big_container{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background: #101010;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
