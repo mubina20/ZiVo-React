@@ -26,7 +26,8 @@ export interface Member {
     mb_subscriber_count: number;
     createdAt: Date;
     me_liked: MeLiked[];
-    me_followed: MeFollowed[];
+    me_followed: MeFollowed;
+    follow: string;
 };
 
 export interface MemberUpdateData {

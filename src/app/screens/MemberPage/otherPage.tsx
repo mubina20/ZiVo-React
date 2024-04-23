@@ -65,12 +65,14 @@ export function OtherPage(props: any) {
     const history = useHistory();
     const [value, setValue] = useState("1");
 
-    const { chosenMember } = useSelector(chosenMemberRetriever);
+    let { chosenMember } = useSelector(chosenMemberRetriever);
     const { setChosenMember} = actionDispatch(useDispatch());
     console.log("Chosen Member::", chosenMember)
     const { memberId } = useParams<RouteParams>();
     const { open, handleOpenModal, handleModalClose } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
+    const [memberFollow, setMemberFollow] = useState<any>();
+    console.log("memberFollow::", memberFollow);
     const [createChat, setCreateChat] = useState<CreateChat>({
         sender_id: verifiedMemberData._id,
 		receiver_id: memberId
@@ -143,6 +145,7 @@ export function OtherPage(props: any) {
     
     }, [verifiedMemberData, memberId, followRebuild]);
 
+
     const handleCreateChatButton = async () => {
         try {
             const chatService = new ChatApiService();
@@ -173,6 +176,14 @@ export function OtherPage(props: any) {
 			.then((data) => setMemberFollowings(data))
 			.catch((err) => console.log(err));
 	}, [followingsSearchObj]);
+
+    useEffect(() => {
+		const followService = new FollowApiService();
+		followService
+			.chosenMemberFollow(memberId)
+			.then((data) => setMemberFollow(data))
+			.catch((err) => console.log(err));
+	}, [followersSearchObj]);
 
     const subscribeHandler = async (e: any, id: any) => {
         try {
@@ -228,26 +239,30 @@ export function OtherPage(props: any) {
                                     className="user_icon" 
                                 />
                                 <Typography className="nickname">@{chosenMember?.mb_nick}</Typography>
-                                    {/* Follow */}
-                                    {memberFollowers ? (
-                                        memberFollowers[0]?.subscriber_id === verifiedMemberData._id ? (
-                                            <button
-                                                className="follow_btn"
-                                                style={{ backgroundColor: "#f10101f2" }}
-                                                onClick={(e) => unsubscribeHandler(e, chosenMember?._id)}
-                                            >
-                                                UNFOLLOW
-                                            </button>
-                                        ) : (
-                                            <button
-                                                className="follow_btn"
-                                                onClick={(e) => subscribeHandler(e, chosenMember?._id)}
-                                            >
-                                                FOLLOW 
-                                            </button>
-                                        )
-                                    ) : null}
-                                {/* </button> */}
+                                    
+                                {memberFollow && memberFollow.length > 0 ? (
+                                    memberFollow[0].subscriber_id === verifiedMemberData?._id ? (
+                                        <button
+                                            className="follow_btn"
+                                            style={{ backgroundColor: "#f10101f2" }}
+                                            onClick={(e) => unsubscribeHandler(e, chosenMember?._id)}
+                                        >
+                                            UNFOLLOW
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="follow_btn"
+                                            onClick={(e) => subscribeHandler(e, chosenMember?._id)}
+                                        >
+                                            FOLLOW 
+                                        </button>
+                                    )
+                                ) : <button
+                                        className="follow_btn"
+                                        onClick={(e) => subscribeHandler(e, chosenMember?._id)}
+                                        >
+                                        FOLLOW 
+                                    </button>}
                                 <button className="follow_btn" style={{background: "#fff", color: "#000"}} onClick={handleCreateChatButton}>Message</button>
                             </div>
                             <div className="right_info">

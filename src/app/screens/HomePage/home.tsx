@@ -288,7 +288,13 @@ export function Home() {
                 </Swiper>
             </div>
 
-            <TabContext value={value}>
+            <AllPosts  
+                                setChosenMember={setChosenMember}
+                                handleMemberSelect={handleMemberSelect}
+                                handlePostSelect={handlePostSelect}
+                            /> 
+
+            {/* <TabContext value={value}>
                         <Stack className="upload_page_tabs_container">
                             <TabList 
                                 onChange={handleChange} 
@@ -330,7 +336,7 @@ export function Home() {
                                 handlePostSelect={handlePostSelect}
                             /> 
                         </TabPanel>
-                </TabContext>
+                </TabContext> */}
 
         </div>
     )

@@ -83,6 +83,25 @@ class FollowApiService {
             throw err;
         }
     };
+
+    public async chosenMemberFollow(follow_id: any) {
+        try {
+            let url = `/follow/${follow_id}`;
+        
+            const result = await axios.get(this.path + url, {withCredentials: true});
+
+            assert.ok(result?.data, Definer.general_err1);
+            assert.ok(result?.data?.state != "fail", result?.data?.message);
+            console.log("getMemberFollowings STATE ::", result.data.state);
+        
+            const follow = result.data.data;
+            return follow;
+        } catch (err: any) {
+            console.log(`ERROR :: getMemberFollowings ${err.message}`);
+            throw err;
+        }
+    };
+
 };
 
 export default FollowApiService;
