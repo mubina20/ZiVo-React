@@ -3,8 +3,26 @@ import "../../../css/chat.css";
 import { NavLink } from "react-router-dom";
 import { verifiedMemberData } from "../../apiServices/verify";
 import { serverApi } from "../../../lib/config";
+import MemberApiService from "../../apiServices/memberApiService";
+import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { Definer } from "../../../lib/definer";
 
 export function ChatPageSidebar() {
+
+    /** HANDLERS **/
+    const handleLogOutRequest = async () => {
+        try {
+            const memberApiService = new MemberApiService();
+            await memberApiService.logOutRequest(); 
+
+            await sweetTopSmallSuccessAlert("success", 700, true);
+            window.location.href = '/';
+        } catch (err) {
+            console.log(err);
+            sweetFailureProvider(Definer.general_err1);
+        }
+    };
+
     return(
         <div className="chat_page_sidebar">
             <div className="account">
@@ -40,7 +58,7 @@ export function ChatPageSidebar() {
                         <NavLink to={'/setting'}><img src="/icons/left-sidebar-icons/setting.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/logout'}><img src="/icons/left-sidebar-icons/logout.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/logout'}  onClick={handleLogOutRequest}><img src="/icons/left-sidebar-icons/logout.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                 </div>
             </div>

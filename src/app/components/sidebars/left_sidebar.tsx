@@ -14,16 +14,15 @@ export function LeftSidebar() {
     const handleLogOutRequest = async () => {
         try {
             const memberApiService = new MemberApiService();
-            await memberApiService.logOutRequest(); // logOutRequest() metodini chaqirish
-            // await sweetTopSmallSuccessAlert("success", 700, true);
-            // Foydalanuvchi logout bo'lganda /home sahifasiga yo'naltirish
-            // window.location.href = '/';
+            await memberApiService.logOutRequest(); 
+
+            await sweetTopSmallSuccessAlert("success", 700, true);
+            window.location.href = '/';
         } catch (err) {
             console.log(err);
             sweetFailureProvider(Definer.general_err1);
         }
     };
-    
     
     return(
         <div className="container">

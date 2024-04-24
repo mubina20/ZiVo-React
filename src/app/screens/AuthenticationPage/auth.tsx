@@ -1,4 +1,4 @@
-import { Box, Modal, Stack, TextField } from '@mui/material';
+import { Box, Modal } from '@mui/material';
 import assert from 'assert';
 import { Definer } from '../../../lib/definer';
 import MemberApiService from '../../apiServices/memberApiService';
@@ -7,15 +7,11 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { format } from 'date-fns';
-import { parse } from 'date-fns';
-
 import "../../../css/auth.css"
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export function AuthenticationPage(props: any) {
-    // INITIALIZATIONS 
+    /** INITIALIZATIONS **/
     let mb_nick: string = "",
         mb_name: string = "",
         mb_surname: string = "",
@@ -34,7 +30,7 @@ export function AuthenticationPage(props: any) {
         const [phone, setPhone] = useState("");
         const [gender, setGender] = useState('');
     
-    // HANDLERS 
+    /** HANDLERS **/ 
     const handleUsername = (e: any) => {
         mb_name = e.target.value;
         setName(mb_name);
@@ -52,14 +48,6 @@ export function AuthenticationPage(props: any) {
         SetNick(mb_nick);
         console.log("mb_nick", mb_nick);
     };
-
-    // const handleUserBirthday = (e: any) => {
-    //     mb_birthday = e.target.value;
-    // };
-
-    // const handleUserGender = (e: any) => {
-    //     mb_gender = e.target.value;
-    // };
 
     const handleUserPhone = (e: any) => {
         mb_phone = e.target.value;
@@ -95,7 +83,6 @@ export function AuthenticationPage(props: any) {
 
     const handleSignupRequest = async () => {
         try {
-            // Barcha inputlarni tekshiramiz
             const is_other_fields_filled = nick != "" && 
                                         name != "" && 
                                         surname != "" && 
@@ -125,16 +112,11 @@ export function AuthenticationPage(props: any) {
             sweetErrorHandling(err).then();
         }
     };
-    
-    
-    
-    
-    
 
     const handleUserBirthday = (date: Date | null) => {
-        setSelectedDate(date); // Tanlangan sanani o'zgartirish
-        mb_birthday = date; // mb_birthday ni tanlangan sanaga o'zgartiring
-        console.log("Tanlangan sana: ", mb_birthday); // Formatlangan sanani konsolga chiqarish
+        setSelectedDate(date); 
+        mb_birthday = date; 
+        console.log("Tanlangan sana: ", mb_birthday); 
     };
     
 
@@ -143,6 +125,16 @@ export function AuthenticationPage(props: any) {
         setGender(mb_gender);
         console.log(mb_gender)
     };
+
+    const getKeyLoginHandler = (e: any) => {
+		try {
+            if (e.key == 'Enter') {
+				handleLoginRequest();
+			}
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	};
 
     return (
         <div>
@@ -162,7 +154,7 @@ export function AuthenticationPage(props: any) {
                                     <label>NickName</label>
                                 </div>
                                 <div className="user-box">
-                                    <input onChange={handleUserPassword} type="password" name="mb_password" required />
+                                    <input onChange={handleUserPassword} type="password" name="mb_password" onKeyDown={getKeyLoginHandler} required />
                                     <label>Password</label>
                                 </div>
                                 <Box className='button'>
