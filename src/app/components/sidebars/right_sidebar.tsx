@@ -45,25 +45,39 @@ export function RightSidebar() {
         <div className="right_container">
             <h2 style={{margin: "20px 0"}}>Followings</h2>
 
-            {memberFollowings.map((following: Following) => {
-                const image_url = following?.follow_member_data?.mb_profile_image
-                    ? `${serverApi}/${following?.follow_member_data?.mb_profile_image}`
-					: '/icons/user.png';
+            {memberFollowings.length > 0 ? (
+                memberFollowings.map((following: Following) => {
+                    const image_url = following?.follow_member_data?.mb_profile_image
+                        ? `${serverApi}/${following?.follow_member_data?.mb_profile_image}`
+                        : '/icons/user.png';
 
-                return(
-                    <div>
-                        <div className="followings_container">
-                            <img src={image_url} alt="" className="user_icon" onClick={() => handleVisitFollowingPage(following?.follow_id)}/>
-                            <div className="following_info">
-                                <Typography className="nickName" style={{fontSize: "17px", cursor: "pointer"}}>@{following?.follow_member_data?.mb_nick}</Typography>
-                                <Typography style={{opacity: "0.56"}}>{following?.follow_member_data?.mb_name}</Typography>
+                    return (
+                        <div key={following.follow_id}>
+                            <div className="followings_container">
+                                <img
+                                    src={image_url}
+                                    alt=""
+                                    className="user_icon"
+                                    onClick={() => handleVisitFollowingPage(following?.follow_id)}
+                                />
+                                <div className="following_info">
+                                    <div
+                                        className="nickName"
+                                        style={{ fontSize: "17px", cursor: "pointer" }}
+                                        onClick={() => handleVisitFollowingPage(following?.follow_id)}
+                                    >
+                                        @{following?.follow_member_data?.mb_nick}
+                                    </div>
+                                    <Typography style={{ opacity: "0.56" }}>{following?.follow_member_data?.mb_name}</Typography>
+                                </div>
                             </div>
+                            <Box className='following-line' />
                         </div>
-                        <Box className='following-line' />
-                    </div>
-                    
-                )
-            })}
+                    )
+                })
+            ) : (
+                <div>No followings yet</div>
+            )}
         </div>
     )
 };
