@@ -208,7 +208,7 @@ export function AllPosts(props: any) {
                                 </div>
 
                                 <div 
-                                    className="post_content"
+                                    className="post_content_article"
                                     style={{
                                         background: post?.post_bg_color ? post?.post_bg_color : "#000",
                                         color: post?.post_text_color ? post?.post_text_color : "#fff",

@@ -4,6 +4,7 @@
     flex-direction: column;
     background: #101010;
     min-height: 100vh;
+    padding-bottom: 100px;
 }
 
 /* Story */
@@ -68,31 +69,27 @@
     display: flex;
     flex-direction: column;
     width: 693px;
-    height: 573px;
-    background: rgb(78, 78, 187);
+    height: 773px;
+    /* background: rgb(78, 78, 187); */
     margin-top: 100px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }
-.post_container .post_data{
+.post_data{
     display: flex;
     background: #000000;
-    height: 130px;
+    max-height: 190px;
     padding: 20px 30px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
     color: #ffffff;
     justify-content: space-between;
     flex-direction: column;
 }
-.post_container .post_data .post_top{
+.post_data .post_top{
     display: flex;
     width: 100%;
     color: #ffffff;
     justify-content: space-between;
     align-items: center;
 }
-.post_container .post_data .user_container{
+.post_data .user_container{
     display: flex;
 }
 .post_user_icon {
@@ -107,14 +104,26 @@
 }
 .post_content{
     /* width: 100%; */
-    height: 66%;
-    background: gray;
+    height: 75%;
+    background: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 .post_content img, video{
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     cursor: pointer;
+}
+.post_content_article{
+    height: 75%;
+    background: rgb(0, 0, 0);
+    cursor: pointer;
+}
+.post_desctiption{
+    padding-top: 10px;
+    max-height: 100px;
 }
 
 /* Post Bottom */

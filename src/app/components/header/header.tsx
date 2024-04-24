@@ -8,7 +8,6 @@ export function Header() {
     return(
         <div className='navbar'>
             <Stack className='logo'>
-                {/* <h1 style={{color: "white"}}>ZiVo</h1> */}
                 <img src="/Logo/Zivo.png" alt="" width={"100px"} height={"30px"}/>
             </Stack>
 

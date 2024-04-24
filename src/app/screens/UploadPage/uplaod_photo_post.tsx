@@ -16,6 +16,7 @@ export function UploadPhotoPost(props: any) {
     const [photoPostData, setPhotoPostData] = useState<UploadPost>({
         post_title: "",
         post_content: "",
+        post_type: "photo",
     });
 
     /** HANDLERS **/
