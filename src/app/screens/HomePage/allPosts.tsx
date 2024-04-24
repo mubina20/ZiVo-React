@@ -150,7 +150,7 @@ export function AllPosts(props: any) {
                                     <Typography className="post_desctiption">{post.post_title}</Typography>
                                 </div>
 
-                                <div className="post_content" onClick={() => handlePostSelect(post?._id, "photo")}>
+                                <div className="post_content">
                                     <img src={`${serverApi}/${post?.post_content}`} alt=""/>
                                 </div>
 
@@ -172,7 +172,8 @@ export function AllPosts(props: any) {
                                             />
                                         )}
                                         <span style={{marginRight: "50px"}}>{post.post_likes}</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
+                                        {/* <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span> */}
+                                        <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "photo")}>view comment</span>
                                     </div>
                                     <div className="right">
                                         <img src="/icons/post/share.png" alt="" className="bottom_icon"/>
@@ -215,7 +216,6 @@ export function AllPosts(props: any) {
                                         textAlign: post.post_align === "center" ? "center" : "left"
 
                                     }}
-                                    onClick={() => handlePostSelect(post?._id, "article")}
                                 >
                                     {post.post_content}
                                 </div>
@@ -228,7 +228,8 @@ export function AllPosts(props: any) {
                                             alt="" className="bottom_icon"
                                     />
                                         <span style={{marginRight: "50px"}}>{post.post_likes}</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
+                                        {/* <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span> */}
+                                        <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "article")}>view comment</span>
                                     </div>
                                     <div className="right">
                                         <img src="/icons/post/share.png" alt="" className="bottom_icon"/>
@@ -264,7 +265,7 @@ export function AllPosts(props: any) {
                                     <Typography className="post_desctiption">{post.post_title}</Typography>
                                 </div>
 
-                                <div className="post_content" onClick={() => handlePostSelect(post?._id, "video")}>
+                                <div className="post_content">
                                     <video
                                         loop
                                         playsInline
@@ -285,7 +286,8 @@ export function AllPosts(props: any) {
                                             alt="" className="bottom_icon"
                                         />
                                         <span style={{marginRight: "50px"}}>{post.post_likes}</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span>
+                                        {/* <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span> */}
+                                        <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "video")}>view comment</span>
                                     </div>
                                     <div className="right">
                                         <img src="/icons/post/share.png" alt="" className="bottom_icon"/>
