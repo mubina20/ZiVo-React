@@ -156,21 +156,27 @@ export function AllPosts(props: any) {
 
                                 <div className="post_bottom">
                                     <div className="left">
-                                        {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
-                                            <img 
-                                                src="/icons/post/heart.png" 
-                                                onClick={(e) => photoPostLike(e, post?._id)}
-                                                alt="" 
-                                                className="bottom_icon"
-                                            />
-                                        ) : (
-                                            <img 
-                                                src="/icons/post/like.png" 
-                                                onClick={(e) => photoPostLike(e, post?._id)}
-                                                alt="" 
-                                                className="bottom_icon"
-                                            />
-                                        )}
+                                    {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
+    (() => {
+        console.log("photo post:", post);
+        return (
+            <img 
+                src="/icons/post/heart.png" 
+                onClick={(e) => photoPostLike(e, post?._id)}
+                alt="" 
+                className="bottom_icon"
+            />
+        );
+    })()
+) : (
+    <img 
+        src="/icons/post/like.png" 
+        onClick={(e) => photoPostLike(e, post?._id)}
+        alt="" 
+        className="bottom_icon"
+    />
+)}
+
                                         <span style={{marginRight: "50px"}}>{post.post_likes}</span>
                                         {/* <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span> */}
                                         <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "photo")}>view comment</span>

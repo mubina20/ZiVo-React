@@ -193,8 +193,8 @@ export function ChosenPost(props: any) {
                                 <div 
                                     className="left_article_content"
                                     style={{
-                                        background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                        color: post?.post_text_color ? post?.post_text_color : "black",
+                                        background: post?.post_bg_color ? post?.post_bg_color : "#000",
+                                        color: post?.post_text_color ? post?.post_text_color : "#fff",
                                         textAlign: post.post_align === "center" ? "center" : "left"
 
                                     }}

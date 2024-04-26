@@ -23,6 +23,10 @@ import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
 import { MobileMembersPage } from "./screens/MemberPage/mobileMembersPage";
 import { UplaodStory } from "./screens/UploadPage/uploadStory";
 import { ChosenStory } from "./screens/postPage/chosenStory";
+import { Header } from "./components/header/header";
+import { MobileHeader } from "./components/header/mobileHeader";
+import { MobileFooter } from "./components/footer/mobileFooter";
+import { LeftSidebar } from "./components/sidebars/left_sidebar";
 
 function App() {
   /** INITIALIZATIONS **/
@@ -209,7 +213,26 @@ function App() {
           <HelpPage />
         </Route>
         <Route path="/life">
-          <div>Still in progress.</div>
+          {isDesktop && (
+            <div>
+              <Header />
+              <LeftSidebar />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
+          {isTablet && (
+            <div>
+            <Header />
+            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+          </div>
+          )}
+          {isMobile && (
+            <div>
+            <MobileHeader />
+            <MobileFooter />
+            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+          </div>
+          )}
         </Route>
         <Route path="/settings">
           <div>Still in progress.</div>

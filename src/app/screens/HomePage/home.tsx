@@ -231,7 +231,7 @@ export function Home() {
                                     {
                                         post.post_type === "photoStory" ? (
                                             <div className="user-icon">
-                                                <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" />
+                                                <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" onClick={() => handleStorySelct(post?._id, "photoStory")}/>
                                                 <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
                                                     @{post.member?.mb_nick}
                                                 </p>
@@ -246,7 +246,7 @@ export function Home() {
                                                         // textAlign: post.post_align === "center" ? "center" : "left"
 
                                                     }}
-                                                    onClick={() => handlePostSelect(post?._id, "article")}
+                                                    onClick={() => handleStorySelct(post?._id, "articleStory")}
                                                 >
                                                     {post.post_content}
                                                 </div>
@@ -262,6 +262,7 @@ export function Home() {
                                                     // controls
                                                     // style={{borderRadius: "50%"}}
                                                     className="storyContent"
+                                                    onClick={() => handleStorySelct(post?._id, "videoStory")}
                                                     >
                                                     <source
                                                         src={`${serverApi}/${post?.post_content}`}
