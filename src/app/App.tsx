@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../css/App.css";
 import { MembersPage } from "./screens/MemberPage/members";
-import { HelpPage } from "./screens/HelpPage/help";
-
 import { verifiedMemberData } from "./apiServices/verify";
 import { HomePage } from "./screens/HomePage";
 import { VideoContents } from "./screens/VideoContentsPage/videoContent";
@@ -19,7 +17,6 @@ import { MobileEditProfile } from "./screens/MemberPage/mobileEditProfile";
 import { MobileMyPage } from "./screens/MemberPage/mobileMyPage";
 import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
-import { MobileUploadPost } from "./screens/UploadPage/mobileUploadPost";
 import { MobileMembersPage } from "./screens/MemberPage/mobileMembersPage";
 import { UplaodStory } from "./screens/UploadPage/uploadStory";
 import { ChosenStory } from "./screens/postPage/chosenStory";
@@ -36,18 +33,11 @@ function App() {
   /** HANDLERS **/
   const handleOpenModal = () => setOpen(true);
   const handleModalClose = () => setOpen(false);
-
-  // const handleOpenFollowersModal = () => setOpen(true);
-  // const handleCloseFollowersModal = () => setOpen(false);
-
-  // const handleOpenFollowingsModal = () => setOpen(true);
-  // const handleCloseFollowingsModal = () => setOpen(false);
-
-  // LogOut Request
   
   return (
     <Router>
       <Switch>
+
         <Route path="/" exact>
           {verifiedMemberData ? (
             <HomePage />
@@ -59,6 +49,7 @@ function App() {
             />
           )}
         </Route>
+
         <Route path="/members">
           {isDesktop && (
             <div>
@@ -67,7 +58,8 @@ function App() {
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -75,8 +67,8 @@ function App() {
               <MobileMembersPage />
             </div>
           )}
-          
         </Route>
+
         <Route path="/my-page">
           {isDesktop && (
             <div>
@@ -89,7 +81,8 @@ function App() {
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -102,6 +95,7 @@ function App() {
             </div>
           )}
         </Route>
+
         <Route path="/member/:memberId">
           {isDesktop && (
             <div>
@@ -114,7 +108,8 @@ function App() {
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -127,18 +122,17 @@ function App() {
             </div>
           )}
         </Route>
+
         <Route path="/video-contents">
-          <VideoContents />
-        </Route>
-        <Route path="/edit">
           {isDesktop && (
             <div>
-              <EditProfile />
+              <VideoContents />
             </div>
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -147,6 +141,26 @@ function App() {
             </div>
           )}
         </Route>
+
+        <Route path="/edit">
+          {isDesktop && (
+            <div>
+              <EditProfile />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileEditProfile />
+            </div>
+          )}
+        </Route>
+
         <Route path="/upload-post">
           {isDesktop && (
             <div>
@@ -155,16 +169,19 @@ function App() {
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
-              <MobileUploadPost />
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
-          
         </Route>
+
         <Route path="/upload-story">
           {isDesktop && (
             <div>
@@ -173,16 +190,19 @@ function App() {
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
-              {/* <MobileUploadPost /> */}
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
-          
         </Route>
+
         <Route path="/post/:postType/:postId">
           {isDesktop && (
             <div>
@@ -191,7 +211,8 @@ function App() {
           )}
           {isTablet && (
             <div>
-              <div style={{color: "white", fontSize: "5rem"}}>isTablet</div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -200,18 +221,53 @@ function App() {
             </div>
           )}
         </Route>
+
         <Route exact path="/chat" >
-          <ChatPage />
+          {isDesktop && (
+            <div>
+              <ChatPage />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
         </Route>
+
         <Route path="/chat/:chatId">
-          <ChatPage />
+          {isDesktop && (
+            <div>
+              <ChatPage />
+            </div>
+          )}
+          {isTablet && (
+            <div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
+          {isMobile && (
+            <div>
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
         </Route>
+
         <Route path="/stories/:mb_nick/:storyType/:storyId">
           <ChosenStory />
         </Route>
-        <Route path="/help">
-          <HelpPage />
-        </Route>
+
         <Route path="/life">
           {isDesktop && (
             <div>
@@ -234,8 +290,28 @@ function App() {
           </div>
           )}
         </Route>
+        
         <Route path="/settings">
-          <div>Still in progress.</div>
+          {isDesktop && (
+            <div>
+              <Header />
+              <LeftSidebar />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
+          )}
+          {isTablet && (
+            <div>
+            <Header />
+            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+          </div>
+          )}
+          {isMobile && (
+            <div>
+            <MobileHeader />
+            <MobileFooter />
+            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+          </div>
+          )}
         </Route>
       </Switch>
     </Router>

@@ -1,3 +1,4 @@
+import { Header } from '../../components/header/header';
 import useDeviceSize from '../../hooks';
 import { AuthenticationPage } from './auth';
 import { MobileAuth } from './mobileAuth';
@@ -18,9 +19,9 @@ export function AuthPage(props: any) {
 	if (isTablet) {
 		return(
 			<div>
-				<div style={{color: "white", fontSize: "5rem"}}>isTablet</div>;
+				<Header />
+				<div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
 			</div>
-			
 		) 
 	}
 	if (isMobile) {
