@@ -16,6 +16,7 @@ import { Definer } from "../../../lib/definer";
 import { verifiedMemberData } from "../../apiServices/verify";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Favorite } from "@mui/icons-material";
 
 export function VideoContents(props: any) {
     /** INITIALIZATIONS **/
@@ -30,8 +31,6 @@ export function VideoContents(props: any) {
 		post_id: "",
 		comment: ""
 	});
-    const [likedComments, setLikedComments] = useState<string[]>([]);
-
     /** HANDLERS **/
     useEffect(() => {
         const postService = new PostApiService();
@@ -59,7 +58,7 @@ export function VideoContents(props: any) {
             }
         };
 
-        const handlePostLike = async (e: any, id: any) => {
+        const handlePostLike = async (e: any, id: string) => {
             try {
                 assert.ok(verifiedMemberData, Definer.auth_err1);
                 
@@ -69,10 +68,11 @@ export function VideoContents(props: any) {
                     group_type: "video",
                 });
                 assert.ok(likeResult, Definer.general_err1);
+    
                 await sweetTopSmallSuccessAlert("success", 700, false);
                 window.location.reload();
             } catch (err: any) {
-                console.log(`ERROR :: targetLikeTop, ${err}`);
+                console.log(`ERROR :: handlePostLike, ${err}`);
                 sweetErrorHandling(err).then();
             }
         };
@@ -94,7 +94,7 @@ export function VideoContents(props: any) {
                 assert.ok(likeResult, Definer.general_err1);
     
                 // Like tugmasini bosgan kommentni ID sini likedComments holatiga qo'shamiz
-                setLikedComments((prevLikedComments) => [...prevLikedComments, id]);
+                // setLikedComments((prevLikedComments) => [...prevLikedComments, id]);
     
                 await sweetTopSmallSuccessAlert("success", 700, false);
                 // window.location.reload();
@@ -204,6 +204,31 @@ export function VideoContents(props: any) {
                                         )
                                     })} 
                                 </div>
+                                {post?.me_liked && post?.me_liked[0]?.my_favorite ? (
+                                        <img 
+                                            src="/icons/post/heart.png" 
+                                            onClick={(e) => handlePostLike(e, post?._id,)}
+                                            alt="" 
+                                            className="like"
+                                        />
+                                    ) : (
+                                        <img 
+                                            src="/icons/post/like.png" 
+                                            onClick={(e) => handlePostLike(e, post?._id,)}
+                                            alt="" 
+                                            className="like"
+                                        />
+                                    )}
+                                    {post?.post_likes}
+                                {/* <Favorite
+                                                    onClick={(e) => handlePostLike(e, post._id)}
+                                                    style={{ 
+                                                        fill:
+                                                        post?.me_liked && post?.me_liked[0]?.my_favorite
+                                                            ? "red"
+                                                            : "white"
+                                                    }} 
+                                                /> */}
                             </div>
                             // // Video Post
                             // <div className="post_container" key={post._id}>
@@ -248,11 +273,11 @@ export function VideoContents(props: any) {
 
                             //     <div className="post_bottom">
                             //         <div className="left">
-                            //             <img 
-                            //                 src={post?.post_likes > 0 ? "/icons/post/heart.png" : "/icons/post/like.png" }
-                            //                 onClick={(e) => videoPostLike(e, post._id)}
-                            //                 alt="" className="bottom_icon"
-                            //             />
+                                        // <img 
+                                        //     src={post?.post_likes > 0 ? "/icons/post/heart.png" : "/icons/post/like.png" }
+                                        //     // onClick={(e) => videoPostLike(e, post._id)}
+                                        //     alt="" className="bottom_icon"
+                                        // />
                             //             <span style={{marginRight: "50px"}}>{post.post_likes}</span>
                             //             {/* <img src="/icons/post/chat.png" alt="" className="bottom_icon"/><span>100</span> */}
                             //             <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "video")}>view comment</span>

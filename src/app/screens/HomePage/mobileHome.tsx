@@ -3,27 +3,15 @@ import { MobileHeader } from '../../components/header/mobileHeader'
 import "../../../css/mobileHome.css"
 import { MobileFooter } from '../../components/footer/mobileFooter'
 
-import { Box, Container, Stack, Tab, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import "../../../css/mobileHome.css";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper';
 import { useEffect, useReducer, useState } from "react";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar'
 import PostApiService from "../../apiServices/postApiService";
 import { Post } from "../../../types/post";
 
 import { setAllPosts, setChosenPost, setChosenStory } from "./slice";
-import { retrieveAllPosts } from "./selector";
 import { serverApi } from "../../../lib/config";
-import { AllPosts } from "./allPosts";
-import { AllVideoPosts } from "./allVideoPosts";
-import { AllPhotoPosts } from "./allPhotoPosts";
-import { AllArticlePosts } from "./allArticlePosts";
 import moment from 'moment';
 import { Dispatch } from '@reduxjs/toolkit';
 import { setAllMembers, setChosenMember } from '../MemberPage/slice';
@@ -42,7 +30,6 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export function MobileHome() {
     /** INITIALIZATIONS **/
     const [allPosts, setAllPosts] = useState<Post[]>([]);
-    const [value, setValue] = useState("1");
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -97,12 +84,6 @@ export function MobileHome() {
         }
     };
 
-    
-
-    /** HANDLERS **/
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
-    };
     return (
         <div>
             <MobileHeader />
@@ -130,9 +111,8 @@ export function MobileHome() {
                             style={{
                                 background: post?.post_bg_color ? post?.post_bg_color : "#000",
                                 color: post?.post_text_color ? post?.post_text_color : "#fff",
-                                // textAlign: post.post_align === "center" ? "center" : "left"
+                                textAlign: post.post_align === "center" ? "center" : "left"
                             }}
-                            // onClick={() => handlePostSelect(post?._id, "article")}
                         >
                             {post.post_content}
                         </div>
@@ -194,7 +174,7 @@ export function MobileHome() {
                                         </div>
                                         <img src={"/icons/post/bookmark.png"} alt="" className="icon"/>
                                     </div>
-                                    <Typography className="post-desctiption">{post.post_title}</Typography>
+                                    <Typography className="post_desctiption">{post.post_title}</Typography>
                                 </div>
 
                                 <div className="post-content">
@@ -203,8 +183,7 @@ export function MobileHome() {
 
                                 <div className="post-bottom">
                                     <div className="mobile-left">
-                                        <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon" onClick={() => handlePostSelect(post?._id, "photo")}/><span>100</span>
+                                        <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "photo")}>View post information</span>
                                     </div>
                                     <div className="mobile-right">
                                         <img src="/icons/post/share.png" alt="" className="bottom-icon"/>
@@ -238,8 +217,8 @@ export function MobileHome() {
                                 <div 
                                     className="post-content"
                                     style={{
-                                        background: post?.post_bg_color ? post?.post_bg_color : "grey",
-                                        color: post?.post_text_color ? post?.post_text_color : "black",
+                                        background: post?.post_bg_color ? post?.post_bg_color : "#000",
+                                        color: post?.post_text_color ? post?.post_text_color : "#fff",
                                         textAlign: post.post_align === "center" ? "center" : "left"
 
                                     }}
@@ -249,8 +228,7 @@ export function MobileHome() {
 
                                 <div className="post-bottom">
                                     <div className="mobile-left">
-                                        <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                        <img src="/icons/post/chat.png" alt="" className="bottom-icon" onClick={() => handlePostSelect(post?._id, "article")}/><span>100</span>
+                                        <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "article")}>View post information</span>
                                     </div>
                                     <div className="mobile-right">
                                         <img src="/icons/post/share.png" alt="" className="bottom-icon"/>
@@ -297,8 +275,7 @@ export function MobileHome() {
 
                                 <div className="post-bottom">
                                     <div className="mobile-left">
-                                        <img src="/icons/post/like.png" alt="" className="bottom-icon"/><span style={{marginRight: "50px"}}>464K</span>
-                                        <img src="/icons/post/chat.png" onClick={() => handlePostSelect(post?._id, "video")} alt="" className="bottom-icon"/><span>100</span>
+                                        <span style={{cursor: "pointer"}} onClick={() => handlePostSelect(post?._id, "video")}>View post information</span>
                                     </div>
                                     <div className="mobile-right">
                                         <img src="/icons/post/share.png" alt="" className="bottom-icon"/>

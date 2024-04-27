@@ -1,16 +1,11 @@
-import { Box, Container, Stack, Tab } from "@mui/material";
 import "../../../css/home.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useState } from "react";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { AllPosts } from "./allPosts";
-import { AllVideoPosts } from "./allVideoPosts";
-import { AllPhotoPosts } from "./allPhotoPosts";
-import { AllArticlePosts } from "./allArticlePosts";
 import { Member } from "../../../types/user";
 import { setAllMembers, setChosenMember } from "../MemberPage/slice";
 import { useDispatch } from "react-redux";
@@ -35,21 +30,14 @@ const actionDispatch = (dispatch: Dispatch) => ({
 
 export function Home() {
     /** INITIALIZATIONS **/
-    const [value, setValue] = useState("1");
-    
-
     const dispatch = useDispatch();
     const history = useHistory();
     const {
         setChosenMember,
     } = actionDispatch(useDispatch());
-
     const [allPosts, setAllPosts] = useState<Post[]>([]);
 
     /** HANDLERS **/
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
-    };
     const handleMemberSelect = async (memberId: any) => {
         try {
             const memberService = new MemberApiService();

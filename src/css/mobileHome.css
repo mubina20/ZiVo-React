@@ -90,6 +90,8 @@
 .mobile-main{
     background: #101010;
     margin-top: -10px;
+    min-height: 100vh;
+    padding-bottom: 50px;
 }
 .mobile_home_stories{
     display: flex;
