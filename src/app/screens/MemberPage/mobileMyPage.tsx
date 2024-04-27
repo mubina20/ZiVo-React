@@ -215,7 +215,7 @@ export function MobileMyPage(props: any) {
                                     <div className="mobile_page_information" onClick={handleOpenModal}><Typography>Information</Typography></div>
                                         <div>
                                             <Modal
-                                                className="infoModalContainer"
+                                                className="mobileInfoModalContainer"
                                                 open={open}
                                                 onClose={handleModalClose}
                                                 aria-labelledby="modal-modal-title"
@@ -237,7 +237,7 @@ export function MobileMyPage(props: any) {
                                                     </div>
                                                     <div className="information">
                                                         <div className="info_category">Birthday</div>
-                                                        <div className="info">{verifiedMemberData?.mb_birthday}</div>
+                                                        <div className="info">{moment(verifiedMemberData?.mb_birthday).format('YYYY-MM-DD')}</div>
                                                     </div>
                                                     <div className="information">
                                                         <div className="info_category">Gender</div>
@@ -260,11 +260,7 @@ export function MobileMyPage(props: any) {
                                                         <div className="info">{verifiedMemberData?.mb_hobby}</div>
                                                     </div>
                                                     <div className="information">
-                                                        <div className="info_category">Address</div>
-                                                        <div className="info">{verifiedMemberData?.mb_address}</div>
-                                                    </div>
-                                                    <div className="information">
-                                                        <div className="info_category">Account creation date</div>
+                                                        <div className="info_category">Join</div>
                                                         <div className="info">{moment(verifiedMemberData?.createdAt).format("YYYY-MM-DD")}</div>
                                                     </div>
                                                 </div>

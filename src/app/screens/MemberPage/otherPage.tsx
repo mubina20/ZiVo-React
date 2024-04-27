@@ -2,7 +2,7 @@ import { Box, Modal, Typography, Tab, Stack } from "@mui/material";
 import "../../../css/visitPage.css";
 import { Header } from "../../components/header/header";
 import { LeftSidebar } from "../../components/sidebars/left_sidebar";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import MemberApiService from "../../apiServices/memberApiService";

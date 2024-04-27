@@ -93,7 +93,7 @@ export function MobileStories(props: any) {
                     )
                 ))
             ) : (
-                <div style={{marginLeft: "400px", marginTop: "100px"}}>No posts yet</div>
+                <div style={{marginLeft: "120px", marginTop: "60px", color: "#fff"}}>No posts yet</div>
             )}
         </div>
     )

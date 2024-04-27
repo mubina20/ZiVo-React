@@ -315,6 +315,7 @@
     animation-name: modal;
     animation-duration: 1s;
     background: #000;
+    color: #fff;
 }
 
 @keyframes modal {
