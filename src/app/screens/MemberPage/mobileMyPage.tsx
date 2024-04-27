@@ -22,6 +22,7 @@ import { MobileFooter } from "../../components/footer/mobileFooter";
 import "../../../css/mobileVistiPage.css";
 import { MobileMyPosts } from "./mobileMyPosts";
 import { MobileStories } from "./mobileStories";
+import { Link } from "react-router-dom";
 
 
 // REDUX SLICE
@@ -196,7 +197,9 @@ export function MobileMyPage(props: any) {
                         </div>
                     </div>
                     <div className="mobile_buttons">
+                    <Link to={"/upload-story"} style={{textDecoration: "none"}}>
                         <button className="mobile_story_button"><img src="/icons/post/plus.png" alt="" width={"10px"}/>Upload Story</button>
+                    </Link>
                     </div>
                         <div className="page-center">
                             <TabContext value={value}>

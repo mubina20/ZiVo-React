@@ -9,7 +9,7 @@ export function MobileFooter() {
     <div className='footer'>
         <div className='footer-navigation'>
             <Link to={"/"}><img src="/icons/left-sidebar-icons/home.png" alt="home" width={"25px"}/></Link>
-            <Link to={"/short-contents"}><img src="/icons/left-sidebar-icons/shorts.png" alt="home" width={"25px"}/></Link>
+            <Link to={"/video-contents"}><img src="/icons/left-sidebar-icons/shorts.png" alt="home" width={"25px"}/></Link>
             <Link to={"/my-page"}>
               <img 
                 src={

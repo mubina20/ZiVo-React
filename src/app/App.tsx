@@ -13,7 +13,6 @@ import { EditProfile } from "./screens/MemberPage/editProfile";
 import { AuthPage } from "./screens/AuthenticationPage";
 import { ChosenPost } from "./screens/postPage/chosenPost";
 import useDeviceSize from "./hooks";
-import { MobileEditProfile } from "./screens/MemberPage/mobileEditProfile";
 import { MobileMyPage } from "./screens/MemberPage/mobileMyPage";
 import { MobileOtherPage } from "./screens/MemberPage/mobileOtherPage";
 import { MobileChosenPost } from "./screens/postPage/mobileChosenPost";
@@ -59,7 +58,7 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the members page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -82,7 +81,7 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the my page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -109,7 +108,7 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the chosen member page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -132,12 +131,14 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the video-contents page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
-              <MobileEditProfile />
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the video-contents page is in the process of developing</div></div>
             </div>
           )}
         </Route>
@@ -151,12 +152,14 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the edit page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
-              <MobileEditProfile />
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the edit page is in the process of developing</div></div>
             </div>
           )}
         </Route>
@@ -170,14 +173,14 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the upload-post page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
               <MobileHeader />
               <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the upload-post page is in the process of developing</div></div>
             </div>
           )}
         </Route>
@@ -191,14 +194,14 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the upload-story page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
               <MobileHeader />
               <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the upload-story page is in the process of developing</div></div>
             </div>
           )}
         </Route>
@@ -212,7 +215,7 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the chosen post page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
@@ -231,14 +234,14 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the chat page is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
               <MobileHeader />
               <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the chat page is in the process of developing</div></div>
             </div>
           )}
         </Route>
@@ -252,14 +255,14 @@ function App() {
           {isTablet && (
             <div>
               <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the life chat is in the process of developing</div></div>
             </div>
           )}
           {isMobile && (
             <div>
               <MobileHeader />
               <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the life chat is in the process of developing</div></div>
             </div>
           )}
         </Route>
@@ -278,39 +281,39 @@ function App() {
           )}
           {isTablet && (
             <div>
-            <Header />
-            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-          </div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
           )}
           {isMobile && (
             <div>
-            <MobileHeader />
-            <MobileFooter />
-            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-          </div>
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+            </div>
           )}
         </Route>
-        
+
         <Route path="/settings">
           {isDesktop && (
             <div>
               <Header />
               <LeftSidebar />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+              <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
             </div>
           )}
           {isTablet && (
             <div>
-            <Header />
-            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-          </div>
+              <Header />
+              <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
+            </div>
           )}
           {isMobile && (
             <div>
-            <MobileHeader />
-            <MobileFooter />
-            <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-          </div>
+              <MobileHeader />
+              <MobileFooter />
+              <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
+            </div>
           )}
         </Route>
       </Switch>

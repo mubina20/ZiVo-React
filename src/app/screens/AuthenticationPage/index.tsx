@@ -20,7 +20,7 @@ export function AuthPage(props: any) {
 		return(
 			<div>
 				<Header />
-				<div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
+				<div className="progress_container"> <div className="process"> Now the authentication page is in the process of developing</div></div>
 			</div>
 		) 
 	}
