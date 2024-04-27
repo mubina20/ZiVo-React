@@ -23,6 +23,7 @@ import { serverApi } from "../../../lib/config";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Dispatch } from "@reduxjs/toolkit";
+import { Autoplay, FreeMode, Navigation } from "swiper";
 
 const actionDispatch = (dispatch: Dispatch) => ({
     setChosenPost: (data: Post) => dispatch(setChosenPost(data)),
@@ -106,7 +107,7 @@ export function Home() {
             {/* <Carousel
                 additionalTransfrom={0}
                 arrows
-                autoPlaySpeed={3000}
+                // autoPlaySpeed={3000}
                 centerMode={false}
                 className=""
                 containerClass="container-with-dots"
@@ -116,7 +117,7 @@ export function Home() {
                 infinite
                 itemClass=""
                 keyBoardControl
-                minimumTouchDrag={80}
+                // minimumTouchDrag={80}
                 pauseOnHover
                 renderArrowsWhenDisabled={false}
                 renderButtonGroupOutside={false}
@@ -127,8 +128,8 @@ export function Home() {
                         max: 3000,
                         min: 1024
                     },
-                    items: 3,
-                    partialVisibilityGutter: 40
+                    items: 8,
+                    partialVisibilityGutter: 0
                     },
                     mobile: {
                     breakpoint: {
@@ -159,9 +160,9 @@ export function Home() {
                     {allPosts.length > 0 ? (
                         allPosts.map((post: Post) => {
                             return (
-                                <div className="user-icon">
+                                <div className="">
                                     {post.post_type === "photoStory" && (
-                                        <div key={post._id} >
+                                        <div key={post._id} className="user-icon">
                                             <img src={`${serverApi}/${post?.post_content}`} className="storyContent" alt="user" onClick={() => handleStorySelct(post?._id, "photoStory")}/>
                                             <p onClick={() => handleVisitFollowingPage(post.member?.mb_nick)}>
                                                 @{post.member?.mb_nick}
@@ -169,7 +170,7 @@ export function Home() {
                                         </div>
                                     )}
                                     {post.post_type === "articleStory" && (
-                                        <div>
+                                        <div className="user-icon">
                                             <div 
                                                 key={post._id} onClick={() => handleStorySelct(post?._id, "articleStory")}
                                                 className="storyContentArticle"
@@ -188,7 +189,7 @@ export function Home() {
                                         </div>
                                     )}
                                     {post.post_type === "videoStory" && (
-                                        <div key={post._id} onClick={() => handleStorySelct(post?._id, "videoStory")}>
+                                        <div key={post._id} onClick={() => handleStorySelct(post?._id, "videoStory")} className="user-icon">
                                             <video
                                                 loop
                                                 playsInline
@@ -215,18 +216,20 @@ export function Home() {
                     )}
 
                 </Carousel> */}
+
                 <Swiper
-                    // slidesPerView={7}
-                    centeredSlides={true}
-                    spaceBetween={30}
-                    scrollbar={{ draggable: true }}
+                    slidesPerView={8}
+                    // centeredSlides={true}
+                    spaceBetween={0}
+                    // scrollbar={{ draggable: true }}
+                    modules={[FreeMode, Navigation, Autoplay]}
                 >
                     {allPosts.length > 0 ? (
                         allPosts.map((post: Post) => {
                             return (
                                 <SwiperSlide
                                     key={post._id}
-                                    style={{ cursor: 'pointer' }}
+                                    style={{ cursor: 'pointer', width: "auto", height: "100%" }}
                                 >
                                     {
                                         post.post_type === "photoStory" ? (
@@ -260,7 +263,7 @@ export function Home() {
                                                     loop
                                                     playsInline
                                                     // controls
-                                                    // style={{borderRadius: "50%"}}
+                                                    style={{borderRadius: "50%"}}
                                                     className="storyContent"
                                                     onClick={() => handleStorySelct(post?._id, "videoStory")}
                                                     >

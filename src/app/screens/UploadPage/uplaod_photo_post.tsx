@@ -100,8 +100,8 @@ export function UploadPhotoPost(props: any) {
                         ) : (
                             <div className="upload_photo">You can see your chosen photo here!</div>
                         )}
-                    </div>
                     <input type="file" onChange={handlePhotoChange} className="Upload_file" id="postContent"/>
+                    </div>
                 </div>
                 <div className="buttons">
                     <button className="upload_button cencel" onClick={goBack}>Back</button>

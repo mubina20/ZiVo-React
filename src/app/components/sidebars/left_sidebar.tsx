@@ -54,9 +54,9 @@ export function LeftSidebar() {
                             <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/><span>Home</span>
                         </div>
                     </NavLink>
-                    <NavLink to="/short-contents" className={'navlink'}>
+                    <NavLink to="/video-contents" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><span>Short Contents</span>
+                            <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><span>Video Contents</span>
                         </div>
                     </NavLink>
                     <NavLink to="/members" className={'navlink'}>

@@ -88,8 +88,8 @@ export function UploadVideoPost(props: any) {
                     ) : (
                         <div className="upload_photo">You can see your chosen video here!</div>
                     )}
-                    </div>
                     <input type="file" onChange={handleVideoChange} className="Upload_file" accept="video/mp4" />
+                    </div>
                     
                 </div>
                 <div className="buttons">

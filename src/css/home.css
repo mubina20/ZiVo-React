@@ -11,16 +11,18 @@
 .story-wrapper {
     margin-top: 100px;
     color: #C1C1C1;
-    width: 1000px;
+    /* min-width: 1000px; */
+    max-width: 1000px;
+    background-color: rgba(141, 141, 141, 0.432);
+    /* width: 1000px; */
     /* max-width: 500px; */
-}
-.story-wrapper svg {
-    margin-bottom: -4px;
 }
 .user-icon{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100px;
+    height: 150px;
 }
 .storyContent{
     border-radius: 50%;
@@ -35,6 +37,7 @@
     border: 2px solid #FF007A;
     text-align: center;
     overflow: hidden;
+    padding-top: 10px;
     font-size: 7px;
 }
 /* .user{

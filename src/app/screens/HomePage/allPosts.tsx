@@ -28,10 +28,7 @@ export function AllPosts(props: any) {
         .then((data) => setAllPosts(data))
         .catch((err) => console.log("ERROR :: AllRestaurants,", err));
     }, []);
-
-    // console.log("allPosts", allPosts);
-    // const {allPosts} = props;
-    console.log("props > allPosts", allPosts);
+    // console.log("props > allPosts", allPosts);
 
     const photoPostLike = async (e: any, id: string) => {
         try {

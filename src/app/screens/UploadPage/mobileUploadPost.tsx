@@ -43,20 +43,20 @@ export function MobileUploadPost() {
                             {/* Photo Post */}
                             <TabPanel value="1">
                                 <div className="upload_post_bottom">
-                                    <h3 style={{marginBottom: "20px"}}>Upload Photo Post</h3>
-                                    <div className="photo_panel_container" style={{display: 'flex', flexDirection: 'column'}}>
-                                        <div className="photo_panel_left">
+                                    <h3 style={{marginBottom: "20px"}}>Photo title</h3>
+                                    <div className="mobile_photo_panel_container" style={{display: 'flex', flexDirection: 'column'}}>
+                                        <div className="mobile_photo_panel_left">
                                             <textarea
                                                 placeholder="Post title"
-                                                className="post_title_textarea"
+                                                className="textarea"
                                                 // value={photoPostData.post_title}
                                                 // onChange={changePhotoPostTitleHandle}
-                                                style={{color: "black", width: "70vw"}}
+                                                // style={{color: "black", width: "70vw"}}
                                             ></textarea>
                                         </div>
                                         <div className="photo_panel_right" style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
                                             <div className="upload_image_box">
-                                                <div className="photos" style={{width: "80vw"}}>
+                                                <div className="photos" style={{width: "100%", height: "300px"}}>
                                                     {file ? (
                                                         <img
                                                             src={"https://img.freepik.com/free-photo/natures-beauty-captured-in-colorful-flower-close-up-generative-ai_188544-8593.jpg?size=626&ext=jpg&ga=GA1.1.967060102.1711411200&semt=ais"}
@@ -65,16 +65,14 @@ export function MobileUploadPost() {
                                                             className="uploaded_image"
                                                         />
                                                     ) : (
-                                                        <div className="upload_photo">You can see your chosen photo here!</div>
+                                                        <div className="mobile_upload_photo">You can see your chosen photo here!</div>
                                                     )}
-                                                </div>
-                                                <div className="file_input" style={{margin: "30px auto"}}>
-                                                    <span>Add Photo</span>
-                                                    <input type="file"  className="Upload_file" id="postContent"/>
+                                                    
+                                                <input type="file"  className="Upload_file" id="postContent" style={{background: "red"}}/>
                                                 </div>
                                             </div>
 
-                                            <div className="buttons" style={{marginBottom: "100px", gap: "40px"}}>
+                                            <div className="mobile_upload_buttons" style={{marginBottom: "100px", gap: "40px"}}>
                                                 <Link to={"/my-page"}>
                                                     <button className="upload_button cencel">Back</button>
                                                 </Link>

@@ -5,7 +5,7 @@ import { HelpPage } from "./screens/HelpPage/help";
 
 import { verifiedMemberData } from "./apiServices/verify";
 import { HomePage } from "./screens/HomePage";
-import { ShortContents } from "./screens/ShortContentsPage/shortContent";
+import { VideoContents } from "./screens/VideoContentsPage/videoContent";
 import { MyPage } from "./screens/MemberPage/myPage";
 import { ChatPage } from "./screens/ChatPage/chatPage";
 import { OtherPage } from "./screens/MemberPage/otherPage";
@@ -127,8 +127,8 @@ function App() {
             </div>
           )}
         </Route>
-        <Route path="/short-contents">
-          <ShortContents />
+        <Route path="/video-contents">
+          <VideoContents />
         </Route>
         <Route path="/edit">
           {isDesktop && (
