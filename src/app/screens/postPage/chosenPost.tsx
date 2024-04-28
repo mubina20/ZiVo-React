@@ -48,16 +48,24 @@ export function ChosenPost(props: any) {
         history.goForward();
     };
 
-    const handleDeleteStory = async () => {
+    const handleDeletePost = async () => {
         try {
             const postService = new PostApiService();
             await postService.editPost(updatePost);     
 
             window.location.href = '/my-page';
         } catch (error) {
-            console.log(`ERROR :: handleDeleteStory, ${error}`);
+            console.log(`ERROR :: handleDeletePost, ${error}`);
             sweetErrorHandling(error).then();
         }
+    };
+
+    const handleUpdatePost = async () => {
+        alert("The post update logic is still in process!");
+    };
+
+    const handleSavedPost = async () => {
+        alert("The logic of saving the post is still in process!");
     };
 
     useEffect(() => {
@@ -120,7 +128,7 @@ export function ChosenPost(props: any) {
             await sweetTopSmallSuccessAlert("success", 700, false);
             window.location.reload();
         } catch (err: any) {
-            console.log(`ERROR :: targetLikeTop, ${err}`);
+            console.log(`ERROR :: handlePostLike, ${err}`);
             sweetErrorHandling(err).then();
         }
     };
@@ -174,7 +182,6 @@ export function ChosenPost(props: any) {
         }
     };
     
-
     return (
         <div className='chosen_post_page'>
             <div className="page_left">
@@ -249,17 +256,16 @@ export function ChosenPost(props: any) {
                             post?.member._id === verifiedMemberData._id ? (
                                 <div className="my_post_controll">
                                     <button className="controll">
-                                        <img src="/icons/post/trash.png" alt="" width={"20px"} height={"20px"} onClick={handleDeleteStory}/>
+                                        <img src="/icons/post/trash.png" alt="" width={"20px"} height={"20px"} onClick={handleDeletePost}/>
                                     </button>
                                     {post?.member._id === verifiedMemberData._id && post?.post_status === "active" ? (
-                                        <button className="controll">
-                                            <img src="/icons/post/padlock.png" alt="" width={"20px"} height={"20px"}/>
+                                        <button className="controll" onClick={handleUpdatePost}>
+                                            <img src="/icons/post/padlock.png" alt="" width={"20px"} height={"20px"} />
                                         </button>
                                     ) : (
-                                        <button className="controll">
+                                        <button className="controll" onClick={handleUpdatePost}>
                                             <img src="/icons/post/open-padlock.png" alt="" width={"20px"} height={"20px"}/>
                                         </button>
-                                        
                                     )}
                                     
                                 </div>
@@ -267,7 +273,6 @@ export function ChosenPost(props: any) {
                                 null
                             )
                         }
-                        
                     </div>
                     <div className="post_description">
                         <Typography>{post?.post_title}</Typography>
@@ -292,7 +297,7 @@ export function ChosenPost(props: any) {
                             <Typography style={{marginTop: "8px"}}>{post?.post_likes}</Typography>
                         </div>
                         <div className="">
-                            <img src="/icons/post/bookmark.png" alt="" className='left_icon' />
+                            <img src="/icons/post/bookmark.png" alt="" className='left_icon' onClick={handleSavedPost}/>
                         </div>
                     </div>
                 </div>
