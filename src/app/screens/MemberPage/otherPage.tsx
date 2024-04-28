@@ -219,6 +219,10 @@ export function OtherPage(props: any) {
 		}
 	};
 
+    const handleAlert = async () => {
+        alert("This logic is still in process!");
+    };
+
     return(
         <div>
             <Header />
@@ -268,8 +272,8 @@ export function OtherPage(props: any) {
                             <div className="right_info">
                                 <div className="info">
                                     <div className="top_icons">
-                                        <img src="/icons/post/share.png" alt="" className="top_icon"/>
-                                        <img src="/icons/post/more.png" alt="" className="top_icon"/>
+                                        <img src="/icons/post/share.png" alt="" className="top_icon" onClick={handleAlert}/>
+                                        <img src="/icons/post/more.png" alt="" className="top_icon" onClick={handleAlert}/>
                                     </div>
                                     <div className="bottom_infos">
                                         <div className="group">
@@ -442,10 +446,6 @@ export function OtherPage(props: any) {
                                         <div className="information">
                                             <div className="info_category">Hobby</div>
                                             <div className="info">{chosenMember?.mb_hobby}</div>
-                                        </div>
-                                        <div className="information">
-                                            <div className="info_category">Address</div>
-                                            <div className="info">{chosenMember?.mb_address}</div>
                                         </div>
                                         <div className="information">
                                             <div className="info_category">Join</div>

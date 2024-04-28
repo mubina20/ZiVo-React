@@ -11,9 +11,9 @@
 .story-wrapper {
     margin-top: 100px;
     color: #C1C1C1;
-    /* min-width: 1000px; */
+    min-width: 1000px;
     max-width: 1000px;
-    background-color: rgba(141, 141, 141, 0.432);
+    /* background-color: rgba(141, 141, 141, 0.432); */
     /* width: 1000px; */
     /* max-width: 500px; */
 }
@@ -33,7 +33,7 @@
 .storyContentArticle{
     border-radius: 50%;
     width: 100px;
-    height: 100px;
+    height: 91px;
     border: 2px solid #FF007A;
     text-align: center;
     overflow: hidden;

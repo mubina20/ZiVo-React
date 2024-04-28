@@ -284,7 +284,7 @@ export function MyPage(props: any) {
                                                     </div>
                                                     
                                                     <div className="information">
-                                                        <div className="info_category">Account creation date</div>
+                                                        <div className="info_category">Join</div>
                                                         <div className="info">{moment(verifiedMemberData?.createdAt).format("YYYY-MM-DD")}</div>
                                                     </div>
                                                 </div>
