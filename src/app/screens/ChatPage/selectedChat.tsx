@@ -44,7 +44,7 @@ export function SelectedChat(props: any) {
             if (new_message.chat_id === chatId) {
                 setMessagesList(prevMessages => [
                     ...prevMessages,
-                    <div key={prevMessages.length} style={{width: "100%"}}>
+                    <div key={prevMessages.length} className='socket_message'>
                         {new_message.sender_id === verifiedMemberData?._id ? (
                             <div className="my_message_container">
                                 <div className="message_time">{moment(new_message.createdAt).format('HH:mm')}</div>
@@ -54,12 +54,6 @@ export function SelectedChat(props: any) {
                             </div>
                         ) : (
                             <div className="friend_message_container">
-                                <div className="user_profile">
-                                    <img  
-                                        alt="" 
-                                        className="profile" 
-                                    />
-                                </div>
                                 <div className="friend_message_data">
                                     <div className="friend_message">
                                         <div className="message">{new_message.msg}</div>
