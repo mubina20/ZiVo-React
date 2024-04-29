@@ -47,7 +47,7 @@ export function ChatPageSidebar() {
                         <NavLink to={'/members'}><img src="/icons/left-sidebar-icons/members.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/life'}><img src="/icons/left-sidebar-icons/life.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/live'}><img src="/icons/left-sidebar-icons/life.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@ export function ChatPageSidebar() {
 
                 <div className="sidebar_bottom_sections">
                     <div className="top_section">
-                        <NavLink to={'/setting'}><img src="/icons/left-sidebar-icons/setting.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/settings'}><img src="/icons/left-sidebar-icons/setting.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
                         <NavLink to={'/logout'}  onClick={handleLogOutRequest}><img src="/icons/left-sidebar-icons/logout.png" alt="" className="sidebar_icon"/></NavLink>

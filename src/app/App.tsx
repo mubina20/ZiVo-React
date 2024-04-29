@@ -39,7 +39,11 @@ function App() {
 
         <Route path="/" exact>
           {verifiedMemberData ? (
-            <HomePage />
+            <HomePage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           ) : (
             <AuthPage 
               open={open}
@@ -68,7 +72,7 @@ function App() {
           )}
         </Route>
 
-        <Route path="/my-page">
+        {/* <Route path="/my-page">
           {isDesktop && (
             <div>
               <MyPage 
@@ -93,227 +97,334 @@ function App() {
               />
             </div>
           )}
+        </Route> */}
+
+        <Route path="/my-page">
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <MyPage 
+                open={open}
+                handleOpenModal={handleOpenModal}
+                handleModalClose={handleModalClose}
+              />
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the my page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <MobileMyPage 
+                open={open}
+                handleOpenModal={handleOpenModal}
+                handleModalClose={handleModalClose}
+              />
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
+          )}
         </Route>
 
         <Route path="/member/:memberId">
-          {isDesktop && (
-            <div>
-              <OtherPage 
-                open={open}
-                handleOpenModal={handleOpenModal}
-                handleModalClose={handleModalClose}
-              />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the chosen member page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileOtherPage 
-                open={open}
-                handleOpenModal={handleOpenModal}
-                handleModalClose={handleModalClose}
-              />
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <OtherPage 
+                  open={open}
+                  handleOpenModal={handleOpenModal}
+                  handleModalClose={handleModalClose}
+                />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the chosen member page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileOtherPage 
+                  open={open}
+                  handleOpenModal={handleOpenModal}
+                  handleModalClose={handleModalClose}
+                />
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/video-contents">
-          {isDesktop && (
-            <div>
-              <VideoContents />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the video-contents page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the video-contents page is in the process of developing</div></div>
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <VideoContents />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the video-contents page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the video-contents page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/edit">
-          {isDesktop && (
-            <div>
-              <EditProfile />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the edit page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the edit page is in the process of developing</div></div>
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <EditProfile />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the edit page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the edit page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/upload-post">
-          {isDesktop && (
-            <div>
-              <UploadPostPage />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the upload-post page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the upload-post page is in the process of developing</div></div>
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <UploadPostPage />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the upload-post page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the upload-post page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/upload-story">
-          {isDesktop && (
-            <div>
-              <UplaodStory />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the upload-story page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the upload-story page is in the process of developing</div></div>
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <UplaodStory />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the upload-story page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the upload-story page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/post/:postType/:postId">
-          {isDesktop && (
-            <div>
-              <ChosenPost />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the chosen post page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileChosenPost />
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <ChosenPost />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the chosen post page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileChosenPost />
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route exact path="/chat" >
-          {isDesktop && (
-            <div>
-              <ChatPage />
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <ChatPage />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the chat page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the chat page is in the process of developing</div></div>
             </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the chat page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the chat page is in the process of developing</div></div>
-            </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/chat/:chatId">
-          {isDesktop && (
-            <div>
-              <ChatPage />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the life chat is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the life chat is in the process of developing</div></div>
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <ChatPage />
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the life chat is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the life chat is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/stories/:mb_nick/:storyType/:storyId">
-          <ChosenStory />
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <ChosenStory />
+            ) : isTablet ? (
+              <ChosenStory />
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the chosen story page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
+          )}
         </Route>
 
-        <Route path="/life">
-          {isDesktop && (
-            <div>
-              <Header />
-              <LeftSidebar />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the life page is in the process of developing</div></div>
-            </div>
+        <Route path="/live">
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <Header />
+                <LeftSidebar />
+                <div className="progress_container"> <div className="process"> Now the live page is in the process of developing</div></div>
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the live page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the live page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
 
         <Route path="/settings">
-          {isDesktop && (
-            <div>
-              <Header />
-              <LeftSidebar />
-              <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileHeader />
-              <MobileFooter />
-              <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
-            </div>
+          {verifiedMemberData ? (
+            isDesktop ? (
+              <div>
+                <Header />
+                <LeftSidebar />
+                <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
+              </div>
+            ) : isTablet ? (
+              <div>
+                <Header />
+                <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
+              </div>
+            ) : isMobile ? (
+              <div>
+                <MobileHeader />
+                <MobileFooter />
+                <div className="progress_container"> <div className="process"> Now the settings page is in the process of developing</div></div>
+              </div>
+            ) : null
+          ) : (
+            <AuthPage 
+              open={open}
+              handleOpenModal={handleOpenModal}
+              handleModalClose={handleModalClose}
+            />
           )}
         </Route>
       </Switch>

@@ -64,9 +64,9 @@ export function LeftSidebar() {
                             <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/><span>Members</span>
                         </div>
                     </NavLink>
-                    <NavLink to="/life" className={'navlink'}>
+                    <NavLink to="/live" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/><span>Life</span>
+                            <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/><span>Live</span>
                         </div>
                     </NavLink>
                 </div>
@@ -74,7 +74,7 @@ export function LeftSidebar() {
                 <Box className='line' />
 
                 <div className="bottom_sections">
-                    <NavLink to={'/setting'} className={'navlink'}>
+                    <NavLink to={'/settings'} className={'navlink'}>
                         <div className="section">
                             <img src="/icons/left-sidebar-icons/setting.png" alt="" className="icon"/><span>Settings</span>
                         </div>
