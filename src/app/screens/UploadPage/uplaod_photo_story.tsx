@@ -62,7 +62,7 @@ export function UploadPhotoStory(props: any) {
             const postService = new PostApiService();
             await postService.createPhotoPost(photoPostData);
 
-            await sweetTopSmallSuccessAlert('Information modified successfully!', 700, false);
+            await sweetTopSmallSuccessAlert('Post uploaded successfully!', 700, false);
     		window.location.href = '/my-page';
         } catch (error) {
             console.log(`ERROR :: handlePostButton, ${error}`);

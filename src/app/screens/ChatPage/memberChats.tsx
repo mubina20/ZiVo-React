@@ -34,11 +34,6 @@ export function MemberChats(props: any) {
                                         <div className="chat_info">
                                             <div className="chat_top_info">
                                                 <Typography className="nickname">{member.mb_nick}</Typography>
-                                                <span className="date">2024-02-24</span>
-                                            </div>
-                                            <div className="chat_bottom_info">
-                                                <div className="message">Hello</div>
-                                                <div className="checking"></div>
                                             </div>
                                         </div>
                                     </div>

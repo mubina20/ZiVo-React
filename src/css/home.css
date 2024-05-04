@@ -124,7 +124,7 @@
 .post_content_article{
     height: 75%;
     background: rgb(0, 0, 0);
-    /* cursor: pointer; */
+    padding: 30px;
 }
 .post_desctiption{
     padding-top: 10px;

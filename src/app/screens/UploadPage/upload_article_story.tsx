@@ -75,7 +75,7 @@ export function UploadArticleStory(props: any) {
             const postService = new PostApiService();
 
             await postService.createArticlePost(articlePostData);
-            await sweetTopSmallSuccessAlert('Information modified successfully!', 700, false);
+            await sweetTopSmallSuccessAlert('Post uploaded successfully!', 700, false);
     		window.location.href = '/my-page';
 
         } catch (error) {

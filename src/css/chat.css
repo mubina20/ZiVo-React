@@ -423,7 +423,6 @@
 }
 
 .socket_message{
-    background: blue;
     width: 150%;
     display: flex;
     justify-content: space-between;
