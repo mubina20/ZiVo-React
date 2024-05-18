@@ -93,7 +93,7 @@ export function UploadVideoStory(props: any) {
                     
                 </div>
                 <div className="buttons">
-                    <button className="upload_button cencel">Back</button>
+                    <button className="upload_button cencel">Cencel</button>
                     <button
                         className="upload_button"
                         onClick={handleVideoPostButton}

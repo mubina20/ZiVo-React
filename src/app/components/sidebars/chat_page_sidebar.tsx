@@ -38,16 +38,16 @@ export function ChatPageSidebar() {
             <div className="chat_sidebar_sections">
                 <div className="sidebar_top_sections">
                     <div className="top_section">
-                        <NavLink to={'/'}><img src="/icons/left-sidebar-icons/home.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/'}><img src="/icons/left-sidebar-icons/black_home.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/short-contents'}><img src="/icons/left-sidebar-icons/shorts.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/short-contents'}><img src="/icons/left-sidebar-icons/black_shorts.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/members'}><img src="/icons/left-sidebar-icons/members.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/members'}><img src="/icons/left-sidebar-icons/black_members.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/live'}><img src="/icons/left-sidebar-icons/life.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/live'}><img src="/icons/left-sidebar-icons/black_life.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                 </div>
 
@@ -55,10 +55,10 @@ export function ChatPageSidebar() {
 
                 <div className="sidebar_bottom_sections">
                     <div className="top_section">
-                        <NavLink to={'/settings'}><img src="/icons/left-sidebar-icons/setting.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/settings'}><img src="/icons/left-sidebar-icons/black_setting.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/logout'}  onClick={handleLogOutRequest}><img src="/icons/left-sidebar-icons/logout.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/logout'}  onClick={handleLogOutRequest}><img src="/icons/left-sidebar-icons/black_logout.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                 </div>
             </div>

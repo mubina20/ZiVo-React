@@ -118,7 +118,7 @@ export function UploadArticlePost(props: any) {
                     </div>
                 </div>
                 <div className="buttons" style={{marginTop: "100px"}}>
-                    <button className="upload_button cencel" onClick={goBack}>Back</button>
+                    <button className="upload_button cencel" onClick={goBack}>Cencel</button>
                     <button
                         className="upload_button"
                         onClick={handlePostButton}

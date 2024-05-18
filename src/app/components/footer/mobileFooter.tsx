@@ -24,7 +24,7 @@ export function MobileFooter() {
               />
             </Link>
             <Link to={"/members"}><img src="/icons/left-sidebar-icons/members.png" alt="home" width={"25px"}/></Link>
-            <Link to={"/life"}><img src="/icons/left-sidebar-icons/life.png" alt="home" width={"25px"}/></Link>
+            <Link to={"/live"}><img src="/icons/left-sidebar-icons/life.png" alt="home" width={"25px"}/></Link>
         </div>
     </div>
   )

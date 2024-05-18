@@ -51,22 +51,22 @@ export function LeftSidebar() {
                 <div className="top_sections">
                 <NavLink to="/" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/home.png" alt="" className="icon"/><span>Home</span>
+                            <img src="/icons/left-sidebar-icons/black_home.png" alt="" className="icon"/><span>Home</span>
                         </div>
                     </NavLink>
                     <NavLink to="/video-contents" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/shorts.png" alt="" className="icon"/><span>Video Contents</span>
+                            <img src="/icons/left-sidebar-icons/black_shorts.png" alt="" className="icon"/><span>Video Contents</span>
                         </div>
                     </NavLink>
                     <NavLink to="/members" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/members.png" alt="" className="icon"/><span>Members</span>
+                            <img src="/icons/left-sidebar-icons/black_members.png" alt="" className="icon"/><span>Members</span>
                         </div>
                     </NavLink>
                     <NavLink to="/live" className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/life.png" alt="" className="icon"/><span>Live</span>
+                            <img src="/icons/left-sidebar-icons/black_life.png" alt="" className="icon"/><span>Live</span>
                         </div>
                     </NavLink>
                 </div>
@@ -76,11 +76,11 @@ export function LeftSidebar() {
                 <div className="bottom_sections">
                     <NavLink to={'/settings'} className={'navlink'}>
                         <div className="section">
-                            <img src="/icons/left-sidebar-icons/setting.png" alt="" className="icon"/><span>Settings</span>
+                            <img src="/icons/left-sidebar-icons/black_setting.png" alt="" className="icon"/><span>Settings</span>
                         </div>
                     </NavLink>
                     <div className="section" onClick={handleLogOutRequest}>
-                        <img src="/icons/left-sidebar-icons/logout.png" alt="" className="icon"/><span>LogOut</span>
+                        <img src="/icons/left-sidebar-icons/black_logout.png" alt="" className="icon"/><span>LogOut</span>
                     </div>
                 </div>
             </div>

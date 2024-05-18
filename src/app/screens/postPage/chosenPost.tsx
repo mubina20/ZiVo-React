@@ -186,7 +186,7 @@ export function ChosenPost(props: any) {
         <div className='chosen_post_page'>
             <div className="page_left">
                 <div className="left-1">
-                    <img src="/icons/other/white_close.png" alt="" className='left_icon' onClick={handleGoBack}/>
+                    <img src="/icons/other/black_close.png" alt="" className='left_icon' onClick={handleGoBack}/>
                 </div>
                 <div className="left-2">
                         {post?.post_type === "photo" ? (
@@ -340,7 +340,7 @@ export function ChosenPost(props: any) {
                                         />
                                     ) : (
                                         <img 
-                                            src="/icons/post/like.png" 
+                                            src="/icons/post/black_like.png" 
                                             onClick={(e) => handleCommentLike(e, comment?._id)}
                                             alt="" 
                                             className="likE"

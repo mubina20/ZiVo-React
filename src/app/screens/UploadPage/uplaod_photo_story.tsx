@@ -104,7 +104,7 @@ export function UploadPhotoStory(props: any) {
                     <input type="file" onChange={handlePhotoChange} className="Upload_file" id="postContent"/>
                 </div>
                 <div className="buttons">
-                    <button className="upload_button cencel" onClick={goBack}>Back</button>
+                    <button className="upload_button cencel" onClick={goBack}>Cencel</button>
                     <button
                         className="upload_button"
                         onClick={handlePostButton}

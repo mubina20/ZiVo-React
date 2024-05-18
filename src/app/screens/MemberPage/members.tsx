@@ -77,7 +77,7 @@ export function MembersPage() {
                             : "/icons/user.png";
                             return(
                             <div className="card" key={member._id}>
-                                <div className="user_info" style={{marginTop: "10px"}}>
+                                <div className="users_info" style={{marginTop: "10px"}}>
                                     <img src={profile_image} alt="" className="user_icon" onClick={() => handleMemberSelect(member._id)}/>
                                     <Typography style={{fontSize: "15px", cursor: "pointer"}} onClick={() => handleMemberSelect(member._id)}>{member.mb_name}</Typography>
                                     <Typography style={{fontSize: "12px", opacity: "0.5"}}>@{member.mb_nick}</Typography>

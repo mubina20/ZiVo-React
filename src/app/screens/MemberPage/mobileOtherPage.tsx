@@ -277,7 +277,7 @@ export function MobileOtherPage(props: any) {
                                         >
                                         FOLLOW 
                                     </button>}
-                            <button className="mobile_button" style={{background: "#fff", color: "#000"}} onClick={handleAlert}>Message</button>
+                            <button className="mobile_button" style={{background: "#000", color: "#fff"}} onClick={handleAlert}>Message</button>
                         </div>
                         <div className="other_page_center">
                             <TabContext value={value}>

@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 .visit-contianer{
-    background: #101010;
+    background: #F0F2F5;
     min-height: 100vh;
     margin-top: 60px;
 }
@@ -69,14 +69,13 @@
     cursor: pointer;
     margin-left: 30px;
     font-size: 12px;
-    color: #fff;
 }
 .my_page_mobile_description{
-    background: #181818;
+    background: rgb(228, 227, 227);
     width: 232px;
     height: 65px;
     font-size: 9px;
-    color: #BABABA;
+    color: #000000;
     padding: 5px;
     margin-top: 14px;
 }

@@ -158,7 +158,7 @@ export function ChosenStory() {
 
     return (
         <div className='chosen_story_page'>
-            <img src="/icons/other/white_close.png" alt="" className='story_close' onClick={handleGoBack}/>
+            <img src="/icons/other/black_close.png" alt="" className='story_close' onClick={handleGoBack}/>
             {
                 story?.member._id === verifiedMemberData._id ? (
                     <div className='chosen_story_page'>

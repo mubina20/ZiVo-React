@@ -72,33 +72,6 @@ function App() {
           )}
         </Route>
 
-        {/* <Route path="/my-page">
-          {isDesktop && (
-            <div>
-              <MyPage 
-                open={open}
-                handleOpenModal={handleOpenModal}
-                handleModalClose={handleModalClose}
-              />
-            </div>
-          )}
-          {isTablet && (
-            <div>
-              <Header />
-              <div className="progress_container"> <div className="process"> Now the my page is in the process of developing</div></div>
-            </div>
-          )}
-          {isMobile && (
-            <div>
-              <MobileMyPage 
-                open={open}
-                handleOpenModal={handleOpenModal}
-                handleModalClose={handleModalClose}
-              />
-            </div>
-          )}
-        </Route> */}
-
         <Route path="/my-page">
           {verifiedMemberData ? (
             isDesktop ? (

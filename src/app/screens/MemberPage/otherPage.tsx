@@ -267,12 +267,12 @@ export function OtherPage(props: any) {
                                         >
                                         FOLLOW 
                                     </button>}
-                                <button className="follow_btn" style={{background: "#fff", color: "#000"}} onClick={handleCreateChatButton}>Message</button>
+                                <button className="follow_btn" style={{background: "#000000", color: "#ffffff"}} onClick={handleCreateChatButton}>Message</button>
                             </div>
                             <div className="right_info">
                                 <div className="info">
                                     <div className="top_icons">
-                                        <img src="/icons/post/share.png" alt="" className="top_icon" onClick={handleAlert}/>
+                                        <img src="/icons/post/share-other.png" alt="" className="top_icon" onClick={handleAlert}/>
                                         <img src="/icons/post/more.png" alt="" className="top_icon" onClick={handleAlert}/>
                                     </div>
                                     <div className="bottom_infos">

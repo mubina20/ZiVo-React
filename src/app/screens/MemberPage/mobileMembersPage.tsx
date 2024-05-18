@@ -93,7 +93,7 @@ export function MobileMembersPage() {
                         console.log("Profile image:", profile_image);
                             return(
                             <div className="mobile_card" key={member._id} onClick={() => handleMemberSelect(member._id)}>
-                                <div className="user_info">
+                                <div className="users_info">
                                     <img src={profile_image} alt="" className="mobile_user_icon"/>
                                     <Typography style={{fontSize: "15px", cursor: "pointer"}}>{member.mb_name}</Typography>
                                     <Typography style={{fontSize: "12px", opacity: "0.5"}}>@{member.mb_nick}</Typography>
