@@ -21,7 +21,7 @@
 
 .visit_page_box .page_top{
     width: 788px;
-    height: 330px;
+    height: 300px;
     display: flex;
     gap: 130px;
     padding: 0 30px;
@@ -68,6 +68,7 @@
     background: var(--ff-007-a, #FF007A);
     font-size: 16px;
     color: #fff;
+    padding: 10px;
     border: none;
     cursor: pointer;
     display: flex;
@@ -111,7 +112,7 @@
 
 .visit_page_box .page_top .right_info .info .group .text{
     color: #4f4d4d;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -251,7 +252,7 @@
 }
 
 .my_data{
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     gap: 100px;
 }
@@ -300,6 +301,7 @@
     gap: 10px;
     margin: 20px;
     margin-left: 30px;
+    color: #fff;
 }
 .info_category{
     width: 100px;

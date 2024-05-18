@@ -84,7 +84,7 @@
     align-items: center;
 }
 .post_data .user_container{
-    display: flex;
+    display: flex;color: #fff;
 }
 .post_user_icon {
     width: 50px;

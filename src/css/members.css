@@ -65,12 +65,12 @@
 .user_info{
     display: flex;
     flex-direction: column;
-    color: #000000;
 }
 .users_info{
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #fff;
 }
 
 .user_icon {
