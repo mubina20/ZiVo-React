@@ -1,5 +1,4 @@
 import Cookies from "universal-cookie";
-import { serverApi } from "../../lib/config";
 
 const cookies = new Cookies();
 let verifiedMemberData: any = null;

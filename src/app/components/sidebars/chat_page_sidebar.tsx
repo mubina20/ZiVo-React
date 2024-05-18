@@ -41,7 +41,7 @@ export function ChatPageSidebar() {
                         <NavLink to={'/'}><img src="/icons/left-sidebar-icons/black_home.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
-                        <NavLink to={'/short-contents'}><img src="/icons/left-sidebar-icons/black_shorts.png" alt="" className="sidebar_icon"/></NavLink>
+                        <NavLink to={'/video-contents'}><img src="/icons/left-sidebar-icons/black_shorts.png" alt="" className="sidebar_icon"/></NavLink>
                     </div>
                     <div className="top_section">
                         <NavLink to={'/members'}><img src="/icons/left-sidebar-icons/black_members.png" alt="" className="sidebar_icon"/></NavLink>

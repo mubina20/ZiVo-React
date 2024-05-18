@@ -22,11 +22,11 @@ class ChatApiService {
             assert.ok(result, Definer.general_err1);
 
             const myChats: Chats[] = result.data.data;
-            console.log("myChats::", myChats);
+            // console.log("myChats::", myChats);
 
             return myChats;
         } catch (err: any) {
-            console.log(`ERROR :: findChosenPostComments ${err.message}`);
+            console.log(`ERROR :: findMyChats ${err.message}`);
             throw err;
         }
     }
@@ -46,7 +46,7 @@ class ChatApiService {
             const chat: ChosenChat = result.data.data;
             return chat;
         } catch (err: any) {
-            console.log(`ERROR :: getChosenArticlePost: ${err.message}`);
+            console.log(`ERROR :: getSelectedChat: ${err.message}`);
             throw err;
         }
     };
@@ -63,12 +63,12 @@ class ChatApiService {
                 data, 
                 { signal, withCredentials: true }
             );
-            console.log("data", data)
+            // console.log("data", data);
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
 
-            console.log("createMessage STATE ::", result.data.data);
+            // console.log("createMessage STATE ::", result.data.data);
             const message_result = result.data.data;
 
             return message_result;
@@ -86,16 +86,16 @@ class ChatApiService {
                 {withCredentials: true}
             );
     
-            console.log(data);
+            // console.log(data);
     
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
     
             const chat = result.data.data;
-            console.log("chat result::", chat);
+            // console.log("chat result::", chat);
             return chat;
         } catch (err: any) {
-            console.log(`ERROR :: createArticlePost: ${err.message}`);
+            console.log(`ERROR :: createChat: ${err.message}`);
             throw err;
         }
     };

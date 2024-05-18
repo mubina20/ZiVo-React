@@ -21,13 +21,10 @@ export function SelectedChat(props: any) {
         chat_id: chatId,
         message: ""
     });
-    console.log(messageData)
 
     const [messagesList, setMessagesList] = useState<JSX.Element[]>([]);
     const socket = useContext(SocketContext);
     const textInput: any = useRef(null);
-
-    console.log("SelectedPage Socket::", socket);
 
     useEffect(() => {
         if (!socket) {

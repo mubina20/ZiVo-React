@@ -55,7 +55,7 @@ export function MembersPage() {
         memberService
         .getAllMembers()
         .then((data) => setAllMembers(data))
-        .catch((err) => console.log("ERROR :: AllRestaurants,", err));
+        .catch((err) => console.log("ERROR :: handleMemberSelect,", err));
     }, []);
 
     return(

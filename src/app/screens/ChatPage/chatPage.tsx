@@ -43,56 +43,13 @@ export function ChatPage() {
         }
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    // useEffect(() => {
-    //     const chatService = new ChatApiService();
-    //     const socket = new WebSocket(`ws://${serverApi}`);
-
-    //     socket.onmessage = async (e: any) => {
-    //         const newData = JSON.parse(e.data);
-    //         setChats(newData);
-    //     }
-    //     const findMyChats = async () => {
-    //         try{
-    //             const myChats = await chatService.findMyChats();
-    //             setChats(myChats);
-    //             console.log("myChats", myChats);
-    //         } catch(err) {
-    //             console.log(" ERROR: findMyChats", err);
-    //         }
-    //     };
-
-    
-    //     findMyChats();
-    //     return () => {
-    //         socket.close();
-    //     }
-    // },[]); 
-
     useEffect(() => {
         const findMyChats = async () => {
             try {
                 const chatService = new ChatApiService();
                 const myChats = await chatService.findMyChats();
                 setChats(myChats);
-                console.log("myChats ::", myChats);
+                // console.log("myChats ::", myChats);
             } catch (error) {
                 console.error("ERROR handleMemberSelect ::", error);
             }
@@ -101,7 +58,6 @@ export function ChatPage() {
         findMyChats();
     },[]);
     
-
     return(
         <div>
             <ChatPageSidebar />

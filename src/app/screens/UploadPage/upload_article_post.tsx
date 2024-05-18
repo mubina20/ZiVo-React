@@ -40,7 +40,6 @@ export function UploadArticlePost(props: any) {
             textAlign = "center";
             articlePostData.post_align = textAlign;
         }
-        console.log("center?????", textAlign);
 
         setArticlePostData({ ...articlePostData });
     };    
@@ -49,7 +48,6 @@ export function UploadArticlePost(props: any) {
         const bgColor = event.target.value;
         setBackgroundColor(bgColor);
         setLastSelectedBGColor(bgColor); 
-        console.log("bgColor", lastSelectedBGColor);
 
         articlePostData.post_bg_color = lastSelectedBGColor;
     setArticlePostData({ ...articlePostData });
@@ -60,7 +58,6 @@ export function UploadArticlePost(props: any) {
         setTextColor(textColor);
         setTextColor(textColor);
         setLastSelectedColor(textColor);
-        console.log("textColor", lastSelectedColor);
 
         articlePostData.post_text_color = lastSelectedColor;
         setArticlePostData({ ...articlePostData });

@@ -26,11 +26,10 @@ class MemberApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("Login STATE :: ", result.data.state);
 
             const member: Member = result.data.data;
-            localStorage.setItem("member_data", JSON.stringify(member));
-            console.log("Login MEMBER :: ", member);
+            // localStorage.setItem("member_data", JSON.stringify(member));
+            // console.log("Login MEMBER :: ", member);
 
             return member;
         } catch (err: any) {
@@ -53,7 +52,6 @@ class MemberApiService {
 
             const member: Member = result.data.data;
             localStorage.setItem("member_data", JSON.stringify(member));
-            console.log("Signup MEMBER :: ", member);
 
             return member;
         } catch (err: any) {
@@ -72,7 +70,6 @@ class MemberApiService {
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
         
             const logout_result = result.data.state;
-            console.log("logout_result::", logout_result);
             localStorage.removeItem("member_data");
             
             return logout_result === "successfully LogOut";
@@ -89,7 +86,7 @@ class MemberApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("getChosenMember DATA ::", result.data.data);
+            // console.log("getChosenMember DATA ::", result.data.data);
 
             const member: Member = result.data.data;
             return member;
@@ -109,11 +106,8 @@ class MemberApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            // console.log("getAllMembers STATE ::", result.data.state);
 
             const member: Member[] = result.data.data;
-
-            console.log("getAllMembers MEMBER :: ", member);
 
             return member;
         } catch (err: any) {
@@ -134,7 +128,6 @@ class MemberApiService {
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
 
-            console.log("memberLikeTarget STATE ::", result.data.data);
             const like_result: MemberLiken = result.data.data;
 
             return like_result;
@@ -199,10 +192,9 @@ class MemberApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("updateMemberData STATE ::", result.data.state);
 
             const member: Member = result.data.data;
-            localStorage.setItem("member_data", JSON.stringify(member));
+            // localStorage.setItem("member_data", JSON.stringify(member));
 
             return member;
         } catch (err: any) {

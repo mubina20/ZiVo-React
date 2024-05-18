@@ -113,9 +113,7 @@ export function MobileMyPage(props: any) {
         allPostsData();
     }, []);
     // console.log("allPosts", allPosts);
-    console.log("props > allPosts", allPosts);
     const filteredPosts = allPosts.filter(post => post.member._id === verifiedMemberData._id);
-    console.log("filteredPosts", filteredPosts);
 
     // Followers
     useEffect(() => {

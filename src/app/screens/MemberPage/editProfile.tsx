@@ -51,7 +51,6 @@ export function EditProfile() {
 
     const handleImagePreviewer = (e: any) => {
 		try {
-			console.log("handleImagePreviewer ::  e.target.files :: ", e.target.files);
 			const file = e.target.files[0];
 
 			const fileType = file.type;
@@ -71,7 +70,6 @@ export function EditProfile() {
 		try {
 			const memberService = new MemberApiService();
 			const result = await memberService.updateMemberData(memberUpdate);
-            console.log("memberUpdate::", memberUpdate);
 
 			assert.ok(result, Definer.general_err1);
 			await sweetTopSmallSuccessAlert('Information modified successfully!', 700, false);

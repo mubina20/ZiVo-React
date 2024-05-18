@@ -19,7 +19,6 @@ export function UploadVideoStory(props: any) {
 
     /** HANDLERS **/
     const handleVideoChange = (e: any) => {
-        console.log("handleVideoChange ::  e.target.files :: ", e.target.files);
         const selectedVideoFile = e.target.files[0];
 
         const fileType = selectedVideoFile['type'];

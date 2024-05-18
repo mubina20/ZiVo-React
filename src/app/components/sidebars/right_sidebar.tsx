@@ -34,7 +34,7 @@ export function RightSidebar() {
 			.then((data) => setMemberFollowings(data))
 			.catch((err) => console.log(err));
 	}, [followingsSearchObj]);
-    console.log("member Followings :: ", memberFollowings);
+    // console.log("member Followings :: ", memberFollowings);
 
     const handleVisitFollowingPage = (mb_id: string) => {
 		history.push(`/member/${mb_id}`);

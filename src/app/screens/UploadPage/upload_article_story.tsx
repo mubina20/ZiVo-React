@@ -59,7 +59,6 @@ export function UploadArticleStory(props: any) {
         setTextColor(textColor);
         setTextColor(textColor);
         setLastSelectedColor(textColor);
-        console.log("textColor", lastSelectedColor);
 
         articlePostData.post_text_color = lastSelectedColor;
         setArticlePostData({ ...articlePostData });

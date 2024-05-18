@@ -22,7 +22,6 @@ export function UploadPhotoPost(props: any) {
     /** HANDLERS **/
     const handlePhotoChange = (e: any) => {
         try {
-            console.log("handlePhotoChange ::  e.target.files :: ", e.target.files);
             const selectedPhotoFile = e.target.files[0];
     
             const fileType = selectedPhotoFile['type'],

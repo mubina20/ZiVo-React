@@ -29,12 +29,8 @@ class PostApiService {
                 }
             });
     
-            console.log(data);
-            console.log(typeof data.post_content);
-    
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("createPhotoPost STATE :: ", result.data.state);
     
             return result;
         } catch (err: any) {
@@ -60,11 +56,8 @@ class PostApiService {
                 }
             });
     
-            console.log(data);
-    
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("createPhotoPost STATE :: ", result.data.state);
     
             return result;
         } catch (err: any) {
@@ -84,7 +77,6 @@ class PostApiService {
     
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("createArticlePost STATE :: ", result.data.state);
     
             return result;
         } catch (err: any) {
@@ -102,12 +94,8 @@ class PostApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("getAllPosts STATE ::", result.data.state);
 
             const posts: Post[] = result.data.data;
-            console.log("posts", posts)
-
-            console.log("getAllPosts POSTS :: ", posts);
 
             return posts;
         } catch (err: any) {
@@ -123,7 +111,6 @@ class PostApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
-            console.log("getChosenArticlePost DATA ::", result.data.data);
 
             const post: Post = result.data.data;
             return post;
@@ -141,13 +128,10 @@ class PostApiService {
                 {withCredentials: true}
             );
     
-            console.log(data);
-    
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
     
             const comment = result.data.data;
-            console.log("comment result::", comment);
             return comment;
         } catch (err: any) {
             console.log(`ERROR :: createArticlePost: ${err.message}`);
@@ -163,13 +147,10 @@ class PostApiService {
                 {withCredentials: true}
             );
     
-            console.log(data);
-    
             assert.ok(result?.data, Definer.post_error1);
             assert.ok(result?.data?.state !== "fail", result?.data?.message);
     
             const updatedPost = result.data.data;
-            console.log("updatedPost result::", updatedPost);
             return updatedPost;
         } catch (err: any) {
             console.log(`ERROR :: createArticlePost: ${err.message}`);

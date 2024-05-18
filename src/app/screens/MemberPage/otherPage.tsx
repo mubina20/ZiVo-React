@@ -67,12 +67,10 @@ export function OtherPage(props: any) {
 
     let { chosenMember } = useSelector(chosenMemberRetriever);
     const { setChosenMember} = actionDispatch(useDispatch());
-    console.log("Chosen Member::", chosenMember)
     const { memberId } = useParams<RouteParams>();
     const { open, handleOpenModal, handleModalClose } = props;
     const [allPosts, setAllPosts] = useState<Post[]>([]);
     const [memberFollow, setMemberFollow] = useState<any>();
-    console.log("memberFollow::", memberFollow);
     const [createChat, setCreateChat] = useState<CreateChat>({
         sender_id: verifiedMemberData._id,
 		receiver_id: memberId
@@ -345,7 +343,6 @@ export function OtherPage(props: any) {
                                                             </div>
                                                             <div className="followers_container">
                                                                 {memberFollowings.map((following: Following) => {
-                                                                    console.log("following", following);
                                                                     const image_url = following?.follow_member_data?.mb_profile_image
                                                                         ? `${serverApi}/${following.follow_member_data.mb_profile_image}`
                                                                         : '/icons/user.png';

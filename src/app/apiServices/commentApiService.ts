@@ -20,7 +20,7 @@ class CommentApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state != "fail", result?.data?.message);
-            console.log("getMemberFollowers STATE ::", result.data.state);
+            // console.log("getMemberFollowers STATE ::", result.data.state);
 
             const followers: Follower[] = result.data.data;
             return followers;
@@ -42,7 +42,7 @@ class CommentApiService {
 
             assert.ok(result?.data, Definer.general_err1);
             assert.ok(result?.data?.state != "fail", result?.data?.message);
-            console.log("findChosenPostComments STATE ::", result.data.state);
+            // console.log("findChosenPostComments STATE ::", result.data.state);
 
             const comments: Comment[] = result.data.data;
             return comments;

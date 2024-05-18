@@ -34,31 +34,26 @@ export function AuthenticationPage(props: any) {
     const handleUsername = (e: any) => {
         mb_name = e.target.value;
         setName(mb_name);
-        console.log("name", mb_name);
     };
 
     const handleUserSurname = (e: any) => {
         mb_surname = e.target.value;
         setSurname(mb_surname);
-        console.log("mb_surname", mb_surname);
     };
 
     const handleUserNickName = (e: any) => {
         mb_nick = e.target.value;
         SetNick(mb_nick);
-        console.log("mb_nick", mb_nick);
     };
 
     const handleUserPhone = (e: any) => {
         mb_phone = e.target.value;
         setPhone(mb_phone);
-        console.log("mb_phone", mb_phone);
     };
 
     const handleUserPassword = (e: any) => {
         mb_password = e.target.value;
         setPassword(mb_password);
-        console.log("mb_password", mb_password);
     };
 
     const handleLoginRequest = async () => {
@@ -116,14 +111,12 @@ export function AuthenticationPage(props: any) {
     const handleUserBirthday = (date: Date | null) => {
         setSelectedDate(date); 
         mb_birthday = date; 
-        console.log("Tanlangan sana: ", mb_birthday); 
     };
     
 
     const handleUserGender = (e: any) => {
         mb_gender = e.target.value;
         setGender(mb_gender);
-        console.log(mb_gender)
     };
 
     const getKeyLoginHandler = (e: any) => {
