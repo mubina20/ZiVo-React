@@ -10,9 +10,10 @@
 /* Story */
 .story-wrapper {
     margin-top: 100px;
+    margin-bottom: -50px;
     color: #000000;
-    min-width: 1000px;
-    max-width: 1000px;
+    width: 700px;
+    max-width: 700px;
 }
 .user-icon{
     display: flex;
@@ -23,14 +24,14 @@
 }
 .storyContent{
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: 2px solid #FF007A;
 }
 .storyContentArticle{
     border-radius: 50%;
-    width: 100px;
-    height: 91px;
+    width: 80px;
+    height: 71px;
     border: 2px solid #FF007A;
     text-align: center;
     overflow: hidden;

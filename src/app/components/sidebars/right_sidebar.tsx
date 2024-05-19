@@ -63,12 +63,12 @@ export function RightSidebar() {
                                 <div className="following_info">
                                     <div
                                         className="nickName"
-                                        style={{ fontSize: "17px", cursor: "pointer" }}
+                                        style={{ fontSize: "15px", cursor: "pointer" }}
                                         onClick={() => handleVisitFollowingPage(following?.follow_id)}
                                     >
                                         @{following?.follow_member_data?.mb_nick}
                                     </div>
-                                    <Typography style={{ opacity: "0.56" }}>{following?.follow_member_data?.mb_name}</Typography>
+                                    <Typography style={{ fontSize: "13px", opacity: "0.56" }}>{following?.follow_member_data?.mb_name}</Typography>
                                 </div>
                             </div>
                             <Box className='following-line' />

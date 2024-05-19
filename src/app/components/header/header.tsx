@@ -29,6 +29,7 @@ export function Header() {
                             } 
                             alt="my page"
                             className='icon'
+                            style={{borderRadius: "50%"}}
                         />
                     </NavLink>
                 </div>

@@ -359,7 +359,7 @@ export function ChosenPost(props: any) {
                 <div className="add_comment_container">
                     <input type="text" placeholder='Comment...' className='comment_input' onChange={handleComment} ref={textInput}
                                     onKeyDown={getKeyHandler}/>
-                    <img src="/icons/chat/sent.png" alt="" width={'30px'} style={{marginLeft: "-50px", cursor: "pointer"}} onClick={handleSendButton}/>
+                    <img src="/icons/chat/sent-1.png" alt="" width={'30px'} style={{marginLeft: "-50px", cursor: "pointer"}} onClick={handleSendButton}/>
                 </div>
 
             </div>
